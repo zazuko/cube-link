@@ -1,8 +1,10 @@
 # RDF Cube Schema
 
-In this repository we present the *RDF Cube Schema* model. We describe the model, an elaborate example and scripts to validate the example using the SHACL shape that is part of the standard.
+In this repository we present the *RDF Cube Schema* model.
 
-An additional document describes [Best Practice](best-practice.md)
+We describe the model, an elaborate example and scripts to validate observations based on the the constraint (SHACL shape) provided.
+
+We also provide [Best Practice](best-practice.md).
 
 ## Example Cube
 
@@ -44,17 +46,13 @@ An `ObservationSet` is a structure that acts as a container for multiple `Observ
 * `cube:observationSet`: Connects a cube with a set of observations.
 * `cube:observationConstraint`: Connects a cube with a constraint for metadata and validation.
 * `cube:observation`: Connects a set of observations with a single observation. 
-* `cube:observedBy`: Indicates how this observation was gathered. This can be a description of the method, link to a description of the sensor, etc.
+* `cube:observedBy`: Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.
 
-### Additional features not part of the core
+### Optional Features
 
 A `Constraint` for a cube. A Constraint is optional but recommended, it is used to:
 * Define how data (`Observation`s) in a `Cube` can be validated.
 * Add Cube-specific metadata (custom labels, translation to other languages, etc).
-
-A `View` can be used to combine data from multiple `Cube`s, see its own section for details.
-
-Annotations are not part of the core-model of `Cube`s, see its own section for details.
 
 ### Dimensions
 
@@ -102,7 +100,7 @@ The following snipped defines a new shape, it applies to all `cube:Observation`:
   ]
 ```
 
-For each dimension (facts, measures, and categories) an additional `sh:property` should be provided. The dimension/property is referenced using `sh:path`.
+For each dimension (facts, measures, and categories) an additional `sh:property` should be provided. The dimension/property is referenced using `sh:path`. The value of the path must be a single value and not an RDF list.
 
 Additional metadata like labels can be attached to the `sh:property` node.
 
