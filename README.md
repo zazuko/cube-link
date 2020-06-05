@@ -1,5 +1,22 @@
 # RDF Cube Schema
 
+In this repository we present the *RDF Cube Schema* model. We describe the model, an elaborate example and scripts to validate the example using the SHACL shape that is part of the standard.
+
+## Example Cube
+
+An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [shape.ttl](shape.ttl).
+
+### Validate the cube
+
+You can validate the cube with a cli tool written in Node.js.
+
+Install the package dependencies: `npm i`
+
+Validate `cube.ttl` by using the SHACL shape in `shape.ttl`: 
+
+    ./bin/rdf-cube-schema.js validate cube.ttl shape.ttl
+
+
 ## Core Schema
 
 The _RDF Cube Schema_ defines a minimal set of classes and properties necessary to represent multi-dimensional arrays of data in RDF.
@@ -117,12 +134,37 @@ It is possible to generate a minimal SHACL shape given a `Cube` and a set of `Ob
 
 A SPARQL query to generate it is provided.
 
-## Validate the cube
+## Existing Work
 
-You can validate the cube with a cli tool written in Node.js.
+### RDF Data Cube Vocabulary
 
-Install the package dependencies: `npm i`
+The [RDF Data Cube Vocabulary](https://www.w3.org/TR/vocab-data-cube/) is probably the oldest vocabulary in the domain of RDF for representing cubes. The authors of this document used RDF Data Cubes extensively in the past and ran into multiple issues with it.
 
-Validate `cube.ttl` by using the SHACL shape in `shape.ttl`: 
+The authors of this specification are grateful for the work done by the original authors of the RDF Data Cube Vocabulary specification. This work would not have been possible without it and some parts look pretty much like the RDF Data Cube Vocabulary.
 
-    ./bin/rdf-cube-schema.js validate cube.ttl shape.ttl
+It was considered to either clarify or update the RDF Data Cube Vocabulary specification. For the sake of simplicity, it was decided to start from scratch.
+
+#### Issues with RDF Data Cube Vocabulary
+
+* The metadata model is overly complex.
+    * Many additional nodes are introduced that make querying the data in the real world overly complex.
+    * Generating proper metadata from basic cubes is not easy, which increases complexity for automated pipelines.
+* There is a mix of forward- and backward-linking within the metadata model.
+* [Follow your nose](https://patterns.dataincubator.org/book/follow-your-nose.html) often not possible.
+* There is more than one way to do it. Different people interpret the spec differently, which makes it very hard to write libraries that consume generic RDF Data Cubes.
+* There is a clear focus on [SDMX](https://en.wikipedia.org/wiki/SDMX), which introduces too rigorous restrictions and/or examples for use-cases outside the statistical domain.
+
+There are at least two efforts that extend the RDF Data Cube Vocabulary to address some of its limitations:
+
+* [QB4ST](https://w3c.github.io/sdw/qb4st/)
+* [QB4OLAP](https://github.com/lorenae/qb4olap/wiki)
+
+Both efforts could likely be solved/addressed within the _RDF Cube Schema_ approach, this needs to be validated by interested parties.
+
+### SSN
+
+The [Semantic Sensor Network Ontology](https://www.w3.org/TR/vocab-ssn/) defines a simplified model for describing observations from a sensor in RDF.
+
+The [Observation](https://www.w3.org/TR/vocab-ssn/#SOSAObservation) model is at least inspired by the RDF Data Cube Vocabulary but it is not very useful for use-cases outside of sensor networks.
+
+It should be relatively easy to replace SSN observations with the _RDF Cube Schema_.
