@@ -150,9 +150,10 @@ It was considered to either clarify or update the RDF Data Cube Vocabulary speci
     * Many additional nodes are introduced that make querying the data in the real world overly complex.
     * Generating proper metadata from basic cubes is not easy, which increases complexity for automated pipelines.
 * There is a mix of forward- and backward-linking within the metadata model.
-* [Follow your nose](https://patterns.dataincubator.org/book/follow-your-nose.html) often not possible.
+* [Follow your nose](https://patterns.dataincubator.org/book/follow-your-nose.html) is often not possible.
 * There is more than one way to do it. Different people interpret the spec differently, which makes it very hard to write libraries that consume generic RDF Data Cubes.
 * There is a clear focus on [SDMX](https://en.wikipedia.org/wiki/SDMX), which introduces too rigorous restrictions and/or examples for use-cases outside the statistical domain.
+* Re-use of dimensions is not very common in the RDF Data Cube vocabulary, that makes it much harder to compare data accross data providers.
 
 There are at least two efforts that extend the RDF Data Cube Vocabulary to address some of its limitations:
 
