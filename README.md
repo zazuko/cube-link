@@ -2,6 +2,8 @@
 
 In this repository we present the *RDF Cube Schema* model. We describe the model, an elaborate example and scripts to validate the example using the SHACL shape that is part of the standard.
 
+An additional document describes [Best Practice](best-practice.md)
+
 ## Example Cube
 
 An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [shape.ttl](shape.ttl).
