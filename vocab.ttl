@@ -1,0 +1,39 @@
+@base <http://ns.bergnet.org/cube/>.
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+<>
+  rdfs:label "RDF Cube Schema".
+
+<Constraint> a rdfs:Class;
+  rdfs:label "Constrain";
+  rdfs:comment "Specifies constraints that need to be met on the Cube. Used for metadata and validation.".
+
+<Cube> a rdfs:Class;
+  rdfs:label "Cube";
+  rdfs:comment "Represents the entry point for a collection of observations, conforming to some common dimensional structure.".
+
+<Observation> a rdfs:Class;
+  rdfs:label "Observation";
+  rdfs:comment "A single observation in the cube, may have one or more associated dimensions.".
+
+<ObservationSet> a rdfs:Class;
+  rdfs:label "Observation Set";
+  rdfs:comment "A set of observations.".
+
+<observation> a rdf:Property;
+  rdfs:label "observation";
+  rdfs:comment "Connects a set of observations with a single observation.".
+
+<observationConstraint> a rdf:Property;
+  rdfs:label "observation constraint";
+  rdfs:comment "Connects a cube with a constraint for metadata and validation.".
+
+<observationSet> a rdf:Property;
+  rdfs:label "observation set";
+  rdfs:comment "Connects a cube with a set of observations.".
+
+<observedBy> a rdf:Property;
+  rdfs:label "observed by";
+  rdfs:comment "Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.".
