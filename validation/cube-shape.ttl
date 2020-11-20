@@ -1,0 +1,44 @@
+@base <http://example.org/> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <http://ns.bergnet.org/cube/> .
+
+#
+# This is the bare minimal SHACL shape for validating a cube.
+# All cubes should pass this validation.
+#
+
+<CubeShape>
+    a sh:NodeShape ;
+    sh:targetClass cube:Cube ;
+    sh:property [
+        sh:path cube:observationSet ;
+        sh:minCount 1 ;
+        sh:node <ObservationSetShape> ;
+    ] ;
+    sh:property [
+        # optional, but recommended
+        sh:path cube:observationConstraint ;
+        sh:node <ObservationConstraintShape> 
+    ] .
+
+<ObservationSetShape>
+    a sh:NodeShape ;
+    sh:targetClass cube:ObservationSet ;
+    sh:property [
+        sh:path cube:observation ;
+        sh:minCount 1 ;
+    ] .
+
+<ObservationConstraintShape>
+    a sh:NodeShape ;
+    sh:targetClass cube:ObservationConstraint ;
+    sh:property [
+        # we assume at least one dimension, otherwise we would have an empty Observation/shape
+        sh:path sh:property ;
+        sh:minCount 1 ;
+    ] .
