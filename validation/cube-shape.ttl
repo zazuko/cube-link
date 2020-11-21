@@ -40,7 +40,7 @@
     a sh:NodeShape ;
     sh:targetClass cube:ObservationConstraint ;
     sh:property [
-        # we assume at least 3 dimensions, otherwise we would have an empty Observation/shape
+        # we assume at least 3 dimensions, otherwise we would have an empty list of dimensions
         # one for cube:observedBy, one for rdf:type and at least one cube dimension
         sh:path sh:property ;
         sh:minCount 3 ;
