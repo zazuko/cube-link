@@ -1,4 +1,4 @@
-@base <http://localhost:8080/rdf-cube-schema-example/> .
+@base <http://example.org/rdf-cube-schema-example/> .
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix cube: <http://ns.bergnet.org/cube/> .
