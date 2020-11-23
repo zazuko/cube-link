@@ -34,12 +34,14 @@ Namespace: `http://ns.bergnet.org/cube/`
 
 * `cube:Cube`: Represents the entry point for a collection of observations, conforming to some common dimensional structure.
 * `cube:Observation`: A single observation in the cube, may have one or more associated dimensions.
-* `cube:ObservationSet`: A set of observations.
+* `cube:ObservationSet`: A set of observations. One-to-many.
 * `cube:Constraint`: Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional)
 
-`Cube` and `Observation` are pretty much self-describing. All `Observation`s somehow linked with a `Cube` need to adhere to the same dimensional structure.
+`Cube` and `Observation` are pretty much self-describing. All `Observation`s linked with a `Cube` need to adhere to the same dimensional structure.
 
-An `ObservationSet` is a structure that acts as a container for multiple `Observation`s. It can be used to group any set of `Observation`s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more.
+![Basic RDF Cube Schema structure](./img/rdf-cube-schema-basic.svg)
+
+An `ObservationSet` is a structure that acts as a container for multiple `Observation`s. It can be used to group any set of `Observation`s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more `ObservationSet`s and an `Observation` can appear in multiple `ObservationSet`s.
 
 ### Properties
 
@@ -47,6 +49,8 @@ An `ObservationSet` is a structure that acts as a container for multiple `Observ
 * `cube:observationConstraint`: Connects a cube with a constraint for metadata and validation.
 * `cube:observation`: Connects a set of observations with a single observation. 
 * `cube:observedBy`: Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.
+
+![Observations can be connected to an observer](./img/rdf-cube-schema-observedBy.svg)
 
 ### Optional Features
 
@@ -71,6 +75,33 @@ In general, any RDF Property can be considered for describing a dimension, excep
 > Note that choosing a particular dimension will have implications. For querying cubes via SPARQL, spatial and temporal dimensions might only be filtered properly if the datatype used (i.e. `xsd:date`, `geo:asWKT`) is supported/optimized by the SPARQL endpoint. This is for example mostly _not_ the case for fragment datatypes like `xsd:gYear` etc.
 >
 > It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation.
+
+Dimensions can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal), language-tagged literals and literals with [datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes). For terms/concepts, [IRIs](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used instead and the literals would be attached to that particular instance of a concept. This can be done by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm) for example. As shown in the following example, a typical cube structure is a combination dimensions with typed literals attached to the `Observation` itself and dimensions that point to concept groups via IRIs.
+
+![An Observation often combines dimensions of typed literals with dimensions that point to IRIs]./img./rdf-cube-schema-dimensions.svg)
+
+In [Turtle](https://www.w3.org/TR/rdf11-primer/#section-turtle-family) syntax, the observation above looks like this:
+
+```turtle
+<temperature-sensor/cube/observation/20190103T120000055Z> a cube:Observation ;
+  cube:observedBy <temperature-sensor> ;
+  dh:room <building1/level1/room1> ;
+  dh:humidity 75.0 ;
+  dh:lowBatteryPower false ;
+  dh:temperature 0.0 ;
+  dc:date "2019-01-03T12:00:00.055000+00:00"^^xsd:dateTime .
+```
+
+`room1` is an IRI that has labels attached as language-tagged strings. 
+
+```turtle
+<building1/level1/room1> a schema:Place ;
+  schema:name "Room 1101"@en, "Raum 1101"@de, "Pièce 1101"@fr ;
+  schema:inDefinedTermSet <rooms> ;
+  schema:containedInPlace <building1/level1> .
+```
+
+Nesting of relations can be expressed in a machine readable form as well but is not part of the core RDF Cube Schema.
 
 ## Metadata and Validation (Constraint)
 
@@ -132,7 +163,7 @@ Dimensions that point to objects like code lists (i.e taxonomies represented in 
 
 It is possible to generate a minimal SHACL shape given a `Cube` and a set of `Observation`s.
 
-A SPARQL query to generate it is provided.
+A SPARQL query to generate is provided.
 
 ## Existing Work
 
