@@ -78,7 +78,7 @@ In general, any RDF Property can be considered for describing a dimension, excep
 
 Dimensions can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal), language-tagged literals and literals with [datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes). For terms/concepts, [IRIs](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used instead and the literals would be attached to that particular instance of a concept. This can be done by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm) for example. As shown in the following example, a typical cube structure is a combination dimensions with typed literals attached to the `Observation` itself and dimensions that point to concept groups via IRIs.
 
-![An Observation often combines dimensions of typed literals with dimensions that point to IRIs]./img./rdf-cube-schema-dimensions.svg)
+![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/rdf-cube-schema-dimensions.svg)
 
 In [Turtle](https://www.w3.org/TR/rdf11-primer/#section-turtle-family) syntax, the observation above looks like this:
 
