@@ -76,7 +76,9 @@ In general, any RDF Property can be considered for describing a dimension, excep
 >
 > It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation.
 
-Dimensions can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal), language-tagged literals and literals with [datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes). For terms/concepts, [IRIs](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used instead and the literals would be attached to that particular instance of a concept. This can be done by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm) for example. As shown in the following example, a typical cube structure is a combination dimensions with typed literals attached to the `Observation` itself and dimensions that point to concept groups via IRIs.
+Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal) with [datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Each dimension must only have one literal attached or point to one single IRI.
+
+Language-tagged literals and any other (meta-) data should be modeled as proper term/concept. For that, [IRIs](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be attached to that particular instance of a term/concept. This can be done by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm) for example. As shown in the following example, a typical cube structure is a combination dimensions with typed literals attached to the `Observation` itself and dimensions that point to concept groups via IRIs.
 
 ![An Observation often combines dimensions of typed literals with dimensions that point to IRIs]./img./rdf-cube-schema-dimensions.svg)
 
