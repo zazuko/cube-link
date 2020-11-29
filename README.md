@@ -80,8 +80,6 @@ Instances of a dimension can be [RDF literals] (https://www.w3.org/TR/rdf11-prim
 
 Language tagged literals and all other (meta) data should be modeled as  term/concept. For this purpose, [IRIs] (https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
 
-Translated with www.DeepL.com/Translator (free version)
-
 ![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/rdf-cube-schema-dimensions.svg)
 
 In [Turtle](https://www.w3.org/TR/rdf11-primer/#section-turtle-family) syntax, the observation above looks like this:
