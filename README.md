@@ -76,9 +76,11 @@ In general, any RDF Property can be considered for describing a dimension, excep
 >
 > It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation.
 
-Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal) with [datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Each dimension must only have one literal attached or point to one single IRI.
+Instances of a dimension can be [RDF literals] (https://www.w3.org/TR/rdf11-primer/#section-literal) with [data types] (https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.
 
-Language-tagged literals and any other (meta-) data should be modeled as proper term/concept. For that, [IRIs](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be attached to that particular instance of a term/concept. This can be done by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm) for example. As shown in the following example, a typical cube structure is a combination dimensions with typed literals attached to the `Observation` itself and dimensions that point to concept groups via IRIs.
+Language tagged literals and all other (meta) data should be modeled as  term/concept. For this purpose, [IRIs] (https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
+
+Translated with www.DeepL.com/Translator (free version)
 
 ![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/rdf-cube-schema-dimensions.svg)
 
