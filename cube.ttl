@@ -17,7 +17,7 @@
   schema:name "Thermometer"@de ;
   schema:name "Thermomètre"@fr . 
 
-<temperature-sensor/cube> a cube:Cube, a schema:Dataset ;
+<temperature-sensor/cube> a cube:Cube, schema:Dataset ;
   schema:name "Thermometer Historical Data"@en ;
   schema:name "Historische Daten vom Thermometer"@de ;
   schema:name "Données historiques du thermomètre"@fr ;
