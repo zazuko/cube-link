@@ -4,7 +4,7 @@ const SHACLValidator = require('rdf-validate-shacl')
 const namespace = require('@rdfjs/namespace')
 
 const ns = {
-  cube: namespace('http://cube.link/'),
+  cube: namespace('https://cube.link/'),
   rdf: namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#'),
   sh: namespace('http://www.w3.org/ns/shacl#')
 }
