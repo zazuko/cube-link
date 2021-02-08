@@ -9,9 +9,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ex: <http://example.org/> .
-@prefix scale: <http://ns.bergnet.org/cube/scale/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix schema: <http://schema.org/>.
+@prefix qudt: <http://qudt.org/schema/qudt#> .
 
 <temperature-sensor/cube/shape> a sh:NodeShape, cube:Constraint ;
   sh:closed true ;
@@ -29,7 +29,7 @@
     sh:datatype xsd:dateTime ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    scale:scaleOfMeasure scale:Temporal ;
+    qudt:scaleType qudt:IntervalScale ;
   ], [
     schema:name "Humidity"@en, "Feuchtigkeit"@de, "Humidité"@fr ; # optional, label of the vocab can be used
     sh:path dh:humidity ;
@@ -38,7 +38,7 @@
     sh:maxCount 1 ;
     sh:minInclusive 0 ;
     sh:maxInclusive 100 ;
-    scale:scaleOfMeasure scale:Continuous ;
+    qudt:scaleType qudt:IntervalScale ;
   ], [
     schema:name "Low Battery Power"@en, "Niedrige Batterieleistung"@de, "Piles faibles"@fr  ; # optional, label of the vocab can be used
     sh:path dh:lowBatteryPower ;
@@ -46,7 +46,7 @@
     sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:in ( "true"^^xsd:boolean "false"^^xsd:boolean ) ;
-    scale:scaleOfMeasure scale:Nominal ;
+    qudt:scaleType qudt:NominalScale ;
   ], [
     schema:name "Temperature"@en, "Temperatur"@de, "Température"@fr ; # optional, label of the vocab can be used
     sh:path dh:temperature ;
@@ -55,7 +55,7 @@
     sh:maxCount 1 ;
     sh:minInclusive -50 ;
     sh:maxInclusive 50 ;
-    scale:scaleOfMeasure scale:Numerical ;
+    qudt:scaleType qudt:IntervalScale ;
   ], [
     schema:name "Raum"@de , "Pièce"@fr ,"Room"@en ;
     sh:path dh:room ;
@@ -63,5 +63,5 @@
     sh:class schema:Place ;
     sh:nodeKind sh:IRI ;
     sh:in ( <building1/level1/room1> <building1/level1/room2> <building1/level2/room1> <building1/level2/room2> <building2/level1/room1> <building2/level1/room2> <building2/level2/room1> <building2/level2/room2> ) ;
-    scale:scaleOfMeasure scale:Nominal ;
+    qudt:scaleType qudt:NominalScale ;
   ] .
