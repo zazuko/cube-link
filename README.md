@@ -28,7 +28,7 @@ The _RDF Cube Schema_ defines a minimal set of classes and properties necessary 
 The core schema is very simple and almost unconstrained from an RDF perspective. This ensures it can be used in many ways and does not restrict its usefulness due to too rigorous definitions.
 
 Prefix: `cube`
-Namespace: `http://ns.bergnet.org/cube/`
+Namespace: `https://cube.link/`
 
 ### Classes
 
