@@ -12,6 +12,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix qudt: <http://qudt.org/schema/qudt#>.
 @prefix schema: <http://schema.org/>.
+@prefix qudt: <http://qudt.org/schema/qudt#> .
 
 <temperature-sensor/cube/shape> a sh:NodeShape, cube:Constraint ;
   sh:closed true ;
