@@ -17,7 +17,7 @@
   schema:name "Thermometer"@de ;
   schema:name "Thermomètre"@fr . 
 
-<temperature-sensor/cube> a cube:Cube ;
+<temperature-sensor/cube> a cube:Cube, schema:Dataset ;
   schema:name "Thermometer Historical Data"@en ;
   schema:name "Historische Daten vom Thermometer"@de ;
   schema:name "Données historiques du thermomètre"@fr ;
@@ -33,12 +33,7 @@
   schema:dateCreated "2020-05-04"^^xsd:date ; # The date on which the CreativeWork was created or the item was added to a DataFeed.
   schema:datePublished "2020-05-04"^^xsd:date ; # Date of first broadcast/publication.
   schema:dateModified "2020-05-04"^^xsd:date ; # The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
-  # ex:isUsedIn <http://my.fancy.webapp> # TODO We need a way to describe what apps use/visualize this cube data
-  # add topics. We should be able to represent topics like the one in Zurich. Should be possible to nest them.
-.
-
-  # TODO Missing
-  # - how do we describe the nesting to the user/API?
+  schema:workExample <http://my.fancy.webapp> . # What apps use/visualize this cube data
 
 <temperature-sensor/cube/observation> a cube:ObservationSet ;
   cube:observation <temperature-sensor/cube/observation/20190102T120000058Z>,
@@ -89,7 +84,7 @@
 
 <temperature-sensor/cube/observation/20190106T120000057Z> a cube:Observation ;
   cube:observedBy <temperature-sensor> ;
-  dh:room <building1/level2/room1> ; 
+  dh:room <building1/level2/room1> ;
   dh:humidity 88.0 ;
   dh:lowBatteryPower false ;
   dh:temperature 2.3999999999999999112 ;
