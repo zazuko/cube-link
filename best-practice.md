@@ -30,17 +30,47 @@ sensor:powerIncoming a rdf:Property;
 
 In _RDF Cube Schema_, all dimensions are mandatory for a cube. If a value could not be measured, it should be expressed as such.
 
-For numeric datatypes, XML and [thus RDF](https://www.w3.org/TR/rdf11-concepts/#xsd-datatypes) defines ["not a number"](https://docstore.mik.ua/orelly/xml/schema/ch04_04.htm) (`NaN`) as a value. For `xsd:float` and `xsd:double` the following RDF is valid:
+There is no generic "built-in" way to solve this in RDF. For some numeric datatypes, XML and [thus RDF](https://www.w3.org/TR/rdf11-concepts/#xsd-datatypes) defines ["not a number"](https://docstore.mik.ua/orelly/xml/schema/ch04_04.htm) (`NaN`) as a value. According to the specs, this is only valid for `xsd:float` and `xsd:double` and not for `xsd:decimal` and `xsd:integer`.
 
+To provide a generic solution that works for all number and IRIs, _RDF Cube Schema_ provides `cube:Undefined`. The following example shows how to use it in `cube:Observation` and in the attached shape:
+
+```turtle
+# NamedNode Dimensions
+
+<observation1> a cube:Observation;
+  ex:namedNodeDimension cube:Undefined;
+
+<observation2> a cube:Observation;
+  ex:namedNodeDimension ex:realValue1;
+
+<observation3> a cube:Observation;
+  ex:namedNodeDimension ex:realValue2;
+  
+## Snippet for for the according shape:
+
+[
+    sh:path ex:namedNodeDimension;
+    sh:nodeKind sh:IRI;
+    sh:in(cube:Undefined, ex:realValue1, ex:realValue2)
+]
+
+
+# Literals Dimensions
+
+<observation2> a cube:Observation;
+  ex:literalDimension ""^^cube:Undefined.
+
+## Snippet for for the according shape:
+
+[
+    sh:path ex:literalDimension;
+    sh:nodeKind sh:Literal;
+    sh:or([
+        sh:datatype xsd:string
+    ], [
+        sh:datatype cube:Undefined
+    ])
+]
 ```
-BASE <http://example.org/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-<observation> <measure> "NaN"^^xsd:double .
-```
-
-Please note that `NaN` is __not__ a valid value for `xsd:decimal`.
-
-For [IRIs](https://www.w3.org/TR/rdf11-concepts/#section-IRIs), it could make sense to define a generic `Nil`-value. There is [rdf:nil](https://prefix.zazuko.com/rdf:nil) but its textual description limits its usage to an application in [RDF Lists](https://www.w3.org/TR/rdf-schema/#ch_list). 
-
-If it is necessary to state why the value is`NaN`, annotations should be used.
+If it is necessary to state why the value is `cube:Undefined`, annotations should be used.
