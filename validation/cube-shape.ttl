@@ -5,7 +5,7 @@
 @prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix cube: <http://ns.bergnet.org/cube/> .
+@prefix cube: <https://cube.link/> .
 
 #
 # This is the bare minimal SHACL shape for validating a cube.
