@@ -167,6 +167,50 @@ It is possible to generate a minimal SHACL shape given a `Cube` and a set of `Ob
 
 SPARQL CONSTRUCT queries will be provided in this repository.
 
+### Types of Dimensions
+
+To be able to understand the nature of a dimension we can type the dimension in the constraints. In general we have two mandatory types, the `cube:MeasureDimension` and the `cube:KeyDimension`. Whereas the `cube:MeasureDimension` does flag the dimension which is the actually measurement, or statistical count attached to an observation. The `KeyDimension` tages all dimensions which are together uniqly identifying an observation. You can think of them as the *Key* in a realational database.
+
+```turtle
+<temperature-sensor/cube/shape> a sh:NodeShape, cube:Constraint ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( cube:Observation )
+  ], [ a cube:KeyDimension ; # Dimension is part of the Key
+    sh:path cube:observedBy ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( <temperature-sensor> )
+  ], [ a cube:KeyDimension ; # Dimension is part of the Key
+    schema:name "Date and Time"@en, "Datum und Zeit"@de, "Date et heure"@fr;
+    sh:path dc:date ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    qudt:scaleType qudt:IntervalScale ;
+  ], [ a cube:MeasureDimension ; # The measurement of this observation.
+    schema:name "Humidity"@en, "Feuchtigkeit"@de, "Humidité"@fr ;
+    sh:path dh:humidity ;
+    sh:datatype xsd:decimal ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:minInclusive 0 ;
+    sh:maxInclusive 100 ;
+    qudt:scaleType qudt:IntervalScale ;
+  ].
+```
+
+Finally to be able to distinguish of Dimensions which are defined inside a Cube from Dimensions which are used in multiple cubes, we have the type of `cube:SharedDimensions`. Every dimension except the ones typed as `cube:MeasureDimension` can be a `cube:SharedDimension`.
+```turtle
+[ a cube:KeyDimension, cube:SharedDimension ;
+    schema:name "Canton"@en, "Kanton"@de, "Canton"@fr;
+    sh:path example:canton ;
+    qudt:scaleType qudt:NominalScale ;
+  ].
+```
+
+Dimensions can have further types, which are not defined by this vocabulary to support other Dimensions (e.g. Precision, Statistical Measures) or for additional Attributes to filter on, which are not part of the key to define a `cube:KeyDimension`.
+
 ## Existing Work
 
 ### RDF Data Cube Vocabulary
