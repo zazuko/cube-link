@@ -4,7 +4,7 @@ In this repository we present the *RDF Cube Schema* model.
 
 We describe the model, an elaborate example and scripts to validate observations based on the the constraint (SHACL shape) provided.
 
-We also provide [Best Practice](best-practice.md).
+We also provide [Best Practice](best-practice.md), and an [Extension for Visualization](https://github.com/zazuko/rdf-cube-schema-viz) related topics.
 
 ## Example Cube
 
