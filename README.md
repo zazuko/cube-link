@@ -169,7 +169,7 @@ SPARQL CONSTRUCT queries will be provided in this repository.
 
 ### Types of Dimensions
 
-To be able to understand the nature of a dimension we can type the dimension in the constraints. In general we have two mandatory types, the `cube:MeasureDimension` and the `cube:KeyDimension`. Whereas the `cube:MeasureDimension` does flag the dimension which is the actually measurement, or statistical count attached to an observation. The `KeyDimension` tages all dimensions which are together uniqly identifying an observation. You can think of them as the *Key* in a realational database.
+To be able to understand the nature of a dimension we can type the dimension in the constraints. In general we have at least two mandatory types per cube, the `cube:MeasureDimension` and the `cube:KeyDimension`. Whereas the `cube:MeasureDimension` does flag at least one dimension, but potentially multiples which is the actually measurement, or statistical count attached to an observation. The `KeyDimension` tags one or multiple dimensions which are together uniquely identifying an observation. You can think of them as the *Key* in a realational database.
 
 ```turtle
 <temperature-sensor/cube/shape> a sh:NodeShape, cube:Constraint ;
