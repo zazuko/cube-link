@@ -161,6 +161,8 @@ Dimensions that point to objects like code lists (i.e taxonomies represented in 
 ]
 ```
 
+SHACL also provides properties that are not used for validation purposes like `shacl:order`. This can be used to indicate the relative order of the dimension, for use in visualizations. It should be used according to [the specification](https://www.w3.org/TR/shacl/#order) by using ascending order, for example so that properties with smaller order are placed above (or to the left) of properties with larger order. 
+
 ### Generating Shapes
 
 It is possible to generate a minimal SHACL shape given a `Cube` and a set of `Observation`s.
