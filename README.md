@@ -41,7 +41,7 @@ Namespace: `http://ns.bergnet.org/cube/`
 
 ![Basic RDF Cube Schema structure](./img/rdf-cube-schema-basic.svg)
 
-An `ObservationSet` is a structure that acts as a container for multiple `Observation`s. It can be used to group any set of `Observation`s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more `ObservationSet`s and an `Observation` can appear in multiple `ObservationSet`s.
+An `ObservationSet` is a structure that acts as a container for multiple `Observation`s. It can be used to group any set of `Observation`s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more `ObservationSet`s and an `Observation` can appear in multiple `ObservationSet`s.
 
 ### Properties
 
@@ -76,11 +76,11 @@ In general, any RDF Property can be considered for describing a dimension, excep
 >
 > It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation.
 
-Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal) with [datatypes](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Each dimension must only have one literal attached or point to one single IRI.
+Instances of a dimension can be [RDF literals] (https://www.w3.org/TR/rdf11-primer/#section-literal) with [data types] (https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.
 
-Language-tagged literals and any other (meta-) data should be modeled as proper term/concept. For that, [IRIs](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be attached to that particular instance of a term/concept. This can be done by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm) for example. As shown in the following example, a typical cube structure is a combination dimensions with typed literals attached to the `Observation` itself and dimensions that point to concept groups via IRIs.
+Language tagged literals and all other (meta) data should be modeled as  term/concept. For this purpose, [IRIs] (https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [SKOS](https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
 
-![An Observation often combines dimensions of typed literals with dimensions that point to IRIs]./img./rdf-cube-schema-dimensions.svg)
+![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/rdf-cube-schema-dimensions.svg)
 
 In [Turtle](https://www.w3.org/TR/rdf11-primer/#section-turtle-family) syntax, the observation above looks like this:
 
@@ -113,7 +113,7 @@ Providing shape and constraints for a cube facilitates the interpretation and va
 
 From a pure publishing point of view and according to the [Open World Model](http://linked-data-training.zazuko.com/Ontologies/index.html#14), publishing observations using the core _RDF Cube Schema_ is enough. However, in reality one might want to use the data for other purposes as well, like visualizing it in web applications and other publications. To be useful, such tools might require additional metadata and cubes that adhere to certain constraints.
 
-It is up to the consumer of the data to decide how the shape is used. If provided, it should be possible to validate the observations in the cube with it. 
+It is up to the consumer of the data to decide how the shape is used. If provided, it should be possible to validate the observations in the cube with it.
 
 ### Shapes
 
@@ -165,7 +165,7 @@ Dimensions that point to objects like code lists (i.e taxonomies represented in 
 
 It is possible to generate a minimal SHACL shape given a `Cube` and a set of `Observation`s.
 
-A SPARQL query to generate is provided.
+SPARQL CONSTRUCT queries will be provided in this repository.
 
 ## Existing Work
 
