@@ -155,7 +155,7 @@ Dimensions that point to objects like code lists (i.e taxonomies represented in 
 ```turtle
 [
   schema:name "Room"@en, "Raum"@de , "Pièce"@fr ;
-  sh:path ex:room ;
+  sh:path dh:room ;
   sh:maxCount 1 ;
   sh:in ( <building1/level1/room1> <building1/level1/room2> ) ;
 ]
