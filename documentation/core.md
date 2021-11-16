@@ -76,15 +76,17 @@ In general, any RDF Property can be considered for describing a dimension, excep
 >
 > It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation.
 
-Instances of a dimension can be [RDF literals] (https://www.w3.org/TR/rdf11-primer/#section-literal) with [data types] (https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.
+Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal) with [data types](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.
 
-Language tagged literals and all other (meta) data should be modeled as  term/concept. For this purpose, [^section-IRIs^] [[[rdf11-primer]]] (https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [[[skos-primer]]] (https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
+Language tagged literals and all other (meta) data should be modeled as  term/concept. For this purpose, [IRI's](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [[[skos-primer]]] (https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
 
 ![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/rdf-cube-schema-dimensions.svg)
 
-In [Turtle](https://www.w3.org/TR/rdf11-primer/#section-turtle-family) syntax, the observation above looks like this:
+In [[[turtle]]] syntax, the observation above looks like this:
 
-```turtle
+<div class='example'>
+
+```turtle example
 <temperature-sensor/cube/observation/20190103T120000055Z> a cube:Observation ;
   cube:observedBy <temperature-sensor> ;
   dh:room <building1/level1/room1> ;
@@ -93,6 +95,8 @@ In [Turtle](https://www.w3.org/TR/rdf11-primer/#section-turtle-family) syntax, t
   dh:temperature 0.0 ;
   dc:date "2019-01-03T12:00:00.055000+00:00"^^xsd:dateTime .
 ```
+
+</div>
 
 `room1` is an IRI that has labels attached as language-tagged strings. 
 
@@ -107,7 +111,7 @@ Nesting of relations can be expressed in a machine readable form as well but is 
 
 ## Metadata and Validation (Constraint)
 
-_RDF Cube Schema_ supports attaching a "shape", or "constraint" to a cube. The constraints itself are expressed using the [Shapes Constraint Language (SHACL)](https://www.w3.org/TR/shacl/).
+_RDF Cube Schema_ supports attaching a "shape", or "constraint" to a cube. The constraints itself are expressed using the [[[shacl]]]
 
 Providing shape and constraints for a cube facilitates the interpretation and validation of the cube for tooling and libraries.
 
@@ -236,14 +240,14 @@ It was considered to either clarify or update the RDF Data Cube Vocabulary speci
 
 There are at least two efforts that extend the RDF Data Cube Vocabulary to address some of its limitations:
 
-* [QB4ST](https://w3c.github.io/sdw/qb4st/)
+* [[[qb4st]]]
 * [QB4OLAP](https://github.com/lorenae/qb4olap/wiki)
 
 Both efforts could likely be solved/addressed within the _RDF Cube Schema_ approach, this needs to be validated by interested parties.
 
 ### SSN
 
-The [Semantic Sensor Network Ontology](https://www.w3.org/TR/vocab-ssn/) defines a simplified model for describing observations from a sensor in RDF.
+The [[[vocab-ssn]]] defines a simplified model for describing observations from a sensor in RDF.
 
 The [Observation](https://www.w3.org/TR/vocab-ssn/#SOSAObservation) model is at least inspired by the RDF Data Cube Vocabulary but it is not very useful for use-cases outside of sensor networks.
 
