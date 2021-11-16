@@ -37,8 +37,8 @@ An [ObservationSet](#ObservationSet) is a structure that acts as a container for
 #### cube:Constraint {#Constraint}
 Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional)
 
+<div class="issue" data-number="28"></div>
 [Cube](#Cube) and [Observation](#Observation) are pretty much self-describing. All [Observation](#Observation)s linked with a [Cube](#Cube) need to adhere to the same dimensional structure.
-
 
 ### Properties
 
@@ -260,7 +260,7 @@ It was considered to either clarify or update the RDF Data Cube Vocabulary speci
 
 There are at least two efforts that extend the RDF Data Cube Vocabulary to address some of its limitations:
 
-* [[[qb4st]]]
+* [[[?qb4st]]]
 * [QB4OLAP](https://github.com/lorenae/qb4olap/wiki)
 
 Both efforts could likely be solved/addressed within the _RDF Cube Schema_ approach, this needs to be validated by interested parties.
