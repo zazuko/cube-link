@@ -1,62 +1,56 @@
 # RDF Cube Schema
 
-This section describes the *RDF Cube Schema* model.
-
-The _RDF Cube Schema_ defines a minimal set of classes and properties necessary to represent multi-dimensional arrays of data in [[[rdf11-concepts]]].
+In this repository we present the *RDF Cube Schema* model.
 
 We describe the model, an elaborate example and scripts to validate observations based on the the constraint (SHACL shape) provided.
 
 We also provide [Best Practice](best-practice.md), and an [Extension for Visualization](https://github.com/zazuko/rdf-cube-schema-viz) related topics.
 
-## Namespace and Prefix {#NS}
+## Example Cube
 
-Prefix: `cube`
+An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [shape.ttl](shape.ttl).
 
-Namespace: `https://cube.link/`
+### Validate the cube
+
+You can validate the cube with a cli tool written in Node.js.
+
+Install the package dependencies: `npm i`
+
+Validate `cube.ttl` by using the SHACL shape in `shape.ttl`: 
+
+```./bin/rdf-cube-schema.js validate cube.ttl shape.ttl```
+
 
 ## Core Schema
 
+The _RDF Cube Schema_ defines a minimal set of classes and properties necessary to represent multi-dimensional arrays of data in [[[rdf11-concepts]]].
+
 The core schema is very simple and almost unconstrained from an RDF perspective. This ensures it can be used in many ways and does not restrict its usefulness due to too rigorous definitions.
 
-![Basic RDF Cube Schema structure](./img/rdf-cube-schema-basic.svg)
+Prefix: `cube`
+Namespace: `https://cube.link/`
 
 ### Classes
 
-There are 4 classes defined in the RDF Cube Schema
+* `cube:Cube`: Represents the entry point for a collection of observations, conforming to some common dimensional structure.
+* `cube:Observation`: A single observation in the cube, may have one or more associated dimensions.
+* `cube:ObservationSet`: A set of observations. One-to-many.
+* `cube:Constraint`: Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional)
 
-#### cube:Cube {#Cube}
-Represents the entry point for a collection of observations, conforming to some common dimensional structure.
+`Cube` and `Observation` are pretty much self-describing. All `Observation`s linked with a `Cube` need to adhere to the same dimensional structure.
 
-#### cube:Observation {#Observation}
-A single observation in the cube, may have one or more associated dimensions.
+![Basic RDF Cube Schema structure](./img/rdf-cube-schema-basic.svg)
 
-#### cube:ObservationSet {#ObservationSet}
-
-An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observation](#Observation)s. It can be used to group any set of [Observation](#Observation)s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSet](#ObservationSet)s and an [Observation](#Observation) can appear in multiple [ObservationSet](#ObservationSet)s.
-
-#### cube:Constraint {#Constraint}
-Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional)
-
-[Cube](#Cube) and [Observation](#Observation) are pretty much self-describing. All [Observation](#Observation)s linked with a [Cube](#Cube) need to adhere to the same dimensional structure.
-
+An `ObservationSet` is a structure that acts as a container for multiple `Observation`s. It can be used to group any set of `Observation`s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more `ObservationSet`s and an `Observation` can appear in multiple `ObservationSet`s.
 
 ### Properties
 
-The resource described by the various classes are connected by a small set of properties.
+* `cube:observationSet`: Connects a cube with a set of observations.
+* `cube:observationConstraint`: Connects a cube with a constraint for metadata and validation.
+* `cube:observation`: Connects a set of observations with a single observation. 
+* `cube:observedBy`: Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.
 
 ![Observations can be connected to an observer](./img/rdf-cube-schema-observedBy.svg)
-
-#### cube:observationSet {#observationSet}
-Connects a cube with a set of observations.
-
-#### cube:observationConstraint {#observationConstraint}
-Connects a cube with a constraint for metadata and validation.
-
-#### cube:observation {#observation}
-Connects a set of observations with a single observation. 
-
-#### cube:observedBy {#observedBy}
-Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.
 
 ### Optional Features
 
@@ -222,20 +216,6 @@ Finally to be able to distinguish of Dimensions which are defined inside a Cube 
 ```
 
 Dimensions can have further types, which are not defined by this vocabulary to support other Dimensions (e.g. Precision, Statistical Measures) or for additional Attributes to filter on, which are not part of the key to define a `cube:KeyDimension`.
-
-## Example Cube
-
-An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [shape.ttl](shape.ttl).
-
-### Validate the cube
-
-You can validate the cube with a cli tool written in Node.js.
-
-Install the package dependencies: `npm i`
-
-Validate `cube.ttl` by using the SHACL shape in `shape.ttl`: 
-
-```./bin/rdf-cube-schema.js validate cube.ttl shape.ttl```
 
 ## Existing Work
 
