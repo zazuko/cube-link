@@ -38,6 +38,7 @@ An [ObservationSet](#ObservationSet) is a structure that acts as a container for
 Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional)
 
 <div class="issue" data-number="28"></div>
+
 [Cube](#Cube) and [Observation](#Observation) are pretty much self-describing. All [Observation](#Observation)s linked with a [Cube](#Cube) need to adhere to the same dimensional structure.
 
 ### Properties
