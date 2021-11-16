@@ -9,8 +9,20 @@ var respecConfig = {
       branch: "documentation", // alternative branch
     },
     editors: [{
+      name: "Thomas Bergwinkl",
+      url: "https://www.zazuko.com",
+    },
+    {
+      name: "Adrian Gschwend",
+      url: "https://www.zazuko.com",
+    },
+    {
       name: "Bart van Leeuwen",
-      url: "https://www.netage.nl",
+      url: "https://www.zazuko.com",
+    },
+    {
+      name: "Michael Luggen",
+      url: "https://www.zazuko.com",
     }]
   };
 
