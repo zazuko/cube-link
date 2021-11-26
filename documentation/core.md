@@ -6,8 +6,6 @@ The _RDF Cube Schema_ defines a minimal set of classes and properties necessary 
 
 We describe the model, an elaborate example and scripts to validate observations based on the the constraint (SHACL shape) provided.
 
-We also provide [Best Practice](best-practice.md), and an [Extension for Visualization](https://github.com/zazuko/rdf-cube-schema-viz) related topics.
-
 ## Namespaces and Prefixes {#NS}
 
 ### RDF Cube Schema
