@@ -8,12 +8,23 @@ We describe the model, an elaborate example and scripts to validate observations
 
 We also provide [Best Practice](best-practice.md), and an [Extension for Visualization](https://github.com/zazuko/rdf-cube-schema-viz) related topics.
 
-## Namespace and Prefix {#NS}
+## Namespaces and Prefixes {#NS}
 
-|   |   |
-| - | - |
-| Prefix | `cube` |
-| Namespace | `https://cube.link/` |
+### RDF Cube Schema
+| PREFIX | IRI | Description |
+| --- | --- | --- |
+| `cube` | `https://cube.link` | RDF Cube Schema.|
+| `meta` | `https://cube.link/meta` | RDF Cube Schema meta data extension.|
+
+
+### External
+| PREFIX | IRI | Description |
+| --- | --- | --- |
+| schema | [http://schema.org](http://schema.org) | To describe basic properties. |
+| shacl | [http://www.w3.org/ns/shacl](https://www.w3.org/TR/shacl/) | Inherited from the RDF Cube Schema for constratins. |
+| qudt | [http://qudt.org/vocab/](http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html) | Describe scale of mesures. |
+| unit | [http://qudt.org/vocab/unit/](http://www.qudt.org/doc/DOC_VOCAB-UNITS.html) | Describes units on values. |
+| time | [http://www.w3.org/2006/time#](https://www.w3.org/TR/owl-time/) | A time description ontology. |
 
 ## Core Schema
 
@@ -121,3 +132,25 @@ In [[[turtle]]] syntax, the observation above looks like this:
 
 Nesting of relations can be expressed in a machine readable form as well but is not part of the core RDF Cube Schema.
 
+## Metadata
+
+From a high level point of view the core classes and properties are enough to publish a valid cube, however the absence of all metadata might make it hard for consumers to understand what the data is about.
+
+### Cube Description
+To add the title and a short description of the cube add the following properties directly on an instance of a [cube:Cube](#Cube)
+
+#### schema.name 
+A descriptive name of the Cube, can be multilingual.
+#### schema.description
+A description of the Cube, can be multilingual.
+
+#### other properties
+you are free to add other properties related to your Cube or the publication process of your Cube directly on the instance of the Cube.
+
+<aside class='advisement'>
+
+Although from the Open World concept point of view nothing forbids you to put metadata on every single observation, we do advice AGAINST that practice, in large cubes this can dramatically increase the cube size and negatively impact the performance.
+
+The [Constraints](#constraints) and [Visualization](#viz) section provide guidance on how to describe the structure of observations through the Constraints property.
+
+</aside>
