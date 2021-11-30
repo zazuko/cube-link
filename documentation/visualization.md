@@ -1,0 +1,124 @@
+# RDF Cube Schema: Visualization Extensions
+
+To facilitate the visualization of RDF Cubes it is possible to extend the [Constraints](#constraints) to include additional metadata that describe the characteristics of the cube and its dimensions.
+By providing this information in the Constraints tools used for displaying the data in the cube do no need to process and interpret the actual data in the cube to configure the visualization.
+
+## Dimensions
+
+To be able to understand the nature of a dimension we can type the dimension in the constraints. In general we have at least two mandatory types per cube, the cube:MeasureDimension and the cube:KeyDimension.
+
+### Classes
+
+<div class='issue' data-number='29'></div>
+
+#### cube:KeyDimension
+
+The KeyDimension tags one or multiple dimensions which are together uniquely identifying an observation. You can think of them as the Key in a relational database.
+
+#### cube:MeasureDimension
+
+ The MeasureDimension tags at least one dimension, but potentially multiple, which is the actually measurement, or statistical count attached to an observation.
+
+<aside class='example' title='The use of  Dimension classes'>
+
+```turtle
+<temperature-sensor/cube/shape> a sh:NodeShape, cube:Constraint ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( cube:Observation )
+  ], [ a cube:KeyDimension ; # Dimension is part of the Key
+    sh:path cube:observedBy ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( <temperature-sensor> )
+  ], [ a cube:KeyDimension ; # Dimension is part of the Key
+    schema:name "Date and Time"@en, "Datum und Zeit"@de, "Date et heure"@fr;
+    sh:path dc:date ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    qudt:scaleType qudt:IntervalScale ;
+  ], [ a cube:MeasureDimension ; # The measurement of this observation.
+    schema:name "Humidity"@en, "Feuchtigkeit"@de, "Humidité"@fr ;
+    sh:path dh:humidity ;
+    sh:datatype xsd:decimal ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:minInclusive 0 ;
+    sh:maxInclusive 100 ;
+    qudt:scaleType qudt:IntervalScale ;
+  ].
+```
+
+</aside>
+
+#### cube:SharedDimension
+
+To be able to distinguish Dimensions which are defined inside a Cube from Dimensions which are used in multiple cubes, we have the type of cube:SharedDimension. Every dimension except the ones typed as cube:MeasureDimension can be a cube:SharedDimension.
+
+<aside class='example' title='Shared Dimension'>
+
+```turtle
+[ a cube:KeyDimension, cube:SharedDimension ;
+    schema:name "Canton"@en, "Kanton"@de, "Canton"@fr;
+    sh:path example:canton ;
+    qudt:scaleType qudt:NominalScale ;
+  ].
+```
+
+</aside>
+
+
+### Properties
+
+#### schema:name 
+A descriptive name of the Dimension, can be multilingual.
+#### schema:description
+A description of the Dimension, can be multilingual.
+
+#### qudt:unit
+To describe the unit of the values in a dimension the respecitive `qudt:Unit` instance can be attached to a [Dimension Constraint](#dimensionconstraints) with the `qudt:unit` property.
+
+#### qudt:scaleType
+
+To provide more information on the statistical property of the scale of measure is described by `qudt:NominalScale`, `qudt:OrdinalScale`, `qudt:IntervalScale` or `qudt:RatioScale` which is attached through `qudt:scaleType` to the [Cube Constraint per Dimension](https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint).
+
+The different scaleTypes hint about features which can be used for visualization properties:
+
+* `qudt:NominalScale`: Expects the dimension to be either Resource (connected by an URI) or a value with any kind of dataType.
+* `qudt:OrdinalScale`: Expects the dimesion to be either:
+	* A Resource (connected by an URI): In this case the Resource should provide `schema:position` on the elements which provides a lexical ordering (best to use integer numbers). Further can be expected that the order in `sh:in` of the [shape constraint](https://github.com/zazuko/rdf-cube-schema#shapes) is correctly ordered.
+	* Or value where the lexical order has a meaning. (e.g. `1th`, `2nd`, `3rd`).
+* `qudt:IntervalScale`: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.
+* `qudt:RatioScale`: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.
+
+#### shacl:datatype
+
+To describe the datatype used by the dimension attach the `shacl:datatype` to the [Dimension Constraint](#dimensionconstraints). 
+Be aware that this implies the presence of a typed literal as dimension value
+
+#### meta:dataKind (temporal / spatial)
+Finally to express that the dimension provides a specific _kind_ of data which is necessary to select the correct visual representation we add `https://cube.link/meta/dataKind/` with the following structure possible values:
+
+* [`schema:GeoCoordinates`](https://schema.org/GeoCoordinates): To hint that the dimension does provide Resources with latitutde and longitude which can be shown on a map.
+  ```turtle
+  @prefix: <https://cube.link/meta/dataKind/>
+  
+  <dimension> meta:dataKind [ a schema:GeoCoordinates ].
+  ```
+* [`schema:GeoShape`](https://schema.org/GeoShape): To hint that the dimension does provide Resources which have a shape which can be shown on a map.
+* [`time:GeneralDateTimeDescription`](https://www.w3.org/TR/owl-time/#time:GeneralDateTimeDescription): To hint that the dimension does provide Resources which can be shown on a timeline.
+  
+  It is further possible to add [`time:unitType`](https://www.w3.org/TR/owl-time/#time:unitType) to hint about the precision in which the dimension should be presented. A [`time:TemporalUnit`](https://www.w3.org/TR/owl-time/#time:TemporalUnit) is expected: `time:unitYear`, `time:unitMonth`, `time:unitWeek`, `time:unitDay`, `time:unitHour`, `time:unitMinute` and `time:unitSecond`.
+  
+  ```turtle
+  @prefix: <https://cube.link/meta/dataKind/>
+  
+  <dimension> meta:dataKind [ 
+     a time:GeneralDateTimeDescription;
+     time:unitType time:unitYear
+  ].
+  ```
+
+#### sh:order
+The sh:order can be used to indicate the relative order of the dimension, for use in visualizations. It should be used according to [the specification](https://www.w3.org/TR/shacl/#order) by using ascending order, for example so that properties with smaller order are placed above (or to the left) of properties with larger order. 
