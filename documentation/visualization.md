@@ -102,7 +102,7 @@ Finally to express that the dimension provides a specific _kind_ of data which i
 
 * [`schema:GeoCoordinates`](https://schema.org/GeoCoordinates): To hint that the dimension does provide Resources with latitutde and longitude which can be shown on a map.
   ```turtle
-  @prefix: <https://cube.link/meta/dataKind/>
+  @prefix: <https://cube.link/meta/>
   
   <dimension> meta:dataKind [ a schema:GeoCoordinates ].
   ```
@@ -112,7 +112,7 @@ Finally to express that the dimension provides a specific _kind_ of data which i
   It is further possible to add [`time:unitType`](https://www.w3.org/TR/owl-time/#time:unitType) to hint about the precision in which the dimension should be presented. A [`time:TemporalUnit`](https://www.w3.org/TR/owl-time/#time:TemporalUnit) is expected: `time:unitYear`, `time:unitMonth`, `time:unitWeek`, `time:unitDay`, `time:unitHour`, `time:unitMinute` and `time:unitSecond`.
   
   ```turtle
-  @prefix: <https://cube.link/meta/dataKind/>
+  @prefix: <https://cube.link/meta/>
   
   <dimension> meta:dataKind [ 
      a time:GeneralDateTimeDescription;
