@@ -1,17 +1,21 @@
-# RDF Cube Schema : Advanced Topics
+# RDF Cube Schema: Advanced Topics
 
-The previous section described the properties of basic cubes, there are however situations where more complex obeservations or relations between observations need to be expressed. This section provides a set of best practices for various subjects.
+The previous section described the properties of basic cubes, there are however situations where more complex observations or relations between observations need to be expressed. This section provides a set of best practices for various subjects.
 
 ## Version History of Cubes
 
-To be able to have a continious history of a published cube there is a meta construct which can be put around a cube, describing a line of history of a cubes based on a `schema:CreativeWork`.
+To be able to have a continuous history of a published cube there is a meta construct that can be put around a cube, describing a line of the history of a cube based on a `schema:CreativeWork`.
 
-```
+<aside class='example'>
+
+```turtle
 <https://example.org/cube-version-history> a schema:CreativeWork ;
    schema:hasPart <https://example.org/cube-version-history/1> ;
    schema:hasPart <https://example.org/cube-version-history/2> ;   
    schema:hasPart <https://example.org/cube-version-history/3> .
 ```
+
+</aside>
 
 The version history has attached through `schema:hasPart` each time a fully described cube which can be interpreted independently. It is expected that the cubes in the same history line do not change the count of dimensions. All the other descriptions can change.
 
@@ -22,79 +26,31 @@ Finally, a cube can be invalidated or unlisted by adding `schema:expires` with t
 
 ## Relations between quantitative values
 
-(Originally raised as an issue in [rdf-cube-schema-viz](https://github.com/zazuko/rdf-cube-schema-viz/issues/15)).
+Observation may hold dimensions that are related to each other, either as quantitative relation or aggregation relation. Expressing this on the observation with blank nodes creates properly structured RDF, but creates performance and complexity issues when querying the Cube.
 
-Given an observation in  [RDF Cube Schema](https://github.com/zazuko/rdf-cube-schema) that defines multiple quantitative values (dimensions). It should be possible to express that there is a relation between two quantitative values..
+To overcome this limitation the relation can be expressed on the relevant [Dimension Constraints](#dimensionconstraints)
+There is one `sh:property` definition per dimension so the lookup only needs to be done once and is valid for all observations of that particular cube. 
 
-### Problem & Approach
-
-Given:
-
-```turtle
-<observation1> a Observation
-<observation1> <value> 123.45
-<observation1> <precision> 0.017
-```
-
-We want to express that an observation has a `<value>` and `<precision>` is the precision of `<value>`.
-
-A standard reification/annotation approach would look like this in RDF
-
-```turtle
-# reification
-<statement>
-  <subject> <observation1>
-  <predicate> <value>
-  <object> 123.45
-
-<statement> <precision> 0.017
-```
-
-On large datasets this would have a significant impact on query performance as it would require joins to get the `<precision>` of a particular `<value>` . In other words, it is not suitable for Cubes with many observations. It also makes the model more complicated to understand. 
-
-A simplified approach would be to model quantitative values as entities, for example:
-
-```
-# simplified reification
-<observation1> <value> [
-    <value> 123.45;
-    <precision> 0.017;
-]
-```
-
-This is easier to understand due to forward-linking but it puts the value itself on an additional entity and thus requires a join per observation to fetch the value and its precision. 
-
-The "new" approach would be to use RDF*:
-
-```turtle
-# RDF*
-<observation1> <value> "123.45" 
-<<<observation1> <value> "123.45">> <precision> 0.017
-```
-
-This is nice to read and write but it is too early to require that as support for it is relatively new. We also assume it does have performance impacts on triplestores if we would query that.
-
-### Solution
-
-Our approach moves the reification/annotation to the [constraint](https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint) of the cube, in particular to its dimension. There is one `sh:property` definition per dimension so the lookup only needs to be done once and is valid for all observations of that particular cube. 
+<aside class='example' id='relexample' title='Expressing the relation'>
 
 ```turtle
 [ 
   sh:path <dimension/precision>
   # ... additional definitions for that sh:property
   cube:relation [ a cube:Relation ;
-     # for the moment we recommend to define properties in your own namespace,
-     # thus the "ex" namespace.
-     # We might try to get that into another vocab like QUDT in the future or
-     # provide generic properties on our own
+     # we defined a property to indicate a precision on our own vocabulary
+     # and point to the relevant dimension
      ex:precisionOf <dimension/value>
   ]
 ]
 ```
+</aside>
 
 We define a `<relation>` for the cube dimension `<precision>`. The `<relation>` is of type `<PropertyRelation>`. It's `<target>` is the property `<value>`.
 
-This approach is very generic and allows to express other relations as well, for example aggregations. Given the following triples:
+This approach is very generic and allows to express other relations as well, for example, aggregations. Given the following triples:
+
+<aside class='example'>
 
 ```turtle
 <observation1> a Cube
@@ -103,7 +59,11 @@ This approach is very generic and allows to express other relations as well, for
 <observation1> <populationFemale> 3
 ```
 
+</aside>
+
 We want to express that `<population>` is the sum of` <populationMale>` and `<populationFemale>`. 
+
+<aside class='example'>
 
 ```turtle
 [
@@ -119,7 +79,13 @@ We want to express that `<population>` is the sum of` <populationMale>` and `<po
 ]
 ```
 
+</aside>
+
+</aside>
+
 The same semantics could be expressed the other way around:
+
+<aside class='example'>
 
 ```turtle
 [
@@ -132,21 +98,31 @@ The same semantics could be expressed the other way around:
 ]
 ```
 
-This is obviously advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe complex relationship between data in a machine processable way. 
+</aside>
 
-#### RDF terms
+This is an advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe the complex relationship between data in a machine-processable way. 
 
-There is no recommendation on what properties and classes can or should be used to express the examples above. We only define:
+### Classes
 
-* to use `dcterms:relation` to point to the relation itself. [Its definition](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/relation) is generic enoughand does [not impose any reasoning implications](https://prefix.zazuko.com/dcterms%3Arelation) `
-* `<source>` and `<target>` are terms used in the [Web Annotation Vocabulary](https://www.w3.org/TR/annotation-vocab/), they might or might not fit your use-case. In any way it is *not* recommend to re-use IRIs from this vocabulary as they do have reasoning implications.
-* More formal classes and properties for common relations between two dimensions might be defined at a later stage to encourage re-use and interoperability.
+#### Cube:Relation {#Relation}
+
+A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. a Cube:Relation is linked to an observation through a [cube:relation](#relation) property. 
+See [this example](#relexample).
+
+### Properties
+
+#### cube:relation {#relation}
+
+This property is used on a Dimension Constraint to express a relation with other properties through a [Cube:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
+See [this example](#relexample).
 
 ## Nested hierarchies
 
 (Originally raised as an issue in [rdf-cube-schema-viz](https://github.com/zazuko/rdf-cube-schema-viz/issues/6)).
 
 Given:
+
+<aside class='example'>
 
 ```turtle
 BASE <http://ex.org/>
@@ -163,7 +139,9 @@ BASE <http://ex.org/>
 <canton-bern> a <Canton> .
 ```
 
-It should be possible to express nested hierarchies in a machine processable way. Think of nested taxonomies, spatial nesting etc. The information can be used to provide smart/useful default options for filters on cubes.
+</aside>
+
+It should be possible to express nested hierarchies in a machine-processable way. Think of nested taxonomies, spatial nesting, etc. The information can be used to provide smart/useful default options for filters on cubes.
 
 Our example can be visualized:
 
@@ -173,6 +151,7 @@ There are two paths that would be possible: `<observation1> -> <mun-nidau> -> <c
 
 We address this issue by adding information about the nesting to the constraint (SHACL shape) of the cube.  On the `sh:property` of `<municipality>` we attach a new property called `<nextInHierarchy>`:
 
+<aside class='example'>
 
 ```turtle
 [
@@ -181,18 +160,26 @@ We address this issue by adding information about the nesting to the constraint 
 ]
 ```
 
+</aside>
+
 This property points to minimal SHACL shape:
+
+<aside class='example'>
 
 ```turtle
 <shape-municipality-canton-hierarchy> a NodeShape 
   sh:path <canton>
 ```
 
+</aside>
+
 It points to the outgoing link with `sh:path` and the nesting ends there, as there is no `<nextInHierarchy>` defined on that particular shape. In other words, there is only one additional layer in this example that points to a `<canton>` and the complete shape represents the path `<observation1> -> <mun-nidau> -> <canton-bern>`.
 
 > NOTE: We define `<nextInHierarchy>` purposely instead of re-using a property from SHACL to relate shapes. This ensures we only validate data within our realm.
 
-To represent the more complex path, the contraint/shape might look like this:
+To represent the more complex path, the constraint/shape might look like this:
+
+<aside class='example'>
 
 ```turtle
 [
@@ -201,7 +188,11 @@ To represent the more complex path, the contraint/shape might look like this:
 ]
 ```
 
+</aside>
+
 linking to:
+
+<aside class='example'>
 
 ```turtle
 <shape-municipality-district-hierarchy> a NodeShape 
@@ -209,12 +200,17 @@ linking to:
   <nextInHierarchy> <shape-district-canton-hierarchy> 
 ```
 
+</aside>
+
 The level does not end here, we link from the `<district>` to the `<canton>`:
+
+<aside class='example'>
 
 ```turtle
 <shape-district-canton-hierarchy> a NodeShape 
   sh:path <canton>
 ```
+</aside>
 
 There is no outgoing link at that shape, in other words the nesting ends here. This represents the path  `<observation1> -> <mun-nidau> -> <district-bielbienne> -> <canton-bern> `.
 

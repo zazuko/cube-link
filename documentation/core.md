@@ -1,10 +1,10 @@
-# RDF Cube Schema : Core
+# RDF Cube Schema: Core
 
 This section describes the *RDF Cube Schema* model.
 
 The _RDF Cube Schema_ defines a minimal set of classes and properties necessary to represent multi-dimensional arrays of data in [[[rdf11-concepts]]].
 
-We describe the model, an elaborate example and scripts to validate observations based on the the constraint (SHACL shape) provided.
+We describe the model, an elaborate example, and scripts to validate observations based on the constraint (SHACL shape) provided.
 
 ## Namespaces and Prefixes {#NS}
 
@@ -38,7 +38,7 @@ There are 4 classes defined in the RDF Cube Schema
 Represents the entry point for a collection of observations, conforming to some common dimensional structure.
 
 #### cube:Observation {#Observation}
-A single observation in the cube, may have one or more associated dimensions.
+A single observation in the cube may have one or more associated dimensions.
 
 #### cube:ObservationSet {#ObservationSet}
 
@@ -57,7 +57,7 @@ A [Constraint](#Constraint) for a cube. A Constraint is optional but recommended
 
 ### Properties
 
-The resource described by the various classes are connected by a small set of properties.
+The resources described by the various classes are connected by a small set of properties.
 
 ![Observations can be connected to an observer](./img/rdf-cube-schema-observedBy.svg)
 
@@ -71,7 +71,7 @@ Connects a cube with a constraint for metadata and validation.
 Connects a set of observations with a single observation. 
 
 #### cube:observedBy {#observedBy}
-Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.
+Connects an observation with the agent that created the observation. The agent can be a person, organization, device, or software. A description of the method to gather the data could be attached to the agent.
 
 
 
@@ -95,7 +95,7 @@ In general, any RDF Property can be considered for describing a dimension, excep
 
 Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal) with [data types](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.
 
-Language tagged literals and all other (meta) data should be modeled as  term/concept. For this purpose, [IRI's](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [[[skos-primer]]] (https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
+Language tagged literals and all other (meta) data should be modeled as terms/concepts. For this purpose, [IRI's](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [[[skos-primer]]] (https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
 
 ![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/rdf-cube-schema-dimensions.svg)
 
@@ -128,27 +128,27 @@ In [[[turtle]]] syntax, the observation above looks like this:
 
 </aside>
 
-Nesting of relations can be expressed in a machine readable form as well but is not part of the core RDF Cube Schema.
+Nesting of relations can be expressed in a machine-readable form as well but is not part of the core RDF Cube Schema.
 
 ## Metadata
 
-From a high level point of view the core classes and properties are enough to publish a valid cube, however the absence of all metadata might make it hard for consumers to understand what the data is about.
+From a high-level point of view, the core classes and properties are enough to publish a valid cube, however, the absence of all metadata might make it hard for consumers to understand what the data is about.
 
 ### Cube Description
 To add the title and a short description of the cube add the following properties directly on an instance of a [cube:Cube](#Cube)
 
 #### schema.name 
-A descriptive name of the Cube, can be multilingual.
+A descriptive name of the Cube, this description can be multilingual.
 #### schema.description
-A description of the Cube, can be multilingual.
+A description of the Cube, this description can be multilingual.
 
 #### other properties
 you are free to add other properties related to your Cube or the publication process of your Cube directly on the instance of the Cube.
 
 <aside class='advisement'>
 
-Although from the Open World concept point of view nothing forbids you to put metadata on every single observation, we do advice AGAINST that practice, in large cubes this can dramatically increase the cube size and negatively impact the performance.
+Although from the Open World concept point of view nothing forbids you to put metadata on every single observation, we do advise AGAINST that practice, in large cubes, this can dramatically increase the cube size and negatively impact the performance.
 
-The [Constraints](#constraints) and [Visualization](#viz) section provide guidance on how to describe the structure of observations through the Constraints property.
+The [Constraints](#constraints) and [Visualization](#viz) section guide how to describe the structure of observations through the Constraints property.
 
 </aside>

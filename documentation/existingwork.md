@@ -17,7 +17,7 @@ It was considered to either clarify or update the RDF Data Cube Vocabulary speci
 * [Follow your nose](https://patterns.dataincubator.org/book/follow-your-nose.html) is often not possible.
 * There is more than one way to do it. Different people interpret the spec differently, which makes it very hard to write libraries that consume generic RDF Data Cubes.
 * There is a clear focus on [SDMX](https://en.wikipedia.org/wiki/SDMX), which introduces too rigorous restrictions and/or examples for use-cases outside the statistical domain.
-* Re-use of dimensions is not very common in the RDF Data Cube vocabulary, that makes it much harder to compare data accross data providers.
+* Re-use of dimensions is not very common in the RDF Data Cube vocabulary, which makes it much harder to compare data across data providers.
 
 There are at least two efforts that extend the RDF Data Cube Vocabulary to address some of its limitations:
 
