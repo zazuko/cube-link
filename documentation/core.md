@@ -35,14 +35,14 @@ The core schema is very simple and almost unconstrained from an RDF perspective.
 There are 4 classes defined in the RDF Cube Schema
 
 #### cube:Cube {#Cube}
-Represents the entry point for a collection of observations, conforming to some common dimensional structure.
-
-#### cube:Observation {#Observation}
-A single observation in the cube may have one or more associated dimensions.
+Represents the entry point for a collection of one or more observation sets, conforming to some common dimensional structure.
 
 #### cube:ObservationSet {#ObservationSet}
 
 An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observation](#Observation)s. It can be used to group any set of [Observation](#Observation)s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSet](#ObservationSet)s and an [Observation](#Observation) can appear in multiple [ObservationSet](#ObservationSet)s.
+
+#### cube:Observation {#Observation}
+A single observation in the cube may have one or more associated dimensions. A Observation can appear in one ore more [ObservationSet](#ObservationSet)s.
 
 #### cube:Constraint {#Constraint}
 Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional) For more information see [RDF Cube Schema : Constraints](#constraints)
@@ -51,9 +51,6 @@ A [Constraint](#Constraint) for a cube. A Constraint is optional but recommended
 * Define how data ([Observation](#Observation)`s) in a `Cube` can be validated.
 * Add Cube-specific metadata (custom labels, translation to other languages, etc).
 
-<div class="issue" data-number="28"></div>
-
-[Cube](#Cube) and [Observation](#Observation) are pretty much self-describing. All [Observation](#Observation)s linked with a [Cube](#Cube) need to adhere to the same dimensional structure.
 
 ### Properties
 

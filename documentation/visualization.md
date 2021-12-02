@@ -1,5 +1,7 @@
 # RDF Cube Schema: Visualization Extensions
 
+<div class='issue' data-number='40'></div>
+
 To facilitate the visualization of RDF Cubes it is possible to extend the [Constraints](#constraints) to include additional metadata that describes the characteristics of the cube and its dimensions.
 By providing this information in the Constraints tools used for displaying the data in the cube do not need to process and interpret the actual data in the cube to configure the visualization.
 
@@ -8,8 +10,6 @@ By providing this information in the Constraints tools used for displaying the d
 To be able to understand the nature of a dimension we can type the dimension in the constraints. In general, we have at least two mandatory types per cube, the cube:MeasureDimension and the cube:KeyDimension.
 
 ### Classes
-
-<div class='issue' data-number='29'></div>
 
 #### cube:KeyDimension
 
