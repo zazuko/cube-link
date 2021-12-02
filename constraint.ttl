@@ -13,7 +13,7 @@
 @prefix schema: <http://schema.org/>.
 @prefix qudt: <http://qudt.org/schema/qudt/> .
 
-<temperature-sensor/cube/shape> a sh:NodeShape, cube:Constraint ;
+<temperature-sensor/cube/constraint> a sh:NodeShape, cube:Constraint ;
   sh:closed true ;
   sh:property [
     sh:path rdf:type ;
