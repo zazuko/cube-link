@@ -8,7 +8,7 @@ SPARQL CONSTRUCT queries will be provided in this repository.
 
 ## Example Cube
 
-An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [shape.ttl](shape.ttl).
+An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [constraint.ttl](constraint.ttl).
 
 ### Validate the cube
 
@@ -16,6 +16,6 @@ You can validate the cube with a cli tool written in Node.js.
 
 Install the package dependencies: `npm i`
 
-Validate `cube.ttl` by using the constraint in `shape.ttl`: 
+Validate `cube.ttl` by using the constraint in `constraint.ttl`: 
 
-```./bin/rdf-cube-schema.js validate cube.ttl shape.ttl```
+```./bin/rdf-cube-schema.js validate cube.ttl constraint.ttl```

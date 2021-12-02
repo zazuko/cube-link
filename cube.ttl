@@ -29,7 +29,7 @@
   schema:contactPoint <org/zazuko> ;
   schema:contributor <org/zazuko> ;
   cube:observationSet <temperature-sensor/cube/observation> ;
-  cube:observationConstraint <temperature-sensor/cube/shape> ;
+  cube:observationConstraint <temperature-sensor/cube/constraint> ;
   schema:dateCreated "2020-05-04"^^xsd:date ; # The date on which the CreativeWork was created or the item was added to a DataFeed.
   schema:datePublished "2020-05-04"^^xsd:date ; # Date of first broadcast/publication.
   schema:dateModified "2020-05-04"^^xsd:date ; # The date on which the CreativeWork was most recently modified or when the item's entry was modified within a DataFeed.
