@@ -24,7 +24,12 @@ On the cube through `schema:CreativeWorkStatus` a status of the cube, like *Draf
 Finally, a cube can be invalidated or unlisted by adding `schema:expires` with the expiry date to the cube itself.
 
 
+
 ## Relations between quantitative values
+
+<p class="ednote" title="Do NOT implement">
+  This chapter is undergoing a big rewrite, and should not be implemented
+</p>
 
 Observation may hold dimensions that are related to each other, either as quantitative relation or aggregation relation. Expressing this on the observation with blank nodes creates properly structured RDF, but creates performance and complexity issues when querying the Cube.
 
@@ -117,6 +122,10 @@ This property is used on a Dimension Constraint to express a relation with other
 See [this example](#relexample).
 
 ## Nested hierarchies
+
+<p class="ednote" title="Do NOT implement">
+  This chapter is undergoing a big rewrite, and should not be implemented
+</p>
 
 (Originally raised as an issue in [rdf-cube-schema-viz](https://github.com/zazuko/rdf-cube-schema-viz/issues/6)).
 
