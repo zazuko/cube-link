@@ -1,0 +1,27 @@
+PREFIX relation: <https://cube.link/relation/>
+
+relation:StandardError a meta:DimensionRelation;
+ schema:name "Standard Error";
+ schema:description "The standard error is the standard deviation of the mean of the sample.";
+ schema:about <http://www.wikidata.org/entity/Q12483>;
+ schema:sameAs <http://www.wikidata.org/entity/Q620994>.
+
+relation:StandardError1SD a meta:DimensionRelation;
+ rdfs:subClassOf relation:StandardError;
+ schema:name "The standard error is the standard deviation of the mean of the sample.";
+ schema:alternateName "SE".
+
+relation:StandardError2SD a meta:DimensionRelation;
+ schema:name "The standard error is 2 standard deviation of the mean of the sample.";
+ schema:alternateName "2SE".
+
+relation:StandardError3SD a meta:DimensionRelation;
+ schema:name "The standard error is 3 standard deviation of the mean of the sample.";
+ schema:alternateName "3SE".
+
+relation:StandarDeviation a meta:DimensionRelation;
+ schema:name "Standard Deviation";
+ schema:alternateName "SD";
+ schema:description "Dispersion of the values of a random variable around its expected value.";
+ schema:about <http://www.wikidata.org/entity/Q12483>;
+ schema:sameAs <http://www.wikidata.org/entity/Q159375>.
