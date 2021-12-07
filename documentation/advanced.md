@@ -27,83 +27,33 @@ Finally, a cube can be invalidated or unlisted by adding `schema:expires` with t
 
 ## Relations between quantitative values
 
-<p class="ednote" title="Do NOT implement">
-  This chapter is undergoing a big rewrite, and should not be implemented
-</p>
 
-Observation may hold dimensions that are related to each other, either as quantitative relation or aggregation relation. Expressing this on the observation with blank nodes creates properly structured RDF, but creates performance and complexity issues when querying the Cube.
+Observation may hold dimensions that are related to each other as quantitative relation. Expressing this on the observation with blank nodes creates properly structured RDF, but creates performance and complexity issues when querying the Cube.
+
 
 To overcome this limitation the relation can be expressed on the relevant [Dimension Constraints](#dimensionconstraints)
-There is one `sh:property` definition per dimension so the lookup only needs to be done once and is valid for all observations of that particular cube. 
+There is one `sh:property` definition per dimension so the lookup only needs to be done once and is valid for all observations of that particular cube.
 
 <aside class='example' id='relexample' title='Expressing the relation'>
 
 ```turtle
+PREFIX relation: <https://cube.link/relation/>
+   
 [ 
   sh:path <dimension/precision>
   # ... additional definitions for that sh:property
-  cube:relation [ a cube:Relation ;
-     # we defined a property to indicate a precision on our own vocabulary
-     # and point to the relevant dimension
-     ex:precisionOf <dimension/value>
+  meta:dimensionRelation [ 
+    # We use a Class to indicate the e.g. the standard error.
+    a relation:StandardError ;
+    # A generic cube metadata property points to the relevant dimension.
+    meta:relatesTo ex:dimension\/measurement;
   ]
 ]
 ```
 </aside>
-
-We define a `<relation>` for the cube dimension `<precision>`. The `<relation>` is of type `<PropertyRelation>`. It's `<target>` is the property `<value>`.
-
-This approach is very generic and allows to express other relations as well, for example, aggregations. Given the following triples:
-
-<aside class='example'>
-
-```turtle
-<observation1> a Cube
-<observation1> <population> 10
-<observation1> <populationMale> 7
-<observation1> <populationFemale> 3
-```
-
-</aside>
-
-We want to express that `<population>` is the sum of` <populationMale>` and `<populationFemale>`. 
-
-<aside class='example'>
-
-```turtle
-[
-  sh:path <populationMale>
-  <relation> [ <AddRelation>
-    <target> <population>
-  ]
-], [
-  sh:path <populationFemale>
-  <relation> [ <AddRelation>
-    <target> <population>
-  ]
-]
-```
-
-</aside>
-
-</aside>
-
-The same semantics could be expressed the other way around:
-
-<aside class='example'>
-
-```turtle
-[
-  sh:path <population>
-  <relation> [ <SumRelation>
-    <source> <populationMale>, <populationFemale>
-  ], [ <SumRelation>
-    <source> <populationAge0050>, <population5090> # restrictions on instances of a particular dimension
-  ]
-]
-```
-
-</aside>
+   
+A relation between dimensions is described only with `cube` and `meta` vocabulary. The relation classes itself can be extended based on specific use cases. 
+The controlled vocabulary introduced with namespace `PREFIX relation: <https://cube.link/relation/>` provides the most common relation Classes, and is proposed as a guideline.
 
 This is an advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe the complex relationship between data in a machine-processable way. 
 
