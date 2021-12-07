@@ -19,7 +19,7 @@ relation:StandardError3SD a meta:DimensionRelation;
  schema:name "The standard error is 3 standard deviation of the mean of the sample.";
  schema:alternateName "3SE".
 
-relation:StandarDeviation a meta:DimensionRelation;
+relation:StandardDeviation a meta:DimensionRelation;
  schema:name "Standard Deviation";
  schema:alternateName "SD";
  schema:description "Dispersion of the values of a random variable around its expected value.";
