@@ -10,7 +10,7 @@ relation:StandardError a meta:DimensionRelation;
  schema:name "Standard Error";
  rdfs:label "Standard Error";
  schema:description "The standard error is the standard deviation of the mean of the sample.";
- rdfs:description "The standard error is the standard deviation of the mean of the sample.";
+ rdfs:comment "The standard error is the standard deviation of the mean of the sample.";
  schema:about <http://www.wikidata.org/entity/Q12483>;
  schema:sameAs <http://www.wikidata.org/entity/Q620994>.
 
@@ -35,6 +35,6 @@ relation:StandardDeviation a meta:DimensionRelation;
  rdfs:label "Standard Deviation";
  schema:alternateName "SD";
  schema:description "Dispersion of the values of a random variable around its expected value.";
- rdfs:description "Dispersion of the values of a random variable around its expected value.";
+ rdfs:comment "Dispersion of the values of a random variable around its expected value.";
  schema:about <http://www.wikidata.org/entity/Q12483>;
  schema:sameAs <http://www.wikidata.org/entity/Q159375>.
