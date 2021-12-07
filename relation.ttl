@@ -1,3 +1,9 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX cube: <https://cube.link/>
+PREFIX meta: <https://cube.link/meta/>
+PREFIX relation: <https://cube.link/relation/>
+PREFIX schema: <http://schema.org/
 PREFIX relation: <https://cube.link/relation/>
 
 relation:StandardError a meta:DimensionRelation;
