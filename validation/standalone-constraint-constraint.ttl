@@ -1,0 +1,113 @@
+@base <http://example.org/> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+
+#
+# This is the bare minimal SHACL shape for validating a Cube Constraint.
+# All Cube Constraints should pass this validation.
+#
+
+<ObservationConstraintShape>
+    a sh:NodeShape ;
+    sh:targetClass cube:Constraint ;
+    sh:property [
+        # we assume at least 3 dimensions, otherwise we would have an empty list of dimensions
+        # one for cube:observedBy, one for rdf:type and at least one cube dimension
+        sh:path sh:property ;
+        sh:minCount 3 ;
+        sh:message "cube:Constraint needs at least a certain amount of sh:properties"
+    ] ;
+    sh:property [
+        sh:path sh:property ;
+        sh:node <ObservationConstraintProperty>;
+        sh:message "The constraints do not validate"
+    ] ;
+	sh:property [
+        sh:path sh:closed;
+        sh:hasValue true;
+    ]
+    .
+
+<ObservationConstraintProperty> a sh:NodeShape;
+	sh:property [
+        sh:path qudt:scaleType;
+        sh:in ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
+        sh:message "If qudt:scale is used it needs to be within"
+    ];
+	sh:property [
+        sh:path sh:path;
+        sh:minCount 1;
+        sh:maxCount 1;
+        sh:message "a sh:path is needed on a property"
+    ];
+    sh:property[
+        sh:path sh:minInclusive;
+        sh:datatype xsd:integer;
+        sh:message "sh:minInclusive needs to be an integer"
+    ];
+    sh:property[
+        sh:path sh:in;
+        sh:node <listnode>;
+        sh:message "sh:in needs to be a list"
+    ];
+    sh:property[
+        sh:path sh:maxInclusive;
+        sh:datatype xsd:integer;
+        sh:message "sh:maxInclusive needs to be an integer"
+    ];
+    
+    sh:or(
+        [
+            sh:path schema:name;
+            sh:minCount 1;
+            sh:datatype xsd:string;
+            sh:message "needs a schema:name"
+        ]
+        [
+            sh:path schema:name;
+            sh:minCount 1;
+            sh:datatype rdf:langString;
+            sh:message "needs a schema:name"
+        ]
+        [
+            sh:path sh:path;
+            sh:in (rdf:type cube:observedBy);
+        ]
+    );
+    sh:or(
+        [
+            sh:path sh:datatype;
+            sh:minCount 1;
+            sh:message "needs a sh:datatype or sh:nodeKind"
+        ]
+        [
+            sh:path sh:nodeKind;
+            sh:minCount 1;
+            sh:message "needs a sh:datatype or sh:nodeKind"
+        ]
+    );
+
+.
+
+# Testing proper rdf:list construction
+<listnode> a sh:NodeShape ;
+    sh:targetClass rdf:List ;
+    sh:property [
+        sh:path rdf:first;
+        sh:minCount 1;
+        sh:maxCount 1;
+    ];
+    sh:property [
+        sh:path rdf:rest;
+        sh:minCount 1;
+        sh:maxCount 1;
+        sh:message "a rdf:List can only have one rdf:rest node, multiples nodes need to be linked"
+        #sh:node <restnode>;
+    ]
+    .
