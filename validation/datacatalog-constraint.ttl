@@ -1,0 +1,174 @@
+@base <http://example.org/> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+#
+# This is the bare minimal SHACL shape for validating a datacatalog.
+# All datacatlogs should pass this validation.
+#
+
+<DataCatalogShape>
+    a sh:NodeShape ;
+    sh:targetClass schema:DataCatalog ;
+    #sh:targetClass ;
+    sh:or(
+            sh:property [
+		        sh:path schema:name;
+                sh:minCount 1;
+                sh:datatype xsd:string;
+                sh:message "schema:DataCatalog needs a schema:name"
+            ]
+            sh:property [
+		        sh:path schema:name;
+                sh:minCount 1;
+                sh:datatype rdf:langString;
+                sh:message "schema:DataCatalog needs a schema:name"
+            ]
+    );
+    sh:property [
+        # optional, but recommended
+        sh:path schema:dataset;
+        sh:minCount 1;
+        sh:node <DataSetShape> ;
+        sh:message "schema:DataCatalog needs at least one dataset"
+    ] .
+
+<DataSetShape>
+    a sh:NodeShape ;
+    sh:targetClass schema:Dataset;
+    sh:or(
+            sh:property [
+		        sh:path schema:name;
+                sh:minCount 1;
+                sh:datatype xsd:string;
+                sh:message "schema:Dataset needs a schema:name"
+            ]
+            sh:property [
+		        sh:path schema:name;
+                sh:minCount 1;
+                sh:datatype rdf:langString;
+                sh:message "schema:Dataset needs a schema:name"
+            ]
+    );
+    sh:or(
+            sh:property [
+		        sh:path schema:description;
+                sh:minCount 1;
+                sh:datatype xsd:string;
+                sh:message "schema:Dataset needs a schema:description"
+            ]
+            sh:property [
+		        sh:path schema:description;
+                sh:minCount 1;
+                sh:datatype rdf:langString;
+                sh:message "schema:Dataset needs a schema:description"
+            ]
+    );
+    sh:property [
+		        sh:path schema:identifier;
+                sh:minCount 1;
+                sh:maxCount 1;
+                sh:datatype xsd:string;
+                sh:message "schema:Dataset needs a schema:identifier"
+    ] ;
+    sh:property [
+        sh:path schema:publisher ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "schema:Dataset needs an schema:publisher"
+    ] ;
+    sh:property [
+        sh:path schema:contactPoint ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "schema:Dataset needs an schema:contactpoint"
+    ] ;
+    sh:property [
+        sh:path schema:contributor ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "schema:Dataset needs an schema:contributor"
+    ] ;
+    sh:property [
+        sh:path schema:dateCreated ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date;
+        sh:message "schema:Dataset needs a valid schema:dateCreated"
+    ] ;
+    sh:property [
+        sh:path schema:dateModified ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date;
+        sh:message "schema:Dataset needs a valid schema:dateModified"
+    ] ;
+    sh:property [
+        sh:path schema:hasPart ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "schema:Dataset needs a schema:hasPart"
+    ] ;    
+    sh:property [
+        sh:path void:sparqlEndpoint ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "schema:Dataset needs a void:sparqlEndpoint"
+    ] ; 
+    sh:property [
+        sh:path void:rootResource ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "schema:Dataset needs a void:rootResource"
+    ] ; 
+    sh:property [
+        sh:path void:exampleResource ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "schema:Dataset needs a void:exampleResource"
+    ] ; 
+    sh:property [
+        sh:path dcat:distribution ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:node <DCATDistributionShape>;
+        sh:message "schema:Dataset needs a valid dcat:Distribution"
+    ] ; 
+    
+    .
+
+<DCATDistributionShape>
+    a sh:NodeShape ;
+    sh:targetClass dcat:Distribution;
+    sh:property [
+        sh:path dcterms:issued ;
+        sh:minCount 1 ;
+        sh:datatype xsd:date;
+        sh:message "dcat:Distribution needs a valid dcterms:issues"
+    ] ;
+    sh:property [
+        sh:path dcterms:publisher ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "dcat:Distribution needs a valid dcterms:publisher"
+    ] ;
+    sh:property [
+        sh:path dcterms:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string;
+        sh:message "dcat:Distribution needs a valid dcterms:identifier"
+    ] ;
+    sh:property [
+        sh:path dcat:downloadURL;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "dcat:Distribution needs a valid dcat:downloadURL"
+    ] ;
+    .

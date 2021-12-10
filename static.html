@@ -1,0 +1,671 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head>
+<meta charset="utf-8">
+<meta name="generator" content="ReSpec 28.0.3">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+dfn{cursor:pointer}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font:small Helvetica Neue,sans-serif,Droid Sans Fallback;background:#fff;color:#000;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px}
+.dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
+.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;top:0}
+.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1}
+.dfn-panel *{margin:0}
+.dfn-panel b{display:block;color:#000;margin-top:.25em}
+.dfn-panel ul a[href]{color:#333}
+.dfn-panel>div{display:flex}
+.dfn-panel a.self-link{font-weight:700;margin-right:auto}
+.dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
+.dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
+.dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
+.dfn-panel a[href]:hover{border-bottom-width:1px}
+.dfn-panel ul{padding:0}
+.dfn-panel li{margin-left:1em}
+.dfn-panel.docked{position:fixed;left:.5em;top:unset;bottom:2em;margin:0 auto;max-width:calc(100vw - .75em * 2 - .5em - .2em * 2);max-height:30vh;overflow:auto}
+</style>
+<link rel="shortcut icon" type="image/x-icon" href="https://zazuko.com/favicon/favicon-16x16.png">
+    
+    
+    
+    
+    
+<title>RDF Cube Schema</title>
+  
+<style id="respec-mainstyle">
+@keyframes pop{
+0%{transform:scale(1,1)}
+25%{transform:scale(1.25,1.25);opacity:.75}
+100%{transform:scale(1,1)}
+}
+.hljs{background:0 0!important}
+:is(h1,h2,h3,h4,h5,h6,a) abbr{border:none}
+dfn{font-weight:700}
+a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
+a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}
+a.bibref{text-decoration:none}
+.respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}
+.respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}
+@supports not (text-decoration:red wavy underline){
+.respec-offending-element:not(pre){display:inline-block}
+.respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
+}
+#references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+cite .bibref{font-style:normal}
+code{color:#c63501}
+th code{color:inherit}
+a[href].orcid{padding-left:4px;padding-right:4px}
+a[href].orcid>svg{margin-bottom:-2px}
+.toc a,.tof a{text-decoration:none}
+a .figno,a .secno{color:#000}
+ol.tof,ul.tof{list-style:none outside none}
+.caption{margin-top:.5em;font-style:italic}
+table.simple{border-spacing:0;border-collapse:collapse;border-bottom:3px solid #005a9c}
+.simple th{background:#005a9c;color:#fff;padding:3px 5px;text-align:left}
+.simple th a{color:#fff;padding:3px 5px;text-align:left}
+.simple th[scope=row]{background:inherit;color:inherit;border-top:1px solid #ddd}
+.simple td{padding:3px 10px;border-top:1px solid #ddd}
+.simple tr:nth-child(even){background:#f0f6ff}
+.section dd>p:first-child{margin-top:0}
+.section dd>p:last-child{margin-bottom:0}
+.section dd{margin-bottom:1em}
+.section dl.attrs dd,.section dl.eldef dd{margin-bottom:0}
+#issue-summary>ul{column-count:2}
+#issue-summary li{list-style:none;display:inline-block}
+details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
+details.respec-tests-details>*{padding-right:2em}
+details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
+details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
+details.respec-tests-details>ul{width:100%;margin-top:-.3em}
+details.respec-tests-details>li{padding-left:1em}
+a[href].self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
+h2,h3,h4,h5,h6{position:relative}
+aside.example .marker>a.self-link{color:inherit}
+:is(h2,h3,h4,h5,h6)>a.self-link{border:none;color:inherit;font-size:83%;height:2em;left:-1.6em;opacity:.5;position:absolute;text-align:center;text-decoration:none;top:0;transition:opacity .2s;width:2em}
+:is(h2,h3,h4,h5,h6)>a.self-link::before{content:"§";display:block}
+@media (max-width:767px){
+dd{margin-left:0}
+:is(h2,h3,h4,h5,h6)>a.self-link{left:auto;top:auto}
+}
+@media print{
+.removeOnSave{display:none}
+}
+</style>
+<link rel="stylesheet" href="https://respec.zazuko.com/css/ZZ-BASIC.css">
+<style>
+.hljs{display:block;overflow-x:auto;padding:.5em;color:#383a42;background:#fafafa}
+.hljs-comment,.hljs-quote{color:#717277;font-style:italic}
+.hljs-doctag,.hljs-formula,.hljs-keyword{color:#a626a4}
+.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#ca4706;font-weight:700}
+.hljs-literal{color:#0b76c5}
+.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string{color:#42803c}
+.hljs-built_in,.hljs-class .hljs-title{color:#9a6a01}
+.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#986801}
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#336ae3}
+.hljs-emphasis{font-style:italic}
+.hljs-strong{font-weight:700}
+.hljs-link{text-decoration:underline}
+</style>
+<script id="initialUserConfig" type="application/json">{
+  "specStatus": "ZZ-BASIC",
+  "shortName": "rdf-cube-schema",
+  "edDraftURI": "",
+  "maxTocLevel": 4,
+  "github": {
+    "repoURL": "https://github.com/zazuko/rdf-cube-schema",
+    "branch": "documentation"
+  },
+  "editors": [
+    {
+      "name": "Bart van Leeuwen",
+      "url": "https://www.netage.nl"
+    }
+  ],
+  "publishISODate": "2021-11-16T00:00:00.000Z",
+  "generatedSubtitle": "Zazuko Document 16 November 2021"
+}</script></head>
+  <body class="h-entry informative"><div class="head">
+    <a class="logo" href="https://www.zazuko.com/"><img crossorigin="" alt="zazuko" height="67" id="zazuko" src="https://zazuko.com/logo/zazuko-logo.svg" width="132">
+  </a> <h1 id="title">RDF Cube Schema</h1>
+    
+    <h2>Zazuko Document <time class="dt-published" datetime="2021-11-16">16 November 2021</time></h2>
+    <details open="">
+      <summary>More details about this document</summary>
+      <dl>
+        
+        
+        <dt>History:</dt><dd>
+        <a href="https://github.com/zazuko/rdf-cube-schema/commits/documentation">Commit history</a>
+      </dd>
+        
+        
+        
+        
+        
+        <dt>Editor:</dt>
+        <dd class="editor p-author h-card vcard">
+    <a class="u-url url p-name fn" href="https://www.netage.nl">Bart van Leeuwen</a>
+  </dd>
+        
+        
+        <dt>Feedback:</dt><dd>
+        <a href="https://github.com/zazuko/rdf-cube-schema/">GitHub zazuko/rdf-cube-schema</a>
+        (<a href="https://github.com/zazuko/rdf-cube-schema/pulls/">pull requests</a>,
+        <a href="https://github.com/zazuko/rdf-cube-schema/issues/new/choose">new issue</a>,
+        <a href="https://github.com/zazuko/rdf-cube-schema/issues/">open issues</a>)
+      </dd>
+        
+        
+      </dl>
+    </details>
+    
+    
+    <p class="copyright">
+    Copyright ©
+    2021
+    
+    <a href="https://www.zazuko.com/"><abbr title="Zazuko GMBH">Zazuko</abbr></a><sup>®</sup>  and
+    <a rel="license" href="https://creativecommons.org/licenses/by/4.0/legalcode" title="Creative Commons Attribution 4.0 International Public License">CC-BY</a> rules apply.
+  </p>
+    <hr title="Separator for header">
+  </div>
+    
+    
+    <section id="abstract" class="introductory"><h2>Abstract</h2>TBD</section>
+    <section id="sotd" class="introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this
+      document at the time of its publication. Other documents may supersede
+      this document.</em></p>
+    <p> </p><p>
+    This is a draft document and may be updated, replaced or obsoleted by other
+    documents at any time. It is inappropriate to cite this document as other
+    than work in progress.
+    
+  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#main"><bdi class="secno">1. </bdi>RDF Cube Schema</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#example-cube"><bdi class="secno">1.1 </bdi>Example Cube</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#validate-the-cube"><bdi class="secno">1.1.1 </bdi>Validate the cube</a></li></ol></li><li class="tocline"><a class="tocxref" href="#core-schema"><bdi class="secno">1.2 </bdi>Core Schema</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#classes"><bdi class="secno">1.2.1 </bdi>Classes</a></li><li class="tocline"><a class="tocxref" href="#properties"><bdi class="secno">1.2.2 </bdi>Properties</a></li><li class="tocline"><a class="tocxref" href="#optional-features"><bdi class="secno">1.2.3 </bdi>Optional Features</a></li><li class="tocline"><a class="tocxref" href="#dimensions"><bdi class="secno">1.2.4 </bdi>Dimensions</a></li></ol></li><li class="tocline"><a class="tocxref" href="#metadata-and-validation-constraint"><bdi class="secno">1.3 </bdi>Metadata and Validation (Constraint)</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#shapes"><bdi class="secno">1.3.1 </bdi>Shapes</a></li><li class="tocline"><a class="tocxref" href="#generating-shapes"><bdi class="secno">1.3.2 </bdi>Generating Shapes</a></li><li class="tocline"><a class="tocxref" href="#types-of-dimensions"><bdi class="secno">1.3.3 </bdi>Types of Dimensions</a></li></ol></li><li class="tocline"><a class="tocxref" href="#existing-work"><bdi class="secno">1.4 </bdi>Existing Work</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#rdf-data-cube-vocabulary"><bdi class="secno">1.4.1 </bdi>RDF Data Cube Vocabulary</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#issues-with-rdf-data-cube-vocabulary"><bdi class="secno">1.4.1.1 </bdi>Issues with RDF Data Cube Vocabulary</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ssn"><bdi class="secno">1.4.2 </bdi>SSN</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#viz"><bdi class="secno">2. </bdi>RDF Cube Schema: Visualization Extensions</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#external-vocabularies"><bdi class="secno">2.1 </bdi>External Vocabularies</a></li><li class="tocline"><a class="tocxref" href="#cube-description"><bdi class="secno">2.2 </bdi>Cube Description</a></li><li class="tocline"><a class="tocxref" href="#dimension-description"><bdi class="secno">2.3 </bdi>Dimension Description</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#name-and-description"><bdi class="secno">2.3.1 </bdi>Name and Description</a></li><li class="tocline"><a class="tocxref" href="#unit-number-percent-meter-gram-milliter-per-day"><bdi class="secno">2.3.2 </bdi>unit (number, percent, meter, gram, milliter per day ...)</a></li><li class="tocline"><a class="tocxref" href="#scaletype-nominal-ordinal-interval-ratio"><bdi class="secno">2.3.3 </bdi>scaleType (nominal, ordinal, interval, ratio)</a></li><li class="tocline"><a class="tocxref" href="#datatype-string-boolean-int-float"><bdi class="secno">2.3.4 </bdi>dataType (string, boolean, int, float, ...)</a></li><li class="tocline"><a class="tocxref" href="#datakind-temporal-spatial"><bdi class="secno">2.3.5 </bdi>dataKind (temporal / spatial)</a></li></ol></li><li class="tocline"><a class="tocxref" href="#version-history-of-cubes"><bdi class="secno">2.4 </bdi>Version History of Cubes</a></li><li class="tocline"><a class="tocxref" href="#relations-between-quantitative-values"><bdi class="secno">2.5 </bdi>Relations between quantitative values</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#problem-approach"><bdi class="secno">2.5.1 </bdi>Problem &amp; Approach</a></li><li class="tocline"><a class="tocxref" href="#solution"><bdi class="secno">2.5.2 </bdi>Solution</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#rdf-terms"><bdi class="secno">2.5.2.1 </bdi>RDF terms</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#nested-hierarchies"><bdi class="secno">2.6 </bdi>Nested hierarchies</a></li></ol></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
+
+    <section id="main"><h2 id="x1-rdf-cube-schema"><bdi class="secno">1. </bdi>RDF Cube Schema<a class="self-link" aria-label="§" href="#main"></a></h2><p>In this repository we present the <em>RDF Cube Schema</em> model.</p><p>We describe the model, an elaborate example and scripts to validate observations based on the the constraint (SHACL shape) provided.</p><p>We also provide <a href="best-practice.md">Best Practice</a>, and an <a href="https://github.com/zazuko/rdf-cube-schema-viz">Extension for Visualization</a> related topics.</p><section id="example-cube"><h3 id="x1-1-example-cube"><bdi class="secno">1.1 </bdi>Example Cube<a class="self-link" aria-label="§" href="#example-cube"></a></h3><p>An example Cube is specified in <a href="cube.ttl">cube.ttl</a>. The cube provides a constraint in <a href="shape.ttl">shape.ttl</a>.</p><section id="validate-the-cube"><h4 id="x1-1-1-validate-the-cube"><bdi class="secno">1.1.1 </bdi>Validate the cube<a class="self-link" aria-label="§" href="#validate-the-cube"></a></h4><p>You can validate the cube with a cli tool written in Node.js.</p><p>Install the package dependencies: <code>npm i</code></p><p>Validate <code>cube.ttl</code> by using the SHACL shape in <code>shape.ttl</code>: </p><p><code>./bin/rdf-cube-schema.js validate cube.ttl shape.ttl</code></p></section></section><section id="core-schema"><h3 id="x1-2-core-schema"><bdi class="secno">1.2 </bdi>Core Schema<a class="self-link" aria-label="§" href="#core-schema"></a></h3><p>The <em>RDF Cube Schema</em> defines a minimal set of classes and properties necessary to represent multi-dimensional arrays of data in <cite><a href="https://www.w3.org/TR/rdf11-concepts/">RDF 1.1 Concepts and Abstract Syntax</a></cite>.</p><p>The core schema is very simple and almost unconstrained from an RDF perspective. This ensures it can be used in many ways and does not restrict its usefulness due to too rigorous definitions.</p><p>Prefix: <code>cube</code>
+Namespace: <code>https://cube.link/</code></p><section id="classes"><h4 id="x1-2-1-classes"><bdi class="secno">1.2.1 </bdi>Classes<a class="self-link" aria-label="§" href="#classes"></a></h4><ul>
+<li><code>cube:Cube</code>: Represents the entry point for a collection of observations, conforming to some common dimensional structure.</li>
+<li><code>cube:Observation</code>: A single observation in the cube, may have one or more associated dimensions.</li>
+<li><code>cube:ObservationSet</code>: A set of observations. One-to-many.</li>
+<li><code>cube:Constraint</code>: Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional)</li>
+</ul><p><code>Cube</code> and <code>Observation</code> are pretty much self-describing. All <code>Observation</code>s linked with a <code>Cube</code> need to adhere to the same dimensional structure.</p><p><img src="./img/rdf-cube-schema-basic.svg" alt="Basic RDF Cube Schema structure" height="640" width="867"></p><p>An <code>ObservationSet</code> is a structure that acts as a container for multiple <code>Observation</code>s. It can be used to group any set of <code>Observation</code>s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more <code>ObservationSet</code>s and an <code>Observation</code> can appear in multiple <code>ObservationSet</code>s.</p></section><section id="properties"><h4 id="x1-2-2-properties"><bdi class="secno">1.2.2 </bdi>Properties<a class="self-link" aria-label="§" href="#properties"></a></h4><ul>
+<li><code>cube:observationSet</code>: Connects a cube with a set of observations.</li>
+<li><code>cube:observationConstraint</code>: Connects a cube with a constraint for metadata and validation.</li>
+<li><code>cube:observation</code>: Connects a set of observations with a single observation. </li>
+<li><code>cube:observedBy</code>: Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.</li>
+</ul><p><img src="./img/rdf-cube-schema-observedBy.svg" alt="Observations can be connected to an observer" height="743" width="1155"></p></section><section id="optional-features"><h4 id="x1-2-3-optional-features"><bdi class="secno">1.2.3 </bdi>Optional Features<a class="self-link" aria-label="§" href="#optional-features"></a></h4><p>A <code>Constraint</code> for a cube. A Constraint is optional but recommended, it is used to:</p><ul>
+<li>Define how data (<code>Observation</code>s) in a <code>Cube</code> can be validated.</li>
+<li>Add Cube-specific metadata (custom labels, translation to other languages, etc).</li>
+</ul></section><section id="dimensions"><h4 id="x1-2-4-dimensions"><bdi class="secno">1.2.4 </bdi>Dimensions<a class="self-link" aria-label="§" href="#dimensions"></a></h4><blockquote>
+<p>A dimension is a structure that categorizes facts and measures to enable users to answer business questions. Commonly used dimensions are people, products, place, and time (<a href="https://en.wikipedia.org/wiki/Dimension_(data_warehouse)">Source: Wikidata</a>).</p>
+</blockquote><p>In <em>RDF Cube Schema</em>, facts, measures, and categories are all considered a dimension.</p><p>All <code>Observation</code>s need to provide the same set of dimensions, they cannot be optional. This ensures that cubes can be queried efficiently.</p><p>Unlike other RDF vocabularies in that domain, there is no specific class for a dimension. Creating a new <em>RDF Cube Schema</em> dimension would be the same as defining a new <a href="https://www.w3.org/TR/rdf-schema/#ch_property">RDF Property</a>. </p><p>This encourages re-use and makes it much easier to cherrypick on existing RDF properties and use them as dimensions. Obvious examples are temporal properties like <code>schema:validFrom</code>, <code>dcterms:date</code>, <code>dcterms:temporal</code>, etc.</p><p>In general, any RDF Property can be considered for describing a dimension, except for heavily constrained properties that might lead to unwanted conclusions (inference) by <a href="http://www.w3.org/TR/sparql11-entailment/">reasoners</a>.</p><blockquote>
+<p>Note that choosing a particular dimension will have implications. For querying cubes via SPARQL, spatial and temporal dimensions might only be filtered properly if the datatype used (i.e. <code>xsd:date</code>, <code>geo:asWKT</code>) is supported/optimized by the SPARQL endpoint. This is for example mostly <em>not</em> the case for fragment datatypes like <code>xsd:gYear</code> etc.</p>
+<p>It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely <em>not</em> attached to the observation directly but to an instance of a dimension referenced in the observation.</p>
+</blockquote><p>Instances of a dimension can be <a href="https://www.w3.org/TR/rdf11-primer/#section-literal">RDF literals</a> with <a href="https://www.w3.org/TR/rdf11-concepts/#section-Datatypes">data types</a> (sometimes called <em>typed literals</em>) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.</p><p>Language tagged literals and all other (meta) data should be modeled as  term/concept. For this purpose, <a href="https://www.w3.org/TR/rdf11-primer/#section-IRI">IRI's</a> should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using <cite><a href="https://www.w3.org/TR/skos-primer/">SKOS Simple Knowledge Organization System Primer</a></cite> (<a href="https://www.w3.org/TR/skos-primer/">https://www.w3.org/TR/skos-primer/</a>) or schema.org <a href="https://schema.org/DefinedTerm">DefinedTerm</a>. As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.</p><p><img src="./img/rdf-cube-schema-dimensions.svg" alt="An Observation often combines dimensions of typed literals with dimensions that point to IRIs" height="753" width="1100"></p><p>In <cite><a href="https://www.w3.org/TR/turtle/">RDF 1.1 Turtle</a></cite> syntax, the observation above looks like this:</p><div class="example">
+
+<pre><code class="turtle hljs" aria-busy="false">&lt;temperature-sensor/cube/observation/20190103T120000055Z&gt; a cube:Observation ;
+  cube:observedBy &lt;temperature-sensor&gt; ;
+  dh:room &lt;building1/level1/room1&gt; ;
+  dh:humidity 75.0 ;
+  dh:lowBatteryPower false ;
+  dh:temperature 0.0 ;
+  dc:date "2019-01-03T12:00:00.055000+00:00"^^xsd:dateTime .
+</code></pre>
+</div><p><code>room1</code> is an IRI that has labels attached as language-tagged strings. </p><pre><code class="turtle hljs" aria-busy="false">&lt;building1/level1/room1&gt; a schema:Place ;
+  schema:name "Room 1101"@en, "Raum 1101"@de, "Pièce 1101"@fr ;
+  schema:inDefinedTermSet &lt;rooms&gt; ;
+  schema:containedInPlace &lt;building1/level1&gt; .
+</code></pre><p>Nesting of relations can be expressed in a machine readable form as well but is not part of the core RDF Cube Schema.</p></section></section><section id="metadata-and-validation-constraint"><h3 id="x1-3-metadata-and-validation-constraint"><bdi class="secno">1.3 </bdi>Metadata and Validation (Constraint)<a class="self-link" aria-label="§" href="#metadata-and-validation-constraint"></a></h3><p><em>RDF Cube Schema</em> supports attaching a "shape", or "constraint" to a cube. The constraints itself are expressed using the <cite><a href="https://www.w3.org/TR/shacl/">Shapes Constraint Language (SHACL)</a></cite></p><p>Providing shape and constraints for a cube facilitates the interpretation and validation of the cube for tooling and libraries.</p><p>From a pure publishing point of view and according to the <a href="http://linked-data-training.zazuko.com/Ontologies/index.html#14">Open World Model</a>, publishing observations using the core <em>RDF Cube Schema</em> is enough. However, in reality one might want to use the data for other purposes as well, like visualizing it in web applications and other publications. To be useful, such tools might require additional metadata and cubes that adhere to certain constraints.</p><p>It is up to the consumer of the data to decide how the shape is used. If provided, it should be possible to validate the observations in the cube with it.</p><section id="shapes"><h4 id="x1-3-1-shapes"><bdi class="secno">1.3.1 </bdi>Shapes<a class="self-link" aria-label="§" href="#shapes"></a></h4><p>A <code>cube:Constraint</code> is also a <code>sh:NodeShape</code>. SHACL is used to restrict the cube to a particular structure. The shape presented in this section can be used to validate all <code>Observation</code>s in the cube.</p><p>If additional restrictions are needed, additional restrictions and shapes could be provided.</p><p>The following snipped defines a new shape, it applies to all <code>cube:Observation</code>:</p><pre><code class="turtle hljs" aria-busy="false">&lt;example-cube/cube/shape&gt; a sh:NodeShape, cube:Constraint ;
+  sh:closed true ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( cube:Observation )
+  ]
+</code></pre><p>For each dimension (facts, measures, and categories) an additional <code>sh:property</code> should be provided. The dimension/property is referenced using <code>sh:path</code>. The value of the path must be a single value and not an RDF list.</p><p>Additional metadata like labels can be attached to the <code>sh:property</code> node.</p><p>Additional constraints can be added according to the SHACL specification, for example datatypes, min/max values, etc.
+The following snippet defines a dimension (property) <code>dc:date</code> with a literal value (<code>xsd:dateTime</code>):</p><pre><code class="turtle hljs" aria-busy="false">[
+  schema:name "Date and Time"@en, "Datum und Zeit"@de, "Date et heure"@fr; # optional, label of the vocab can be used
+  sh:path dc:date ;
+  sh:datatype xsd:dateTime ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+]
+</code></pre><p>Dimensions that point to objects like code lists (i.e taxonomies represented in vocabularies like <a href="https://www.w3.org/TR/skos-primer/">SKOS</a>) can be expressed as well:</p><pre><code class="turtle hljs" aria-busy="false">[
+  schema:name "Room"@en, "Raum"@de , "Pièce"@fr ;
+  sh:path dh:room ;
+  sh:maxCount 1 ;
+  sh:in ( &lt;building1/level1/room1&gt; &lt;building1/level1/room2&gt; ) ;
+]
+</code></pre><p>SHACL also provides properties that are not used for validation purposes like <code>shacl:order</code>. This can be used to indicate the relative order of the dimension, for use in visualizations. It should be used according to <a href="https://www.w3.org/TR/shacl/#order">the specification</a> by using ascending order, for example so that properties with smaller order are placed above (or to the left) of properties with larger order. </p></section><section id="generating-shapes"><h4 id="x1-3-2-generating-shapes"><bdi class="secno">1.3.2 </bdi>Generating Shapes<a class="self-link" aria-label="§" href="#generating-shapes"></a></h4><p>It is possible to generate a minimal SHACL shape given a <code>Cube</code> and a set of <code>Observation</code>s.</p><p>SPARQL CONSTRUCT queries will be provided in this repository.</p></section><section id="types-of-dimensions"><h4 id="x1-3-3-types-of-dimensions"><bdi class="secno">1.3.3 </bdi>Types of Dimensions<a class="self-link" aria-label="§" href="#types-of-dimensions"></a></h4><p>To be able to understand the nature of a dimension we can type the dimension in the constraints. In general we have at least two mandatory types per cube, the <code>cube:MeasureDimension</code> and the <code>cube:KeyDimension</code>. Whereas the <code>cube:MeasureDimension</code> does flag at least one dimension, but potentially multiples which is the actually measurement, or statistical count attached to an observation. The <code>KeyDimension</code> tags one or multiple dimensions which are together uniquely identifying an observation. You can think of them as the <em>Key</em> in a realational database.</p><pre><code class="turtle hljs" aria-busy="false">&lt;temperature-sensor/cube/shape&gt; a sh:NodeShape, cube:Constraint ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( cube:Observation )
+  ], [ a cube:KeyDimension ; # Dimension is part of the Key
+    sh:path cube:observedBy ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( &lt;temperature-sensor&gt; )
+  ], [ a cube:KeyDimension ; # Dimension is part of the Key
+    schema:name "Date and Time"@en, "Datum und Zeit"@de, "Date et heure"@fr;
+    sh:path dc:date ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    qudt:scaleType qudt:IntervalScale ;
+  ], [ a cube:MeasureDimension ; # The measurement of this observation.
+    schema:name "Humidity"@en, "Feuchtigkeit"@de, "Humidité"@fr ;
+    sh:path dh:humidity ;
+    sh:datatype xsd:decimal ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:minInclusive 0 ;
+    sh:maxInclusive 100 ;
+    qudt:scaleType qudt:IntervalScale ;
+  ].
+</code></pre><p>Finally to be able to distinguish of Dimensions which are defined inside a Cube from Dimensions which are used in multiple cubes, we have the type of <code>cube:SharedDimensions</code>. Every dimension except the ones typed as <code>cube:MeasureDimension</code> can be a <code>cube:SharedDimension</code>.</p><pre><code class="turtle hljs" aria-busy="false">[ a cube:KeyDimension, cube:SharedDimension ;
+    schema:name "Canton"@en, "Kanton"@de, "Canton"@fr;
+    sh:path example:canton ;
+    qudt:scaleType qudt:NominalScale ;
+  ].
+</code></pre><p>Dimensions can have further types, which are not defined by this vocabulary to support other Dimensions (e.g. Precision, Statistical Measures) or for additional Attributes to filter on, which are not part of the key to define a <code>cube:KeyDimension</code>.</p></section></section><section id="existing-work"><h3 id="x1-4-existing-work"><bdi class="secno">1.4 </bdi>Existing Work<a class="self-link" aria-label="§" href="#existing-work"></a></h3><section id="rdf-data-cube-vocabulary"><h4 id="x1-4-1-rdf-data-cube-vocabulary"><bdi class="secno">1.4.1 </bdi>RDF Data Cube Vocabulary<a class="self-link" aria-label="§" href="#rdf-data-cube-vocabulary"></a></h4><p>The <cite><a href="https://www.w3.org/TR/vocab-data-cube/">The RDF Data Cube Vocabulary</a></cite> is probably the oldest vocabulary in the domain of RDF for representing cubes. The authors of this document used RDF Data Cubes extensively in the past and ran into multiple issues with it.</p><p>The authors of this specification are grateful for the work done by the original authors of the RDF Data Cube Vocabulary specification. This work would not have been possible without it and some parts look pretty much like the RDF Data Cube Vocabulary.</p><p>It was considered to either clarify or update the RDF Data Cube Vocabulary specification. For the sake of simplicity, it was decided to start from scratch.</p><section id="issues-with-rdf-data-cube-vocabulary"><h5 id="x1-4-1-1-issues-with-rdf-data-cube-vocabulary"><bdi class="secno">1.4.1.1 </bdi>Issues with RDF Data Cube Vocabulary<a class="self-link" aria-label="§" href="#issues-with-rdf-data-cube-vocabulary"></a></h5><ul>
+<li>The metadata model is overly complex.<ul>
+<li>Many additional nodes are introduced that make querying the data in the real world overly complex.</li>
+<li>Generating proper metadata from basic cubes is not easy, which increases complexity for automated pipelines.</li>
+</ul>
+</li>
+<li>There is a mix of forward- and backward-linking within the metadata model.</li>
+<li><a href="https://patterns.dataincubator.org/book/follow-your-nose.html">Follow your nose</a> is often not possible.</li>
+<li>There is more than one way to do it. Different people interpret the spec differently, which makes it very hard to write libraries that consume generic RDF Data Cubes.</li>
+<li>There is a clear focus on <a href="https://en.wikipedia.org/wiki/SDMX">SDMX</a>, which introduces too rigorous restrictions and/or examples for use-cases outside the statistical domain.</li>
+<li>Re-use of dimensions is not very common in the RDF Data Cube vocabulary, that makes it much harder to compare data accross data providers.</li>
+</ul><p>There are at least two efforts that extend the RDF Data Cube Vocabulary to address some of its limitations:</p><ul>
+<li><cite><a href="https://www.w3.org/TR/qb4st/">QB4ST: RDF Data Cube extensions for spatio-temporal components</a></cite></li>
+<li><a href="https://github.com/lorenae/qb4olap/wiki">QB4OLAP</a></li>
+</ul><p>Both efforts could likely be solved/addressed within the <em>RDF Cube Schema</em> approach, this needs to be validated by interested parties.</p></section></section><section id="ssn"><h4 id="x1-4-2-ssn"><bdi class="secno">1.4.2 </bdi>SSN<a class="self-link" aria-label="§" href="#ssn"></a></h4><p>The <cite><a href="https://www.w3.org/TR/vocab-ssn/">Semantic Sensor Network Ontology</a></cite> defines a simplified model for describing observations from a sensor in RDF.</p><p>The <a href="https://www.w3.org/TR/vocab-ssn/#SOSAObservation">Observation</a> model is at least inspired by the RDF Data Cube Vocabulary but it is not very useful for use-cases outside of sensor networks.</p><p>It should be relatively easy to replace SSN observations with the <em>RDF Cube Schema</em>.</p></section></section></section>
+    <section id="viz"><h2 id="x2-rdf-cube-schema-visualization-extensions"><bdi class="secno">2. </bdi>RDF Cube Schema: Visualization Extensions<a class="self-link" aria-label="§" href="#viz"></a></h2><p>This is work in progress for extending the <a href="https://github.com/zazuko/rdf-cube-schema">RDF Cube Schema</a> with additional metadata that can be used for better default-visualizations of RDF cubes.</p><section id="external-vocabularies"><h3 id="x2-1-external-vocabularies"><bdi class="secno">2.1 </bdi>External Vocabularies<a class="self-link" aria-label="§" href="#external-vocabularies"></a></h3><table>
+<thead>
+<tr>
+<th>PREFIX</th>
+<th>IRI</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cube</td>
+<td><a href="https://cube.link">https://cube.link</a></td>
+<td>The underlying RDF Cube Schema on which this extension is based on.</td>
+</tr>
+<tr>
+<td>schema</td>
+<td><a href="http://schema.org">http://schema.org</a></td>
+<td>To describe basic properties.</td>
+</tr>
+<tr>
+<td>shacl</td>
+<td><a href="https://www.w3.org/TR/shacl/">http://www.w3.org/ns/shacl</a></td>
+<td>Inherited from the RDF Cube Schema for constratins.</td>
+</tr>
+<tr>
+<td>qudt</td>
+<td><a href="http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html">http://qudt.org/vocab/</a></td>
+<td>Describe scale of mesures.</td>
+</tr>
+<tr>
+<td>unit</td>
+<td><a href="http://www.qudt.org/doc/DOC_VOCAB-UNITS.html">http://qudt.org/vocab/unit/</a></td>
+<td>Describes units on values.</td>
+</tr>
+<tr>
+<td>time</td>
+<td><a href="https://www.w3.org/TR/owl-time/">http://www.w3.org/2006/time#</a></td>
+<td>A time description ontology.</td>
+</tr>
+</tbody></table></section><section id="cube-description"><h3 id="x2-2-cube-description"><bdi class="secno">2.2 </bdi>Cube Description<a class="self-link" aria-label="§" href="#cube-description"></a></h3><p>To add the title and a short description of the cube the properties <code>schema:name</code> and <code>schema:description</code> are used respectively directly on the <code>cube:Cube</code> Class.</p></section><section id="dimension-description"><h3 id="x2-3-dimension-description"><bdi class="secno">2.3 </bdi>Dimension Description<a class="self-link" aria-label="§" href="#dimension-description"></a></h3><section id="name-and-description"><h4 id="x2-3-1-name-and-description"><bdi class="secno">2.3.1 </bdi>Name and Description<a class="self-link" aria-label="§" href="#name-and-description"></a></h4><p>The name and description of a dimension are represented in the <a href="https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint">Cube Constraint per Dimension</a>. To add the title and a short description the properties <code>schema:name</code> and <code>schema:description</code> are used respectively.</p></section><section id="unit-number-percent-meter-gram-milliter-per-day"><h4 id="x2-3-2-unit-number-percent-meter-gram-milliter-per-day"><bdi class="secno">2.3.2 </bdi>unit (number, percent, meter, gram, milliter per day ...)<a class="self-link" aria-label="§" href="#unit-number-percent-meter-gram-milliter-per-day"></a></h4><p>To describe the unit of the values in a dimension the respecitive <code>qudt:Unit</code> shall be attached to the <a href="https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint">Cube Constraint per Dimension</a> with <code>qudt:unit</code>.</p></section><section id="scaletype-nominal-ordinal-interval-ratio"><h4 id="x2-3-3-scaletype-nominal-ordinal-interval-ratio"><bdi class="secno">2.3.3 </bdi>scaleType (nominal, ordinal, interval, ratio)<a class="self-link" aria-label="§" href="#scaletype-nominal-ordinal-interval-ratio"></a></h4><p>To provide more information on the statistical property of the scale of measure is described by <code>qudt:NominalScale</code>, <code>qudt:OrdinalScale</code>, <code>qudt:IntervalScale</code> or <code>qudt:RatioScale</code> which is attached through <code>qudt:scaleType</code> to the <a href="https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint">Cube Constraint per Dimension</a>.</p><p>The different scaleTypes hint about features which can be used for visualization properties:</p><ul>
+<li><code>qudt:NominalScale</code>: Expects the dimension to be either Resource (connected by an URI) or a value with any kind of dataType.</li>
+<li><code>qudt:OrdinalScale</code>: Expects the dimesion to be either:<ul>
+<li>A Resource (connected by an URI): In this case the Resource should provide <code>schema:position</code> on the elements which provides a lexical ordering (best to use integer numbers). Further can be expected that the order in <code>sh:in</code> of the <a href="https://github.com/zazuko/rdf-cube-schema#shapes">shape constraint</a> is correctly ordered.</li>
+<li>Or value where the lexical order has a meaning. (e.g. <code>1th</code>, <code>2nd</code>, <code>3rd</code>).</li>
+</ul>
+</li>
+<li><code>qudt:IntervalScale</code>: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.</li>
+<li><code>qudt:RatioScale</code>: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.</li>
+</ul></section><section id="datatype-string-boolean-int-float"><h4 id="x2-3-4-datatype-string-boolean-int-float"><bdi class="secno">2.3.4 </bdi>dataType (string, boolean, int, float, ...)<a class="self-link" aria-label="§" href="#datatype-string-boolean-int-float"></a></h4><p>In addition to honor a selected dataType on each literal value, the expected dataType per dimension is further added to the <a href="https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint">Cube Constraint per Dimension</a> per <code>shacl:datatype</code>.</p></section><section id="datakind-temporal-spatial"><h4 id="x2-3-5-datakind-temporal-spatial"><bdi class="secno">2.3.5 </bdi>dataKind (temporal / spatial)<a class="self-link" aria-label="§" href="#datakind-temporal-spatial"></a></h4><p>Finally to express that the dimension provides a specific <em>kind</em> of data which is necessary to select the correct visual representation we add <code>https://cube.link/meta/dataKind/</code> with the following structure possible values:</p><ul>
+<li><p><a href="https://schema.org/GeoCoordinates"><code>schema:GeoCoordinates</code></a>: To hint that the dimension does provide Resources with latitutde and longitude which can be shown on a map.</p>
+<pre><code class="turtle hljs" aria-busy="false">@prefix: &lt;https://cube.link/meta/dataKind/&gt;
+  
+&lt;dimension&gt; meta:dataKind [ a schema:GeoCoordinates ].
+</code></pre>
+</li>
+<li><p><a href="https://schema.org/GeoShape"><code>schema:GeoShape</code></a>: To hint that the dimension does provide Resources which have a shape which can be shown on a map.</p>
+</li>
+<li><p><a href="https://www.w3.org/TR/owl-time/#time:GeneralDateTimeDescription"><code>time:GeneralDateTimeDescription</code></a>: To hint that the dimension does provide Resources which can be shown on a timeline.</p>
+<p>It is further possible to add <a href="https://www.w3.org/TR/owl-time/#time:unitType"><code>time:unitType</code></a> to hint about the precision in which the dimension should be presented. A <a href="https://www.w3.org/TR/owl-time/#time:TemporalUnit"><code>time:TemporalUnit</code></a> is expected: <code>time:unitYear</code>, <code>time:unitMonth</code>, <code>time:unitWeek</code>, <code>time:unitDay</code>, <code>time:unitHour</code>, <code>time:unitMinute</code> and <code>time:unitSecond</code>.</p>
+<pre><code class="turtle hljs" aria-busy="false">@prefix: &lt;https://cube.link/meta/dataKind/&gt;
+
+&lt;dimension&gt; meta:dataKind [ 
+   a time:GeneralDateTimeDescription;
+   time:unitType time:unitYear
+].
+</code></pre>
+</li>
+</ul></section></section><section id="version-history-of-cubes"><h3 id="x2-4-version-history-of-cubes"><bdi class="secno">2.4 </bdi>Version History of Cubes<a class="self-link" aria-label="§" href="#version-history-of-cubes"></a></h3><p>To be able to have a continious history of a published cube there is a meta construct which can be put around a cube, describing a line of history of a cubes based on a <code>schema:CreativeWork</code>.</p><pre><code aria-busy="false" class="hljs css">&lt;https://example.org/cube-version-history&gt; a schema:CreativeWork ;
+   schema<span class="hljs-selector-pseudo">:has</span>Part &lt;https://example.org/cube-version-history/<span class="hljs-number">1</span>&gt; ;
+   schema<span class="hljs-selector-pseudo">:has</span>Part &lt;https://example.org/cube-version-history/<span class="hljs-number">2</span>&gt; ;   
+   schema<span class="hljs-selector-pseudo">:has</span>Part &lt;https://example.org/cube-version-history/<span class="hljs-number">3</span>&gt; .
+</code></pre><p>The version history has attached through <code>schema:hasPart</code> each time a fully described cube which can be interpreted independently. It is expected that the cubes in the same history line do not change the count of dimensions. All the other descriptions can change.</p><p>On the cube through <code>schema:CreativeWorkStatus</code> a status of the cube, like <em>Draft</em> or <em>Published</em> can be added. The status is expected to be a <code>schema:DefinedTerm</code>.</p><p>Finally, a cube can be invalidated or unlisted by adding <code>schema:expires</code> with the expiry date to the cube itself.</p></section><section id="relations-between-quantitative-values"><h3 id="x2-5-relations-between-quantitative-values"><bdi class="secno">2.5 </bdi>Relations between quantitative values<a class="self-link" aria-label="§" href="#relations-between-quantitative-values"></a></h3><p>(Originally raised as an issue in <a href="https://github.com/zazuko/rdf-cube-schema-viz/issues/15">rdf-cube-schema-viz</a>).</p><p>Given an observation in  <a href="https://github.com/zazuko/rdf-cube-schema">RDF Cube Schema</a> that defines multiple quantitative values (dimensions). It should be possible to express that there is a relation between two quantitative values..</p><section id="problem-approach"><h4 id="x2-5-1-problem-approach"><bdi class="secno">2.5.1 </bdi>Problem &amp; Approach<a class="self-link" aria-label="§" href="#problem-approach"></a></h4><p>Given:</p><pre><code class="turtle hljs" aria-busy="false">&lt;observation1&gt; a Observation
+&lt;observation1&gt; &lt;value&gt; 123.45
+&lt;observation1&gt; &lt;precision&gt; 0.017
+</code></pre><p>We want to express that an observation has a <code>&lt;value&gt;</code> and <code>&lt;precision&gt;</code> is the precision of <code>&lt;value&gt;</code>.</p><p>A standard reification/annotation approach would look like this in RDF</p><pre><code class="turtle hljs" aria-busy="false"># reification
+&lt;statement&gt;
+  &lt;subject&gt; &lt;observation1&gt;
+  &lt;predicate&gt; &lt;value&gt;
+  &lt;object&gt; 123.45
+
+&lt;statement&gt; &lt;precision&gt; 0.017
+</code></pre><p>On large datasets this would have a significant impact on query performance as it would require joins to get the <code>&lt;precision&gt;</code> of a particular <code>&lt;value&gt;</code> . In other words, it is not suitable for Cubes with many observations. It also makes the model more complicated to understand. </p><p>A simplified approach would be to model quantitative values as entities, for example:</p><pre><code aria-busy="false" class="hljs xml"># simplified reification
+<span class="hljs-tag">&lt;<span class="hljs-name">observation1</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span> [
+    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span> 123.45;
+    <span class="hljs-tag">&lt;<span class="hljs-name">precision</span>&gt;</span> 0.017;
+]
+</code></pre><p>This is easier to understand due to forward-linking but it puts the value itself on an additional entity and thus requires a join per observation to fetch the value and its precision. </p><p>The "new" approach would be to use RDF*:</p><pre><code class="turtle hljs" aria-busy="false"># RDF*
+&lt;observation1&gt; &lt;value&gt; "123.45" 
+&lt;&lt;&lt;observation1&gt; &lt;value&gt; "123.45"&gt;&gt; &lt;precision&gt; 0.017
+</code></pre><p>This is nice to read and write but it is too early to require that as support for it is relatively new. We also assume it does have performance impacts on triplestores if we would query that.</p></section><section id="solution"><h4 id="x2-5-2-solution"><bdi class="secno">2.5.2 </bdi>Solution<a class="self-link" aria-label="§" href="#solution"></a></h4><p>Our approach moves the reification/annotation to the <a href="https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint">constraint</a> of the cube, in particular to its dimension. There is one <code>sh:property</code> definition per dimension so the lookup only needs to be done once and is valid for all observations of that particular cube. </p><pre><code class="turtle hljs" aria-busy="false">[ 
+  sh:path &lt;dimension/precision&gt;
+  # ... additional definitions for that sh:property
+  cube:relation [ a cube:Relation ;
+     # for the moment we recommend to define properties in your own namespace,
+     # thus the "ex" namespace.
+     # We might try to get that into another vocab like QUDT in the future or
+     # provide generic properties on our own
+     ex:precisionOf &lt;dimension/value&gt;
+  ]
+]
+</code></pre><p>We define a <code>&lt;relation&gt;</code> for the cube dimension <code>&lt;precision&gt;</code>. The <code>&lt;relation&gt;</code> is of type <code>&lt;PropertyRelation&gt;</code>. It's <code>&lt;target&gt;</code> is the property <code>&lt;value&gt;</code>.</p><p>This approach is very generic and allows to express other relations as well, for example aggregations. Given the following triples:</p><pre><code class="turtle hljs" aria-busy="false">&lt;observation1&gt; a Cube
+&lt;observation1&gt; &lt;population&gt; 10
+&lt;observation1&gt; &lt;populationMale&gt; 7
+&lt;observation1&gt; &lt;populationFemale&gt; 3
+</code></pre><p>We want to express that <code>&lt;population&gt;</code> is the sum of<code> &lt;populationMale&gt;</code> and <code>&lt;populationFemale&gt;</code>. </p><pre><code class="turtle hljs" aria-busy="false">[
+  sh:path &lt;populationMale&gt;
+  &lt;relation&gt; [ &lt;AddRelation&gt;
+    &lt;target&gt; &lt;population&gt;
+  ]
+], [
+  sh:path &lt;populationFemale&gt;
+  &lt;relation&gt; [ &lt;AddRelation&gt;
+    &lt;target&gt; &lt;population&gt;
+  ]
+]
+</code></pre><p>The same semantics could be expressed the other way around:</p><pre><code class="turtle hljs" aria-busy="false">[
+  sh:path &lt;population&gt;
+  &lt;relation&gt; [ &lt;SumRelation&gt;
+    &lt;source&gt; &lt;populationMale&gt;, &lt;populationFemale&gt;
+  ], [ &lt;SumRelation&gt;
+    &lt;source&gt; &lt;populationAge0050&gt;, &lt;population5090&gt; # restrictions on instances of a particular dimension
+  ]
+]
+</code></pre><p>This is obviously advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe complex relationship between data in a machine processable way. </p><section id="rdf-terms"><h5 id="x2-5-2-1-rdf-terms"><bdi class="secno">2.5.2.1 </bdi>RDF terms<a class="self-link" aria-label="§" href="#rdf-terms"></a></h5><p>There is no recommendation on what properties and classes can or should be used to express the examples above. We only define:</p><ul>
+<li>to use <code>dcterms:relation</code> to point to the relation itself. <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/relation">Its definition</a> is generic enoughand does <a href="https://prefix.zazuko.com/dcterms%3Arelation">not impose any reasoning implications</a> `</li>
+<li><code>&lt;source&gt;</code> and <code>&lt;target&gt;</code> are terms used in the <a href="https://www.w3.org/TR/annotation-vocab/">Web Annotation Vocabulary</a>, they might or might not fit your use-case. In any way it is <em>not</em> recommend to re-use IRIs from this vocabulary as they do have reasoning implications.</li>
+<li>More formal classes and properties for common relations between two dimensions might be defined at a later stage to encourage re-use and interoperability.</li>
+</ul></section></section></section><section id="nested-hierarchies"><h3 id="x2-6-nested-hierarchies"><bdi class="secno">2.6 </bdi>Nested hierarchies<a class="self-link" aria-label="§" href="#nested-hierarchies"></a></h3><p>(Originally raised as an issue in <a href="https://github.com/zazuko/rdf-cube-schema-viz/issues/6">rdf-cube-schema-viz</a>).</p><p>Given:</p><pre><code class="turtle hljs" aria-busy="false">BASE &lt;http://ex.org/&gt;
+&lt;observation1&gt; a &lt;Observation&gt; ;
+  &lt;municipality&gt; &lt;mun-nidau&gt; .
+
+&lt;mun-nidau&gt; a &lt;Municipality&gt; ;
+  &lt;district&gt; &lt;dist-bielbienne&gt; ;
+  &lt;canton&gt; &lt;canton-bern&gt; .
+
+&lt;dist-bielbienne&gt; a &lt;District&gt; ;
+  &lt;canton&gt; &lt;canton-bern&gt; .
+
+&lt;canton-bern&gt; a &lt;Canton&gt; .
+</code></pre><p>It should be possible to express nested hierarchies in a machine processable way. Think of nested taxonomies, spatial nesting etc. The information can be used to provide smart/useful default options for filters on cubes.</p><p>Our example can be visualized:</p><p><img src="./img/example-hierarchy.svg" alt="Example of a hierarchy"></p><p>There are two paths that would be possible: <code>&lt;observation1&gt; -&gt; &lt;mun-nidau&gt; -&gt; &lt;canton-bern&gt;</code> or <code>&lt;observation1&gt; -&gt; &lt;mun-nidau&gt; -&gt; &lt;district-bielbienne&gt; -&gt; &lt;canton-bern&gt; </code>. There is no way to know if the district should be followed or not by purely interpreting the data structure.</p><p>We address this issue by adding information about the nesting to the constraint (SHACL shape) of the cube.  On the <code>sh:property</code> of <code>&lt;municipality&gt;</code> we attach a new property called <code>&lt;nextInHierarchy&gt;</code>:</p><pre><code class="turtle hljs" aria-busy="false">[
+  sh:path &lt;municipality&gt;
+    &lt;nextInHierarchy&gt; &lt;shape-municipality-canton-hierarchy&gt;
+]
+</code></pre><p>This property points to minimal SHACL shape:</p><pre><code class="turtle hljs" aria-busy="false">&lt;shape-municipality-canton-hierarchy&gt; a NodeShape 
+  sh:path &lt;canton&gt;
+</code></pre><p>It points to the outgoing link with <code>sh:path</code> and the nesting ends there, as there is no <code>&lt;nextInHierarchy&gt;</code> defined on that particular shape. In other words, there is only one additional layer in this example that points to a <code>&lt;canton&gt;</code> and the complete shape represents the path <code>&lt;observation1&gt; -&gt; &lt;mun-nidau&gt; -&gt; &lt;canton-bern&gt;</code>.</p><blockquote>
+<p>NOTE: We define <code>&lt;nextInHierarchy&gt;</code> purposely instead of re-using a property from SHACL to relate shapes. This ensures we only validate data within our realm.</p>
+</blockquote><p>To represent the more complex path, the contraint/shape might look like this:</p><pre><code class="turtle hljs" aria-busy="false">[
+  sh:path &lt;municipality&gt;
+    &lt;nextInHierarchy&gt; &lt;shape-municipality-district-hierarchy&gt;
+]
+</code></pre><p>linking to:</p><pre><code class="turtle hljs" aria-busy="false">&lt;shape-municipality-district-hierarchy&gt; a NodeShape 
+  sh:path &lt;district&gt;
+  &lt;nextInHierarchy&gt; &lt;shape-district-canton-hierarchy&gt; 
+</code></pre><p>The level does not end here, we link from the <code>&lt;district&gt;</code> to the <code>&lt;canton&gt;</code>:</p><pre><code class="turtle hljs" aria-busy="false">&lt;shape-district-canton-hierarchy&gt; a NodeShape 
+  sh:path &lt;canton&gt;
+</code></pre><p>There is no outgoing link at that shape, in other words the nesting ends here. This represents the path  <code>&lt;observation1&gt; -&gt; &lt;mun-nidau&gt; -&gt; &lt;district-bielbienne&gt; -&gt; &lt;canton-bern&gt; </code>.</p></section></section>
+
+    
+   
+      
+<section id="references" class="appendix"><h2 id="a-references"><bdi class="secno">A. </bdi>References<a class="self-link" aria-label="§" href="#references"></a></h2>
+    <section id="informative-references">
+    <h3 id="a-1-informative-references"><bdi class="secno">A.1 </bdi>Informative references<a class="self-link" aria-label="§" href="#informative-references"></a></h3>
+    <dl class="bibliography"><dt id="bib-qb4st">[qb4st]</dt><dd><a href="https://www.w3.org/TR/qb4st/"><cite>QB4ST: RDF Data Cube extensions for spatio-temporal components</cite></a>. Rob Atkinson.  W3C. 28 September 2017. W3C Working Group Note. URL: <a href="https://www.w3.org/TR/qb4st/">https://www.w3.org/TR/qb4st/</a></dd><dt id="bib-rdf11-concepts">[rdf11-concepts]</dt><dd><a href="https://www.w3.org/TR/rdf11-concepts/"><cite>RDF 1.1 Concepts and Abstract Syntax</cite></a>. Richard Cyganiak; David Wood; Markus Lanthaler.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf11-concepts/">https://www.w3.org/TR/rdf11-concepts/</a></dd><dt id="bib-shacl">[shacl]</dt><dd><a href="https://www.w3.org/TR/shacl/"><cite>Shapes Constraint Language (SHACL)</cite></a>. Holger Knublauch; Dimitris Kontokostas.  W3C. 20 July 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/shacl/">https://www.w3.org/TR/shacl/</a></dd><dt id="bib-skos-primer">[skos-primer]</dt><dd><a href="https://www.w3.org/TR/skos-primer/"><cite>SKOS Simple Knowledge Organization System Primer</cite></a>. Antoine Isaac; Ed Summers.  W3C. 18 August 2009. W3C Working Group Note. URL: <a href="https://www.w3.org/TR/skos-primer/">https://www.w3.org/TR/skos-primer/</a></dd><dt id="bib-turtle">[turtle]</dt><dd><a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers.  W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a></dd><dt id="bib-vocab-data-cube">[vocab-data-cube]</dt><dd><a href="https://www.w3.org/TR/vocab-data-cube/"><cite>The RDF Data Cube Vocabulary</cite></a>. Richard Cyganiak; Dave Reynolds.  W3C. 16 January 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/vocab-data-cube/">https://www.w3.org/TR/vocab-data-cube/</a></dd><dt id="bib-vocab-ssn">[vocab-ssn]</dt><dd><a href="https://www.w3.org/TR/vocab-ssn/"><cite>Semantic Sensor Network Ontology</cite></a>. Armin Haller; Krzysztof Janowicz; Simon Cox; Danh Le Phuoc; Kerry Taylor; Maxime Lefrançois.  W3C. 19 October 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/vocab-ssn/">https://www.w3.org/TR/vocab-ssn/</a></dd></dl>
+  </section></section><p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+  </p><script id="respec-dfn-panel">(() => {
+// @ts-check
+if (document.respec) {
+  document.respec.ready.then(setupPanel);
+} else {
+  setupPanel();
+}
+
+function setupPanel() {
+  const listener = panelListener();
+  document.body.addEventListener("keydown", listener);
+  document.body.addEventListener("click", listener);
+}
+
+function panelListener() {
+  /** @type {HTMLElement} */
+  let panel = null;
+  return event => {
+    const { target, type } = event;
+
+    if (!(target instanceof HTMLElement)) return;
+
+    // For keys, we only care about Enter key to activate the panel
+    // otherwise it's activated via a click.
+    if (type === "keydown" && event.key !== "Enter") return;
+
+    const action = deriveAction(event);
+
+    switch (action) {
+      case "show": {
+        hidePanel(panel);
+        /** @type {HTMLElement} */
+        const dfn = target.closest("dfn, .index-term");
+        panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
+        const coords = deriveCoordinates(event);
+        displayPanel(dfn, panel, coords);
+        break;
+      }
+      case "dock": {
+        panel.style.left = null;
+        panel.style.top = null;
+        panel.classList.add("docked");
+        break;
+      }
+      case "hide": {
+        hidePanel(panel);
+        panel = null;
+        break;
+      }
+    }
+  };
+}
+
+/**
+ * @param {MouseEvent|KeyboardEvent} event
+ */
+function deriveCoordinates(event) {
+  const target = /** @type HTMLElement */ (event.target);
+
+  // We prevent synthetic AT clicks from putting
+  // the dialog in a weird place. The AT events sometimes
+  // lack coordinates, so they have clientX/Y = 0
+  const rect = target.getBoundingClientRect();
+  if (
+    event instanceof MouseEvent &&
+    event.clientX >= rect.left &&
+    event.clientY >= rect.top
+  ) {
+    // The event probably happened inside the bounding rect...
+    return { x: event.clientX, y: event.clientY };
+  }
+
+  // Offset to the middle of the element
+  const x = rect.x + rect.width / 2;
+  // Placed at the bottom of the element
+  const y = rect.y + rect.height;
+  return { x, y };
+}
+
+/**
+ * @param {Event} event
+ */
+function deriveAction(event) {
+  const target = /** @type {HTMLElement} */ (event.target);
+  const hitALink = !!target.closest("a");
+  if (target.closest("dfn:not([data-cite]), .index-term")) {
+    return hitALink ? "none" : "show";
+  }
+  if (target.closest(".dfn-panel")) {
+    if (hitALink) {
+      return target.classList.contains("self-link") ? "hide" : "dock";
+    }
+    const panel = target.closest(".dfn-panel");
+    return panel.classList.contains("docked") ? "hide" : "none";
+  }
+  if (document.querySelector(".dfn-panel:not([hidden])")) {
+    return "hide";
+  }
+  return "none";
+}
+
+/**
+ * @param {HTMLElement} dfn
+ * @param {HTMLElement} panel
+ * @param {{ x: number, y: number }} clickPosition
+ */
+function displayPanel(dfn, panel, { x, y }) {
+  panel.hidden = false;
+  // distance (px) between edge of panel and the pointing triangle (caret)
+  const MARGIN = 20;
+
+  const dfnRects = dfn.getClientRects();
+  // Find the `top` offset when the `dfn` can be spread across multiple lines
+  let closestTop = 0;
+  let minDiff = Infinity;
+  for (const rect of dfnRects) {
+    const { top, bottom } = rect;
+    const diffFromClickY = Math.abs((top + bottom) / 2 - y);
+    if (diffFromClickY < minDiff) {
+      minDiff = diffFromClickY;
+      closestTop = top;
+    }
+  }
+
+  const top = window.scrollY + closestTop + dfnRects[0].height;
+  const left = x - MARGIN;
+  panel.style.left = `${left}px`;
+  panel.style.top = `${top}px`;
+
+  // Find if the panel is flowing out of the window
+  const panelRect = panel.getBoundingClientRect();
+  const SCREEN_WIDTH = Math.min(window.innerWidth, window.screen.width);
+  if (panelRect.right > SCREEN_WIDTH) {
+    const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
+    const newCaretOffset = left - newLeft;
+    panel.style.left = `${newLeft}px`;
+    /** @type {HTMLElement} */
+    const caret = panel.querySelector(".caret");
+    caret.style.left = `${newCaretOffset}px`;
+  }
+
+  // As it's a dialog, we trap focus.
+  // TODO: when <dialog> becomes a implemented, we should really
+  // use that.
+  trapFocus(panel, dfn);
+}
+
+/**
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function trapFocus(panel, dfn) {
+  /** @type NodeListOf<HTMLAnchorElement> elements */
+  const anchors = panel.querySelectorAll("a[href]");
+  // No need to trap focus
+  if (!anchors.length) return;
+
+  // Move focus to first anchor element
+  const first = anchors.item(0);
+  first.focus();
+
+  const trapListener = createTrapListener(anchors, panel, dfn);
+  panel.addEventListener("keydown", trapListener);
+
+  // Hiding the panel releases the trap
+  const mo = new MutationObserver(records => {
+    const [record] = records;
+    const target = /** @type HTMLElement */ (record.target);
+    if (target.hidden) {
+      panel.removeEventListener("keydown", trapListener);
+      mo.disconnect();
+    }
+  });
+  mo.observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+}
+
+/**
+ *
+ * @param {NodeListOf<HTMLAnchorElement>} anchors
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function createTrapListener(anchors, panel, dfn) {
+  const lastIndex = anchors.length - 1;
+  let currentIndex = 0;
+  return event => {
+    switch (event.key) {
+      // Hitting "Tab" traps us in a nice loop around elements.
+      case "Tab": {
+        event.preventDefault();
+        currentIndex += event.shiftKey ? -1 : +1;
+        if (currentIndex < 0) {
+          currentIndex = lastIndex;
+        } else if (currentIndex > lastIndex) {
+          currentIndex = 0;
+        }
+        anchors.item(currentIndex).focus();
+        break;
+      }
+
+      // Hitting "Enter" on an anchor releases the trap.
+      case "Enter":
+        hidePanel(panel);
+        break;
+
+      // Hitting "Escape" returns focus to dfn.
+      case "Escape":
+        hidePanel(panel);
+        dfn.focus();
+        return;
+    }
+  };
+}
+
+/** @param {HTMLElement} panel */
+function hidePanel(panel) {
+  if (!panel) return;
+  panel.hidden = true;
+  panel.classList.remove("docked");
+}
+})()</script><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>

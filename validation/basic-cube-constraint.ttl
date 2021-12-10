@@ -19,13 +19,13 @@
         sh:path cube:observationSet ;
         sh:minCount 1 ;
         sh:node <ObservationSetShape> ;
-        sh:message "Cube needs an observationSet"
+        sh:message "cube:Cube needs at least one cube:ObservationSet"
     ] ;
     sh:property [
         # optional, but recommended
         sh:path cube:observationConstraint ;
         sh:node <ObservationConstraintShape> ;
-        sh:message "Cube must point to a valid constraint" 
+        sh:message "cube:Cube must point to a valid cube:Constraint"
     ] .
 
 <ObservationSetShape>
@@ -34,7 +34,7 @@
     sh:property [
         sh:path cube:observation ;
         sh:minCount 1 ;
-        sh:message "Cube needs at least one observation"
+        sh:message "cube:ObservationSet needs at least one cube:observation"
     ] .
 
 <ObservationConstraintShape>
@@ -45,5 +45,5 @@
         # one for cube:observedBy, one for rdf:type and at least one cube dimension
         sh:path sh:property ;
         sh:minCount 3 ;
-        sh:message "Constraint needs at least a certain amount of sh:properties"
+        sh:message "cube:Constraint needs at least a certain amount of sh:properties"
     ] .
