@@ -9,6 +9,12 @@
   "bin": {
     "rdf-cube-schema": "bin/rdf-cube-schema.js"
   },
+  "files": [
+    "validate.js",
+    "validation",
+    "bin",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/zazuko/rdf-cube-schema.git"
