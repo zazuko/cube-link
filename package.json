@@ -1,6 +1,6 @@
 {
   "name": "rdf-cube-schema",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "RDF Cube Schema",
   "main": "validate.js",
   "scripts": {
@@ -9,6 +9,12 @@
   "bin": {
     "rdf-cube-schema": "bin/rdf-cube-schema.js"
   },
+  "files": [
+    "validate.js",
+    "validation",
+    "bin",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/zazuko/rdf-cube-schema.git"
