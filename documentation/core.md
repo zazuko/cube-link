@@ -39,16 +39,16 @@ Represents the entry point for a collection of one or more observation sets, con
 
 #### cube:ObservationSet {#ObservationSet}
 
-An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observation](#Observation)s. It can be used to group any set of [Observation](#Observation)s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSet](#ObservationSet)s and an [Observation](#Observation) can appear in multiple [ObservationSet](#ObservationSet)s.
+An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observations](#Observation). It can be used to group any set of [Observations](#Observation), as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSets](#ObservationSet) and an [Observation](#Observation) can appear in multiple [ObservationSets](#ObservationSet).
 
 #### cube:Observation {#Observation}
-A single observation in the cube may have one or more associated dimensions. A Observation can appear in one ore more [ObservationSet](#ObservationSet)s.
+A single observation in the cube may have one or more associated dimensions. A Observation can appear in one ore more [ObservationSets](#ObservationSet).
 
 #### cube:Constraint {#Constraint}
-Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional) For more information see [RDF Cube Schema : Constraints](#constraints)
+Specifies constraints that need to be met on the [Cube](#Cube). Used for metadata and validation. (Optional) For more information see [RDF Cube Schema : Constraints](#constraints)
 
 A [Constraint](#Constraint) for a cube. A Constraint is optional but recommended, it is used to:
-* Define how data ([Observation](#Observation)`s) in a `Cube` can be validated.
+* Define how data ([Observations](#Observation)) in a `Cube` can be validated.
 * Add Cube-specific metadata (custom labels, translation to other languages, etc).
 
 
@@ -78,7 +78,7 @@ Connects an observation with the agent that created the observation. The agent c
 
 In _RDF Cube Schema_, facts, measures, and categories are all considered a dimension.
 
-All `Observation`s need to provide the same set of dimensions, they cannot be optional. This ensures that cubes can be queried efficiently.
+All [Observations](#Observation) need to provide the same set of dimensions, they cannot be optional. This ensures that cubes can be queried efficiently.
 
 Unlike other RDF vocabularies in that domain, there is no specific class for a dimension. Creating a new _RDF Cube Schema_ dimension would be the same as defining a new [RDF Property](https://www.w3.org/TR/rdf-schema/#ch_property). 
 

@@ -61,7 +61,7 @@ This is an advanced usage of the cube and increases its complexity. But it gives
 
 #### Cube:Relation {#Relation}
 
-A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. a Cube:Relation is linked to an observation through a [cube:relation](#relation) property. 
+A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. A Cube:Relation is linked to an observation through a [cube:relation](#relation) property. 
 See [this example](#relexample).
 
 ### Properties

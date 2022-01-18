@@ -61,7 +61,7 @@ The following snippet defines a dimension (property) `dc:date` with a literal va
 
 #### Usage of code lists
 
-Dimensions that point to objects like code lists (i.e taxonomies represented in vocabularies like [[[skos-primer]]] can be expressed as well:
+Dimensions that point to objects like code lists (i.e taxonomies represented in vocabularies like [[[skos-primer]]]) can be expressed as well:
 
 <aside class='example' title='Using code lists on  a dimension'>
 
