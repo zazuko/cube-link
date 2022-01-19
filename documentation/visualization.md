@@ -11,11 +11,13 @@ To be able to understand the nature of a dimension we can type the dimension in 
 
 ### Classes
 
-#### cube:KeyDimension
+The following classes are used to define the various visualization element of the RDF Cube Schema
+
+#### cube:KeyDimension {#KeyDimension}
 
 The KeyDimension tags one or multiple dimensions which are together uniquely identifying an observation. You can think of them as the Key in a relational database.
 
-#### cube:MeasureDimension
+#### cube:MeasureDimension {#MeasureDimension}
 
  The MeasureDimension tags at least one dimension, but potentially multiple, which is the actual measurement, or statistical count attached to an observation.
 
@@ -52,7 +54,7 @@ The KeyDimension tags one or multiple dimensions which are together uniquely ide
 
 </aside>
 
-#### cube:SharedDimension
+#### cube:SharedDimension {#SharedDimension}
 
 To be able to distinguish Dimensions that are defined inside a Cube from Dimensions that are used in multiple cubes, we have the type of cube:SharedDimension. Every dimension except the ones typed as a cube:MeasureDimension can be a cube:SharedDimension.
 
@@ -70,6 +72,8 @@ To be able to distinguish Dimensions that are defined inside a Cube from Dimensi
 
 
 ### Properties
+
+The following properties are used to define the various visualization element of the RDF Cube Schema
 
 #### schema:name 
 A descriptive name of the Dimension, this description can be multilingual.

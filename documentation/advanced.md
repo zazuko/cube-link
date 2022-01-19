@@ -19,9 +19,11 @@ To be able to have a continuous history of a published cube there is a meta cons
 
 The version history has attached through `schema:hasPart` each time a fully described cube which can be interpreted independently. It is expected that the cubes in the same history line do not change the count of dimensions. All the other descriptions can change.
 
-On the cube through `schema:CreativeWorkStatus` a status of the cube, like *Draft* or *Published* can be added. The status is expected to be a `schema:DefinedTerm`.
+A status of the cube, like *Draft* or *Published* can be added to the cube through `schema:CreativeWorkStatus`. The status is expected to be a `schema:DefinedTerm`.
 
-Finally, a cube can be invalidated or unlisted by adding `schema:expires` with the expiry date to the cube itself.
+To record a version the `schema:version` property can be used
+
+A cube can be invalidated or unlisted by adding `schema:expires` with the expiry date to the cube itself.
 
 
 
