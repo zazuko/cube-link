@@ -1,0 +1,1 @@
+This vocubulary is intended as a companion vocabulary to the RDF Cube Schema vocabulary.

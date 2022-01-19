@@ -37,7 +37,7 @@ There is one `sh:property` definition per dimension so the lookup only needs to 
 <aside class='example' id='relexample' title='Expressing the relation'>
 
 ```turtle
-PREFIX relation: <https://cube.link/relation/>
+PREFIX meta: <https://cube.link/meta/>
    
 [ 
   sh:path <dimension/precision>
@@ -53,22 +53,22 @@ PREFIX relation: <https://cube.link/relation/>
 </aside>
    
 A relation between dimensions is described only with `cube` and `meta` vocabulary. The relation classes itself can be extended based on specific use cases. 
-The controlled vocabulary introduced with namespace `PREFIX relation: <https://cube.link/relation/>` provides the most common relation Classes, and is proposed as a guideline.
+The controlled vocabulary introduced with namespace `PREFIX meta: <https://cube.link/meta/>` provides the most common relation Classes, and is proposed as a guideline.
 
 This is an advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe the complex relationship between data in a machine-processable way. 
 
 ### Classes
 
-#### Cube:Relation {#Relation}
+#### meta:Relation {#Relation}
 
-A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. A Cube:Relation is linked to an observation through a [cube:relation](#relation) property. 
+A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. A Cube:Relation is linked to an observation through a [meta:relation](#relation) property. 
 See [this example](#relexample).
 
 ### Properties
 
-#### cube:relation {#relation}
+#### meta:relation {#relation}
 
-This property is used on a Dimension Constraint to express a relation with other properties through a [Cube:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
+This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
 See [this example](#relexample).
 
 ## Nested hierarchies

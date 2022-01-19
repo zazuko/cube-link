@@ -81,7 +81,7 @@ To describe the unit of the values in a dimension the respective `qudt:Unit` ins
 
 #### qudt:scaleType
 
-To provide more information on the statistical property of the scale of measure is described by `qudt:NominalScale`, `qudt:OrdinalScale`, `qudt:IntervalScale` or `qudt:RatioScale` which is attached through `qudt:scaleType` to the [Cube Constraint per Dimension](https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint).
+To provide more information on the statistical property scale of measure it can be described by `qudt:NominalScale`, `qudt:OrdinalScale`, `qudt:IntervalScale` or `qudt:RatioScale` which is attached through `qudt:scaleType` to the [Dimension Constraint](#dimensionconstraints).
 
 The different scale types hint about features that can be used for visualization properties:
 
@@ -98,7 +98,7 @@ To describe the datatype used by the dimension attach the `shacl:datatype` to th
 Be aware that this implies the presence of a typed literal as the dimension value
 
 #### meta:dataKind (temporal / spatial)
-Finally to express that the dimension provides a specific _kind_ of data which is necessary to select the correct visual representation we add `https://cube.link/meta/dataKind/` with the following structure possible values:
+To express that the dimension provides a specific _kind_ of data which is necessary to select the correct visual representation you can add a `meta:dataKind` resource with the following possible structures:
 
 * [`schema:GeoCoordinates`](https://schema.org/GeoCoordinates): To hint that the dimension does provide Resources with latitude and longitude which can be shown on a map.
 

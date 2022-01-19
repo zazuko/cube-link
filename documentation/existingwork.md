@@ -1,4 +1,4 @@
-# Existing Work
+# Related Work
 
 ## RDF Data Cube Vocabulary
 
