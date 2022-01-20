@@ -24,6 +24,9 @@ We describe the model, an elaborate example, and scripts to validate observation
 | qudt | [http://qudt.org/vocab/](http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html) | Describe scale of mesures. |
 | unit | [http://qudt.org/vocab/unit/](http://www.qudt.org/doc/DOC_VOCAB-UNITS.html) | Describes units on values. |
 | time | [http://www.w3.org/2006/time#](https://www.w3.org/TR/owl-time/) | A time description ontology. |
+| geo | [http://www.opengis.net/ont/geosparql#](http://www.opengis.net/ont/geosparql) | OGC GeoSPARQL 1.0. |
+| xsd | [http://www.w3.org/2001/XMLSchema#](http://www.w3.org/2001/XMLSchema) | XML Schema Datatypes. |
+| skos | [http://www.w3.org/2004/02/skos/core#](http://www.w3.org/2004/02/skos/core) | SKOS Simple Knowledge Organization System. |
 
 ## Core Schema
 
