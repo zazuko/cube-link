@@ -40,9 +40,10 @@ There is one `sh:property` definition per dimension so the lookup only needs to 
 
 ```turtle
 PREFIX meta: <https://cube.link/meta/>
+PREFIX relation: <https://cube.link/relation/>
    
 [ 
-  sh:path <dimension/precision>
+  sh:path <dimension/starndardError>
   # ... additional definitions for that sh:property
   meta:dimensionRelation [ 
     # We use a Class to indicate the e.g. the standard error.
@@ -55,7 +56,7 @@ PREFIX meta: <https://cube.link/meta/>
 </aside>
    
 A relation between dimensions is described only with `cube` and `meta` vocabulary. The relation classes itself can be extended based on specific use cases. 
-The controlled vocabulary introduced with namespace `PREFIX meta: <https://cube.link/meta/>` provides the most common relation Classes, and is proposed as a guideline.
+The controlled vocabulary introduced with namespace `PREFIX relation: <https://cube.link/relation/>` provides the most common relation Classes, and is proposed as a guideline.
 
 This is an advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe the complex relationship between data in a machine-processable way. 
 

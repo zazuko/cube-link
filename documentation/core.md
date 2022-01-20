@@ -13,6 +13,7 @@ We describe the model, an elaborate example, and scripts to validate observation
 | --- | --- | --- |
 | `cube` | `https://cube.link` | RDF Cube Schema.|
 | `meta` | `https://cube.link/meta` | RDF Cube Schema meta data extension.|
+| `relation` | `https://cube.link/relation` | RDF Cube Schema meta data extension.|
 
 
 ### External
