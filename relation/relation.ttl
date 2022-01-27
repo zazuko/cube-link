@@ -4,7 +4,6 @@ PREFIX cube: <https://cube.link/>
 PREFIX meta: <https://cube.link/meta/>
 PREFIX relation: <https://cube.link/relation/>
 PREFIX schema: <http://schema.org/>
-PREFIX relation: <https://cube.link/relation/>
 
 relation:StandardError a meta:DimensionRelation;
  schema:name "Standard Error";
@@ -21,11 +20,13 @@ relation:StandardError1SD a meta:DimensionRelation;
  schema:alternateName "SE".
 
 relation:StandardError2SD a meta:DimensionRelation;
+rdfs:subClassOf relation:StandardError;
  schema:name "The standard error is 2 standard deviation of the mean of the sample.";
  rdfs:label "The standard error is 2 standard deviation of the mean of the sample.";
 schema:alternateName "2SE".
 
 relation:StandardError3SD a meta:DimensionRelation;
+rdfs:subClassOf relation:StandardError;
  schema:name "The standard error is 3 standard deviation of the mean of the sample.";
  rdfs:label "The standard error is 3 standard deviation of the mean of the sample.";
  schema:alternateName "3SE".

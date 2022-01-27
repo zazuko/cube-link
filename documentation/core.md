@@ -138,9 +138,9 @@ From a high-level point of view, the core classes and properties are enough to p
 ### Cube Description
 To add the title and a short description of the cube add the following properties directly on an instance of a [cube:Cube](#Cube)
 
-#### schema.name 
+#### schema:name 
 A descriptive name of the Cube, this description can be multilingual.
-#### schema.description
+#### schema:description
 A description of the Cube, this description can be multilingual.
 
 #### other properties

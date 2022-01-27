@@ -2,6 +2,9 @@
 
 ## Classes ##
 
+The classes in the relation vocabulary are instances of meta:DimensionRelation as well as a rdfs:Class.
+This facilitates validation of the Dimension Constraints
+
 ### relation:StandardError  {#StandardError}
  
  The standard error is the standard deviation of the mean of the sample.

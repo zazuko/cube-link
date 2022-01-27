@@ -4,8 +4,12 @@
 
 ### meta:Relation {#Relation}
 
-A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. A Cube:Relation is linked to an observation through a [meta:relation](#relation) property. 
-See [this example](#relexample).
+A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relation](#relation) property. 
+
+### meta:DimensionRelation {#DimensionRelation}
+
+A meta:DimensionRelation resource is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError
+
 
 ## Properties
 

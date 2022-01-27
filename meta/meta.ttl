@@ -1,0 +1,29 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX cube: <https://cube.link/>
+PREFIX meta: <https://cube.link/meta/>
+PREFIX schema: <http://schema.org/>
+
+meta:Relation a rdfs:Class;
+    rdfs:label "Relation";
+    rdfs:comment "A meta:Relation resource is used to express the relation or hiarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a meta:relation property. ";
+    .
+
+meta:DimensionRelation a rdfs:Class;
+    rdfs:subClassOf meta:Relation;
+    rdfs:label "Dimension relation";
+    rdfs:comment "A meta:DimensionRelation resource is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError";
+    .
+
+meta:dataKind a rdf:Property;
+    rdfs:label "data Kind";
+    rdfs:comment "The kind or variety of the data in a dimension. Often schema:GeoCoordinates and schema:GeoShape for Spatial and time:GeneralTimeDescription for Temporal is used.";
+    .
+
+meta:relation a rdf:Property;
+    rdfs:range meta:Relation;
+    rdfs:label "relation";
+    rdfs:comment "This property is used on a Dimension Constraint to express a relation with other properties through a meta:Relation instance, the nature of this relationship is determined by the properties used on the instance. ";
+    .
+
+
