@@ -129,7 +129,7 @@ PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
   meta:inHierarchy [
     rdf:type meta:Hierarchy ;
-    meta:root <https://ld.admin.ch/country/CHE> ;
+    meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
     schema:name "CH - Canton" ;
     shacl:path  [ sh:inversePath <http://schema.org/containedInPlace> ] ;
     shacl:targetClass <https://schema.ld.admin.ch/Canton>
@@ -150,7 +150,7 @@ PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
   meta:inHierarchy [
     rdf:type meta:Hierarchy ;
-    meta:root <https://ld.admin.ch/country/CHE>;
+    meta:hierarchyRoot <https://ld.admin.ch/country/CHE>;
     schema:name "CH - Canton - District - Municipality" ;
     shacl:path <http://schema.org/containsPlace> ;
 
@@ -185,10 +185,10 @@ A hierarchy is defined and can be named `schema:name`. This can help user interf
 
 This property is used on a Dimension Constraint to express a hierarchy implemented in such. It is possible to add multiple different hierarchies on one dimension.
 
-A hierarchy must have a `meta:root`.
+A hierarchy must have at least one `meta:hierarchyRoot`.
 
 
-#### meta:root {#root}
+#### meta:hierarchyRoot {#hierarchyRoot}
 
 This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of `shacl:path` is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with ['meta:nextInHierarchy'](#nextInHiearchy).
 
