@@ -190,7 +190,7 @@ A hierarchy must have at least one `meta:hierarchyRoot`.
 
 #### meta:hierarchyRoot {#hierarchyRoot}
 
-This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of `shacl:path` is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with ['meta:nextInHierarchy'](#nextInHiearchy).
+This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of `shacl:path` is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with ['meta:nextInHierarchy'](#nextInHierarchy).
 
 #### meta:nextInHierarchy {#nextInHierarchy}
 
