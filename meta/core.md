@@ -2,14 +2,17 @@
 
 ## Classes ##
 
-### meta:Relation {#Relation}
-
-A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relation](#relation) property. 
-
 ### meta:DimensionRelation {#DimensionRelation}
 
 A meta:DimensionRelation resource is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError
 
+### meta:Hierarchy {#Hierarchy}
+
+A hierarchy is defined and can be named `schema:name`. This can help user interfaces to allow a selection in case of multiple hierarchies.
+
+### meta:Relation {#Relation}
+
+A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relation](#relation) property. 
 
 ## Properties
 
@@ -45,6 +48,20 @@ To express that the dimension provides a specific _kind_ of data which is necess
   ```
 
 </aside>
+
+### meta:hierarchyRoot {#hierarchyRoot}
+
+This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of `shacl:path` is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with ['meta:nextInHierarchy'](#nextInHierarchy).
+
+### meta:inHierarchy {#inHierarchy}
+
+This property is used on a Dimension Constraint to express a hierarchy implemented in such. It is possible to add multiple different hierarchies on one dimension.
+
+A hierarchy must have at least one `meta:hierarchyRoot`.
+
+### meta:nextInHierarchy {#nextInHierarchy}
+
+With `meta:nextInHierarchy` it is possible to 
 
 ### meta:relation {#relation}
 
