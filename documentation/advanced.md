@@ -74,105 +74,127 @@ See [this example](#relexample).
 This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
 See [this example](#relexample).
 
-## Nested hierarchies
 
-<p class="ednote" title="Do NOT implement">
-  This chapter is undergoing a big rewrite, and should not be implemented
-</p>
 
-(Originally raised as an issue in [rdf-cube-schema-viz](https://github.com/zazuko/rdf-cube-schema-viz/issues/6)).
 
-Given:
 
-<aside class='example'>
 
-```turtle
-BASE <http://ex.org/>
-<observation1> a <Observation> ;
-  <municipality> <mun-nidau> .
 
-<mun-nidau> a <Municipality> ;
-  <district> <dist-bielbienne> ;
-  <canton> <canton-bern> .
 
-<dist-bielbienne> a <District> ;
-  <canton> <canton-bern> .
 
-<canton-bern> a <Canton> .
-```
 
-</aside>
+## Hierarchies
 
-It should be possible to express nested hierarchies in a machine-processable way. Think of nested taxonomies, spatial nesting, etc. The information can be used to provide smart/useful default options for filters on cubes.
 
-Our example can be visualized:
+Observations can be structured in hierarchies inside cubes. It is possible to define hierarchies which reside inside one dimension (e.g. categories, classifications) or also hierarchies which span over multiple dimensions. It is also possible to have hierarchies using external concepts.
 
-![Example of a hierarchy](./img/example-hierarchy.svg)
+To allow to reuse existing hierarchies described with e.g. (`schema:hasPart` / `schema:isPartOf`, [[[skos-primer]]] (https://www.w3.org/TR/skos-primer/) or similar ontologies) the following solution simply annotates one or multiple possible hierarchies. 
 
-There are two paths that would be possible: `<observation1> -> <mun-nidau> -> <canton-bern>` or `<observation1> -> <mun-nidau> -> <district-bielbienne> -> <canton-bern> `. There is no way to know if the district should be followed or not by purely interpreting the data structure.
+The hierarchies are defined always *top-down* with one or multiple roots, following predicates of your choosing and the leaves must be the final observations inside one dimension.
 
-We address this issue by adding information about the nesting to the constraint (SHACL shape) of the cube.  On the `sh:property` of `<municipality>` we attach a new property called `<nextInHierarchy>`:
+The hierarchy annotation is attached to a cube dimension, similar to a [meta:Relation](#Relation).
 
 <aside class='example'>
 
 ```turtle
-[
-  sh:path <municipality>
-    <nextInHierarchy> <shape-municipality-canton-hierarchy>
-]
-```
+PREFIX meta: <https://cube.link/meta/>
+PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
+  meta:inHierarchy [
+    rdf:type meta:Hierarchy ;
+    meta:root <https://ld.admin.ch/country/CHE> ;
+    schema:name "CH - Canton" ;
+    shacl:path <http://schema.org/containsPlace> ;
+  ]
+```
 </aside>
 
-This property points to minimal SHACL shape:
+The simplest example above puts the two concepts countries and cantons in relation.
+
+### shacl:path
+With the use of [Property Paths](https://www.w3.org/TR/shacl/#property-paths) (`shacl:path`) the connection between to levels in the hierarchy is expressed.
+
+As a guideline we suggest support minimally support one step [Predicate Paths](https://www.w3.org/TR/shacl/#property-path-predicate) and [inverse](https://www.w3.org/TR/shacl/#property-path-inverse) one step Predicate Paths.
+
+More complex paths will depend on the support of the used applications.
+
+### shacl:targetClass
+If the predicate using `shacl:path` is not distinct enough, it is possible to add `shacl:targetClass` specify additionally the Class of which the `shacl:path` is pointing to.
 
 <aside class='example'>
 
 ```turtle
-<shape-municipality-canton-hierarchy> a NodeShape 
-  sh:path <canton>
+PREFIX meta: <https://cube.link/meta/>
+PREFIX shacl: <http://www.w3.org/ns/shacl#>
+
+  meta:inHierarchy [
+    rdf:type meta:Hierarchy ;
+    meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
+    schema:name "CH - Canton" ;
+    shacl:path  [ sh:inversePath <http://schema.org/containedInPlace> ] ;
+    shacl:targetClass <https://schema.ld.admin.ch/Canton>
+  ]
 ```
 
 </aside>
 
-It points to the outgoing link with `sh:path` and the nesting ends there, as there is no `<nextInHierarchy>` defined on that particular shape. In other words, there is only one additional layer in this example that points to a `<canton>` and the complete shape represents the path `<observation1> -> <mun-nidau> -> <canton-bern>`.
+### Nested Levels
 
-> NOTE: We define `<nextInHierarchy>` purposely instead of re-using a property from SHACL to relate shapes. This ensures we only validate data within our realm.
-
-To represent the more complex path, the constraint/shape might look like this:
+With the use of `meta:nextInHierarchy` it is possible to extend the number of levels indefinitely. Once a path does point to an observation which is part of the dimension, the hierarchy stops.
 
 <aside class='example'>
 
 ```turtle
-[
-  sh:path <municipality>
-    <nextInHierarchy> <shape-municipality-district-hierarchy>
-]
-```
+PREFIX meta: <https://cube.link/meta/>
+PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
-</aside>
+  meta:inHierarchy [
+    rdf:type meta:Hierarchy ;
+    meta:hierarchyRoot <https://ld.admin.ch/country/CHE>;
+    schema:name "CH - Canton - District - Municipality" ;
+    shacl:path <http://schema.org/containsPlace> ;
 
-linking to:
+    meta:nextInHierachy [
+      schema:name "Canton" ;
+      shacl:path <http://schema.org/containsPlace> ;
 
-<aside class='example'>
+      meta:nextInHierachy [
+        schema:name "District" ;
+        shacl:path <http://schema.org/containsPlace> ;
 
-```turtle
-<shape-municipality-district-hierarchy> a NodeShape 
-  sh:path <district>
-  <nextInHierarchy> <shape-district-canton-hierarchy> 
-```
+        meta:nextInHierachy [
+          schema:name "Municipality" ;
+          shacl:path <http://schema.org/containsPlace> ;
+        ]
+      ]
+    ]
+  ] 
 
-</aside>
-
-The level does not end here, we link from the `<district>` to the `<canton>`:
-
-<aside class='example'>
-
-```turtle
-<shape-district-canton-hierarchy> a NodeShape 
-  sh:path <canton>
 ```
 </aside>
 
-There is no outgoing link at that shape, in other words the nesting ends here. This represents the path  `<observation1> -> <mun-nidau> -> <district-bielbienne> -> <canton-bern> `.
+### Classes
+
+#### meta:Hierarchy {#Hierarchy}
+
+A hierarchy is defined and can be named `schema:name`. This can help user interfaces to allow a selection in case of multiple hierarchies.
+
+### Properties
+
+#### meta:inHierarchy {#inHierarchy}
+
+This property is used on a Dimension Constraint to express a hierarchy implemented in such. It is possible to add multiple different hierarchies on one dimension.
+
+A hierarchy must have at least one `meta:hierarchyRoot`.
+
+
+#### meta:hierarchyRoot {#hierarchyRoot}
+
+This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of `shacl:path` is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with ['meta:nextInHierarchy'](#nextInHiearchy).
+
+#### meta:nextInHierarchy {#nextInHierarchy}
+
+With `meta:nextInHierarchy` it is possible to 
+
+
 
