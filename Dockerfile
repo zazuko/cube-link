@@ -41,7 +41,7 @@ COPY . .
 
 # start a server locally, and generate the ReSpec HTML file
 RUN pm2 --name serve start "serve -l tcp://0.0.0.0:5000 /app" \
-  && sleep 5 && curl http://localhost:5000/ && respec --disable-sandbox http://localhost:5000/ /app/respec.html \
+  && sleep 5 && curl http://localhost:5000/ && respec --disable-sandbox http://localhost:5000/ /app/index.html \
   && pm2 delete serve
 
 # Trifid is only working on Node12
@@ -55,7 +55,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 RUN npm install -g trifid@2.3.6
 
-COPY --from=respec /app/respec.html ./respec.html
+COPY --from=respec /app/index.html ./views/index.html
+COPY --from=respec /app/meta.html ./views/meta.html
+COPY --from=respec /app/relation.html ./views/relation.html
 
 COPY . .
 
