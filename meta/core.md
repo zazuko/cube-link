@@ -49,19 +49,22 @@ To express that the dimension provides a specific _kind_ of data which is necess
 
 </aside>
 
+### meta:Hierarchy {#Hierarchy}
+Defines a hierarchy which can be interpreted in the context of a cube dimension. It describes the path between the [meta:hierarchyRoot](#hierarchyRoot) and the observations in a dimension. Further does it build a base to describe aggregations between the hierarchy levels.
+
 ### meta:hierarchyRoot {#hierarchyRoot}
 
 This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of `shacl:path` is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with ['meta:nextInHierarchy'](#nextInHierarchy).
 
 ### meta:inHierarchy {#inHierarchy}
 
-This property is used on a Dimension Constraint to express a hierarchy implemented in such. It is possible to add multiple different hierarchies on one dimension.
+This property is used on a Dimension Constraint to express a hierarchy implemented. It points to a [meta:Hierarchy](#Hierarchy) which is the root level of the defined hierarchy. It is possible to add multiple different hierarchies on one dimension.
 
 A hierarchy must have at least one `meta:hierarchyRoot`.
 
 ### meta:nextInHierarchy {#nextInHierarchy}
 
-With `meta:nextInHierarchy` it is possible to 
+With `meta:nextInHierarchy` the next lower level is attached to the higher level or the root level of a hierarchy.
 
 ### meta:relation {#relation}
 

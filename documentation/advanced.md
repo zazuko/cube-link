@@ -43,13 +43,14 @@ PREFIX meta: <https://cube.link/meta/>
 PREFIX relation: <https://cube.link/relation/>
    
 [ 
-  sh:path <dimension/starndardError>
+  # the dimension description
+  sh:path <dimension/standardError> ;
   # ... additional definitions for that sh:property
   meta:dimensionRelation [ 
     # We use a Class to indicate the e.g. the standard error.
     a relation:StandardError ;
     # A generic cube metadata property points to the relevant dimension.
-    meta:relatesTo ex:dimension\/measurement;
+    meta:relatesTo ex:measurement-dimension; # the other dimensions predicate defined by sh:path
   ]
 ]
 ```
@@ -76,13 +77,6 @@ See [this example](#relexample).
 
 
 
-
-
-
-
-
-
-
 ## Hierarchies
 
 <aside class='note'>
@@ -93,9 +87,11 @@ Observations can be structured in hierarchies inside cubes. It is possible to de
 
 To allow to reuse existing hierarchies described with e.g. (`schema:hasPart` / `schema:isPartOf`, [[[skos-primer]]] (https://www.w3.org/TR/skos-primer/) or similar ontologies) the following solution simply annotates one or multiple possible hierarchies. 
 
-The hierarchies are defined always *top-down* with one or multiple roots, following predicates of your choosing and the leaves must be the final observations inside one dimension.
+The hierarchies definition are always done *top-down* with one or multiple roots, following predicates of your choosing and the leaves must be the final observations inside one dimension.
 
-The hierarchy annotation is attached to a cube dimension, similar to a [meta:Relation](meta#Relation).
+The hierarchy annotation is attached to a cube dimension as a [meta:Hierarchy](meta#Hierarchy) through [meta:inHierarchy](meta#inHierarchy) (similar to a [meta:Relation](meta#Relation)).
+It holds a name describing the hierarchy as such with `schema:name` and least one, but potentially multiple [meta:hierarchyRoot](meta#hierarchyRoot). Finally the connection between the root nodes and the first level below in the hierarchy is attached  through [meta:nextInHierarchy](meta#nextInHierarchy).
+
 
 <aside class='example'>
 
@@ -103,25 +99,30 @@ The hierarchy annotation is attached to a cube dimension, similar to a [meta:Rel
 PREFIX meta: <https://cube.link/meta/>
 PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
+[
   meta:inHierarchy [
-    rdf:type meta:Hierarchy ;
-    meta:root <https://ld.admin.ch/country/CHE> ;
+    a meta:Hierarchy ;
+    meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
     schema:name "CH - Canton" ;
-    shacl:path <http://schema.org/containsPlace> ;
+    meta:nextInHierachy [
+      schema:name "Canton" ;
+      shacl:path <http://schema.org/containsPlace> ;
+    ]
   ]
+]
 ```
 </aside>
 
 The simplest example above puts the two concepts countries and cantons in relation.
 
-### shacl:path
+### shacl:path (connecting levels of a hierarchy)
 With the use of [Property Paths](https://www.w3.org/TR/shacl/#property-paths) (`shacl:path`) the connection between to levels in the hierarchy is expressed.
 
 As a guideline we suggest support minimally support one step [Predicate Paths](https://www.w3.org/TR/shacl/#property-path-predicate) and [inverse](https://www.w3.org/TR/shacl/#property-path-inverse) one step Predicate Paths.
 
 More complex paths will depend on the support of the used applications.
 
-### shacl:targetClass
+### shacl:targetClass (differentiating concepts of a hierarchy level)
 If the predicate using `shacl:path` is not distinct enough, it is possible to add `shacl:targetClass` specify additionally the Class of which the `shacl:path` is pointing to.
 
 <aside class='example'>
@@ -130,20 +131,23 @@ If the predicate using `shacl:path` is not distinct enough, it is possible to ad
 PREFIX meta: <https://cube.link/meta/>
 PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
-  meta:inHierarchy [
-    rdf:type meta:Hierarchy ;
-    meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
-    schema:name "CH - Canton" ;
+meta:inHierarchy [
+  a meta:Hierarchy ;
+  meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
+  schema:name "CH - Canton" ;
+  meta:nextInHierachy [
+    schema:name "Canton" ;
     shacl:path  [ sh:inversePath <http://schema.org/containedInPlace> ] ;
-    shacl:targetClass <https://schema.ld.admin.ch/Canton>
+    shacl:targetClass <https://schema.ld.admin.ch/Canton> ;
   ]
+]
 ```
 
 </aside>
 
 ### Nested Levels
 
-With the use of `meta:nextInHierarchy` it is possible to extend the number of levels indefinitely. Once a path does point to an observation which is part of the dimension, the hierarchy stops.
+With the use of `meta:nextInHierarchy` it is possible to extend the number of levels indefinitely. Once a path does point to a instance of a concept which is attached by the defined dimension, the hierarchy for this element is complete. Therefore is it possible that the levels change for different levels.
 
 <aside class='example'>
 
@@ -152,26 +156,18 @@ PREFIX meta: <https://cube.link/meta/>
 PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
   meta:inHierarchy [
-    rdf:type meta:Hierarchy ;
+    a meta:Hierarchy ;
     meta:hierarchyRoot <https://ld.admin.ch/country/CHE>;
-    schema:name "CH - Canton - District - Municipality" ;
-    shacl:path <http://schema.org/containsPlace> ;
-
+    schema:name "CH - Canton - Municipality" ;
     meta:nextInHierachy [
       schema:name "Canton" ;
       shacl:path <http://schema.org/containsPlace> ;
-
       meta:nextInHierachy [
-        schema:name "District" ;
+        schema:name "Municipality" ;
         shacl:path <http://schema.org/containsPlace> ;
-
-        meta:nextInHierachy [
-          schema:name "Municipality" ;
-          shacl:path <http://schema.org/containsPlace> ;
-        ]
       ]
     ]
-  ] 
+  ]
 
 ```
 </aside>
