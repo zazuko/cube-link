@@ -97,7 +97,7 @@ It holds a name describing the hierarchy as such with `schema:name` and least on
 
 ```turtle
 PREFIX meta: <https://cube.link/meta/>
-PREFIX shacl: <http://www.w3.org/ns/shacl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
 
 [
   meta:inHierarchy [
@@ -106,7 +106,7 @@ PREFIX shacl: <http://www.w3.org/ns/shacl#>
     schema:name "CH - Canton" ;
     meta:nextInHierachy [
       schema:name "Canton" ;
-      shacl:path <http://schema.org/containsPlace> ;
+      sh:path <http://schema.org/containsPlace> ;
     ]
   ]
 ]
@@ -115,21 +115,21 @@ PREFIX shacl: <http://www.w3.org/ns/shacl#>
 
 The simplest example above puts the two concepts countries and cantons in relation.
 
-### shacl:path (connecting levels of a hierarchy)
-With the use of [Property Paths](https://www.w3.org/TR/shacl/#property-paths) (`shacl:path`) the connection between to levels in the hierarchy is expressed.
+### sh:path (connecting levels of a hierarchy)
+With the use of [Property Paths](https://www.w3.org/TR/shacl/#property-paths) (`sh:path`) the connection between to levels in the hierarchy is expressed.
 
 As a guideline we suggest support minimally support one step [Predicate Paths](https://www.w3.org/TR/shacl/#property-path-predicate) and [inverse](https://www.w3.org/TR/shacl/#property-path-inverse) one step Predicate Paths.
 
 More complex paths will depend on the support of the used applications.
 
-### shacl:targetClass (differentiating concepts of a hierarchy level)
-If the predicate using `shacl:path` is not distinct enough, it is possible to add `shacl:targetClass` specify additionally the Class of which the `shacl:path` is pointing to.
+### sh:targetClass (differentiating concepts of a hierarchy level)
+If the predicate using `sh:path` is not distinct enough, it is possible to add `sh:targetClass` specify additionally the Class of which the `sh:path` is pointing to.
 
 <aside class='example'>
 
 ```turtle
 PREFIX meta: <https://cube.link/meta/>
-PREFIX shacl: <http://www.w3.org/ns/shacl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
 
 meta:inHierarchy [
   a meta:Hierarchy ;
@@ -137,8 +137,8 @@ meta:inHierarchy [
   schema:name "CH - Canton" ;
   meta:nextInHierachy [
     schema:name "Canton" ;
-    shacl:path  [ sh:inversePath <http://schema.org/containedInPlace> ] ;
-    shacl:targetClass <https://schema.ld.admin.ch/Canton> ;
+    sh:path  [ sh:inversePath <http://schema.org/containedInPlace> ] ;
+    sh:targetClass <https://schema.ld.admin.ch/Canton> ;
   ]
 ]
 ```
@@ -153,7 +153,7 @@ With the use of `meta:nextInHierarchy` it is possible to extend the number of le
 
 ```turtle
 PREFIX meta: <https://cube.link/meta/>
-PREFIX shacl: <http://www.w3.org/ns/shacl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
 
   meta:inHierarchy [
     a meta:Hierarchy ;
@@ -161,10 +161,10 @@ PREFIX shacl: <http://www.w3.org/ns/shacl#>
     schema:name "CH - Canton - Municipality" ;
     meta:nextInHierachy [
       schema:name "Canton" ;
-      shacl:path <http://schema.org/containsPlace> ;
+      sh:path <http://schema.org/containsPlace> ;
       meta:nextInHierachy [
         schema:name "Municipality" ;
-        shacl:path <http://schema.org/containsPlace> ;
+        sh:path <http://schema.org/containsPlace> ;
       ]
     ]
   ]
