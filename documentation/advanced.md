@@ -80,7 +80,7 @@ See [this example](#relexample).
 ## Hierarchies
 
 <aside class='note'>
-This part is under construction
+This part is still experimental and changes are to be expected. 
 </aside>
 
 Observations can be structured in hierarchies inside cubes. It is possible to define hierarchies which reside inside one dimension (e.g. categories, classifications) or also hierarchies which span over multiple dimensions. It is also possible to have hierarchies using external concepts.
