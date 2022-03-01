@@ -1,6 +1,6 @@
 # RDF Cube Schema: User eXperience Extension
 
-To facilitate the visualization of RDF Cubes or any other user experience related activities it is possible to extend the [Constraints](#constraints) to include additional metadata that describes the characteristics of the cube and its dimensions.
+To facilitate the visualization of RDF Cubes or any other user experience related activity it is possible to extend the [Constraints](#constraints) to include additional metadata that describes the characteristics of the cube and its dimensions.
 By providing this information in the Constraints tools used for displaying the data in the cube do not need to process and interpret the actual data in the cube to configure the visualization.
 
 ## Dimensions
