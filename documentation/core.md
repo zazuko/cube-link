@@ -41,13 +41,6 @@ There are 4 classes defined in the RDF Cube Schema
 #### cube:Cube {#Cube}
 Represents the entry point for a collection of one or more observation sets, conforming to some common dimensional structure.
 
-#### cube:ObservationSet {#ObservationSet}
-
-An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observations](#Observation). It can be used to group any set of [Observations](#Observation), as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSets](#ObservationSet) and an [Observation](#Observation) can appear in multiple [ObservationSets](#ObservationSet).
-
-#### cube:Observation {#Observation}
-A single observation in the cube may have one or more associated dimensions. A Observation can appear in one ore more [ObservationSets](#ObservationSet).
-
 #### cube:Constraint {#Constraint}
 Specifies constraints that need to be met on the [Cube](#Cube). Used for metadata and validation. (Optional) For more information see [RDF Cube Schema : Constraints](#constraints)
 
@@ -55,6 +48,18 @@ A [Constraint](#Constraint) for a cube. A Constraint is optional but recommended
 * Define how data ([Observations](#Observation)) in a `Cube` can be validated.
 * Add Cube-specific metadata (custom labels, translation to other languages, etc).
 
+#### cube:Observation {#Observation}
+A single observation in the cube may have one or more associated dimensions. A Observation can appear in one ore more [ObservationSets](#ObservationSet).
+
+#### cube:ObservationSet {#ObservationSet}
+
+An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observations](#Observation). It can be used to group any set of [Observations](#Observation), as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSets](#ObservationSet) and an [Observation](#Observation) can appear in multiple [ObservationSets](#ObservationSet).
+
+### Datatypes
+
+#### cube:Undefined {#Undefined}
+
+An observation which is not defined. for more information see [NULL and Empty values](#null-empty-values)
 
 ### Properties
 
@@ -73,7 +78,6 @@ Connects a set of observations with a single observation.
 
 #### cube:observedBy {#observedBy}
 Connects an observation with the agent that created the observation. The agent can be a person, organization, device, or software. A description of the method to gather the data could be attached to the agent.
-
 
 
 ## Dimensions
@@ -130,6 +134,63 @@ In [[[turtle]]] syntax, the observation above looks like this:
 </aside>
 
 Nesting of relations can be expressed in a machine-readable form as well but is not part of the core RDF Cube Schema.
+
+### NULL and Empty values {#null-empty-values}
+
+In _RDF Cube Schema_, all dimensions are mandatory for a cube. If a value could not be measured, it should be expressed as such.
+
+There is no generic "built-in" way to solve this in RDF. For some numeric datatypes, XML and [thus RDF](https://www.w3.org/TR/rdf11-concepts/#xsd-datatypes) defines ["not a number"](https://docstore.mik.ua/orelly/xml/schema/ch04_04.htm) (`NaN`) as a value. According to the specs, this is only valid for `xsd:float` and `xsd:double` and not for `xsd:decimal` and `xsd:integer`.
+
+To provide a generic solution that works for all numbers and IRIs, _RDF Cube Schema_ provides `cube:Undefined`. The following example shows how to use it in `cube:Observation` and in the attached shape:
+
+<aside class='example' title='Name node Dimensions'>
+
+```turtle
+# NamedNode Dimensions
+
+<observation1> a cube:Observation;
+  ex:namedNodeDimension cube:Undefined;
+
+<observation2> a cube:Observation;
+  ex:namedNodeDimension ex:realValue1;
+
+<observation3> a cube:Observation;
+  ex:namedNodeDimension ex:realValue2;
+  
+## Snippet for for the according shape:
+
+[
+    sh:path ex:namedNodeDimension;
+    sh:nodeKind sh:IRI;
+    sh:in(cube:Undefined, ex:realValue1, ex:realValue2)
+]
+```
+
+</aside>
+
+<aside class='example' title='Literals Dimensions'>
+
+```turtle
+<observation2> a cube:Observation;
+  ex:literalDimension ""^^cube:Undefined.
+
+## Snippet for for the according shape:
+
+[
+    sh:path ex:literalDimension;
+    sh:nodeKind sh:Literal;
+    sh:or([
+        sh:datatype xsd:string
+    ], [
+        sh:datatype cube:Undefined
+    ])
+]
+```
+
+</aside>
+
+If it is necessary to state why the value is `cube:Undefined`, annotations should be used.
+
 
 ## Metadata
 
