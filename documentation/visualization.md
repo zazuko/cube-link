@@ -96,9 +96,9 @@ The different scale types hint about features that can be used for visualization
 * `qudt:IntervalScale`: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.
 * `qudt:RatioScale`: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.
 
-#### shacl:datatype
+#### sh:datatype
 
-To describe the datatype used by the dimension attach the `shacl:datatype` to the [Dimension Constraint](#dimensionconstraints). 
+To describe the datatype used by the dimension attach the `sh:datatype` to the [Dimension Constraint](#dimensionconstraints). 
 Be aware that this implies the presence of a typed literal as the dimension value
 
 #### meta:dataKind (temporal / spatial)

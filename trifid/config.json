@@ -10,19 +10,21 @@
         "cache": "true"
       }
     },
-    "view": {
-      "path": "/view/",
+    "meta": {
+      "path": "/meta/",
       "module": "trifid-handler-fetch",
       "options": {
-        "resource": "https://cube.link/view/",
-        "url": "cwd:vocab.ttl",
+        "resource": "https://cube.link/meta/",
+        "url": "cwd:meta/meta.ttl",
         "contentType": "text/turtle",
         "cache": "true"
       }
     }
   },
   "staticViews": {
-    "/": null
+    "/": "index.html",
+    "/meta/": "meta.html",
+    "/relation/": "relation.html" 
   },
   "plugins": {
     "vocab-redirect": {

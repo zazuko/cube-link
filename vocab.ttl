@@ -44,8 +44,8 @@
   rdfs:comment "Connects a cube with a set of observations.".
 
 <observedBy> a rdf:Property;
-  rdfs:domain <Observation>
-  rdfs:range rdfs:Resource
+  rdfs:domain <Observation>;
+  rdfs:range rdfs:Resource;
   rdfs:label "observed by";
   rdfs:comment "Connects an observation with the agent that created the observation. The agent can be a person, organisation, device or software. A description of the method to gather the data could be attached to the agent.".
 
