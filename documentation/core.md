@@ -96,7 +96,7 @@ In general, any RDF Property can be considered for describing a dimension, excep
 
 > Note that choosing a particular dimension will have implications. For querying cubes via SPARQL, spatial and temporal dimensions might only be filtered properly if the datatype used (i.e. `xsd:date`, `geo:asWKT`) is supported/optimized by the SPARQL endpoint. This is for example mostly _not_ the case for fragment datatypes like `xsd:gYear` etc.
 >
-> It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation.
+> It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation. This is the case when the observation is referring to a static location where the observation is done, e.g. a sensor location. When however the actual location is the observation then it can be recorded as a dimension
 
 Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal) with [data types](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.
 
