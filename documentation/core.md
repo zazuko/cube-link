@@ -11,16 +11,16 @@ We describe the model, an elaborate example, and scripts to validate observation
 ### RDF Cube Schema
 | PREFIX | IRI | Description |
 | --- | --- | --- |
-| `cube` | `https://cube.link` | RDF Cube Schema.|
-| `meta` | `https://cube.link/meta` | RDF Cube Schema meta data extension.|
-| `relation` | `https://cube.link/relation` | RDF Cube Schema meta data extension.|
+| `cube` | `https://cube.link/` | RDF Cube Schema.|
+| `meta` | `https://cube.link/meta/` | RDF Cube Schema meta data extension.|
+| `relation` | `https://cube.link/relation/` | RDF Cube Schema meta data extension.|
 
 
 ### External
 | PREFIX | IRI | Description |
 | --- | --- | --- |
-| schema | [http://schema.org](http://schema.org) | To describe basic properties. |
-| sh | [http://www.w3.org/ns/shacl](https://www.w3.org/TR/shacl/) | Inherited from the RDF Cube Schema for constratins. |
+| schema | [http://schema.org/](http://schema.org) | To describe basic properties. |
+| sh | [http://www.w3.org/ns/shacl#](https://www.w3.org/TR/shacl/) | Inherited from the RDF Cube Schema for constratins. |
 | qudt | [http://qudt.org/vocab/](http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html) | Describe scale of mesures. |
 | unit | [http://qudt.org/vocab/unit/](http://www.qudt.org/doc/DOC_VOCAB-UNITS.html) | Describes units on values. |
 | time | [http://www.w3.org/2006/time#](https://www.w3.org/TR/owl-time/) | A time description ontology. |
