@@ -11,18 +11,22 @@ We describe the model, an elaborate example, and scripts to validate observation
 ### RDF Cube Schema
 | PREFIX | IRI | Description |
 | --- | --- | --- |
-| `cube` | `https://cube.link` | RDF Cube Schema.|
-| `meta` | `https://cube.link/meta` | RDF Cube Schema meta data extension.|
+| `cube` | `https://cube.link/` | RDF Cube Schema.|
+| `meta` | `https://cube.link/meta/` | RDF Cube Schema meta data extension.|
+| `relation` | `https://cube.link/relation/` | RDF Cube Schema meta data extension.|
 
 
 ### External
 | PREFIX | IRI | Description |
 | --- | --- | --- |
-| schema | [http://schema.org](http://schema.org) | To describe basic properties. |
-| shacl | [http://www.w3.org/ns/shacl](https://www.w3.org/TR/shacl/) | Inherited from the RDF Cube Schema for constratins. |
+| schema | [http://schema.org/](http://schema.org) | To describe basic properties. |
+| sh | [http://www.w3.org/ns/shacl#](https://www.w3.org/TR/shacl/) | Inherited from the RDF Cube Schema for constratins. |
 | qudt | [http://qudt.org/vocab/](http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html) | Describe scale of mesures. |
 | unit | [http://qudt.org/vocab/unit/](http://www.qudt.org/doc/DOC_VOCAB-UNITS.html) | Describes units on values. |
 | time | [http://www.w3.org/2006/time#](https://www.w3.org/TR/owl-time/) | A time description ontology. |
+| geo | [http://www.opengis.net/ont/geosparql#](http://www.opengis.net/ont/geosparql) | OGC GeoSPARQL 1.0. |
+| xsd | [http://www.w3.org/2001/XMLSchema#](http://www.w3.org/2001/XMLSchema) | XML Schema Datatypes. |
+| skos | [http://www.w3.org/2004/02/skos/core#](http://www.w3.org/2004/02/skos/core) | SKOS Simple Knowledge Organization System. |
 
 ## Core Schema
 
@@ -37,20 +41,25 @@ There are 4 classes defined in the RDF Cube Schema
 #### cube:Cube {#Cube}
 Represents the entry point for a collection of one or more observation sets, conforming to some common dimensional structure.
 
-#### cube:ObservationSet {#ObservationSet}
-
-An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observation](#Observation)s. It can be used to group any set of [Observation](#Observation)s, as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSet](#ObservationSet)s and an [Observation](#Observation) can appear in multiple [ObservationSet](#ObservationSet)s.
-
-#### cube:Observation {#Observation}
-A single observation in the cube may have one or more associated dimensions. A Observation can appear in one ore more [ObservationSet](#ObservationSet)s.
-
 #### cube:Constraint {#Constraint}
-Specifies constraints that need to be met on the Cube. Used for metadata and validation. (Optional) For more information see [RDF Cube Schema : Constraints](#constraints)
+Specifies constraints that need to be met on the [Cube](#Cube). Used for metadata and validation. (Optional) For more information see [RDF Cube Schema : Constraints](#constraints)
 
 A [Constraint](#Constraint) for a cube. A Constraint is optional but recommended, it is used to:
-* Define how data ([Observation](#Observation)`s) in a `Cube` can be validated.
+* Define how data ([Observations](#Observation)) in a `Cube` can be validated.
 * Add Cube-specific metadata (custom labels, translation to other languages, etc).
 
+#### cube:Observation {#Observation}
+A single observation in the cube may have one or more associated dimensions. A Observation can appear in one ore more [ObservationSets](#ObservationSet).
+
+#### cube:ObservationSet {#ObservationSet}
+
+An [ObservationSet](#ObservationSet) is a structure that acts as a container for multiple [Observations](#Observation). It can be used to group any set of [Observations](#Observation), as long as they use the same dimensions. There is on purpose no stronger semantics attached to this set, to make sure it can be used in almost any scenario. A cube can have one or more [ObservationSets](#ObservationSet) and an [Observation](#Observation) can appear in multiple [ObservationSets](#ObservationSet).
+
+### Datatypes
+
+#### cube:Undefined {#Undefined}
+
+An observation which is not defined. for more information see [NULL and Empty values](#null-empty-values)
 
 ### Properties
 
@@ -71,14 +80,13 @@ Connects a set of observations with a single observation.
 Connects an observation with the agent that created the observation. The agent can be a person, organization, device, or software. A description of the method to gather the data could be attached to the agent.
 
 
-
 ## Dimensions
 
 > A dimension is a structure that categorizes facts and measures to enable users to answer business questions. Commonly used dimensions are people, products, place, and time ([Source: Wikidata](https://en.wikipedia.org/wiki/Dimension_(data_warehouse))).
 
 In _RDF Cube Schema_, facts, measures, and categories are all considered a dimension.
 
-All `Observation`s need to provide the same set of dimensions, they cannot be optional. This ensures that cubes can be queried efficiently.
+All [Observations](#Observation) need to provide the same set of dimensions, they cannot be optional. This ensures that cubes can be queried efficiently.
 
 Unlike other RDF vocabularies in that domain, there is no specific class for a dimension. Creating a new _RDF Cube Schema_ dimension would be the same as defining a new [RDF Property](https://www.w3.org/TR/rdf-schema/#ch_property). 
 
@@ -88,7 +96,7 @@ In general, any RDF Property can be considered for describing a dimension, excep
 
 > Note that choosing a particular dimension will have implications. For querying cubes via SPARQL, spatial and temporal dimensions might only be filtered properly if the datatype used (i.e. `xsd:date`, `geo:asWKT`) is supported/optimized by the SPARQL endpoint. This is for example mostly _not_ the case for fragment datatypes like `xsd:gYear` etc.
 >
-> It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation.
+> It has to be ensured that properties are not attached at the wrong level. Spatial dimensions for example are most likely *not* attached to the observation directly but to an instance of a dimension referenced in the observation. This is the case when the observation is referring to a static location where the observation is done, e.g. a sensor location. When however the actual location is the observation then it can be recorded as a dimension
 
 Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-primer/#section-literal) with [data types](https://www.w3.org/TR/rdf11-concepts/#section-Datatypes) (sometimes called _typed literals_) or IRIs. Only one literal must be attached to each dimension or must point to a single IRI.
 
@@ -127,6 +135,63 @@ In [[[turtle]]] syntax, the observation above looks like this:
 
 Nesting of relations can be expressed in a machine-readable form as well but is not part of the core RDF Cube Schema.
 
+### NULL and Empty values {#null-empty-values}
+
+In _RDF Cube Schema_, all dimensions are mandatory for a cube. If a value could not be measured, it should be expressed as such.
+
+There is no generic "built-in" way to solve this in RDF. For some numeric datatypes, XML and [thus RDF](https://www.w3.org/TR/rdf11-concepts/#xsd-datatypes) defines ["not a number"](https://docstore.mik.ua/orelly/xml/schema/ch04_04.htm) (`NaN`) as a value. According to the specs, this is only valid for `xsd:float` and `xsd:double` and not for `xsd:decimal` and `xsd:integer`.
+
+To provide a generic solution that works for all numbers and IRIs, _RDF Cube Schema_ provides `cube:Undefined`. The following example shows how to use it in `cube:Observation` and in the attached shape:
+
+<aside class='example' title='Name node Dimensions'>
+
+```turtle
+# NamedNode Dimensions
+
+<observation1> a cube:Observation;
+  ex:namedNodeDimension cube:Undefined;
+
+<observation2> a cube:Observation;
+  ex:namedNodeDimension ex:realValue1;
+
+<observation3> a cube:Observation;
+  ex:namedNodeDimension ex:realValue2;
+  
+## Snippet for for the according shape:
+
+[
+    sh:path ex:namedNodeDimension;
+    sh:nodeKind sh:IRI;
+    sh:in(cube:Undefined, ex:realValue1, ex:realValue2)
+]
+```
+
+</aside>
+
+<aside class='example' title='Literals Dimensions'>
+
+```turtle
+<observation2> a cube:Observation;
+  ex:literalDimension ""^^cube:Undefined.
+
+## Snippet for for the according shape:
+
+[
+    sh:path ex:literalDimension;
+    sh:nodeKind sh:Literal;
+    sh:or([
+        sh:datatype xsd:string
+    ], [
+        sh:datatype cube:Undefined
+    ])
+]
+```
+
+</aside>
+
+If it is necessary to state why the value is `cube:Undefined`, annotations should be used.
+
+
 ## Metadata
 
 From a high-level point of view, the core classes and properties are enough to publish a valid cube, however, the absence of all metadata might make it hard for consumers to understand what the data is about.
@@ -134,9 +199,9 @@ From a high-level point of view, the core classes and properties are enough to p
 ### Cube Description
 To add the title and a short description of the cube add the following properties directly on an instance of a [cube:Cube](#Cube)
 
-#### schema.name 
+#### schema:name 
 A descriptive name of the Cube, this description can be multilingual.
-#### schema.description
+#### schema:description
 A description of the Cube, this description can be multilingual.
 
 #### other properties

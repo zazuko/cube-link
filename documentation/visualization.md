@@ -1,8 +1,6 @@
-# RDF Cube Schema: Visualization Extensions
+# RDF Cube Schema: User eXperience Extension
 
-<div class='issue' data-number='40'></div>
-
-To facilitate the visualization of RDF Cubes it is possible to extend the [Constraints](#constraints) to include additional metadata that describes the characteristics of the cube and its dimensions.
+To facilitate the visualization of RDF Cubes or any other user experience related activity it is possible to extend the [Constraints](#constraints) to include additional metadata that describes the characteristics of the cube and its dimensions.
 By providing this information in the Constraints tools used for displaying the data in the cube do not need to process and interpret the actual data in the cube to configure the visualization.
 
 ## Dimensions
@@ -11,11 +9,13 @@ To be able to understand the nature of a dimension we can type the dimension in 
 
 ### Classes
 
-#### cube:KeyDimension
+The following classes are used to define the various visualization element of the RDF Cube Schema
+
+#### cube:KeyDimension {#KeyDimension}
 
 The KeyDimension tags one or multiple dimensions which are together uniquely identifying an observation. You can think of them as the Key in a relational database.
 
-#### cube:MeasureDimension
+#### cube:MeasureDimension {#MeasureDimension}
 
  The MeasureDimension tags at least one dimension, but potentially multiple, which is the actual measurement, or statistical count attached to an observation.
 
@@ -52,7 +52,7 @@ The KeyDimension tags one or multiple dimensions which are together uniquely ide
 
 </aside>
 
-#### cube:SharedDimension
+#### cube:SharedDimension {#SharedDimension}
 
 To be able to distinguish Dimensions that are defined inside a Cube from Dimensions that are used in multiple cubes, we have the type of cube:SharedDimension. Every dimension except the ones typed as a cube:MeasureDimension can be a cube:SharedDimension.
 
@@ -71,6 +71,8 @@ To be able to distinguish Dimensions that are defined inside a Cube from Dimensi
 
 ### Properties
 
+The following properties are used to define the various visualization element of the RDF Cube Schema
+
 #### schema:name 
 A descriptive name of the Dimension, this description can be multilingual.
 #### schema:description
@@ -81,7 +83,7 @@ To describe the unit of the values in a dimension the respective `qudt:Unit` ins
 
 #### qudt:scaleType
 
-To provide more information on the statistical property of the scale of measure is described by `qudt:NominalScale`, `qudt:OrdinalScale`, `qudt:IntervalScale` or `qudt:RatioScale` which is attached through `qudt:scaleType` to the [Cube Constraint per Dimension](https://github.com/zazuko/rdf-cube-schema#metadata-and-validation-constraint).
+To provide more information on the statistical property scale of measure it can be described by `qudt:NominalScale`, `qudt:OrdinalScale`, `qudt:IntervalScale` or `qudt:RatioScale` which is attached through `qudt:scaleType` to the [Dimension Constraint](#dimensionconstraints).
 
 The different scale types hint about features that can be used for visualization properties:
 
@@ -92,13 +94,13 @@ The different scale types hint about features that can be used for visualization
 * `qudt:IntervalScale`: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.
 * `qudt:RatioScale`: Expects the dimension to be values with a numeric dataType and the unit not to contradict the correct Scale.
 
-#### shacl:datatype
+#### sh:datatype
 
-To describe the datatype used by the dimension attach the `shacl:datatype` to the [Dimension Constraint](#dimensionconstraints). 
+To describe the datatype used by the dimension attach the `sh:datatype` to the [Dimension Constraint](#dimensionconstraints). 
 Be aware that this implies the presence of a typed literal as the dimension value
 
 #### meta:dataKind (temporal / spatial)
-Finally to express that the dimension provides a specific _kind_ of data which is necessary to select the correct visual representation we add `https://cube.link/meta/dataKind/` with the following structure possible values:
+To express that the dimension provides a specific _kind_ of data which is necessary to select the correct visual representation you can add a `meta:dataKind` resource with the following possible structures:
 
 * [`schema:GeoCoordinates`](https://schema.org/GeoCoordinates): To hint that the dimension does provide Resources with latitude and longitude which can be shown on a map.
 

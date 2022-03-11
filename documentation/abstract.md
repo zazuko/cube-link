@@ -1,1 +1,5 @@
-TBD
+A good amount of data in organizations is maintained in tables with multiple columns. Typically you can think of a multitude of Excel or CSV tables. This data often has a dimension which describes the time, sometimes other dimensions for classifying the data, and in most cases some actual observed values or counts.
+
+Such tables are holding the data in a structured form, but most of the time, the information to understand the columns and also the necessary metadata enabling the creation of use-full representations in charts and visualizations is missing.
+
+With the creation of Cubes you as data provider and domain specialist of the data are able to augment and annotate your data with everything necessary to understand the input data – directly in the to be published dataset. Fully annotated Cubes can also be used to visualize your data proper tooling.

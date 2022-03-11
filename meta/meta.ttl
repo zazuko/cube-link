@@ -1,0 +1,47 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX cube: <https://cube.link/>
+PREFIX meta: <https://cube.link/meta/>
+PREFIX schema: <http://schema.org/>
+
+meta:DimensionRelation a rdfs:Class;
+    rdfs:subClassOf meta:Relation;
+    rdfs:label "Dimension relation";
+    rdfs:comment "A meta:DimensionRelation resource is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError";
+    .
+
+meta:Hierarchy a rdfs:Class;
+    rdfs:label "Hierarchy";
+    rdfs:comment "A hierarchy is defined and can be named schema:name. This can help user interfaces to allow a selection in case of multiple hierarchies.";
+    .
+
+meta:Relation a rdfs:Class;
+    rdfs:label "Relation";
+    rdfs:comment "A meta:Relation resource is used to express the relation or hiarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a meta:relation property. ";
+    .
+
+meta:dataKind a rdf:Property;
+    rdfs:label "data Kind";
+    rdfs:comment "The kind or variety of the data in a dimension. Often schema:GeoCoordinates and schema:GeoShape for Spatial and time:GeneralTimeDescription for Temporal is used.";
+    .
+
+meta:hierarchyRoot a rdf:Property;
+    rdfs:label "hierarchy root";
+    rdfs:comment "This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of shacl:path is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with meta:nextInHierarchy.";
+    .
+
+meta:inHierarchy  a rdf:Property;
+    rdfs:label "in hierarchy";
+    rdfs:comment "This property is used on a Dimension Constraint to express a hierarchy implemented in such. It is possible to add multiple different hierarchies on one dimension. A hierarchy must have at least one meta:hierarchyRoot.";
+    .
+
+meta:nextInHierarchy a rdf:Property;
+    rdfs:label "next in hierarchy";
+    rdfs:comment "With meta:nextInHierarchy it is possible to ";
+    .
+
+meta:relation a rdf:Property;
+    rdfs:range meta:Relation;
+    rdfs:label "relation";
+    rdfs:comment "This property is used on a Dimension Constraint to express a relation with other properties through a meta:Relation instance, the nature of this relationship is determined by the properties used on the instance. ";
+    .

@@ -1,0 +1,36 @@
+{
+  "baseConfig": "trifid:config-base.json",
+  "handler": {
+    "root": {
+      "module": "trifid-handler-fetch",
+      "options": {
+        "resource": "https://cube.link/",
+        "url": "cwd:vocab.ttl",
+        "contentType": "text/turtle",
+        "cache": "true"
+      }
+    },
+    "meta": {
+      "path": "/meta/",
+      "module": "trifid-handler-fetch",
+      "options": {
+        "resource": "https://cube.link/meta/",
+        "url": "cwd:meta/meta.ttl",
+        "contentType": "text/turtle",
+        "cache": "true"
+      }
+    }
+  },
+  "staticViews": {
+    "/": "index.html",
+    "/meta/": "meta.html",
+    "/relation/": "relation.html" 
+  },
+  "plugins": {
+    "vocab-redirect": {
+      "priority": 55,
+      "module": "trifid-core:./plugins/middleware",
+      "middleware": "cwd:trifid/redirect"
+    }
+  }
+}

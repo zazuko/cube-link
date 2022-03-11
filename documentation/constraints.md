@@ -61,7 +61,7 @@ The following snippet defines a dimension (property) `dc:date` with a literal va
 
 #### Usage of code lists
 
-Dimensions that point to objects like code lists (i.e taxonomies represented in vocabularies like [[[skos-primer]]] can be expressed as well:
+Dimensions that point to objects like code lists (i.e taxonomies represented in vocabularies like [[[skos-primer]]]) can be expressed as well:
 
 <aside class='example' title='Using code lists on  a dimension'>
 
@@ -76,5 +76,5 @@ Dimensions that point to objects like code lists (i.e taxonomies represented in 
 
 </aside>
 
-Dimensions can have further types, which are not defined by this vocabulary to support other Dimensions (e.g. Precision, Statistical Measures) or for additional Attributes to filter on, which are not part of the key to defining a `cube:KeyDimension`.
+Dimensions can have further types, which are not defined by this vocabulary to support other Dimensions (e.g. Precision, Statistical Measures) or for additional Attributes to filter on, which are not part of the key to defining a [`cube:KeyDimension`](#KeyDimension).
 
