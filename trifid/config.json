@@ -72,6 +72,12 @@
   "staticViews": {
     "/": null
   },
+  "staticFiles": {
+    "images": {
+      "path": "/img/",
+      "folder": "cwd:img"
+    }
+  },
   "plugins": {
     "vocab-redirect": {
       "priority": 55,

@@ -48,12 +48,15 @@ EXPOSE 8080
 
 WORKDIR /app
 
+RUN apk add --no-cache tini
+
 # install Trifid
 ENV NODE_ENV=production
 RUN npm install -g trifid@2.3.6
 
 COPY --from=respec /app/dist ./dist
+COPY img .
 
 COPY . .
 
-CMD [ "trifid", "--verbose", "--config=trifid/config.json" ]
+CMD [ "tini",  "--", "trifid", "--verbose", "--config=trifid/config.json" ]
