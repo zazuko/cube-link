@@ -4,6 +4,7 @@
   "description": "RDF Cube Schema",
   "main": "validate.js",
   "scripts": {
+    "build": "./build.sh",
     "test": "standard"
   },
   "bin": {
@@ -41,6 +42,11 @@
     "rdf-validate-shacl": "^0.2.1"
   },
   "devDependencies": {
-    "standard": "^14.3.4"
+    "chromium": "^3.0.3",
+    "pm2": "^5.2.0",
+    "respec": "^31.0.11",
+    "serve": "^13.0.2",
+    "standard": "^14.3.4",
+    "trifid": "^2.3.6"
   }
 }
