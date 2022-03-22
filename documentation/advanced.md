@@ -104,7 +104,7 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
     a meta:Hierarchy ;
     meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
     schema:name "CH - Canton" ;
-    meta:nextInHierachy [
+    meta:nextInHierarchy [
       schema:name "Canton" ;
       sh:path <http://schema.org/containsPlace> ;
     ]
@@ -135,7 +135,7 @@ meta:inHierarchy [
   a meta:Hierarchy ;
   meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
   schema:name "CH - Canton" ;
-  meta:nextInHierachy [
+  meta:nextInHierarchy [
     schema:name "Canton" ;
     sh:path  [ sh:inversePath <http://schema.org/containedInPlace> ] ;
     sh:targetClass <https://schema.ld.admin.ch/Canton> ;
@@ -159,10 +159,10 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
     a meta:Hierarchy ;
     meta:hierarchyRoot <https://ld.admin.ch/country/CHE>;
     schema:name "CH - Canton - Municipality" ;
-    meta:nextInHierachy [
+    meta:nextInHierarchy [
       schema:name "Canton" ;
       sh:path <http://schema.org/containsPlace> ;
-      meta:nextInHierachy [
+      meta:nextInHierarchy [
         schema:name "Municipality" ;
         sh:path <http://schema.org/containsPlace> ;
       ]
