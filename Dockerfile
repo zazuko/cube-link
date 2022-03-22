@@ -34,19 +34,12 @@ RUN apt-get update && apt-get install -y \
   libxtst6 \
   xdg-utils
 
-RUN npm i -g respec@31 chromium serve pm2
-
 WORKDIR /app
 COPY . .
+RUN npm install
 
 # start a server locally, and generate the ReSpec HTML file
-RUN pm2 --name serve start "serve -l tcp://0.0.0.0:5000 /app" \
-  && sleep 5 \
-  && mkdir -p /app/generated-respec/ \
-  && respec --disable-sandbox http://localhost:5000/ /app/generated-respec/index.html \
-  && respec --disable-sandbox http://localhost:5000/meta/ /app/generated-respec/meta.html \
-  && respec --disable-sandbox http://localhost:5000/relation/ /app/generated-respec/relation.html \
-  && pm2 delete serve
+RUN npm run build
 
 # Trifid is only working on Node12
 FROM docker.io/library/node:12-alpine3.15
@@ -59,9 +52,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 RUN npm install -g trifid@2.3.6
 
-COPY --from=respec /app/generated-respec/index.html ./views/index.html
-COPY --from=respec /app/generated-respec/meta.html ./views/meta.html
-COPY --from=respec /app/generated-respec/relation.html ./views/relation.html
+COPY --from=respec /app/dist ./dist
 
 COPY . .
 

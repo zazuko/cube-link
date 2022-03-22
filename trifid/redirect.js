@@ -1,24 +1,24 @@
-const termRegex = /[^/]+$/;
-
 function factory () {
   return (req, res, next) => {
-    // ignore javascript files
-    if (req.path.startsWith('/js/')) {
-      return next();
-    }
-
     // ignore health request from the cluster
     if (req.path === '/health') {
-      return next();
+      return next()
     }
 
-    // replace the last part of the path if it doesn't end with /
-    if (termRegex.test(req.path)) {
-      return res.redirect(req.path.replace(termRegex, ''));
+    if (req.path.match(/^\/[^/]+$/)) {
+      return res.redirect('/')
     }
 
-    next();
+    if (req.path.match(/^\/meta\/[^/]+$/)) {
+      return res.redirect('/meta/')
+    }
+
+    if (req.path.match(/^\/relation\/[^/]+$/)) {
+      return res.redirect('/relation/')
+    }
+
+    next()
   }
 }
 
-module.exports = factory;
+module.exports = factory

@@ -19,12 +19,58 @@
         "contentType": "text/turtle",
         "cache": "true"
       }
+    },
+    "relation": {
+      "path": "/relation/",
+      "module": "trifid-handler-fetch",
+      "options": {
+        "resource": "https://cube.link/relation/",
+        "url": "cwd:relation/relation.ttl",
+        "contentType": "text/turtle",
+        "cache": "true"
+      }
+    }
+  },
+  "renderer": {
+    "root": null,
+    "meta": {
+      "path": "/meta/",
+      "module": "trifid-renderer-simple",
+      "template": "cwd:dist/meta.html",
+      "templateError": "trifid:views/error.html",
+      "alternativeMediaTypes": [
+        "application/ld+json",
+        "application/n-triples",
+        "application/rdf+xml",
+        "text/turtle"
+      ]
+    },
+    "relation": {
+      "path": "/relation/",
+      "module": "trifid-renderer-simple",
+      "template": "cwd:dist/relation.html",
+      "templateError": "trifid:views/error.html",
+      "alternativeMediaTypes": [
+        "application/ld+json",
+        "application/n-triples",
+        "application/rdf+xml",
+        "text/turtle"
+      ]
+    },
+    "cube": {
+      "module": "trifid-renderer-simple",
+      "template": "cwd:dist/cube.html",
+      "templateError": "trifid:views/error.html",
+      "alternativeMediaTypes": [
+        "application/ld+json",
+        "application/n-triples",
+        "application/rdf+xml",
+        "text/turtle"
+      ]
     }
   },
   "staticViews": {
-    "/": "index.html",
-    "/meta/": "meta.html",
-    "/relation/": "relation.html" 
+    "/": null
   },
   "plugins": {
     "vocab-redirect": {
