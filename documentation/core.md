@@ -12,8 +12,8 @@ We describe the model, an elaborate example, and scripts to validate observation
 | PREFIX | IRI | Description |
 | --- | --- | --- |
 | `cube` | `https://cube.link/` | RDF Cube Schema.|
-| `meta` | `https://cube.link/meta/` | RDF Cube Schema meta data extension.|
-| `relation` | `https://cube.link/relation/` | RDF Cube Schema meta data extension.|
+| `meta` | `https://cube.link/meta/` | [RDF Cube Schema meta data extension.](meta/)|
+| `relation` | `https://cube.link/relation/` | [RDF Cube Schema relation vocabulary.](relation/)|
 
 
 ### External
