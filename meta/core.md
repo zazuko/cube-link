@@ -8,7 +8,7 @@ A meta:DimensionRelation resource is used to express the relation of this dimens
 
 ### meta:Hierarchy {#Hierarchy}
 
-A hierarchy is defined and can be named `schema:name`. This can help user interfaces to allow a selection in case of multiple hierarchies.
+A hierarchy is defined and can be named `schema:name`. This can help user interfaces to allow a selection in case of multiple hierarchies. 
 
 ### meta:Relation {#Relation}
 
@@ -48,9 +48,6 @@ To express that the dimension provides a specific _kind_ of data which is necess
   ```
 
 </aside>
-
-### meta:Hierarchy {#Hierarchy}
-Defines a hierarchy which can be interpreted in the context of a cube dimension. It describes the path between the [meta:hierarchyRoot](#hierarchyRoot) and the observations in a dimension. Further does it build a base to describe aggregations between the hierarchy levels.
 
 ### meta:hierarchyRoot {#hierarchyRoot}
 
