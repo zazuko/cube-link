@@ -6,6 +6,12 @@ It is possible to generate a minimal constraint given a `Cube` and a set of `Obs
 
 SPARQL CONSTRUCT queries will be provided in this repository.
 
+## Cube Viewer
+
+Cube Viewer [(Homepage)](https://github.com/zazuko/cube-viewer) is both an app and a reusable component to visualize data cubes based on RDF Cube Schema.
+
+A demo of the app is deployed at [cube-viewer.zazuko.com](https://cube-viewer.zazuko.com).
+
 ## Example Cube
 
 An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [constraint.ttl](constraint.ttl).
