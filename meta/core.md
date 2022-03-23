@@ -2,9 +2,6 @@
 
 ## Classes ##
 
-### meta:DimensionRelation {#DimensionRelation}
-
-A meta:DimensionRelation resource is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError
 
 ### meta:Hierarchy {#Hierarchy}
 
@@ -12,7 +9,7 @@ A hierarchy is defined and can be named `schema:name`. This can help user interf
 
 ### meta:Relation {#Relation}
 
-A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relation](#relation) property. 
+A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relatesTo](#relatesTo) property. 
 
 ## Properties
 
@@ -49,6 +46,10 @@ To express that the dimension provides a specific _kind_ of data which is necess
 
 </aside>
 
+### meta:dimensionRelation {#dimensionRelation}
+A meta:dimensionRelation property is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError
+
+
 ### meta:hierarchyRoot {#hierarchyRoot}
 
 This property is mandatory and defines one or multiple root concepts. It is the starting point of the hierarchy which is then defined through a cascade of levels where the use of `sh:path` is connecting the concepts. The simplest case is only two levels, the root level and how they are connected to the observations in the dimension. If there are multiple levels they are nested with ['meta:nextInHierarchy'](#nextInHierarchy).
@@ -63,7 +64,7 @@ A hierarchy must have at least one `meta:hierarchyRoot`.
 
 With `meta:nextInHierarchy` the next lower level is attached to the higher level or the root level of a hierarchy.
 
-### meta:relation {#relation}
+### meta:relatesTo {#relatesTo}
 
 This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
-See [this example](#relexample).
+See [this example](../#relexample).

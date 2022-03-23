@@ -61,22 +61,6 @@ The controlled vocabulary introduced with namespace `PREFIX relation: <https://c
 
 This is an advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe the complex relationship between data in a machine-processable way. 
 
-### Classes
-
-#### meta:Relation {#Relation}
-
-A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. A Cube:Relation is linked to an observation through a [meta:relation](#relation) property. 
-See [this example](#relexample).
-
-### Properties
-
-#### meta:relation {#relation}
-
-This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
-See [this example](#relexample).
-
-
-
 ## Hierarchies
 
 <aside class='note'>
