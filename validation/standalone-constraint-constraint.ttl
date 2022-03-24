@@ -104,8 +104,9 @@
 <DimensionRelation> a sh:NodeShape ;
     sh:property [
         sh:path meta:relatesTo;
-	sh:minCount 1;
-	sh:message "meta:dimensionRelation requires at least one meta:relatesTo";
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1;
+        sh:message "meta:dimensionRelation requires at least one meta:relatesTo";
     ] .
 
 
