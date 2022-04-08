@@ -21,6 +21,11 @@ function validationResultToString (result) {
   return `${severity} of ${sourceConstraintComponent}: "${message}" with path ${path} at focus node ${focusNode} (source: ${sourceShape})`
 }
 
+function includeNestedResult(result) {
+  const nestedResult = Object.keys(result.detail).length ? result.detail .map(includeNestedResult).flat() : []
+  return [result].concat(nestedResult).flat()
+}
+
 program
   .command('validate cube shape')
   .action(async (args, [cubeFilePath, shapeFilePath]) => {
@@ -29,9 +34,11 @@ program
 
     const report = await validateCube(cube, shape)
 
+    const results = report.results.map(includeNestedResult)
+
     console.log(`cube validation ${report.conforms ? 'successful' : 'failed'}`)
 
-    for (const result of report.results) {
+    for (const result of results.flat()) {
       console.log(validationResultToString(result))
     }
 
