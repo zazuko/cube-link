@@ -45,3 +45,8 @@ meta:relatesTo a rdf:Property;
     rdfs:label "relates to";
     rdfs:comment "This property is used on a Dimension Constraint to express a relation with other properties through a meta:Relation instance, the nature of this relationship is determined by the properties used on the instance. ";
     .
+
+meta:applicationIgnores a rdf:Property;
+    rdfs:label "Ignored by Application";
+    rdfs:comment "This property is used on a Dimension Constraint to be ignored by application specified. (It shall use the same objects as used on `schema:workExample`.)";
+    .
