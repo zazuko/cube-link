@@ -19,12 +19,18 @@ To be able to have a continuous history of a published cube there is a meta cons
 
 The version history has attached through `schema:hasPart` each time a fully described cube which can be interpreted independently. It is expected that the cubes in the same history line do not change the count of dimensions. All the other descriptions can change.
 
-A status of the cube, like *Draft* or *Published* can be added to the cube through `schema:CreativeWorkStatus`. The status is expected to be a `schema:DefinedTerm`.
-
 To record a version the `schema:version` property can be used
 
 A cube can be invalidated or unlisted by adding `schema:expires` with the expiry date to the cube itself.
 
+## Annotation of status and scope of usage
+As a guideline we propose the following predicates to annotate a cube with the status of a cube (Draft, Published, Hidden, ...) on the level ot the cube description.
+   
+A status of the cube, like *Draft* or *Published* can be added to the cube through `schema:CreativeWorkStatus`. The status is expected to be a `schema:DefinedTerm`.
+
+Further to hint the usage of a cube for a specific application, and potentially to be filtered out for other applications, we propose the usage of `schema:workExample` attached to the cube. (The logic behind, is that if the cube is shown in an Application, it becomes an example how to interpret the cube – therefore it becomes a work example of that cube.)
+
+Finally we propose `meta:applicationIgnores` attached to the Contraint of the dimension to hide this respective dimension for the specified Application.
 
 
 ## Relations between quantitative values
