@@ -31,7 +31,7 @@ A status of the cube, like *Draft* or *Published* can be added to the cube throu
 Further to hint the usage of a cube for a specific application, and potentially to be filtered out for other applications, we propose the usage of `schema:workExample` attached to the cube. (The logic behind, is that if the cube is shown in an Application, it becomes an example how to interpret the cube – therefore it becomes a work example of that cube.)
 
 Finally we propose `meta:applicationIgnores` attached to the Contraint of the dimension to hide this respective dimension for the specified Application.
-
+(It shall use the same objects as used on `schema:workExample`.)
 
 ## Relations between quantitative values
 
