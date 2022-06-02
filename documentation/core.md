@@ -12,8 +12,8 @@ We describe the model, an elaborate example, and scripts to validate observation
 | PREFIX | IRI | Description |
 | --- | --- | --- |
 | `cube` | `https://cube.link/` | RDF Cube Schema.|
-| `meta` | `https://cube.link/meta/` | RDF Cube Schema meta data extension.|
-| `relation` | `https://cube.link/relation/` | RDF Cube Schema meta data extension.|
+| `meta` | `https://cube.link/meta/` | [RDF Cube Schema meta data extension.](meta/)|
+| `relation` | `https://cube.link/relation/` | [RDF Cube Schema relation vocabulary.](relation/)|
 
 
 ### External
@@ -211,6 +211,6 @@ you are free to add other properties related to your Cube or the publication pro
 
 Although from the Open World concept point of view nothing forbids you to put metadata on every single observation, we do advise AGAINST that practice, in large cubes, this can dramatically increase the cube size and negatively impact the performance.
 
-The [Constraints](#constraints) and [Visualization](#viz) section guide how to describe the structure of observations through the Constraints property.
+The [Constraints](#constraints) and [Visualization](#ux) section guide how to describe the structure of observations through the Constraints property.
 
 </aside>

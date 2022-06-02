@@ -19,13 +19,19 @@ To be able to have a continuous history of a published cube there is a meta cons
 
 The version history has attached through `schema:hasPart` each time a fully described cube which can be interpreted independently. It is expected that the cubes in the same history line do not change the count of dimensions. All the other descriptions can change.
 
-A status of the cube, like *Draft* or *Published* can be added to the cube through `schema:CreativeWorkStatus`. The status is expected to be a `schema:DefinedTerm`.
-
 To record a version the `schema:version` property can be used
 
 A cube can be invalidated or unlisted by adding `schema:expires` with the expiry date to the cube itself.
 
+## Annotation of status and scope of usage
+As a guideline we propose the following predicates to annotate a cube with the status of a cube (Draft, Published, Hidden, ...) on the level ot the cube description.
+   
+A status of the cube, like *Draft* or *Published* can be added to the cube through `schema:CreativeWorkStatus`. The status is expected to be a `schema:DefinedTerm`.
 
+Further to hint the usage of a cube for a specific application, and potentially to be filtered out for other applications, we propose the usage of `schema:workExample` attached to the cube. (The logic behind, is that if the cube is shown in an Application, it becomes an example how to interpret the cube – therefore it becomes a work example of that cube.)
+
+Finally we propose `meta:applicationIgnores` attached to the Contraint of the dimension to hide this respective dimension for the specified Application.
+(It shall use the same objects as used on `schema:workExample`.)
 
 ## Relations between quantitative values
 
@@ -61,22 +67,6 @@ The controlled vocabulary introduced with namespace `PREFIX relation: <https://c
 
 This is an advanced usage of the cube and increases its complexity. But it gives the expressiveness needed to describe the complex relationship between data in a machine-processable way. 
 
-### Classes
-
-#### meta:Relation {#Relation}
-
-A Cube:Relation resource is used to express the relation between different dimensions, the nature of the relationship is determined by the properties used. A Cube:Relation is linked to an observation through a [meta:relation](#relation) property. 
-See [this example](#relexample).
-
-### Properties
-
-#### meta:relation {#relation}
-
-This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
-See [this example](#relexample).
-
-
-
 ## Hierarchies
 
 <aside class='note'>
@@ -104,7 +94,7 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
     a meta:Hierarchy ;
     meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
     schema:name "CH - Canton" ;
-    meta:nextInHierachy [
+    meta:nextInHierarchy [
       schema:name "Canton" ;
       sh:path <http://schema.org/containsPlace> ;
     ]
@@ -135,7 +125,7 @@ meta:inHierarchy [
   a meta:Hierarchy ;
   meta:hierarchyRoot <https://ld.admin.ch/country/CHE> ;
   schema:name "CH - Canton" ;
-  meta:nextInHierachy [
+  meta:nextInHierarchy [
     schema:name "Canton" ;
     sh:path  [ sh:inversePath <http://schema.org/containedInPlace> ] ;
     sh:targetClass <https://schema.ld.admin.ch/Canton> ;
@@ -159,10 +149,10 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
     a meta:Hierarchy ;
     meta:hierarchyRoot <https://ld.admin.ch/country/CHE>;
     schema:name "CH - Canton - Municipality" ;
-    meta:nextInHierachy [
+    meta:nextInHierarchy [
       schema:name "Canton" ;
       sh:path <http://schema.org/containsPlace> ;
-      meta:nextInHierachy [
+      meta:nextInHierarchy [
         schema:name "Municipality" ;
         sh:path <http://schema.org/containsPlace> ;
       ]

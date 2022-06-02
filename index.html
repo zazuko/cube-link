@@ -2,6 +2,13 @@
 <html>
   <head>
     <meta charset='utf-8'>
+    <script>
+      function jumpTo(config) {
+        let element = document.getElementById(location.pathname.substr(location.pathname.lastIndexOf("/")+1));
+        if(typeof element !== "undefined")
+            element.scrollIntoView(true)
+    }
+    </script>
     <script type="text/javascript" src='https://respec.zazuko.com/js/respec-zazuko.js' async class='remove'></script>
     <script class='remove'>
       var module = {}
@@ -35,5 +42,6 @@
 
     <section id='references'></section>
    
+    
    </body>
 </html>

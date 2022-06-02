@@ -2,17 +2,14 @@
 
 ## Classes ##
 
-### meta:DimensionRelation {#DimensionRelation}
-
-A meta:DimensionRelation resource is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError
 
 ### meta:Hierarchy {#Hierarchy}
 
-A hierarchy is defined and can be named `schema:name`. This can help user interfaces to allow a selection in case of multiple hierarchies.
+A hierarchy is defined and can be named `schema:name`. This can help user interfaces to allow a selection in case of multiple hierarchies. 
 
 ### meta:Relation {#Relation}
 
-A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relation](#relation) property. 
+A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relatesTo](#relatesTo) property. 
 
 ## Properties
 
@@ -24,7 +21,7 @@ To express that the dimension provides a specific _kind_ of data which is necess
 <aside class='example'>
 
   ```turtle
-  @prefix: <https://cube.link/meta/>
+  @prefix meta: <https://cube.link/meta/>
   
   <dimension> meta:dataKind [ a schema:GeoCoordinates ].
   ```
@@ -39,7 +36,7 @@ To express that the dimension provides a specific _kind_ of data which is necess
 <aside class='example'>
 
   ```turtle
-  @prefix: <https://cube.link/meta/>
+  @prefix meta: <https://cube.link/meta/>
   
   <dimension> meta:dataKind [ 
      a time:GeneralDateTimeDescription;
@@ -49,8 +46,9 @@ To express that the dimension provides a specific _kind_ of data which is necess
 
 </aside>
 
-### meta:Hierarchy {#Hierarchy}
-Defines a hierarchy which can be interpreted in the context of a cube dimension. It describes the path between the [meta:hierarchyRoot](#hierarchyRoot) and the observations in a dimension. Further does it build a base to describe aggregations between the hierarchy levels.
+### meta:dimensionRelation {#dimensionRelation}
+A meta:dimensionRelation property is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError
+
 
 ### meta:hierarchyRoot {#hierarchyRoot}
 
@@ -66,7 +64,7 @@ A hierarchy must have at least one `meta:hierarchyRoot`.
 
 With `meta:nextInHierarchy` the next lower level is attached to the higher level or the root level of a hierarchy.
 
-### meta:relation {#relation}
+### meta:relatesTo {#relatesTo}
 
 This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
-See [this example](#relexample).
+See [this example](../#relexample).

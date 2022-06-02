@@ -107,7 +107,7 @@ To express that the dimension provides a specific _kind_ of data which is necess
 <aside class='example'>
 
   ```turtle
-  @prefix: <https://cube.link/meta/>
+  @prefix meta: <https://cube.link/meta/>
   
   <dimension> meta:dataKind [ a schema:GeoCoordinates ].
   ```
@@ -122,7 +122,7 @@ To express that the dimension provides a specific _kind_ of data which is necess
 <aside class='example'>
 
   ```turtle
-  @prefix: <https://cube.link/meta/>
+  @prefix meta: <https://cube.link/meta/>
   
   <dimension> meta:dataKind [ 
      a time:GeneralDateTimeDescription;

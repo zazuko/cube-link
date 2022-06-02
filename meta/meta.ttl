@@ -4,10 +4,10 @@ PREFIX cube: <https://cube.link/>
 PREFIX meta: <https://cube.link/meta/>
 PREFIX schema: <http://schema.org/>
 
-meta:DimensionRelation a rdfs:Class;
-    rdfs:subClassOf meta:Relation;
-    rdfs:label "Dimension relation";
-    rdfs:comment "A meta:DimensionRelation resource is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError";
+meta:dimensionRelation a rdfs:Property;
+    rdfs:subClassOf meta:relatesTo;
+    rdfs:label "dimension relation";
+    rdfs:comment "A meta:dimensionRelation property is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError";
     .
 
 meta:Hierarchy a rdfs:Class;
@@ -40,8 +40,13 @@ meta:nextInHierarchy a rdf:Property;
     rdfs:comment "With meta:nextInHierarchy it is possible to ";
     .
 
-meta:relation a rdf:Property;
+meta:relatesTo a rdf:Property;
     rdfs:range meta:Relation;
-    rdfs:label "relation";
+    rdfs:label "relates to";
     rdfs:comment "This property is used on a Dimension Constraint to express a relation with other properties through a meta:Relation instance, the nature of this relationship is determined by the properties used on the instance. ";
+    .
+
+meta:applicationIgnores a rdf:Property;
+    rdfs:label "Ignored by Application";
+    rdfs:comment "This property is used on a Dimension Constraint to be ignored by application specified. (It shall use the same objects as used on `schema:workExample`.)";
     .
