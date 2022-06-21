@@ -52,23 +52,6 @@ The KeyDimension tags one or multiple dimensions which are together uniquely ide
 
 </aside>
 
-#### cube:SharedDimension {#SharedDimension}
-
-To be able to distinguish Dimensions that are defined inside a Cube from Dimensions that are used in multiple cubes, we have the type of cube:SharedDimension. Every dimension except the ones typed as a cube:MeasureDimension can be a cube:SharedDimension.
-
-<aside class='example' title='Shared Dimension'>
-
-```turtle
-[ a cube:KeyDimension, cube:SharedDimension ;
-    schema:name "Canton"@en, "Kanton"@de, "Canton"@fr;
-    sh:path example:canton ;
-    qudt:scaleType qudt:NominalScale ;
-  ].
-```
-
-</aside>
-
-
 ### Properties
 
 The following properties are used to define the various visualization element of the RDF Cube Schema
