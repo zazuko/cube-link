@@ -3,7 +3,7 @@
 const program = require('commander')
 const factory = require('rdf-ext')
 const fromFile = require('rdf-utils-fs/fromFile')
-const { termToNTriples: termToNt } = require('@rdfjs/to-ntriples')
+const termToNt = require('@rdfjs/to-ntriples')
 const { validateCube } = require('../validate')
 
 async function loadDataset (filePath) {
