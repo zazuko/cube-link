@@ -108,7 +108,7 @@ In [[[turtle]]] syntax, the observation above looks like this:
 
 <aside class='example' title='Simple observation'>
 
-```turtle example
+```turtle
 <temperature-sensor/cube/observation/20190103T120000055Z> a cube:Observation ;
   cube:observedBy <temperature-sensor> ;
   dh:room <building1/level1/room1> ;

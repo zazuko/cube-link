@@ -1,10 +1,9 @@
 
 var respecConfig = {
-    specStatus: "ZZ-BASIC",
+    specStatus: "ZZ-DRAFT",
     shortName: 'rdf-cube-schema',
-    edDraftURI: "",
     maxTocLevel: 4,
-    postProcess: [jumpTo],
+    latestVersion: "https://cube.link",
     github: {
       repoURL: "https://github.com/zazuko/rdf-cube-schema",
       branch: "documentation", // alternative branch
