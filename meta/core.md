@@ -11,6 +11,22 @@ A hierarchy is defined and can be named `schema:name`. This can help user interf
 
 A meta:Relation resource is used to express the relation or hierarchy between different dimensions, the nature of the relationship is determined by the properties used. A meta:Relation is linked to an observation through a [meta:relatesTo](#relatesTo) property. 
 
+### meta:SharedDimension {#SharedDimension}
+
+To be able to distinguish Dimensions that are defined inside a Cube from Dimensions that are used in multiple cubes, we have the type of meta:SharedDimension. Every dimension except the ones typed as a cube:MeasureDimension can also be a meta:SharedDimension.
+
+<aside class='example' title='Shared Dimension'>
+
+```turtle
+[ a cube:KeyDimension, meta:SharedDimension ;
+    schema:name "Canton"@en, "Kanton"@de, "Canton"@fr;
+    sh:path example:canton ;
+    qudt:scaleType qudt:NominalScale ;
+  ].
+```
+
+</aside>
+
 ## Properties
 
 ### meta:dataKind (temporal / spatial) {#dataKind}

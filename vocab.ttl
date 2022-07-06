@@ -58,10 +58,7 @@
   rdfs:comment "The KeyDimension tags one or multiple dimensions which are together uniquely identifying an observation. You can think of them as the Key in a relational database.";
   .
 
-  <MeasureDimension> a rdfs:Class;
+<MeasureDimension> a rdfs:Class;
   rdfs:label "Measure Dimension";
   rdfs:comment "The MeasureDimension tags at least one dimension, but potentially multiple, which is the actual measurement, or statistical count attached to an observation.".
 
-  <SharedDimension> a rdfs:Class;
-  rdfs:label "Shared Dimension";
-  rdfs:comment "A schema:DefinedTermSet which holds the Resources used for a shared dimension.".
