@@ -32,7 +32,12 @@
 	sh:property [
         sh:path sh:closed;
         sh:hasValue true;
-    ]
+    ] ;
+    sh:property[
+        sh:path meta:inHierarchy;
+        sh:node <Hierarchy>;
+        sh:message "meta:inHierarchy does not validate"
+    ] ;
     .
 
 <ObservationConstraintProperty> a sh:NodeShape;
@@ -156,7 +161,82 @@
         sh:path rdf:rest;
         sh:minCount 1;
         sh:maxCount 1;
+        sh:or (
+            [
+                sh:node <listnode>;
+            ]
+            [
+                sh:hasValue rdf:nil;
+            ]
+	    ) ;
         sh:message "a rdf:List can only have one rdf:rest node, multiples nodes need to be linked"
         #sh:node <restnode>;
     ]
     .
+
+<inversepathnode> a sh:NodeShape ;
+    sh:property [
+        sh:path sh:inversePath;
+	sh:nodeKind sh:IRI;
+	sh:minCount 1;
+	sh:maxCount 1;
+        sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+    ] .
+
+<NextInHierarchy> a sh:NodeShape ;
+    sh:property [
+        sh:path sh:path;
+	sh:minCount 1;
+	sh:maxCount 1;
+	sh:message "nextInHierarchy requires exactly one sh:path"
+    ],
+    [
+        sh:path schema:name;
+	sh:minCount 1;
+	sh:message "nextInHierarchy requires schema:name"
+    ],
+    [
+        sh:path sh:targetClass;
+	sh:nodeKind sh:IRI;
+	sh:message "meta:nextInHierarchy/sh:targetClass must be an IRI"
+    ],
+    [
+        sh:path meta:nextInHierarchy;
+	sh:node <NextInHierarchy> ;
+	sh:severity sh:Info;
+	sh:message "nextInHierarchy can have nested nodes"
+    ] ;
+    sh:or (
+        [
+            sh:path sh:path;
+	    sh:nodeKind sh:IRI;
+            sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+        ]
+        [
+            sh:path sh:path;
+	    sh:nodeKind sh:BlankNode;
+	    sh:node <inversepathnode>;
+            sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+        ]
+    )
+    .
+
+<Hierarchy> a sh:NodeShape ;
+    sh:targetClass meta:Hierarchy ;
+    sh:property [
+        sh:path meta:hierarchyRoot;
+	sh:minCount 1;
+	sh:nodeKind sh:IRI;
+	sh:message "inHierarchy requires hierarchyRoot";
+    ],
+    [
+        sh:path schema:name;
+        sh:minCount 1;
+        sh:message "inHierarchy requires schema:name"
+    ],
+    [
+        sh:path meta:nextInHierarchy;
+	sh:node <NextInHierarchy>;
+        sh:minCount 1;
+        sh:message "inHierarchy requires a conform nextInHierarchy"
+    ] .
