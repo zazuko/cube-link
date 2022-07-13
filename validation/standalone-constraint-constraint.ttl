@@ -39,7 +39,8 @@
 	sh:property [
         sh:path qudt:scaleType;
         sh:in ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
-        sh:message "If qudt:scale is used it needs to be within"
+        sh:maxCount 1;
+	    sh:message "If qudt:scaleType is used it needs to be within ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale )"
     ];
 	sh:property [
         sh:path sh:path;

@@ -66,7 +66,7 @@ To describe the unit of the values in a dimension the respective `qudt:Unit` ins
 
 #### qudt:scaleType
 
-To provide more information on the statistical property scale of measure it can be described by `qudt:NominalScale`, `qudt:OrdinalScale`, `qudt:IntervalScale` or `qudt:RatioScale` which is attached through `qudt:scaleType` to the [Dimension Constraint](#dimensionconstraints).
+To provide more information on the statistical property scale of measure it can be described by `qudt:NominalScale`, `qudt:OrdinalScale`, `qudt:IntervalScale` or `qudt:RatioScale` which is attached through `qudt:scaleType` to the [Dimension Constraint](#dimensionconstraints). There can be only one `qudt:scaleType` per dimension.
 
 The different scale types hint about features that can be used for visualization properties:
 
