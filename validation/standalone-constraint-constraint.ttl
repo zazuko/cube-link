@@ -91,16 +91,49 @@
         [
             sh:path sh:datatype;
             sh:minCount 1;
-            sh:message "needs a sh:datatype or sh:nodeKind"
+            sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
         ]
         [
             sh:path sh:nodeKind;
             sh:minCount 1;
-            sh:message "needs a sh:datatype or sh:nodeKind"
+            sh:message sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
         ]
+        [
+	        sh:path sh:or;
+            sh:minCount 1;
+	        sh:node <listnode>, <listnode_with_datatype>;
+	        sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
+	    ]
     );
 
 .
+
+<Datatype> a sh:NodeShape ;
+    sh:property [
+        sh:path sh:datatype;
+	sh:minCount 1;
+	sh:message "sh:or (...) requires at least one [ sh:datatype ]"
+    ]
+    .
+
+# Testing proper rdf:list construction
+<listnode_with_datatype> a sh:NodeShape ;
+    sh:property [
+        sh:path rdf:first;
+	sh:node <Datatype>;
+    ];
+    sh:property [
+        sh:path rdf:rest;
+	sh:or (
+	    [
+	        sh:node <listnode_with_datatype>;
+	    ]
+	    [
+	        sh:hasValue rdf:nil;
+	    ]
+	) ;
+    ]
+    .    
 
 <DimensionRelation> a sh:NodeShape ;
     sh:property [
