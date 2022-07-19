@@ -18,6 +18,9 @@ jobs:
       - name: Replace draft status
         run: sed -i 's/"ZZ-DRAFT"/"ZZ-BASIC"/g' config.js meta/config.js relation/config.js
 
+      - name: Remove 'issue-summary' section
+        run: sed -i '/issue-summary/d' index.html meta/index.html relation/index.html
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
