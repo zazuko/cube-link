@@ -55,8 +55,8 @@
     ];
     sh:property[
         sh:path sh:minInclusive;
-        sh:datatype xsd:integer;
-        sh:message "sh:minInclusive needs to be an integer"
+        sh:nodeType sh:Literal;
+        sh:message "sh:minInclusive needs to be a literal"
     ];
     sh:property[
         sh:path sh:in;
@@ -65,8 +65,8 @@
     ];
     sh:property[
         sh:path sh:maxInclusive;
-        sh:datatype xsd:integer;
-        sh:message "sh:maxInclusive needs to be an integer"
+        sh:nodeType sh:Literal;
+        sh:message "sh:maxInclusive needs to be a literal"
     ];
     sh:property[
         sh:path meta:dimensionRelation;
