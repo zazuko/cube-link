@@ -101,7 +101,7 @@
         [
             sh:path sh:nodeKind;
             sh:minCount 1;
-            sh:message sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
+            sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
         ]
         [
 	        sh:path sh:or;
