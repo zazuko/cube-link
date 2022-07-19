@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Replace draft status
-        run: sed -i 's/"ZZ-DRAFT"/"ZZ-BASIC"/g' config.js
+        run: sed -i 's/"ZZ-DRAFT"/"ZZ-BASIC"/g' config.js meta/config.js relation/config.js
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
