@@ -8,6 +8,21 @@ var respecConfig = {
       repoURL: "https://github.com/zazuko/rdf-cube-schema",
       branch: "documentation", // alternative branch
     },
+    otherLinks: [
+      {
+        key: "Related Vocabularies",
+        data: [
+          {
+            value: "RDF Cube Schema",
+            href: "../",
+          },
+          {
+            value: "RDF Cube Schema - Relation vocabulary",
+            href: "../relation/",
+          },
+        ],
+      },
+    ],
     editors: [
       {
         name: "Bart van Leeuwen",
