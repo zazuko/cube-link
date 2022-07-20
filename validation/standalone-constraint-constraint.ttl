@@ -32,14 +32,20 @@
 	sh:property [
         sh:path sh:closed;
         sh:hasValue true;
-    ]
+    ] ;
+    sh:property[
+        sh:path meta:inHierarchy;
+        sh:node <Hierarchy>;
+        sh:message "meta:inHierarchy does not validate"
+    ] ;
     .
 
 <ObservationConstraintProperty> a sh:NodeShape;
 	sh:property [
         sh:path qudt:scaleType;
         sh:in ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
-        sh:message "If qudt:scale is used it needs to be within"
+        sh:maxCount 1;
+	    sh:message "If qudt:scaleType is used it needs to be within ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale )"
     ];
 	sh:property [
         sh:path sh:path;
@@ -49,8 +55,8 @@
     ];
     sh:property[
         sh:path sh:minInclusive;
-        sh:datatype xsd:integer;
-        sh:message "sh:minInclusive needs to be an integer"
+        sh:nodeType sh:Literal;
+        sh:message "sh:minInclusive needs to be a literal"
     ];
     sh:property[
         sh:path sh:in;
@@ -59,8 +65,8 @@
     ];
     sh:property[
         sh:path sh:maxInclusive;
-        sh:datatype xsd:integer;
-        sh:message "sh:maxInclusive needs to be an integer"
+        sh:nodeType sh:Literal;
+        sh:message "sh:maxInclusive needs to be a literal"
     ];
     sh:property[
         sh:path meta:dimensionRelation;
@@ -90,16 +96,49 @@
         [
             sh:path sh:datatype;
             sh:minCount 1;
-            sh:message "needs a sh:datatype or sh:nodeKind"
+            sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
         ]
         [
             sh:path sh:nodeKind;
             sh:minCount 1;
-            sh:message "needs a sh:datatype or sh:nodeKind"
+            sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
         ]
+        [
+	        sh:path sh:or;
+            sh:minCount 1;
+	        sh:node <listnode>, <listnode_with_datatype>;
+	        sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
+	    ]
     );
 
 .
+
+<Datatype> a sh:NodeShape ;
+    sh:property [
+        sh:path sh:datatype;
+	sh:minCount 1;
+	sh:message "sh:or (...) requires at least one [ sh:datatype ]"
+    ]
+    .
+
+# Testing proper rdf:list construction
+<listnode_with_datatype> a sh:NodeShape ;
+    sh:property [
+        sh:path rdf:first;
+	sh:node <Datatype>;
+    ];
+    sh:property [
+        sh:path rdf:rest;
+	sh:or (
+	    [
+	        sh:node <listnode_with_datatype>;
+	    ]
+	    [
+	        sh:hasValue rdf:nil;
+	    ]
+	) ;
+    ]
+    .    
 
 <DimensionRelation> a sh:NodeShape ;
     sh:property [
@@ -122,7 +161,82 @@
         sh:path rdf:rest;
         sh:minCount 1;
         sh:maxCount 1;
+        sh:or (
+            [
+                sh:node <listnode>;
+            ]
+            [
+                sh:hasValue rdf:nil;
+            ]
+	    ) ;
         sh:message "a rdf:List can only have one rdf:rest node, multiples nodes need to be linked"
         #sh:node <restnode>;
     ]
     .
+
+<inversepathnode> a sh:NodeShape ;
+    sh:property [
+        sh:path sh:inversePath;
+	sh:nodeKind sh:IRI;
+	sh:minCount 1;
+	sh:maxCount 1;
+        sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+    ] .
+
+<NextInHierarchy> a sh:NodeShape ;
+    sh:property [
+        sh:path sh:path;
+	sh:minCount 1;
+	sh:maxCount 1;
+	sh:message "nextInHierarchy requires exactly one sh:path"
+    ],
+    [
+        sh:path schema:name;
+	sh:minCount 1;
+	sh:message "nextInHierarchy requires schema:name"
+    ],
+    [
+        sh:path sh:targetClass;
+	sh:nodeKind sh:IRI;
+	sh:message "meta:nextInHierarchy/sh:targetClass must be an IRI"
+    ],
+    [
+        sh:path meta:nextInHierarchy;
+	sh:node <NextInHierarchy> ;
+	sh:severity sh:Info;
+	sh:message "nextInHierarchy can have nested nodes"
+    ] ;
+    sh:or (
+        [
+            sh:path sh:path;
+	    sh:nodeKind sh:IRI;
+            sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+        ]
+        [
+            sh:path sh:path;
+	    sh:nodeKind sh:BlankNode;
+	    sh:node <inversepathnode>;
+            sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+        ]
+    )
+    .
+
+<Hierarchy> a sh:NodeShape ;
+    sh:targetClass meta:Hierarchy ;
+    sh:property [
+        sh:path meta:hierarchyRoot;
+	sh:minCount 1;
+	sh:nodeKind sh:IRI;
+	sh:message "inHierarchy requires hierarchyRoot";
+    ],
+    [
+        sh:path schema:name;
+        sh:minCount 1;
+        sh:message "inHierarchy requires schema:name"
+    ],
+    [
+        sh:path meta:nextInHierarchy;
+	sh:node <NextInHierarchy>;
+        sh:minCount 1;
+        sh:message "inHierarchy requires a conform nextInHierarchy"
+    ] .
