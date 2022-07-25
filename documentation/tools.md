@@ -8,7 +8,7 @@ SPARQL CONSTRUCT queries will be provided in this repository.
 
 ## Cube Viewer
 
-Cube Viewer [(Homepage)](https://github.com/zazuko/cube-viewer) is both an app and a reusable component to visualize data cubes based on RDF Cube Schema.
+Cube Viewer [(Homepage)](https://github.com/zazuko/cube-viewer) is both an app and a reusable component to visualize data cubes based on Cube Schema.
 
 A demo of the app is deployed at [cube-viewer.zazuko.com](https://cube-viewer.zazuko.com).
 
@@ -35,17 +35,17 @@ Install the package dependencies: `npm i`
 <aside class='example' title='Validate `cube.ttl` by using the constraint in `constraint.ttl`'>
  
 
-```./bin/rdf-cube-schema.js validate cube.ttl constraint.ttl```
+```./bin/cube-link.js validate cube.ttl constraint.ttl```
 
 </aside>
 
 #### The cube structure and contents
-Even though RDF Cube Schema is a very lightweight vocabulary its structure needs to conform to a minimal set of rules to be considered a valid [Cube](#Cube) we provide a very light weight constraint that can be used to check this. The constraint can be found in [validation](https://github.com/zazuko/rdf-cube-schema/tree/master/validation) directory of the repository, the constraint is called [basic-cube-constraint.ttl](https://github.com/zazuko/rdf-cube-schema/tree/master/validation/basic-cube-constraint.ttl)
+Even though Cube Schema is a very lightweight vocabulary its structure needs to conform to a minimal set of rules to be considered a valid [Cube](#Cube) we provide a very light weight constraint that can be used to check this. The constraint can be found in [validation](https://github.com/zazuko/cube-link/tree/master/validation) directory of the repository, the constraint is called [basic-cube-constraint.ttl](https://github.com/zazuko/cube-link/tree/master/validation/basic-cube-constraint.ttl)
 
 <aside class='example' title='Validate `cube.ttl` using the constraint in `validation/basic-cube-constraint.ttl`'>
  
 
-```./bin/rdf-cube-schema.js validate cube.ttl validation/basic-cube-constraint.ttl```
+```./bin/cube-link.js validate cube.ttl validation/basic-cube-constraint.ttl```
 
 </aside>
 
@@ -57,14 +57,14 @@ When a cube provides an optional observation constraint through the [observation
 <aside class='example' title='Validate `cube.ttl` by using the constraint in `constraint.ttl`'>
  
 
-```./bin/rdf-cube-schema.js validate cube.ttl constraint.ttl```
+```./bin/cube-link.js validate cube.ttl constraint.ttl```
 
 </aside>
 
 <aside class='example' title='Validate a Cube with inline constraints'>
 When the cube and constraints are in the same file simply use the same filename twice
 
-```./bin/rdf-cube-schema.js validate completecube.ttl completecube.ttl```
+```./bin/cube-link.js validate completecube.ttl completecube.ttl```
 
 </aside>
 
@@ -75,7 +75,7 @@ it is important that the constraints themselves are confirming to a structure th
 <aside class='example' title='Validate a CubeConstraint with a constraint'>
 Here we use the validation to validate the constraint, not the cube
 
-```./bin/rdf-cube-schema.js validate constraint.ttl validation/standalone-constraint-constraint.ttl```
+```./bin/cube-link.js validate constraint.ttl validation/standalone-constraint-constraint.ttl```
 
 </aside>
 

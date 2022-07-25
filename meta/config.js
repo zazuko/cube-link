@@ -1,11 +1,11 @@
 
 var respecConfig = {
     specStatus: "ZZ-DRAFT",
-    shortName: 'rdf-cube-schema/meta',
+    shortName: 'cube-link/meta',
     maxTocLevel: 4,
     latestVersion: "https://cube.link/meta/",
     github: {
-      repoURL: "https://github.com/zazuko/rdf-cube-schema",
+      repoURL: "https://github.com/zazuko/cube-link",
       branch: "documentation", // alternative branch
     },
     otherLinks: [
@@ -13,11 +13,11 @@ var respecConfig = {
         key: "Related Vocabularies",
         data: [
           {
-            value: "RDF Cube Schema",
+            value: "Cube Schema",
             href: "../",
           },
           {
-            value: "RDF Cube Schema - Relation vocabulary",
+            value: "Cube Schema - Relation vocabulary",
             href: "../relation/",
           },
         ],

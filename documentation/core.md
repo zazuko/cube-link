@@ -1,26 +1,26 @@
-# RDF Cube Schema: Core
+# Cube Schema: Core
 
-This section describes the *RDF Cube Schema* model.
+This section describes the *Cube Schema* model.
 
-The _RDF Cube Schema_ defines a minimal set of classes and properties necessary to represent multi-dimensional arrays of data in [[[rdf11-concepts]]].
+The _Cube Schema_ defines a minimal set of classes and properties necessary to represent multi-dimensional arrays of data in [[[rdf11-concepts]]].
 
 We describe the model, an elaborate example, and scripts to validate observations based on the constraint (SHACL shape) provided.
 
 ## Namespaces and Prefixes {#NS}
 
-### RDF Cube Schema
+### Cube Schema
 | PREFIX | IRI | Description |
 | --- | --- | --- |
-| `cube` | `https://cube.link/` | RDF Cube Schema.|
-| `meta` | `https://cube.link/meta/` | [RDF Cube Schema meta data extension.](meta/)|
-| `relation` | `https://cube.link/relation/` | [RDF Cube Schema relation vocabulary.](relation/)|
+| `cube` | `https://cube.link/` | Cube Schema.|
+| `meta` | `https://cube.link/meta/` | [Cube Schema meta data extension.](meta/)|
+| `relation` | `https://cube.link/relation/` | [Cube Schema relation vocabulary.](relation/)|
 
 
 ### External
 | PREFIX | IRI | Description |
 | --- | --- | --- |
 | schema | [http://schema.org/](http://schema.org) | To describe basic properties. |
-| sh | [http://www.w3.org/ns/shacl#](https://www.w3.org/TR/shacl/) | Inherited from the RDF Cube Schema for constratins. |
+| sh | [http://www.w3.org/ns/shacl#](https://www.w3.org/TR/shacl/) | Inherited from the Cube Schema for constratins. |
 | qudt | [http://qudt.org/vocab/](http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html) | Describe scale of mesures. |
 | unit | [http://qudt.org/vocab/unit/](http://www.qudt.org/doc/DOC_VOCAB-UNITS.html) | Describes units on values. |
 | time | [http://www.w3.org/2006/time#](https://www.w3.org/TR/owl-time/) | A time description ontology. |
@@ -32,17 +32,17 @@ We describe the model, an elaborate example, and scripts to validate observation
 
 The core schema is very simple and almost unconstrained from an RDF perspective. This ensures it can be used in many ways and does not restrict its usefulness due to too rigorous definitions.
 
-![Basic RDF Cube Schema structure](./img/rdf-cube-schema-basic.svg)
+![Basic Cube Schema structure](./img/cube-link-basic.svg)
 
 ### Classes
 
-There are 4 classes defined in the RDF Cube Schema
+There are 4 classes defined in the Cube Schema
 
 #### cube:Cube {#Cube}
 Represents the entry point for a collection of one or more observation sets, conforming to some common dimensional structure.
 
 #### cube:Constraint {#Constraint}
-Specifies constraints that need to be met on the [Cube](#Cube). Used for metadata and validation. (Optional) For more information see [RDF Cube Schema : Constraints](#constraints)
+Specifies constraints that need to be met on the [Cube](#Cube). Used for metadata and validation. (Optional) For more information see [Cube Schema : Constraints](#constraints)
 
 A [Constraint](#Constraint) for a cube. A Constraint is optional but recommended, it is used to:
 * Define how data ([Observations](#Observation)) in a `Cube` can be validated.
@@ -65,7 +65,7 @@ An observation which is not defined. for more information see [NULL and Empty va
 
 The resources described by the various classes are connected by a small set of properties.
 
-![Observations can be connected to an observer](./img/rdf-cube-schema-observedBy.svg)
+![Observations can be connected to an observer](./img/cube-link-observedBy.svg)
 
 #### cube:observationSet {#observationSet}
 Connects a cube with a set of observations.
@@ -84,11 +84,11 @@ Connects an observation with the agent that created the observation. The agent c
 
 > A dimension is a structure that categorizes facts and measures to enable users to answer business questions. Commonly used dimensions are people, products, place, and time ([Source: Wikidata](https://en.wikipedia.org/wiki/Dimension_(data_warehouse))).
 
-In _RDF Cube Schema_, facts, measures, and categories are all considered a dimension.
+In _Cube Schema_, facts, measures, and categories are all considered a dimension.
 
 All [Observations](#Observation) need to provide the same set of dimensions, they cannot be optional. This ensures that cubes can be queried efficiently.
 
-Unlike other RDF vocabularies in that domain, there is no specific class for a dimension. Creating a new _RDF Cube Schema_ dimension would be the same as defining a new [RDF Property](https://www.w3.org/TR/rdf-schema/#ch_property). 
+Unlike other RDF vocabularies in that domain, there is no specific class for a dimension. Creating a new _Cube Schema_ dimension would be the same as defining a new [RDF Property](https://www.w3.org/TR/rdf-schema/#ch_property). 
 
 This encourages re-use and makes it much easier to cherrypick on existing RDF properties and use them as dimensions. Obvious examples are temporal properties like `schema:validFrom`, `dcterms:date`, `dcterms:temporal`, etc.
 
@@ -102,7 +102,7 @@ Instances of a dimension can be [RDF literals](https://www.w3.org/TR/rdf11-prime
 
 Language tagged literals and all other (meta) data should be modeled as terms/concepts. For this purpose, [IRI's](https://www.w3.org/TR/rdf11-primer/#section-IRI) should be used and the literal(s) would be appended to that particular instance of a term/concept. This can be done e.g. by using [[[skos-primer]]] (https://www.w3.org/TR/skos-primer/) or schema.org [DefinedTerm](https://schema.org/DefinedTerm). As shown in the following example, a typical cube structure is a combination of dimensions with typed literals attached to the "observation" itself and dimensions that refer to concept groups via IRIs.
 
-![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/rdf-cube-schema-dimensions.svg)
+![An Observation often combines dimensions of typed literals with dimensions that point to IRIs](./img/cube-link-dimensions.svg)
 
 In [[[turtle]]] syntax, the observation above looks like this:
 
@@ -133,15 +133,15 @@ In [[[turtle]]] syntax, the observation above looks like this:
 
 </aside>
 
-Nesting of relations can be expressed in a machine-readable form as well but is not part of the core RDF Cube Schema.
+Nesting of relations can be expressed in a machine-readable form as well but is not part of the core Cube Schema.
 
 ### NULL and Empty values {#null-empty-values}
 
-In _RDF Cube Schema_, all dimensions are mandatory for a cube. If a value could not be measured, it should be expressed as such.
+In _Cube Schema_, all dimensions are mandatory for a cube. If a value could not be measured, it should be expressed as such.
 
 There is no generic "built-in" way to solve this in RDF. For some numeric datatypes, XML and [thus RDF](https://www.w3.org/TR/rdf11-concepts/#xsd-datatypes) defines ["not a number"](https://docstore.mik.ua/orelly/xml/schema/ch04_04.htm) (`NaN`) as a value. According to the specs, this is only valid for `xsd:float` and `xsd:double` and not for `xsd:decimal` and `xsd:integer`.
 
-To provide a generic solution that works for all numbers and IRIs, _RDF Cube Schema_ provides `cube:Undefined`. The following example shows how to use it in `cube:Observation` and in the attached shape:
+To provide a generic solution that works for all numbers and IRIs, _Cube Schema_ provides `cube:Undefined`. The following example shows how to use it in `cube:Observation` and in the attached shape:
 
 <aside class='example' title='Name node Dimensions'>
 

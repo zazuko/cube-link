@@ -1,6 +1,6 @@
-# RDF Cube Schema: User eXperience Extension
+# Cube Schema: User eXperience Extension
 
-To facilitate the visualization of RDF Cubes or any other user experience related activity it is possible to extend the [Constraints](#constraints) to include additional metadata that describes the characteristics of the cube and its dimensions.
+To facilitate the visualization of Cubes or any other user experience related activity it is possible to extend the [Constraints](#constraints) to include additional metadata that describes the characteristics of the cube and its dimensions.
 By providing this information in the Constraints tools used for displaying the data in the cube do not need to process and interpret the actual data in the cube to configure the visualization.
 
 ## Dimensions
@@ -9,7 +9,7 @@ To be able to understand the nature of a dimension we can type the dimension in 
 
 ### Classes
 
-The following classes are used to define the various visualization element of the RDF Cube Schema
+The following classes are used to define the various visualization element of the Cube Schema
 
 #### cube:KeyDimension {#KeyDimension}
 
@@ -54,7 +54,7 @@ The KeyDimension tags one or multiple dimensions which are together uniquely ide
 
 ### Properties
 
-The following properties are used to define the various visualization element of the RDF Cube Schema
+The following properties are used to define the various visualization element of the Cube Schema
 
 #### schema:name 
 A descriptive name of the Dimension, this description can be multilingual.

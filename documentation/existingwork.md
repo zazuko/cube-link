@@ -24,7 +24,7 @@ There are at least two efforts that extend the RDF Data Cube Vocabulary to addre
 * [[[?qb4st]]]
 * [QB4OLAP](https://github.com/lorenae/qb4olap/wiki)
 
-Both efforts could likely be solved/addressed within the _RDF Cube Schema_ approach, this needs to be validated by interested parties.
+Both efforts could likely be solved/addressed within the _Cube Schema_ approach, this needs to be validated by interested parties.
 
 ## SSN
 
@@ -32,4 +32,4 @@ The [[[vocab-ssn]]] defines a simplified model for describing observations from 
 
 The [Observation](https://www.w3.org/TR/vocab-ssn/#SOSAObservation) model is at least inspired by the RDF Data Cube Vocabulary but it is not very useful for use-cases outside of sensor networks.
 
-It should be relatively easy to replace SSN observations with the _RDF Cube Schema_.
+It should be relatively easy to replace SSN observations with the _Cube Schema_.
