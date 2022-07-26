@@ -1,8 +1,8 @@
-# RDF Cube Schema: Constraints
+# Cube Schema: Constraints
 
-From a pure publishing point of view and according to the [Open World Model](http://linked-data-training.zazuko.com/Ontologies/index.html#14), publishing observations using the core _RDF Cube Schema_ is enough. However, in reality, one might want to use the data for other purposes as well, like visualizing it in web applications and other publications. To be useful, such tools might require additional metadata and cubes that adhere to certain constraints.
+From a pure publishing point of view and according to the [Open World Model](http://linked-data-training.zazuko.com/Ontologies/index.html#14), publishing observations using the core _Cube Schema_ is enough. However, in reality, one might want to use the data for other purposes as well, like visualizing it in web applications and other publications. To be useful, such tools might require additional metadata and cubes that adhere to certain constraints.
 
-_RDF Cube Schema_ supports attaching a "constraint" to a cube. The constraints themselves are expressed using the [[[shacl]]]
+_Cube Schema_ supports attaching a "constraint" to a cube. The constraints themselves are expressed using the [[[shacl]]]
 
 Providing constraints for a cube facilitates the documentation, interpretation, and validation of the cube for tooling and libraries. There is only one constraint per cube allowed, this results in a very low overhead for the documentation, the cube and observations do not need any documentation on the data level.
 

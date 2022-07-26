@@ -1,4 +1,4 @@
-# RDF Cube Schema: Advanced Topics
+# Cube Schema: Advanced Topics
 
 The previous section described the properties of basic cubes, there are however situations where more complex observations or relations between observations need to be expressed. This section provides a set of best practices for various subjects.
 

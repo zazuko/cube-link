@@ -1,14 +1,14 @@
 {
-  "name": "rdf-cube-schema",
+  "name": "cube-link",
   "version": "0.0.3",
-  "description": "RDF Cube Schema",
+  "description": "Cube Schema",
   "main": "validate.js",
   "scripts": {
     "build": "./build.sh",
     "test": "standard"
   },
   "bin": {
-    "rdf-cube-schema": "bin/rdf-cube-schema.js"
+    "cube-link": "bin/cube-link.js"
   },
   "files": [
     "validate.js",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/zazuko/rdf-cube-schema.git"
+    "url": "git://github.com/zazuko/cube-link.git"
   },
   "keywords": [
     "cube",
@@ -28,9 +28,9 @@
   "author": "Thomas Bergwinkl <bergi@axolotlfarm.org> (https://www.bergnet.org/people/bergi/card#me)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zazuko/rdf-cube-schema/issues"
+    "url": "https://github.com/zazuko/cube-link/issues"
   },
-  "homepage": "https://github.com/zazuko/rdf-cube-schema",
+  "homepage": "https://github.com/zazuko/cube-link",
   "dependencies": {
     "@rdfjs/namespace": "^1.1.0",
     "@rdfjs/to-ntriples": "^2.0.0",

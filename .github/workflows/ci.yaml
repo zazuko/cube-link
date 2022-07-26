@@ -35,7 +35,7 @@ jobs:
         uses: zazuko/action-docker-meta@main
         id: docker_meta
         with:
-          images: ghcr.io/zazuko/rdf-cube-schema
+          images: ghcr.io/zazuko/cube-link
           include-pipeline-id: true
 
       - name: Build and push Docker images

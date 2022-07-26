@@ -7,7 +7,7 @@
 # Core Schema
 
 <>
-  rdfs:label "RDF Cube Schema".
+  rdfs:label "Cube Schema".
 
 <Constraint> a rdfs:Class;
   rdfs:label "Constraint";
