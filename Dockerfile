@@ -1,7 +1,8 @@
-FROM docker.io/library/node:16-bullseye as respec
+FROM docker.io/library/node:20 as respec
 
 # install some required dependencies to run Puppeteer (for ReSpec)
 RUN apt-get update && apt-get install -y \
+  chromium \
   fonts-liberation \
   gconf-service \
   libasound2 \
@@ -35,14 +36,14 @@ RUN apt-get update && apt-get install -y \
   xdg-utils
 
 WORKDIR /app
-COPY . .
+COPY package.json package-lock.json ./
 RUN npm install
-
+COPY . .
 # start a server locally, and generate the ReSpec HTML file
 RUN npm run build
 
-# Trifid is only working on Node12
-FROM docker.io/library/node:12-alpine3.15
+# Final Docker image
+FROM docker.io/library/node:20-alpine
 
 EXPOSE 8080
 
@@ -52,11 +53,11 @@ RUN apk add --no-cache tini
 
 # install Trifid
 ENV NODE_ENV=production
-RUN npm install -g trifid@2.3.6
+COPY package.json package-lock.json ./
+RUN npm install
 
 COPY --from=respec /app/dist ./dist
 COPY img .
-
 COPY . .
 
-CMD [ "tini",  "--", "trifid", "--verbose", "--config=trifid/config.json" ]
+CMD [ "tini",  "--", "npm", "run", "trifid:local" ]
