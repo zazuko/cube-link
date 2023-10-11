@@ -36,16 +36,18 @@ describe('basic cube constraint', () => {
     ])
 })
 
+const examples = [
+    'undefinedNotAllowed', 
+    'undefinedAllowed', 
+    'undefinedOrBounded', 
+]
+
 describe('standalone constraint constraint', () => {
-    runTests(standaloneConstraintConstraint, [
-        'undefinedNotAllowed', 
-        'undefinedAllowed', 
-    ])
+    runTests(standaloneConstraintConstraint, examples)
 })
 
 describe('observation validation', () => {
-    const names = ['undefinedNotAllowed', 'undefinedAllowed']
-    for (const name of names) {
+    for (const name of examples) {
         const testName = `data.${name}`
         it(testName, async () => {
             const cubeWithShape = await loadDataset(`test/support/${name}.ttl`)
