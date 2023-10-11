@@ -1,0 +1,34 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix cube: <https://cube.link/> .
+@prefix observation: <https://environment.ld.admin.ch/foen/nfi/observation/max_min_undefined> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@base <https://example.org/> .
+
+<cube> a cube:Cube ;
+    cube:observationConstraint <shape> ;
+    cube:observationSet <observationSet> .
+
+<observationSet> cube:observation <observationA> , <observationB> , <observationC> .
+
+<observationA> a cube:Observation ; cube:observedBy <observer> ;
+    <dimension1> 4.9 .
+
+<observationB> a cube:Observation ; cube:observedBy <observer> ;
+     <dimension1> 1.0 .
+
+<observationC> a cube:Observation ; cube:observedBy <observer> ;
+    <dimension1> ""^^cube:Undefined .
+
+<shape> a cube:Constraint ;
+    sh:targetClass cube:Observation ;
+    sh:closed true ;
+    sh:property [ sh:path rdf:type ; sh:nodeKind sh:IRI] ;
+    sh:property [ sh:path cube:observedBy ; ; sh:nodeKind sh:IRI ] ;
+    sh:property [
+            sh:datatype xsd:decimal ;
+            sh:path  <dimension1> ;
+            schema:name "some Quantity"
+    ] ;
+.

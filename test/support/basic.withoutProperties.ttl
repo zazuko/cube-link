@@ -1,0 +1,7 @@
+@prefix cube: <https://cube.link/> .
+@base <https://example.org/> .
+
+<cube> a cube:Cube ;
+    cube:observationSet <observationSet> ;
+    cube:observationConstraint <constraint> .
+<observationSet> cube:observation <observation> .

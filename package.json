@@ -5,7 +5,8 @@
   "main": "validate.js",
   "scripts": {
     "build": "./build.sh",
-    "test": "standard"
+    "test": "standard",
+    "validation-test": "mocha"
   },
   "bin": {
     "cube-link": "bin/cube-link.js"
@@ -42,7 +43,9 @@
     "rdf-validate-shacl": "^0.4.3"
   },
   "devDependencies": {
+    "approvals": "^6.2.2",
     "chromium": "^3.0.3",
+    "mocha": "^10.2.0",
     "pm2": "^5.2.0",
     "respec": "^31.0.11",
     "serve": "^13.0.2",
