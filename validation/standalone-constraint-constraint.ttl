@@ -73,25 +73,28 @@
         sh:node <DimensionRelation>;
         sh:message "meta:dimensionRelation does not validate"
     ];
+
+    sh:property [
+        sh:message "needs a schema:name" ;
+        sh:or(
+            [
+                sh:path schema:name;
+                sh:minCount 1;
+                sh:datatype xsd:string;
+            ]
+            [
+                sh:path schema:name;
+                sh:minCount 1;
+                sh:datatype rdf:langString;
+            ]
+            [
+                sh:path sh:path;
+                sh:in (rdf:type cube:observedBy);
+            ]
+        );
+    ];
     
-    sh:or(
-        [
-            sh:path schema:name;
-            sh:minCount 1;
-            sh:datatype xsd:string;
-            sh:message "needs a schema:name"
-        ]
-        [
-            sh:path schema:name;
-            sh:minCount 1;
-            sh:datatype rdf:langString;
-            sh:message "needs a schema:name"
-        ]
-        [
-            sh:path sh:path;
-            sh:in (rdf:type cube:observedBy);
-        ]
-    );
+
     sh:or(
         [
             sh:path sh:datatype;
