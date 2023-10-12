@@ -94,25 +94,24 @@
         );
     ];
     
-
-    sh:or(
-        [
-            sh:path sh:datatype;
-            sh:minCount 1;
-            sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
-        ]
-        [
-            sh:path sh:nodeKind;
-            sh:minCount 1;
-            sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
-        ]
-        [
-	        sh:path sh:or;
-            sh:minCount 1;
-	        sh:node <listnode>, <listnode_with_datatype>;
-	        sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)"
-	    ]
-    );
+    sh:property [
+        sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
+        sh:or(
+            [
+                sh:path sh:datatype;
+                sh:minCount 1;
+            ]
+            [
+                sh:path sh:nodeKind;
+                sh:minCount 1;
+            ]
+            [
+                sh:path sh:or;
+                sh:minCount 1;
+                sh:node <listnode>, <listnode_with_datatype>;
+            ]
+        );
+    ] ;
 
 .
 

@@ -41,6 +41,7 @@ const examples = [
     'undefinedAllowed', 
     'undefinedOrBounded',
     'withoutName', 
+    'withoutType', 
 ]
 
 describe('standalone constraint constraint', () => {
