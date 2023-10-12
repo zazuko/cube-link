@@ -118,8 +118,7 @@
 <Datatype> a sh:NodeShape ;
     sh:property [
         sh:path sh:datatype;
-	sh:minCount 1;
-	sh:message "sh:or (...) requires at least one [ sh:datatype ]"
+	    sh:minCount 1;
     ]
     .
 
@@ -127,18 +126,18 @@
 <listnode_with_datatype> a sh:NodeShape ;
     sh:property [
         sh:path rdf:first;
-	sh:node <Datatype>;
+	    sh:node <Datatype>;
     ];
     sh:property [
         sh:path rdf:rest;
-	sh:or (
-	    [
-	        sh:node <listnode_with_datatype>;
-	    ]
-	    [
-	        sh:hasValue rdf:nil;
-	    ]
-	) ;
+        sh:or (
+            [
+                sh:node <listnode_with_datatype>;
+            ]
+            [
+                sh:hasValue rdf:nil;
+            ]
+        ) ;
     ]
     .    
 
@@ -179,45 +178,45 @@
 <inversepathnode> a sh:NodeShape ;
     sh:property [
         sh:path sh:inversePath;
-	sh:nodeKind sh:IRI;
-	sh:minCount 1;
-	sh:maxCount 1;
+        sh:nodeKind sh:IRI;
+        sh:minCount 1;
+        sh:maxCount 1;
         sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
     ] .
 
 <NextInHierarchy> a sh:NodeShape ;
     sh:property [
         sh:path sh:path;
-	sh:minCount 1;
-	sh:maxCount 1;
-	sh:message "nextInHierarchy requires exactly one sh:path"
+        sh:minCount 1;
+        sh:maxCount 1;
+        sh:message "nextInHierarchy requires exactly one sh:path"
     ],
     [
         sh:path schema:name;
-	sh:minCount 1;
-	sh:message "nextInHierarchy requires schema:name"
+        sh:minCount 1;
+        sh:message "nextInHierarchy requires schema:name"
     ],
     [
         sh:path sh:targetClass;
-	sh:nodeKind sh:IRI;
-	sh:message "meta:nextInHierarchy/sh:targetClass must be an IRI"
+        sh:nodeKind sh:IRI;
+        sh:message "meta:nextInHierarchy/sh:targetClass must be an IRI"
     ],
     [
         sh:path meta:nextInHierarchy;
-	sh:node <NextInHierarchy> ;
-	sh:severity sh:Info;
-	sh:message "nextInHierarchy can have nested nodes"
+        sh:node <NextInHierarchy> ;
+        sh:severity sh:Info;
+        sh:message "nextInHierarchy can have nested nodes"
     ] ;
     sh:or (
         [
             sh:path sh:path;
-	    sh:nodeKind sh:IRI;
+	        sh:nodeKind sh:IRI;
             sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
         ]
         [
             sh:path sh:path;
-	    sh:nodeKind sh:BlankNode;
-	    sh:node <inversepathnode>;
+            sh:nodeKind sh:BlankNode;
+            sh:node <inversepathnode>;
             sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
         ]
     )
@@ -227,9 +226,9 @@
     sh:targetClass meta:Hierarchy ;
     sh:property [
         sh:path meta:hierarchyRoot;
-	sh:minCount 1;
-	sh:nodeKind sh:IRI;
-	sh:message "inHierarchy requires hierarchyRoot";
+        sh:minCount 1;
+        sh:nodeKind sh:IRI;
+        sh:message "inHierarchy requires hierarchyRoot";
     ],
     [
         sh:path schema:name;
@@ -238,7 +237,7 @@
     ],
     [
         sh:path meta:nextInHierarchy;
-	sh:node <NextInHierarchy>;
+	    sh:node <NextInHierarchy>;
         sh:minCount 1;
         sh:message "inHierarchy requires a conform nextInHierarchy"
     ] .
