@@ -1,0 +1,21 @@
+_:c14n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationReport> .
+_:c14n0 <http://www.w3.org/ns/shacl#conforms> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+_:c14n0 <http://www.w3.org/ns/shacl#result> _:c14n4 .
+_:c14n1 <http://www.w3.org/ns/shacl#message> "The constraints do not validate" .
+_:c14n1 <http://www.w3.org/ns/shacl#node> <http://example.org/ObservationConstraintProperty> .
+_:c14n1 <http://www.w3.org/ns/shacl#path> <http://www.w3.org/ns/shacl#property> .
+_:c14n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationResult> .
+_:c14n2 <http://www.w3.org/ns/shacl#focusNode> _:c14n3 .
+_:c14n2 <http://www.w3.org/ns/shacl#resultSeverity> <http://www.w3.org/ns/shacl#Violation> .
+_:c14n2 <http://www.w3.org/ns/shacl#sourceConstraintComponent> <http://www.w3.org/ns/shacl#OrConstraintComponent> .
+_:c14n2 <http://www.w3.org/ns/shacl#sourceShape> <http://example.org/ObservationConstraintProperty> .
+_:c14n2 <http://www.w3.org/ns/shacl#value> _:c14n3 .
+_:c14n4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationResult> .
+_:c14n4 <http://www.w3.org/ns/shacl#detail> _:c14n2 .
+_:c14n4 <http://www.w3.org/ns/shacl#focusNode> <https://example.org/shape> .
+_:c14n4 <http://www.w3.org/ns/shacl#resultMessage> "The constraints do not validate" .
+_:c14n4 <http://www.w3.org/ns/shacl#resultPath> <http://www.w3.org/ns/shacl#property> .
+_:c14n4 <http://www.w3.org/ns/shacl#resultSeverity> <http://www.w3.org/ns/shacl#Violation> .
+_:c14n4 <http://www.w3.org/ns/shacl#sourceConstraintComponent> <http://www.w3.org/ns/shacl#NodeConstraintComponent> .
+_:c14n4 <http://www.w3.org/ns/shacl#sourceShape> _:c14n1 .
+_:c14n4 <http://www.w3.org/ns/shacl#value> _:c14n3 .

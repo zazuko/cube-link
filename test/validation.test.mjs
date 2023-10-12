@@ -39,7 +39,8 @@ describe('basic cube constraint', () => {
 const examples = [
     'undefinedNotAllowed', 
     'undefinedAllowed', 
-    'undefinedOrBounded', 
+    'undefinedOrBounded',
+    'withoutName', 
 ]
 
 describe('standalone constraint constraint', () => {
