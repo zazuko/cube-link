@@ -32,7 +32,6 @@ function factory () {
     }
 
     // Redirect to a version of a shape (for routes: `/vX.Y.Z/shape/NAME` and `/latest/shape/NAME`)
-    const extensionPath = requestPath.endsWith('.ttl') ? '' : '.ttl'
     const shapePath = requestPath.split('/').slice(3).join('/')
     const versionMatch = requestPath.match(/^\/(?<version>v[0-9]+\.[0-9]+\.[0-9]+)\/shape\//)
     if (versionMatch || requestPath.startsWith('/latest/shape/')) {
@@ -55,7 +54,7 @@ function factory () {
         }
       }
       if (shapePath) {
-        return res.redirect(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}${extensionPath}`)
+        return res.redirect(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
       }
     }
 
