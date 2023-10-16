@@ -1,4 +1,4 @@
-@base <http://example.org/> .
+@base <https://cube.link/shape/standalone-cube-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -9,7 +9,7 @@
 
 #
 # This is the bare minimal SHACL shape for validating a cube.
-# All cubes should pass this validation. 
+# All cubes should pass this validation.
 # It does not validate the constraints
 #
 
@@ -82,7 +82,7 @@
         # optional, but recommended
         sh:path cube:observationConstraint ;
         sh:message "cube:Cube must point to a valid constraint"
-    ] 
+    ]
     .
 
 <ObservationSetShape>
@@ -104,4 +104,4 @@
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:message "cube:Observation requires cube:observedBy"
-    ] .    
+    ] .
