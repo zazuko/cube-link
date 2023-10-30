@@ -1,25 +1,36 @@
-_:c14n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationReport> .
-_:c14n0 <http://www.w3.org/ns/shacl#conforms> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
-_:c14n0 <http://www.w3.org/ns/shacl#result> _:c14n2 .
-_:c14n1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationResult> .
-_:c14n1 <http://www.w3.org/ns/shacl#focusNode> <https://example.org/constraint> .
-_:c14n1 <http://www.w3.org/ns/shacl#resultMessage> "cube:Constraint needs at least a certain amount of sh:properties" .
-_:c14n1 <http://www.w3.org/ns/shacl#resultPath> <http://www.w3.org/ns/shacl#property> .
-_:c14n1 <http://www.w3.org/ns/shacl#resultSeverity> <http://www.w3.org/ns/shacl#Violation> .
-_:c14n1 <http://www.w3.org/ns/shacl#sourceConstraintComponent> <http://www.w3.org/ns/shacl#MinCountConstraintComponent> .
-_:c14n1 <http://www.w3.org/ns/shacl#sourceShape> _:c14n4 .
-_:c14n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationResult> .
-_:c14n2 <http://www.w3.org/ns/shacl#detail> _:c14n1 .
-_:c14n2 <http://www.w3.org/ns/shacl#focusNode> <https://example.org/cube> .
-_:c14n2 <http://www.w3.org/ns/shacl#resultMessage> "cube:Cube must point to a valid cube:Constraint" .
-_:c14n2 <http://www.w3.org/ns/shacl#resultPath> <https://cube.link/observationConstraint> .
-_:c14n2 <http://www.w3.org/ns/shacl#resultSeverity> <http://www.w3.org/ns/shacl#Violation> .
-_:c14n2 <http://www.w3.org/ns/shacl#sourceConstraintComponent> <http://www.w3.org/ns/shacl#NodeConstraintComponent> .
-_:c14n2 <http://www.w3.org/ns/shacl#sourceShape> _:c14n3 .
-_:c14n2 <http://www.w3.org/ns/shacl#value> <https://example.org/constraint> .
-_:c14n3 <http://www.w3.org/ns/shacl#message> "cube:Cube must point to a valid cube:Constraint" .
-_:c14n3 <http://www.w3.org/ns/shacl#node> <http://example.org/ObservationConstraintShape> .
-_:c14n3 <http://www.w3.org/ns/shacl#path> <https://cube.link/observationConstraint> .
-_:c14n4 <http://www.w3.org/ns/shacl#message> "cube:Constraint needs at least a certain amount of sh:properties" .
-_:c14n4 <http://www.w3.org/ns/shacl#minCount> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:c14n4 <http://www.w3.org/ns/shacl#path> <http://www.w3.org/ns/shacl#property> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path cube:observationConstraint ;
+			sh:node <http://example.org/ObservationConstraintShape> ;
+			sh:message "cube:Cube must point to a valid cube:Constraint" ;
+		] ;
+		sh:focusNode <https://example.org/cube> ;
+		sh:resultPath cube:observationConstraint ;
+		sh:resultMessage "cube:Cube must point to a valid cube:Constraint" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+			sh:sourceShape [
+				sh:path sh:property ;
+				sh:message "cube:Constraint needs at least a certain amount of sh:properties" ;
+				sh:minCount 3 ;
+			] ;
+			sh:focusNode <https://example.org/constraint> ;
+			sh:resultPath sh:property ;
+			sh:resultMessage "cube:Constraint needs at least a certain amount of sh:properties" ;
+		] ;
+		sh:value <https://example.org/constraint> ;
+	] ;
+	sh:conforms false .
+

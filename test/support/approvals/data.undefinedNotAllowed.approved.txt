@@ -1,14 +1,23 @@
-_:c14n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationReport> .
-_:c14n0 <http://www.w3.org/ns/shacl#conforms> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
-_:c14n0 <http://www.w3.org/ns/shacl#result> _:c14n1 .
-_:c14n1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationResult> .
-_:c14n1 <http://www.w3.org/ns/shacl#focusNode> <https://example.org/observationC> .
-_:c14n1 <http://www.w3.org/ns/shacl#resultMessage> "Value does not have datatype <http://www.w3.org/2001/XMLSchema#decimal>" .
-_:c14n1 <http://www.w3.org/ns/shacl#resultPath> <https://example.org/dimension1> .
-_:c14n1 <http://www.w3.org/ns/shacl#resultSeverity> <http://www.w3.org/ns/shacl#Violation> .
-_:c14n1 <http://www.w3.org/ns/shacl#sourceConstraintComponent> <http://www.w3.org/ns/shacl#DatatypeConstraintComponent> .
-_:c14n1 <http://www.w3.org/ns/shacl#sourceShape> _:c14n2 .
-_:c14n1 <http://www.w3.org/ns/shacl#value> ""^^<https://cube.link/Undefined> .
-_:c14n2 <http://schema.org/name> "some Quantity" .
-_:c14n2 <http://www.w3.org/ns/shacl#datatype> <http://www.w3.org/2001/XMLSchema#decimal> .
-_:c14n2 <http://www.w3.org/ns/shacl#path> <https://example.org/dimension1> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:DatatypeConstraintComponent ;
+		sh:sourceShape [
+			sh:path <https://example.org/dimension1> ;
+			sh:datatype xsd:decimal ;
+			schema:name "some Quantity" ;
+		] ;
+		sh:focusNode <https://example.org/observationC> ;
+		sh:resultPath <https://example.org/dimension1> ;
+		sh:value ""^^cube:Undefined ;
+		sh:resultMessage "Value does not have datatype <http://www.w3.org/2001/XMLSchema#decimal>" ;
+	] ;
+	sh:conforms false .
+

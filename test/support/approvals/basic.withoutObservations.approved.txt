@@ -1,26 +1,37 @@
-_:c14n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationResult> .
-_:c14n0 <http://www.w3.org/ns/shacl#focusNode> <https://example.org/observationSet> .
-_:c14n0 <http://www.w3.org/ns/shacl#resultMessage> "cube:ObservationSet needs at least one cube:observation" .
-_:c14n0 <http://www.w3.org/ns/shacl#resultPath> <https://cube.link/observation> .
-_:c14n0 <http://www.w3.org/ns/shacl#resultSeverity> <http://www.w3.org/ns/shacl#Violation> .
-_:c14n0 <http://www.w3.org/ns/shacl#sourceConstraintComponent> <http://www.w3.org/ns/shacl#MinCountConstraintComponent> .
-_:c14n0 <http://www.w3.org/ns/shacl#sourceShape> _:c14n4 .
-_:c14n1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationReport> .
-_:c14n1 <http://www.w3.org/ns/shacl#conforms> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
-_:c14n1 <http://www.w3.org/ns/shacl#result> _:c14n3 .
-_:c14n2 <http://www.w3.org/ns/shacl#message> "cube:Cube needs at least one cube:ObservationSet" .
-_:c14n2 <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:c14n2 <http://www.w3.org/ns/shacl#node> <http://example.org/ObservationSetShape> .
-_:c14n2 <http://www.w3.org/ns/shacl#path> <https://cube.link/observationSet> .
-_:c14n3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/shacl#ValidationResult> .
-_:c14n3 <http://www.w3.org/ns/shacl#detail> _:c14n0 .
-_:c14n3 <http://www.w3.org/ns/shacl#focusNode> <https://example.org/cube> .
-_:c14n3 <http://www.w3.org/ns/shacl#resultMessage> "cube:Cube needs at least one cube:ObservationSet" .
-_:c14n3 <http://www.w3.org/ns/shacl#resultPath> <https://cube.link/observationSet> .
-_:c14n3 <http://www.w3.org/ns/shacl#resultSeverity> <http://www.w3.org/ns/shacl#Violation> .
-_:c14n3 <http://www.w3.org/ns/shacl#sourceConstraintComponent> <http://www.w3.org/ns/shacl#NodeConstraintComponent> .
-_:c14n3 <http://www.w3.org/ns/shacl#sourceShape> _:c14n2 .
-_:c14n3 <http://www.w3.org/ns/shacl#value> <https://example.org/observationSet> .
-_:c14n4 <http://www.w3.org/ns/shacl#message> "cube:ObservationSet needs at least one cube:observation" .
-_:c14n4 <http://www.w3.org/ns/shacl#minCount> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
-_:c14n4 <http://www.w3.org/ns/shacl#path> <https://cube.link/observation> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path cube:observationSet ;
+			sh:minCount 1 ;
+			sh:node <http://example.org/ObservationSetShape> ;
+			sh:message "cube:Cube needs at least one cube:ObservationSet" ;
+		] ;
+		sh:focusNode <https://example.org/cube> ;
+		sh:resultPath cube:observationSet ;
+		sh:resultMessage "cube:Cube needs at least one cube:ObservationSet" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+			sh:sourceShape [
+				sh:path cube:observation ;
+				sh:minCount 1 ;
+				sh:message "cube:ObservationSet needs at least one cube:observation" ;
+			] ;
+			sh:focusNode <https://example.org/observationSet> ;
+			sh:resultPath cube:observation ;
+			sh:resultMessage "cube:ObservationSet needs at least one cube:observation" ;
+		] ;
+		sh:value <https://example.org/observationSet> ;
+	] ;
+	sh:conforms false .
+
