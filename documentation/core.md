@@ -174,7 +174,7 @@ To provide a generic solution that works for all numbers and IRIs, _Cube Schema_
 <observation2> a cube:Observation;
   ex:literalDimension ""^^cube:Undefined.
 
-## Snippet for for the according shape:
+## Snippet for the according shape:
 
 [
     sh:path ex:literalDimension;
@@ -190,6 +190,8 @@ To provide a generic solution that works for all numbers and IRIs, _Cube Schema_
 </aside>
 
 If it is necessary to state why the value is `cube:Undefined`, annotations should be used.
+
+Additional constraints (like `sh:minLength` in the example) may be placed within the _real_ data type so that they do not apply to undefined values.
 
 
 ## Metadata
