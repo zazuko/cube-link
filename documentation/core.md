@@ -180,7 +180,7 @@ To provide a generic solution that works for all numbers and IRIs, _Cube Schema_
     sh:path ex:literalDimension;
     sh:nodeKind sh:Literal;
     sh:or([
-        sh:datatype xsd:string
+        sh:datatype xsd:string ; sh:minLength 1
     ], [
         sh:datatype cube:Undefined
     ])
