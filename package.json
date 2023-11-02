@@ -1,6 +1,6 @@
 {
   "name": "cube-link",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Cube Schema",
   "main": "validate.js",
   "scripts": {
