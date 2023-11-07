@@ -1,13 +1,15 @@
 {
   "name": "cube-link",
   "version": "0.1.0",
+  "private": true,
   "description": "Cube Schema",
   "main": "validate.js",
   "scripts": {
     "build": "./build.sh",
     "trifid": "trifid --verbose --config=trifid/config.json",
     "trifid:local": "trifid --verbose --config=trifid/config.local.json",
-    "test": "standard"
+    "test": "standard",
+    "release": "changeset tag"
   },
   "bin": {
     "cube-link": "bin/cube-link.js"
