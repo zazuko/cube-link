@@ -8,7 +8,7 @@
     "trifid": "trifid --verbose --config=trifid/config.json",
     "trifid:local": "trifid --verbose --config=trifid/config.local.json",
     "test": "standard",
-    "release": "changeset publish"
+    "release": "changeset tag"
   },
   "bin": {
     "cube-link": "bin/cube-link.js"
