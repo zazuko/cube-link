@@ -1,0 +1,180 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix code: <https://cube.link/code#>
+prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
+base <https://cube.link/shape#>
+
+[
+    code:imports <./standalone-cube-constraint>
+] .
+
+<CubeShape>
+    sh:property
+        [
+            sh:path rdf:type ;
+            sh:equals dcat:Dataset ;
+        ],
+        [
+            sh:path dcterms:creator ;
+            sh:equals schema:creator ;
+        ],
+        [
+            sh:path dcterms:publisher ;
+            sh:equals schema:publisher ;
+            sh:maxCount 1 ;
+            sh:message "Publisher must be a foaf:Organzation DCAT-AP." ;
+        ],
+        [
+            sh:path dcat:contactPoint ;
+            sh:equals schema:contactPoint ;
+        ],
+        [
+            sh:path dcterms:identifier ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:datatype xsd:string ;
+        ],
+        [
+            sh:path schema:workExample ;
+            sh:hasValue <https://ld.admin.ch/application/opendataswiss> ;
+        ],
+        [
+            sh:path schema:creativeWorkStatus ;
+            sh:hasValue <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
+        ],
+        [
+            sh:path [ sh:alternativePath ( schema:validThrough schema:expires ) ] ;
+            sh:maxCount 0 ;
+        ],
+        [
+            sh:path dcterms:title ;
+            sh:minCount 1 ;
+            sh:languageIn ( "de" "fr" "it" "en" ) ;
+            sh:uniqueLang true ;
+        ],
+        [
+            sh:path dcterms:description ;
+            sh:minCount 1 ;
+            sh:languageIn ( "de" "fr" "it" "en" ) ;
+            sh:uniqueLang true ;
+        ],
+        [
+            sh:path dcat:contactPoint ;
+            sh:minCount 1 ;
+        # TODO: validate vcard structure
+        ],
+        [
+            sh:path dcat:distribution ;
+            sh:minCount 1 ;
+        ],
+        [
+            sh:path dcat:issued ;
+            sh:maxCount 1 ;
+            sh:datatype xsd:dateTime ;
+        ],
+        [
+            sh:path dcat:modified ;
+            sh:maxCount 1 ;
+            sh:datatype xsd:dateTime ;
+        ],
+        [
+            sh:path dcat:theme ;
+            sh:in
+                (
+                    dcat-theme:work
+                    dcat-theme:construction
+                    dcat-theme:population
+                    dcat-theme:education
+                    dcat-theme:energy
+                    dcat-theme:finances
+                    dcat-theme:geography
+                    dcat-theme:legislation
+                    dcat-theme:health
+                    dcat-theme:trade
+                    dcat-theme:industry
+                    dcat-theme:crime
+                    dcat-theme:culture
+                    dcat-theme:agriculture
+                    dcat-theme:mobility
+                    dcat-theme:politics
+                    dcat-theme:prices
+                    dcat-theme:territory
+                    dcat-theme:social-security
+                    dcat-theme:statistical-basis
+                    dcat-theme:tourism
+                    dcat-theme:administration
+                    dcat-theme:national-defence
+                ) ;
+        ],
+        [
+            sh:path dcat:landingPage ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+        ],
+        [
+            sh:path dcterms:relation ;
+            sh:nodeKind sh:IRI ;
+        ],
+        [
+            sh:path rdfs:seeAlso ;
+            sh:nodeKind sh:IRI ;
+        ],
+        [
+            sh:path dcterms:spatial ;
+        # TODO
+        ],
+        [
+            sh:path dcterms:coverage ;
+        # TODO
+        ],
+        [
+            sh:path dcterms:temporal ;
+        # TODO
+        ],
+        [
+            sh:path dcat:keyword ;
+            sh:languageIn ( "de" "fr" "it" "en" ) ;
+        ],
+        [
+            sh:path dcat:accrualPeriodicity ;
+            sh:maxCount 1 ;
+            sh:in
+                (
+                    <http://publications.europa.eu/resource/authority/frequency/ANNUAL_2>
+                    <http://publications.europa.eu/resource/authority/frequency/ANNUAL_3>
+                    <http://publications.europa.eu/resource/authority/frequency/BIENNIAL>
+                    <http://publications.europa.eu/resource/authority/frequency/BIMONTHLY>
+                    <http://publications.europa.eu/resource/authority/frequency/BIWEEKLY>
+                    <http://publications.europa.eu/resource/authority/frequency/CONT>
+                    <http://publications.europa.eu/resource/authority/frequency/DAILY>
+                    <http://publications.europa.eu/resource/authority/frequency/DAILY_2>
+                    <http://publications.europa.eu/resource/authority/frequency/IRREG>
+                    <http://publications.europa.eu/resource/authority/frequency/MONTHLY>
+                    <http://publications.europa.eu/resource/authority/frequency/MONTHLY_2>
+                    <http://publications.europa.eu/resource/authority/frequency/MONTHLY_3>
+                    <http://publications.europa.eu/resource/authority/frequency/NEVER>
+                    <http://publications.europa.eu/resource/authority/frequency/OP_DATPRO>
+                    <http://publications.europa.eu/resource/authority/frequency/QUARTERLY>
+                    <http://publications.europa.eu/resource/authority/frequency/TRIENNIAL>
+                    <http://publications.europa.eu/resource/authority/frequency/UNKNOWN>
+                    <http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT>
+                    <http://publications.europa.eu/resource/authority/frequency/WEEKLY_2>
+                    <http://publications.europa.eu/resource/authority/frequency/WEEKLY_3>
+                    <http://publications.europa.eu/resource/authority/frequency/QUINQUENNIAL>
+                    <http://publications.europa.eu/resource/authority/frequency/DECENNIAL>
+                    <http://publications.europa.eu/resource/authority/frequency/HOURLY>
+                    <http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL>
+                    <http://publications.europa.eu/resource/authority/frequency/BIHOURLY>
+                    <http://publications.europa.eu/resource/authority/frequency/TRIHOURLY>
+                    <http://publications.europa.eu/resource/authority/frequency/BIDECENNIAL>
+                    <http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL>
+                    <http://publications.europa.eu/resource/authority/frequency/OTHER>
+                    <http://publications.europa.eu/resource/authority/frequency/WEEKLY>
+                    <http://publications.europa.eu/resource/authority/frequency/ANNUAL>
+                ) ;
+        ] .
