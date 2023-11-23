@@ -20,7 +20,7 @@ base <https://cube.link/shape#>
     sh:property
         [
             sh:path rdf:type ;
-            sh:equals dcat:Dataset ;
+            sh:hasValue dcat:Dataset ;
         ],
         [
             sh:path dcterms:creator ;
