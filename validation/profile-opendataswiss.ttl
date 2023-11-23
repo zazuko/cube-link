@@ -116,7 +116,7 @@ base <https://cube.link/shape#>
         ],
         [
             sh:path dcat:landingPage ;
-            sh:maxCount 1 ;
+            #sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
         ],
         [
