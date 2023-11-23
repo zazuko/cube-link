@@ -111,7 +111,7 @@ base <https://cube.link/shape#>
                     dcat-theme:statistical-basis
                     dcat-theme:tourism
                     dcat-theme:administration
-                    dcat-theme:national-defence
+                    dcat-theme:national-economy
                 ) ;
         ],
         [
