@@ -73,7 +73,7 @@ base <https://cube.link/shape#>
         ],
         [
             sh:path dcat:distribution ;
-            sh:minCount 1 ;
+        # TODO: validate structure
         ],
         [
             sh:path dcat:issued ;
