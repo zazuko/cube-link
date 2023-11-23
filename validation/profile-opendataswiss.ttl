@@ -7,6 +7,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 prefix code: <https://cube.link/code#>
 prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
+prefix cube: <https://cube.link/>
 base <https://cube.link/shape#>
 
 [
@@ -14,6 +15,8 @@ base <https://cube.link/shape#>
 ] .
 
 <CubeShape>
+    a sh:NodeShape ;
+    sh:targetClass cube:Cube ;
     sh:property
         [
             sh:path rdf:type ;
