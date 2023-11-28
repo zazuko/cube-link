@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 FAILED=0
 
@@ -8,8 +10,7 @@ SHORTENER="https://s.zazuko.com/api/v1/shorten/"
 
 function urlencode() {
   set +x
-
-  local string="$1"
+  local string="${1}"
   local strlen=${#string}
   local encoded=""
   local pos c o
