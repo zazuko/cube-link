@@ -12,7 +12,7 @@ function reportFailure() {
 for file in "$SCRIPT_PATH"/*/valid*.ttl; do
   echo "Test case $file"
   {
-    barnard59 cube check-metadata --profile validation/profile-opendataswiss.ttl > /dev/null 2>&1
+    npx barnard59 cube check-metadata --profile validation/profile-opendataswiss.ttl > /dev/null 2>&1
     success=$?
   } < "$file"
 
@@ -25,9 +25,9 @@ done
 # iterate over invalid cases
 for file in "$SCRIPT_PATH"/*/invalid*.cube.ttl; do
   echo "Test case $file"
-  report=$(barnard59 cube check-metadata --profile validation/profile-opendataswiss.ttl < "$file" 2> /dev/null)
+  report=$(npx barnard59 cube check-metadata --profile validation/profile-opendataswiss.ttl < "$file" 2> /dev/null)
   expectation="${file/cube\.ttl/expectation.ttl}"
-  if ! echo "$report" | barnard59 shacl validate --shapes "$expectation" > /dev/null 2>&1; then
+  if ! echo "$report" | npx barnard59 shacl validate --shapes "$expectation" > /dev/null 2>&1; then
     reportFailure "$(cat "$expectation")" "$report"
     FAILED=1
   fi
