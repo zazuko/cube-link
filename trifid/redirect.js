@@ -1,4 +1,5 @@
 // @ts-check
+const { Readable } = require('stream')
 const { fetchBuilder, MemoryCache } = require('node-fetch-cache')
 
 /**
@@ -54,7 +55,19 @@ function factory () {
         }
       }
       if (shapePath) {
-        return res.redirect(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
+        return fetch(`https://raw.githubusercdontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
+          .then(rawGithub => {
+            if (rawGithub.ok) {
+              res.set('Content-Type', 'text/turtle')
+            } else {
+              res.status(500)
+            }
+            Readable.fromWeb(rawGithub.body).pipe(res)
+          })
+          .catch((e) => {
+            res.status(502)
+            res.send(`Error fetching shape: ${e.message}`)
+          })
       }
     }
 
