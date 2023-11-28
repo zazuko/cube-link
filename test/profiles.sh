@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 FAILED=0
@@ -6,13 +6,13 @@ FAILED=0
 SHACL_PLAYGROUND_URL="https://shacl-playground.zazuko.com/"
 SHORTENER="https://s.zazuko.com/api/v1/shorten/"
 
-function urlencode() {
+urlencode() {
   set +x
 
-  local string="$1"
-  local strlen=${#string}
-  local encoded=""
-  local pos c o
+  string="$1"
+  strlen=${#string}
+  encoded=""
+  pos c o
 
   for (( pos=0 ; pos<strlen ; pos++ )); do
      c=${string:$pos:1}
@@ -20,17 +20,17 @@ function urlencode() {
         [-_.~a-zA-Z0-9] ) o="${c}" ;;
         * ) printf -v o '%%%02x' "'$c"
      esac
-     encoded+="${o}"
+     encoded="${encoded}${o}"
   done
   echo "${encoded}"
 }
 
-function getPlaygroundUrl() {
-  local playgroundUrl="$SHACL_PLAYGROUND_URL#page=2&shapesGraph=$(urlencode "$1")&dataGraph=$(urlencode "$2")&dataGraphFormat=text%2Fturtle"
+getPlaygroundUrl() {
+  playgroundUrl="$SHACL_PLAYGROUND_URL#page=2&shapesGraph=$(urlencode "$1")&dataGraph=$(urlencode "$2")&dataGraphFormat=text%2Fturtle"
   curl -s $SHORTENER --data-raw "url=$playgroundUrl"
 }
 
-function reportFailure() {
+reportFailure() {
   playground=$(getPlaygroundUrl "$1" "$2")
   echo "❌ FAIL - check report on $playground"
 }
