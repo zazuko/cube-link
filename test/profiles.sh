@@ -1,45 +1,22 @@
 #!/usr/bin/env bash
 
-set -x
-
 SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 FAILED=0
 
-SHACL_PLAYGROUND_URL="https://shacl-playground.zazuko.com/"
-SHORTENER="https://s.zazuko.com/api/v1/shorten/"
-
-function urlencode() {
-  set +x
-  local string="${1}"
-  local strlen=${#string}
-  local encoded=""
-  local pos c o
-
-  for (( pos=0 ; pos<strlen ; pos++ )); do
-     c=${string:$pos:1}
-     case "$c" in
-        [-_.~a-zA-Z0-9] ) o="${c}" ;;
-        * ) printf -v o '%%%02x' "'$c"
-     esac
-     encoded+="${o}"
-  done
-  echo "${encoded}"
-}
-
-function getPlaygroundUrl() {
-  local playgroundUrl="$SHACL_PLAYGROUND_URL#page=2&shapesGraph=$(urlencode "$1")&dataGraph=$(urlencode "$2")&dataGraphFormat=text%2Fturtle"
-  curl -s $SHORTENER --data-raw "url=$playgroundUrl"
-}
-
 function reportFailure() {
-  playground=$(getPlaygroundUrl "$1" "$2")
+  playground=$("$SCRIPT_PATH"/shorten-report.js "$1" "$2")
   echo "❌ FAIL - check report on $playground"
 }
 
 # iterate over valid cases, run validation and monitor exit code
 for file in "$SCRIPT_PATH"/*/valid*.ttl; do
   echo "Test case $file"
-  if ! barnard59 cube check-metadata --profile validation/profile-opendataswiss.ttl < "$file" > /dev/null 2>&1; then
+  {
+    barnard59 cube check-metadata --profile validation/profile-opendataswiss.ttl > /dev/null 2>&1
+    success=$?
+  } < "$file"
+
+  if [ $success -ne 0 ] ; then
     reportFailure "$(cat validation/profile-opendataswiss.ttl)" "$(cat "$file")"
     FAILED=1
   fi
