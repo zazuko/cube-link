@@ -26,7 +26,7 @@ function urlencode() {
 }
 
 function getPlaygroundUrl() {
-  local playgroundUrl="$SHACL_PLAYGROUND_URL#shapesGraph=$(urlencode "$1")&dataGraph=$(urlencode "$2")&dataGraphFormat=text%2Fturtle"
+  local playgroundUrl="$SHACL_PLAYGROUND_URL#page=2&shapesGraph=$(urlencode "$1")&dataGraph=$(urlencode "$2")&dataGraphFormat=text%2Fturtle"
   curl -s $SHORTENER --data-raw "url=$playgroundUrl"
 }
 
