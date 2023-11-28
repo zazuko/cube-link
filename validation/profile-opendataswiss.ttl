@@ -8,7 +8,7 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
 prefix code: <https://cube.link/code#>
 prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
 prefix cube: <https://cube.link/>
-base <https://cube.link/shape#>
+base <https://cube.link/shape/profile-opendataswiss#>
 
 [
     code:imports <./standalone-cube-constraint>

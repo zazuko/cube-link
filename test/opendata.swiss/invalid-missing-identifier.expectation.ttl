@@ -1,0 +1,27 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX cube: <https://cube.link/>
+PREFIX ex: <http://example.org/>
+
+[
+    a sh:NodeShape ;
+    sh:targetClass sh:ValidationReport ;
+    sh:property
+        [
+            sh:path sh:result ;
+            sh:maxCount 1 ;
+            sh:message "Only one violation expected" ;
+        ] ;
+] .
+
+[
+    a sh:NodeShape ;
+    sh:targetObjectsOf sh:result ;
+    sh:property
+        [
+            sh:path sh:resultPath ;
+            sh:hasValue dcterms:identifier ;
+            sh:message "Expected violation of dcterms:identifier property" ;
+        ] ;
+] .
