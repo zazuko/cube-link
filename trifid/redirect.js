@@ -55,19 +55,26 @@ function factory () {
         }
       }
       if (shapePath) {
-        return fetch(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
-          .then(rawGithub => {
-            if (rawGithub.ok) {
-              res.set('Content-Type', 'text/turtle')
-            } else {
-              res.status(500)
-            }
-            Readable.fromWeb(rawGithub.body).pipe(res)
-          })
-          .catch((e) => {
-            res.status(502)
-            res.send(`Error fetching shape: ${e.message}`)
-          })
+        try {
+          const rawGithub = await fetch(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
+          if (rawGithub.ok) {
+            res.set('Content-Type', 'text/turtle')
+          } else {
+            res.status(500)
+          }
+          // if the shape does not exist, we return a 404
+          if (rawGithub.status === 404) {
+            return res.sendStatus(404)
+          }
+          /** @type {any | null} */
+          const body = rawGithub.body
+          if (!rawGithub.body) {
+            throw new Error('No body')
+          }
+          return Readable.fromWeb(body).pipe(res)
+        } catch (e) {
+          return res.status(502).send(`Error fetching shape: ${e.message}`)
+        }
       }
     }
 
