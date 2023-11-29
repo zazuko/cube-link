@@ -1,5 +1,11 @@
 # cube-link
 
+## 0.1.2
+
+### Patch Changes
+
+- 6b78238: Bumping version only to trigger CI
+
 ## 0.1.1
 
 ### Patch Changes
