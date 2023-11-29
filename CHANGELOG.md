@@ -1,5 +1,11 @@
 # cube-link
 
+## 0.1.1
+
+### Patch Changes
+
+- 09e2f3d: Forward profiles directly from GitHub
+
 ## 0.1.0
 
 ### Minor Changes
