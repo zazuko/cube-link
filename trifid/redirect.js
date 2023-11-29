@@ -55,7 +55,7 @@ function factory () {
         }
       }
       if (shapePath) {
-        return fetch(`https://raw.githubusercdontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
+        return fetch(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
           .then(rawGithub => {
             if (rawGithub.ok) {
               res.set('Content-Type', 'text/turtle')
