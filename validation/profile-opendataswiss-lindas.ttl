@@ -1,4 +1,3 @@
-PREFIX prefix: <http://prefix.cc/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -10,20 +9,27 @@ prefix code: <https://cube.link/code#>
 prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
 prefix cube: <https://cube.link/>
 prefix frequency: <http://publications.europa.eu/resource/authority/frequency/>
-prefix : <https://cube.link/shape/profile-opendataswiss#>
+prefix : <https://cube.link/>
 
 [
     code:imports <./standalone-cube-constraint>
 ] .
 
-:CubeShape
+<CubeShape>
     a sh:NodeShape ;
-    sh:targetClass dcat:Dataset ;
+    sh:targetClass cube:Cube ;
     sh:property
         [
+            sh:path rdf:type ;
+            sh:hasValue dcat:Dataset ;
+        ],
+        [
+            sh:path dcterms:creator ;
+            sh:equals schema:creator ;
+        ],
+        [
             sh:path dcterms:publisher ;
-            sh:maxCount 1 ;
-            sh:message "Publisher must be a foaf:Organzation DCAT-AP." ;
+            sh:equals schema:publisher ;
         ],
         [
             sh:path dcat:contactPoint ;
@@ -42,10 +48,6 @@ prefix : <https://cube.link/shape/profile-opendataswiss#>
         [
             sh:path schema:creativeWorkStatus ;
             sh:hasValue <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
-        ],
-        [
-            sh:path [ sh:alternativePath ( schema:validThrough schema:expires ) ] ;
-            sh:maxCount 0 ;
         ],
         [
             sh:path dcterms:title ;
