@@ -66,7 +66,7 @@ for file in "$SCRIPT_PATH"/"$profile"/invalid*.ttl; do
   name=$(basename "$file")
   report=$(npx barnard59 cube check-metadata --profile "$profilePath" < "$file" 2> "$file.log" | "$SCRIPT_PATH"/pretty-print.mjs)
 
-  if ! echo "$report" | approvals "$name" --outdir "$SCRIPT_PATH"/"$profile" "$approvalsFlags" > /dev/null 2>&1 ; then
+  if ! echo "$report" | npx approvals "$name" --outdir "$SCRIPT_PATH"/"$profile" "$approvalsFlags" > /dev/null 2>&1 ; then
     "$SCRIPT_PATH"/report-failure.sh "$file" "$(cat "$profilePath")" "$(cat "$file")" "check results"
     FAILED=1
   else
