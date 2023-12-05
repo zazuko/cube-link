@@ -8,7 +8,11 @@
     "build": "./build.sh",
     "trifid": "trifid --verbose --config=trifid/config.json",
     "trifid:local": "trifid --verbose --config=trifid/config.local.json",
-    "test": "standard",
+    "lint": "standard",
+    "test": "run-s -ns test:*",
+    "test:observations": "./test/check-observations.sh",
+    "test:basic-cube-constraint": "./test/check-metadata.sh --profile=basic-cube-constraint",
+    "test:standalone-constraint-constraint": "./test/check-metadata.sh --profile=standalone-constraint-constraint",
     "release": "changeset tag"
   },
   "bin": {
@@ -61,6 +65,7 @@
     "barnard59-shacl": "^1.1.2",
     "barnard59-sparql": "^2.1.1",
     "chromium": "^3.0.3",
+    "npm-run-all": "^4.1.5",
     "pm2": "^5.2.0",
     "respec": "^31.0.11",
     "serve": "^13.0.2",
