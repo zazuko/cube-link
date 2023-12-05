@@ -19,16 +19,18 @@ An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constr
 ### Validate the cube
 
 <pre class='ednote' title='Work in progress'>
-This section is work in progress, the wording and terminology still need some thought.
+This section is a work in progress, the wording and terminology still need some thought.
 </pre>
 
-The validation process of the cube can be divided in three different aspects.
+The validation process of the cube can be divided into three different aspects.
 
 1) The cube structure and contents
 2) The structure of the observations
 3) The integrity of the constraints
 
 We provide a tool to do the actual validations in the repository.
+This tool is suitable for moderately sized cubes. To validate bigger ones,
+consider using the [commands](https://github.com/zazuko/barnard59/tree/master/packages/cube#commands) available in the package `barnard59-cube`.
 
 Install the package dependencies: `npm i`
 
@@ -40,7 +42,7 @@ Install the package dependencies: `npm i`
 </aside>
 
 #### The cube structure and contents
-Even though Cube Schema is a very lightweight vocabulary its structure needs to conform to a minimal set of rules to be considered a valid [Cube](#Cube) we provide a very light weight constraint that can be used to check this. The constraint can be found in [validation](https://github.com/zazuko/cube-link/tree/master/validation) directory of the repository, the constraint is called [basic-cube-constraint.ttl](https://github.com/zazuko/cube-link/tree/master/validation/basic-cube-constraint.ttl)
+Even though Cube Schema is a very lightweight vocabulary its structure needs to conform to a minimal set of rules to be considered a valid [Cube](#Cube). We provide a very lightweight constraint that can be used to check this. The constraint can be found in [validation](https://github.com/zazuko/cube-link/tree/master/validation) directory of the repository, the constraint is called [basic-cube-constraint.ttl](https://github.com/zazuko/cube-link/tree/master/validation/basic-cube-constraint.ttl)
 
 <aside class='example' title='Validate `cube.ttl` using the constraint in `validation/basic-cube-constraint.ttl`'>
  
@@ -52,7 +54,10 @@ Even though Cube Schema is a very lightweight vocabulary its structure needs to 
 
 #### The structure of the observations
 
-When a cube provides an optional observation constraint through the [observationConstaint](#observationConstraint) property this can be tested as well
+When a cube provides an optional observation constraint through the [observationConstaint](#observationConstraint) property, this can be tested as well.
+
+The constraint should be a SHACL shape but it's not expected to have any [target declaration](https://www.w3.org/TR/shacl/#targets).
+The validation tool takes care of making all the observations a target for the constraint.
 
 <aside class='example' title='Validate `cube.ttl` by using the constraint in `constraint.ttl`'>
  
@@ -70,7 +75,7 @@ When the cube and constraints are in the same file simply use the same filename 
 
 #### The integrity of the constraints
 If constraints are used to provide guidance for interaction with the cube, e.g. visualizations
-it is important that the constraints themselves are confirming to a structure that interaction can deal with
+it is important that the constraints themselves conform to a structure that interaction can deal with
 
 <aside class='example' title='Validate a CubeConstraint with a constraint'>
 Here we use the validation to validate the constraint, not the cube
