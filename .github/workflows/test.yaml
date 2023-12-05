@@ -23,6 +23,7 @@ jobs:
   check-cube:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         profile:
           - basic-cube-constraint
@@ -41,3 +42,10 @@ jobs:
 
       - name: Run tests
         run: ./test/check-metadata.sh --profile=${{ matrix.profile }}
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: test-results
+          path: test
