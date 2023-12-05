@@ -17,7 +17,7 @@ The cube and shape are connected on the fly with triples in the following patter
 _:b1 a sh:NodeShape;
   sh:targetNode ?cube;
   sh:property [
-    sh:node ?observationShape; # from ?cube cube:observationShape ?observationShape
+    sh:node ?observationShape; # from ?cube cube:observationConstraint ?observationShape
     sh:path (cube:observationSet cube:observation);
   ].
 
@@ -32,7 +32,7 @@ async function validateCube (cube, shape, factory = rdf) {
   clownface({ dataset: shape, term: rdf.blankNode() })
     .addOut(ns.sh.targetNode, cubeRoot)
     .addOut(ns.sh.property, null, property => {
-      property.addOut(ns.sh.node, cubeRoot.out(ns.cube.observationShape))
+      property.addOut(ns.sh.node, cubeRoot.out(ns.cube.observationConstraint))
       property.addList(ns.sh.path, [ns.cube.observationSet, ns.cube.observation])
     })
 

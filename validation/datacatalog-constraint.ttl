@@ -1,4 +1,4 @@
-@base <http://example.org/> .
+@base <https://cube.link/shape/datacatalog-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -114,33 +114,33 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:message "schema:Dataset needs a schema:hasPart"
-    ] ;    
+    ] ;
     sh:property [
         sh:path void:sparqlEndpoint ;
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:message "schema:Dataset needs a void:sparqlEndpoint"
-    ] ; 
+    ] ;
     sh:property [
         sh:path void:rootResource ;
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:message "schema:Dataset needs a void:rootResource"
-    ] ; 
+    ] ;
     sh:property [
         sh:path void:exampleResource ;
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:message "schema:Dataset needs a void:exampleResource"
-    ] ; 
+    ] ;
     sh:property [
         sh:path dcat:distribution ;
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
         sh:node <DCATDistributionShape>;
         sh:message "schema:Dataset needs a valid dcat:Distribution"
-    ] ; 
-    
+    ] ;
+
     .
 
 <DCATDistributionShape>
