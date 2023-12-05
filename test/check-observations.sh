@@ -31,7 +31,7 @@ for file in "$SCRIPT_PATH"/observations/*.ttl; do
     fi
 
     name=$(basename "$file")
-    report=$(npx barnard59 cube check-observations --constraint "$file" < "$file" 2> /dev/null | "$SCRIPT_PATH"/pretty-print.mjs)
+    report=$(npx barnard59 cube check-observations --constraint "$file" < "$file" 2> "$file.log" | "$SCRIPT_PATH"/pretty-print.mjs)
 
     if ! echo "$report" | approvals "$name" --outdir "$SCRIPT_PATH"/observations "$approvalsFlags" > /dev/null 2>&1 ; then
       "$SCRIPT_PATH"/report-failure.sh "$file" "$(cat "$file")" "$(cat "$file")" "check results"
