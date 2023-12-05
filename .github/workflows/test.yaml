@@ -20,6 +20,13 @@ jobs:
       - name: Run tests
         run: sh ./test/check-observations.sh
 
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: test-observations
+          path: test
+
   check-cube:
     runs-on: ubuntu-latest
     strategy:
@@ -47,5 +54,5 @@ jobs:
         uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
-          name: ${{ matrix.profile }}
+          name: test-${{ matrix.profile }}
           path: test
