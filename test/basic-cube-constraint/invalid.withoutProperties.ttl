@@ -9,7 +9,7 @@
     cube:observationSet <observationSet> ;
     cube:observationConstraint <constraint> .
 <observationSet> cube:observation <observation> .
-<constraint> sh:property 
-  [ sh:path rdf:type ] , 
-  [ sh:path cube:observedBy ] , 
-  [ sh:path dc:date ] .
+#<constraint> sh:property
+  #[ sh:path rdf:type ] ,
+  #[ sh:path cube:observedBy ] ,
+  #[ sh:path dc:date ] .

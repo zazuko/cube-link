@@ -8,7 +8,7 @@ _:report a sh:ValidationReport ;
 	sh:result [
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
-		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
 		sh:sourceShape [
 			sh:path cube:observationSet ;
 			sh:minCount 1 ;
@@ -18,20 +18,5 @@ _:report a sh:ValidationReport ;
 		sh:focusNode <https://example.org/cube> ;
 		sh:resultPath cube:observationSet ;
 		sh:resultMessage "cube:Cube needs at least one cube:ObservationSet" ;
-		sh:detail [
-			rdf:type sh:ValidationResult ;
-			sh:resultSeverity sh:Violation ;
-			sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
-			sh:sourceShape [
-				sh:path cube:observation ;
-				sh:minCount 1 ;
-				sh:message "cube:ObservationSet needs at least one cube:observation" ;
-			] ;
-			sh:focusNode <https://example.org/observationSet> ;
-			sh:resultPath cube:observation ;
-			sh:resultMessage "cube:ObservationSet needs at least one cube:observation" ;
-		] ;
-		sh:value <https://example.org/observationSet> ;
 	] ;
 	sh:conforms false .
-

@@ -15,49 +15,40 @@ _:report a sh:ValidationReport ;
 			sh:message "The constraints do not validate" ;
 		] ;
 		sh:focusNode <https://example.org/shape> ;
-		sh:value _:g2 ;
+		sh:value _:b3 ;
 		sh:resultMessage "The constraints do not validate" ;
 		sh:detail [
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
 			sh:sourceShape [
-				sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
+				sh:message "needs a schema:name" ;
 				sh:or (
 					[
-						sh:path sh:datatype ;
+						sh:path schema:name ;
+						sh:or (
+							[
+								sh:datatype xsd:string ;
+							]
+							[
+								sh:datatype rdf:langString ;
+							]
+						) ;
 						sh:minCount 1 ;
 					]
 					[
-						sh:path sh:nodeKind ;
-						sh:minCount 1 ;
-					]
-					[
-						sh:path sh:or ;
-						sh:node <http://example.org/listnode>, [
-							sh:property [
-								sh:path sh:datatype ;
-								sh:minCount 1 ;
-							] ;
-							sh:path (
-								[
-									sh:zeroOrMorePath rdf:rest ;
-								]
-								rdf:first
-							) ;
-						] ;
-						sh:minCount 1 ;
+						sh:path sh:path ;
+						sh:in (
+							rdf:type
+							cube:observedBy
+						) ;
 					]
 				) ;
 			] ;
-			sh:focusNode _:g2 ;
-			sh:value _:g2 ;
-			sh:resultMessage "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
+			sh:focusNode _:b3 ;
+			sh:value _:b3 ;
+			sh:resultMessage "needs a schema:name" ;
 		] ;
 		sh:resultPath sh:property ;
 	] ;
 	sh:conforms false .
-
-_:g2 sh:path sh:closed ;
-	sh:hasValue true .
-

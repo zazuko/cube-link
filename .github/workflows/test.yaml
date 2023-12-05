@@ -1,0 +1,43 @@
+name: Test validation
+
+on: [push, pull_request]
+
+jobs:
+  check-constraint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: sh ./test/check-observations.sh
+
+  check-cube:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        profile:
+          - basic-cube-constraint
+          - standalone-constraint-constraint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: ./test/check-metadata.sh --profile=$profile

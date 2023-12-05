@@ -33,4 +33,3 @@ _:report a sh:ValidationReport ;
 		sh:value <https://example.org/constraint> ;
 	] ;
 	sh:conforms false .
-
