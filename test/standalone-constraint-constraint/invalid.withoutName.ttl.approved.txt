@@ -11,8 +11,8 @@ _:report a sh:ValidationReport ;
 		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
 		sh:sourceShape [
 			sh:path sh:property ;
-			sh:node <http://example.org/ObservationConstraintProperty> ;
-			sh:message "The constraints do not validated" ;
+			sh:node <https://cube.link/shape/ObservationConstraintProperty> ;
+			sh:message "The constraints do not validate" ;
 		] ;
 		sh:focusNode <https://example.org/shape> ;
 		sh:value _:b3 ;
