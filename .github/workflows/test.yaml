@@ -40,4 +40,4 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: ./test/check-metadata.sh --profile=$profile
+        run: ./test/check-metadata.sh --profile=${{ matrix.profile }}
