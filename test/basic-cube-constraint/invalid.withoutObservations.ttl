@@ -1,0 +1,15 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix cube: <https://cube.link/> .
+@base <https://example.org/> .
+
+<cube> a cube:Cube ;
+    cube:observationSet <observationSet> ;
+    cube:observationConstraint <constraint> .
+#<observationSet> cube:observation <observation> .
+<constraint> sh:property
+        [ sh:path rdf:type ] ,
+        [ sh:path cube:observedBy ] ,
+        [ sh:path dc:date ] .

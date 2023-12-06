@@ -22,7 +22,7 @@ _:b1 a sh:NodeShape;
   ].
 
 */
-async function validateCube (cube, shape) {
+async function validateCube (cube, shape, factory = rdf) {
   const cubeRoot = clownface({ dataset: cube, term: ns.cube.Cube }).in(ns.rdf.type)
 
   if (!cubeRoot.term) {
@@ -36,7 +36,7 @@ async function validateCube (cube, shape) {
       property.addList(ns.sh.path, [ns.cube.observationSet, ns.cube.observation])
     })
 
-  const validator = new SHACLValidator(shape, { factory: rdf })
+  const validator = new SHACLValidator(shape, { factory })
 
   return validator.validate(cube)
 }
