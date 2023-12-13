@@ -16,92 +16,124 @@
 <CubeShape>
     a sh:NodeShape ;
     sh:targetClass cube:Cube ;
-    sh:or(
+    sh:or
+        (
             [
-		        sh:path schema:name;
-                sh:minCount 1;
-                sh:datatype xsd:string;
+                sh:path schema:name ;
+                sh:minCount 1 ;
+                sh:datatype xsd:string ;
                 sh:message "cube:Cube needs a schema:name"
             ]
             [
-		        sh:path schema:name;
-                sh:minCount 1;
-                sh:datatype rdf:langString;
+                sh:path schema:name ;
+                sh:minCount 1 ;
+                sh:datatype rdf:langString ;
                 sh:message "cube:Cube needs a schema:name"
             ]
-    );
-    sh:property [
-        sh:path schema:publisher ;
-        sh:minCount 1 ;
-        sh:nodeKind sh:IRI ;
-        sh:message "cube:Cube needs an schema:publisher"
-    ] ;
-    sh:property [
-        sh:path schema:creator ;
-        sh:minCount 1 ;
-        sh:nodeKind sh:IRI ;
-        sh:message "cube:Cube needs an schema:creator"
-    ] ;
-    sh:property [
-        sh:path schema:contactPoint ;
-        sh:minCount 1 ;
-        sh:nodeKind sh:IRI ;
-        sh:message "cube:Cube needs an schema:contactpoint"
-    ] ;
-    sh:property [
-        sh:path schema:contributor ;
-        sh:minCount 1 ;
-        sh:nodeKind sh:IRI ;
-        sh:message "cube:Cube needs an schema:contributor"
-    ] ;
-    sh:property [
-        sh:path schema:dateCreated ;
-        sh:minCount 1 ;
-        sh:datatype xsd:date;
-        sh:message "cube:Cube needs a valid schema:dateCreated"
-    ] ;
-    sh:property [
-        sh:path schema:datePublished ;
-        sh:minCount 1 ;
-        sh:datatype xsd:date;
-        sh:message "cube:Cube needs a valid schema:datePublished"
-    ] ;
-    sh:property [
-        sh:path schema:dateModified ;
-        sh:minCount 1 ;
-        sh:datatype xsd:date;
-        sh:message "cube:Cube needs a valid schema:dateModified"
-    ] ;
-    sh:property [
-        sh:path cube:observationSet ;
-        sh:minCount 1 ;
-        sh:node <ObservationSetShape> ;
-        sh:message "cube:Cube needs an observationSet"
-    ];
-    sh:property [
+        ) ;
+    sh:property
+        [
+            sh:path schema:publisher ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:message "cube:Cube needs an schema:publisher"
+        ] ;
+    sh:property
+        [
+            sh:path schema:creator ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:message "cube:Cube needs an schema:creator"
+        ] ;
+    sh:property
+        [
+            sh:path schema:contactPoint ;
+            sh:minCount 1 ;
+            sh:or
+                (
+                    [ sh:nodeKind sh:IRI ]
+                    [
+                        sh:nodeKind sh:BlankNode ;
+                        sh:property
+                            [
+                                sh:path schema:email ;
+                                sh:minCount 1 ;
+                                sh:datatype xsd:string ;
+                                sh:message "Contact point needs an email"
+                            ],
+                            [
+                                sh:path schema:name ;
+                                sh:minCount 1 ;
+                                sh:datatype xsd:string ;
+                                sh:message "Contact point needs a name"
+                            ]
+                    ]
+                ) ;
+
+            sh:message "cube:Cube needs a schema:contactpoint"
+        ] ;
+    sh:property
+        [
+            sh:path schema:contributor ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:message "cube:Cube needs an schema:contributor"
+        ] ;
+    sh:property
+        [
+            sh:path schema:dateCreated ;
+            sh:minCount 1 ;
+            sh:datatype xsd:date ;
+            sh:message "cube:Cube needs a valid schema:dateCreated"
+        ] ;
+    sh:property
+        [
+            sh:path schema:datePublished ;
+            sh:minCount 1 ;
+            sh:datatype xsd:date ;
+            sh:message "cube:Cube needs a valid schema:datePublished"
+        ] ;
+    sh:property
+        [
+            sh:path schema:dateModified ;
+            sh:minCount 1 ;
+            sh:datatype xsd:date ;
+            sh:message "cube:Cube needs a valid schema:dateModified"
+        ] ;
+    sh:property
+        [
+            sh:path cube:observationSet ;
+            sh:minCount 1 ;
+            sh:node <ObservationSetShape> ;
+            sh:message "cube:Cube needs an observationSet"
+        ] ;
+    sh:property
+        [
         # optional, but recommended
-        sh:path cube:observationConstraint ;
-        sh:message "cube:Cube must point to a valid constraint"
-    ]
-    .
+            sh:path cube:observationConstraint ;
+            sh:message "cube:Cube must point to a valid constraint"
+        ]
+.
 
 <ObservationSetShape>
     a sh:NodeShape ;
     sh:targetClass cube:ObservationSet ;
-    sh:property [
-        sh:path cube:observation ;
-        sh:minCount 1 ;
-        sh:node <ObservationShape> ;
-        sh:message "cube:Cube needs at least one observation"
-    ];
-    .
+    sh:property
+        [
+            sh:path cube:observation ;
+            sh:minCount 1 ;
+            sh:node <ObservationShape> ;
+            sh:message "cube:Cube needs at least one observation"
+        ] ;
+.
 
 <ObservationShape>
     a sh:NodeShape ;
     sh:targetClass cube:Observation ;
-    sh:property [
-        sh:path cube:observedBy ;
-        sh:minCount 1 ;
-        sh:nodeKind sh:IRI ;
-        sh:message "cube:Observation requires cube:observedBy"
-    ] .
+    sh:property
+        [
+            sh:path cube:observedBy ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:message "cube:Observation requires cube:observedBy"
+        ] .
