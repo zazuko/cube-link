@@ -28,26 +28,37 @@ The validation process of the cube can be divided into three different aspects.
 2) The structure of the observations
 3) The integrity of the constraints
 
-We provide a tool to do the actual validations in the repository.
-This tool is suitable for moderately sized cubes. To validate bigger ones,
-consider using the [commands](https://github.com/zazuko/barnard59/tree/master/packages/cube#commands) available in the package `barnard59-cube`.
+The node package `barnard59-cube` includes [commands](https://github.com/zazuko/barnard59/tree/master/packages/cube#commands) to validate cubes and their constraints. Validation commands can be used with SHACL shapes defined [here](https://github.com/zazuko/cube-link/tree/main/validation).
 
-Install the package dependencies: `npm i`
+Once the package and its dependencies are installed in a node project (use `npm init -y` to create a new one): 
+
+```bash
+npm install barnard59 barnard59-cube barnard59-base barnard59-formats barnard59-http barnard59-rdf barnard59-sparql barnard59-shacl
+```
+
+Validation commands provide SHACL validation reports in case of violations:
 
 <aside class='example' title='Validate `cube.ttl` by using the constraint in `constraint.ttl`'>
  
 
-```./bin/cube-link.js validate cube.ttl constraint.ttl```
+```bash
+ cat cube.ttl | npx barnard59 cube check-observations --constraint constraint.ttl
+```
 
 </aside>
 
-#### The cube structure and contents
-Even though Cube Schema is a very lightweight vocabulary its structure needs to conform to a minimal set of rules to be considered a valid [Cube](#Cube). We provide a very lightweight constraint that can be used to check this. The constraint can be found in [validation](https://github.com/zazuko/cube-link/tree/master/validation) directory of the repository, the constraint is called [basic-cube-constraint.ttl](https://github.com/zazuko/cube-link/tree/master/validation/basic-cube-constraint.ttl)
 
-<aside class='example' title='Validate `cube.ttl` using the constraint in `validation/basic-cube-constraint.ttl`'>
+#### The cube structure and contents
+Even though Cube Schema is a very lightweight vocabulary, there is a minimal set of rules to make a valid [Cube](#Cube). We provide a [basic cube constraint](https://cube.link/latest/shape/basic-cube-constraint) to check this (notice that input includes both cube and constraint).
+
+<aside class='example' title='Validate cube using `basic-cube-constraint`'>
  
 
-```./bin/cube-link.js validate cube.ttl validation/basic-cube-constraint.ttl```
+```bash
+cat cube.ttl constraint.ttl | npx barnard59 cube check-metadata /
+    --profile https://cube.link/latest/shape/basic-cube-constraint /
+    --profileFormat text/turtle
+```
 
 </aside>
 
@@ -62,25 +73,34 @@ The validation tool takes care of making all the observations a target for the c
 <aside class='example' title='Validate `cube.ttl` by using the constraint in `constraint.ttl`'>
  
 
-```./bin/cube-link.js validate cube.ttl constraint.ttl```
+```bash
+ cat cube.ttl | npx barnard59 cube check-observations --constraint constraint.ttl
+```
 
 </aside>
 
 <aside class='example' title='Validate a Cube with inline constraints'>
 When the cube and constraints are in the same file simply use the same filename twice
 
-```./bin/cube-link.js validate completecube.ttl completecube.ttl```
+```bash
+ cat completecube.ttl | npx barnard59 cube check-observations --constraint completecube.ttl
+```
 
 </aside>
 
+Further options and details are described in the [documentation](https://github.com/zazuko/barnard59/tree/master/packages/cube#check-observations). 
+
 #### The integrity of the constraints
-If constraints are used to provide guidance for interaction with the cube, e.g. visualizations
-it is important that the constraints themselves conform to a structure that interaction can deal with
+If constraints are used to provide guidance for interaction with the cube (e.g. visualizations), the constraints themselves should conform to a structure that interaction can deal with.
 
 <aside class='example' title='Validate a CubeConstraint with a constraint'>
-Here we use the validation to validate the constraint, not the cube
+Here we use the command to validate the constraint, not the cube
 
-```./bin/cube-link.js validate constraint.ttl validation/standalone-constraint-constraint.ttl```
+```bash
+cat constraint.ttl | npx barnard59 cube check-metadata /
+    --profile https://cube.link/latest/shape/standalone-constraint-constraint /
+    --profileFormat text/turtle
+```
 
 </aside>
 
