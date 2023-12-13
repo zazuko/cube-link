@@ -12,4 +12,7 @@ playground=$("$SCRIPT_PATH"/shorten-report.js "$2" "$3")
 echo "❌ FAIL - $name. $message: $playground"
 
 # git diff non interactive
-git diff --color --no-index "$1".approved.txt "$1".received.txt | cat
+if [ -f "$1".approved.txt ]; then
+  printf '\n'
+  git diff --color --no-index "$1".approved.txt "$1".received.txt | cat
+fi
