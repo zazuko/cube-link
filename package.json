@@ -12,6 +12,7 @@
     "test": "run-s -ns \"test:* {@}\" --",
     "test:observations": "./test/check-observations.sh",
     "test:basic-cube-constraint": "./test/check-metadata.sh --profile=basic-cube-constraint",
+    "test:standalone-cube-constraint": "./test/check-metadata.sh --profile=standalone-cube-constraint",
     "test:standalone-constraint-constraint": "./test/check-metadata.sh --profile=standalone-constraint-constraint",
     "release": "changeset tag"
   },
