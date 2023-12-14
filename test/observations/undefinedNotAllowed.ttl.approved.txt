@@ -1,0 +1,22 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:DatatypeConstraintComponent ;
+		sh:sourceShape [
+			sh:path <https://example.org/dimension1> ;
+			sh:datatype xsd:decimal ;
+			schema:name "some Quantity" ;
+		] ;
+		sh:focusNode <https://example.org/observationC> ;
+		sh:resultPath <https://example.org/dimension1> ;
+		sh:value ""^^cube:Undefined ;
+		sh:resultMessage "Value does not have datatype <http://www.w3.org/2001/XMLSchema#decimal>" ;
+	] ;
+	sh:conforms false .

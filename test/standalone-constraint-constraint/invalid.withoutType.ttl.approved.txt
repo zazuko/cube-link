@@ -1,0 +1,59 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path sh:property ;
+			sh:node <https://cube.link/shape/ObservationConstraintProperty> ;
+			sh:message "The constraints do not validate" ;
+		] ;
+		sh:focusNode <https://example.org/shape> ;
+		sh:value _:b3 ;
+		sh:resultMessage "The constraints do not validate" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:OrConstraintComponent ;
+			sh:sourceShape [
+				sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
+				sh:or (
+					[
+						sh:path sh:datatype ;
+						sh:minCount 1 ;
+					]
+					[
+						sh:path sh:nodeKind ;
+						sh:minCount 1 ;
+					]
+					[
+						sh:path sh:or ;
+						sh:node <https://cube.link/shape/listnode>, [
+							sh:property [
+								sh:path sh:datatype ;
+								sh:minCount 1 ;
+							] ;
+							sh:path (
+								[
+									sh:zeroOrMorePath rdf:rest ;
+								]
+								rdf:first
+							) ;
+						] ;
+						sh:minCount 1 ;
+					]
+				) ;
+			] ;
+			sh:focusNode _:b3 ;
+			sh:value _:b3 ;
+			sh:resultMessage "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
+		] ;
+		sh:resultPath sh:property ;
+	] ;
+	sh:conforms false .
