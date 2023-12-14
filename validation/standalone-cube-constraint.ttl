@@ -49,8 +49,28 @@
         [
             sh:path schema:contactPoint ;
             sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:message "cube:Cube needs an schema:contactpoint"
+            sh:or
+                (
+                    [ sh:nodeKind sh:IRI ]
+                    [
+                        sh:nodeKind sh:BlankNode ;
+                        sh:property
+                            [
+                                sh:path schema:email ;
+                                sh:minCount 1 ;
+                                sh:datatype xsd:string ;
+                                sh:message "Contact point needs an email"
+                            ],
+                            [
+                                sh:path schema:name ;
+                                sh:minCount 1 ;
+                                sh:datatype xsd:string ;
+                                sh:message "Contact point needs a name"
+                            ]
+                    ]
+                ) ;
+
+            sh:message "cube:Cube needs a schema:contactpoint"
         ] ;
     sh:property
         [
