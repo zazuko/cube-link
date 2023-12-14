@@ -67,7 +67,7 @@ cat cube.ttl constraint.ttl | npx barnard59 cube check-metadata /
 
 When a cube provides an optional observation constraint through the [observationConstaint](#observationConstraint) property, this can be tested as well.
 
-The constraint should be a SHACL shape but it's not expected to have any [target declaration](https://www.w3.org/TR/shacl/#targets).
+The constraint should be a SHACL shape but it's expected to not have any [target declaration](https://www.w3.org/TR/shacl/#targets).
 The validation tool takes care of making all the observations a target for the constraint.
 
 <aside class='example' title='Validate `cube.ttl` by using the constraint in `constraint.ttl`'>
