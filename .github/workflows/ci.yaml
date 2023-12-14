@@ -11,6 +11,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
+    env:
+      DOCKER_IMAGE: ghcr.io/zazuko/cube-link
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,11 +35,16 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker meta
-        uses: zazuko/action-docker-meta@main
         id: docker_meta
+        uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/zazuko/cube-link
-          include-pipeline-id: true
+          images: "${{ env.DOCKER_IMAGE }}"
+          tags: |
+            type=ref,event=branch
+            type=semver,prefix=v,pattern={{version}}
+            type=semver,prefix=v,pattern={{major}}.{{minor}}
+            type=semver,prefix=v,pattern={{major}}
+            type=sha
 
       - name: Build and push Docker images
         id: docker_build

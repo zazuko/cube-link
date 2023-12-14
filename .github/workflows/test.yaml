@@ -1,14 +1,58 @@
-name: Test
+name: Test validation
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  check-constraint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm ci
-      - run: bash ./test/profiles.sh
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: sh ./test/check-observations.sh
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: test-observations
+          path: test
+
+  check-cube:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        profile:
+          - basic-cube-constraint
+          - standalone-constraint-constraint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: ./test/check-metadata.sh --profile=${{ matrix.profile }}
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: test-${{ matrix.profile }}
+          path: test
