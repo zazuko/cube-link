@@ -1,0 +1,41 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:OrConstraintComponent ;
+		sh:sourceShape [
+			sh:path schema:contactPoint ;
+			sh:minCount 1 ;
+			sh:or (
+				[
+					sh:nodeKind sh:IRI ;
+				]
+				[
+					sh:nodeKind sh:BlankNode ;
+					sh:property [
+						sh:path schema:email ;
+						sh:minCount 1 ;
+						sh:message "Contact point needs an email" ;
+						sh:datatype xsd:string ;
+					], [
+						sh:path schema:name ;
+						sh:minCount 1 ;
+						sh:message "Contact point needs a name" ;
+						sh:datatype xsd:string ;
+					] ;
+				]
+			) ;
+			sh:message "cube:Cube needs a schema:contactpoint" ;
+		] ;
+		sh:focusNode <https://example.org/cube> ;
+		sh:resultPath schema:contactPoint ;
+		sh:value _:b1 ;
+		sh:resultMessage "cube:Cube needs a schema:contactpoint" ;
+	] ;
+	sh:conforms false .
