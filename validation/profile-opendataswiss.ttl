@@ -43,7 +43,7 @@ prefix : <https://cube.link/shape/profile-opendataswiss#>
             sh:minCount 1 ;
             sh:maxCount 1 ;
             sh:datatype xsd:string ;
-            sh:pattern "^[A-Z0-9-_]@[A-Z0-9-_]$" ;
+            sh:pattern "^[A-Z0-9-_]+@[A-Z0-9-_]+$" ;
             sh:flags "i" ;
         ],
         :property-title,
