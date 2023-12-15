@@ -44,7 +44,7 @@ for file in "$SCRIPT_PATH"/"$profile"/valid*.ttl; do
 
   name=$(basename "$file")
   {
-    npx barnard59 cube check-metadata --profile "$profilePath" > /dev/null 2>"$file.log"
+    npx barnard59 cube check-metadata --profile "$profilePath" > "$file.log" 2>&1
     success=$?
   } < "$file"
 

@@ -1,3 +1,4 @@
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX schema: <http://schema.org/>
@@ -12,9 +13,18 @@ ex:cube
     schema:creator ex:JohnDoe ;
     schema:publisher ex:Org ;
     dcterms:publisher ex:Org ;
-    schema:contactPoint _:cp ;
-    dcat:contactPoint _:cp ;
-    #dcterms:identifier "1234" ;
+    dcat:contactPoint
+        [
+            a vcard:Organization ;
+            vcard:fn "Abteilung Lärm BAFU" ;
+            vcard:hasEmail <mailto:noise@bafu.admin.ch>
+        ],
+        [
+            a vcard:Individual ;
+            vcard:fn "Max Muster, BAFU Datenspezialist" ;
+            vcard:hasEmail <mailto:max-muster@bafu.admin.ch>
+        ] ;
+    #dcterms:identifier "1234@acme-corp" ;
     schema:workExample <https://ld.admin.ch/application/opendataswiss> ;
     schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
     dcterms:title "Example Cube"@en ;
@@ -27,4 +37,14 @@ ex:cube
         dcat-theme:population ;
     dcat:landingPage <http://example.com/cube> ;
     dcat:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/BIWEEKLY> ;
+    dcat:distribution
+        [
+            dcterms:title "Example Cube"@en ;
+            dcat:accessURL <http://example.com/cube> ;
+            dcat:mediaType <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+            dcat:rights "NonCommercialAllowed-CommercialAllowed-ReferenceNotRequired" ;
+            dcat:issued "2019-01-01T00:00:00Z"^^xsd:dateTime ;
+            dcterms:description "This is an example cube"@en ;
+        ] ;
+    dcterms:language "de" ;
 .

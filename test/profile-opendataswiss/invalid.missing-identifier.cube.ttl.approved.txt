@@ -14,6 +14,7 @@ _:report a sh:ValidationReport ;
 			sh:datatype xsd:string ;
 			sh:maxCount 1 ;
 			sh:minCount 1 ;
+			sh:pattern "^.+@.+$" ;
 		] ;
 		sh:focusNode <http://example.org/cube> ;
 		sh:resultPath <http://purl.org/dc/terms/identifier> ;

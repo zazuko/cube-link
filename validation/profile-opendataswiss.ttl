@@ -1,3 +1,5 @@
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX prefix: <http://prefix.cc/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -23,61 +25,56 @@ prefix : <https://cube.link/shape/profile-opendataswiss#>
         [
             sh:path dcterms:publisher ;
             sh:maxCount 1 ;
-            sh:message "Publisher must be a foaf:Organzation DCAT-AP." ;
-        ],
-        [
-            sh:path dcat:contactPoint ;
-            sh:equals schema:contactPoint ;
+            sh:minCount 1 ;
+            sh:message "Publisher must be a foaf:Organization DCAT-AP." ;
+            sh:xone
+                (
+                    [
+                        sh:nodeKind sh:IRI
+                    ]
+                    [
+                        sh:nodeKind sh:BlankNode ;
+                        sh:class foaf:Organization ;
+                    ]
+                )
         ],
         [
             sh:path dcterms:identifier ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
             sh:datatype xsd:string ;
+            sh:pattern "^[A-Z0-9-_]@[A-Z0-9-_]$" ;
+            sh:flags "i" ;
         ],
-        [
-            sh:path schema:workExample ;
-            sh:hasValue <https://ld.admin.ch/application/opendataswiss> ;
-        ],
-        [
-            sh:path schema:creativeWorkStatus ;
-            sh:hasValue <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
-        ],
-        [
-            sh:path [ sh:alternativePath ( schema:validThrough schema:expires ) ] ;
-            sh:maxCount 0 ;
-        ],
-        [
-            sh:path dcterms:title ;
-            sh:minCount 1 ;
-            sh:languageIn ( "de" "fr" "it" "en" ) ;
-            sh:uniqueLang true ;
-        ],
-        [
-            sh:path dcterms:description ;
-            sh:minCount 1 ;
-            sh:languageIn ( "de" "fr" "it" "en" ) ;
-            sh:uniqueLang true ;
-        ],
+        :property-title,
+        :property-description,
         [
             sh:path dcat:contactPoint ;
             sh:minCount 1 ;
-        # TODO: validate vcard structure
+            sh:message "Contact point must be a vcard:Organization or vcard:Individual." ;
+            sh:nodeKind sh:BlankNode ;
+            sh:node :shape-contactPoint ;
+            sh:or
+                (
+                    [
+                        sh:class vcard:Organization
+                    ]
+                    [
+                        sh:class vcard:Individual
+                    ]
+                )
         ],
         [
             sh:path dcat:distribution ;
-        # TODO: validate structure
+            sh:minCount 1 ;
+            sh:node :shape-distribution ;
         ],
         [
             sh:path dcat:issued ;
             sh:maxCount 1 ;
             sh:datatype xsd:dateTime ;
         ],
-        [
-            sh:path dcat:modified ;
-            sh:maxCount 1 ;
-            sh:datatype xsd:dateTime ;
-        ],
+        :property-modified,
         [
             sh:path dcat:theme ;
             sh:in
@@ -109,7 +106,7 @@ prefix : <https://cube.link/shape/profile-opendataswiss#>
         ],
         [
             sh:path dcat:landingPage ;
-            #sh:maxCount 1 ;
+        #sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
         ],
         [
@@ -121,16 +118,28 @@ prefix : <https://cube.link/shape/profile-opendataswiss#>
             sh:nodeKind sh:IRI ;
         ],
         [
-            sh:path dcterms:spatial ;
-        # TODO
-        ],
-        [
             sh:path dcterms:coverage ;
         # TODO
         ],
         [
             sh:path dcterms:temporal ;
-        # TODO
+            sh:class dcat:PeriodOfTime ;
+            sh:node
+                [
+                    sh:property
+                        [
+                            sh:path schema:startDate ;
+                            sh:datatype xsd:date ;
+                            sh:minCount 1 ;
+                            sh:maxCount 1 ;
+                        ],
+                        [
+                            sh:path schema:endDate ;
+                            sh:datatype xsd:date ;
+                            sh:minCount 1 ;
+                            sh:maxCount 1 ;
+                        ] ;
+                ] ;
         ],
         [
             sh:path dcat:keyword ;
@@ -173,4 +182,99 @@ prefix : <https://cube.link/shape/profile-opendataswiss#>
                     frequency:WEEKLY
                     frequency:ANNUAL
                 ) ;
-        ] .
+        ],
+        :property-language .
+
+:shape-contactPoint
+    sh:property
+        [
+            sh:path vcard:fn ;
+            sh:minCount 1 ;
+        ],
+        [
+            sh:path vcard:hasEmail ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+        ]
+.
+
+:shape-distribution
+    sh:property
+        [
+            sh:path dcterms:identifier ;
+            sh:maxCount 1 ;
+            sh:datatype xsd:string ;
+        ],
+        [
+            sh:path dcat:accessURL ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+        ],
+        [
+            sh:path dcat:downloadURL ;
+            sh:nodeKind sh:IRI ;
+        ],
+        [
+            sh:path dcat:issued ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:datatype xsd:dateTime ;
+        ],
+        [
+            sh:path dcat:rights ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:in
+                (
+                    "NonCommercialAllowed-CommercialAllowed-ReferenceNotRequired"
+                    "NonCommercialAllowed-CommercialAllowed-ReferenceRequired"
+                    "NonCommercialAllowed-CommercialWithPermission-ReferenceNotRequired"
+                    "NonCommercialAllowed-CommercialWithPermission-ReferenceRequired"
+                ) ;
+        ],
+        [
+            sh:path dcat:mediaType ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+        ],
+        [
+            sh:path dcat:format ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+        ],
+        [
+            sh:path dcat:byteSize ;
+            sh:maxCount 1 ;
+            sh:datatype xsd:decimal ;
+        ],
+        :property-modified,
+        :property-title,
+        :property-description,
+        :property-language ;
+.
+
+:property-title
+    sh:path dcterms:title ;
+    sh:minCount 1 ;
+    sh:languageIn ( "de" "fr" "it" "en" ) ;
+    sh:uniqueLang true ;
+.
+
+:property-description
+    sh:path dcterms:description ;
+    sh:minCount 1 ;
+    sh:languageIn ( "de" "fr" "it" "en" ) ;
+    sh:uniqueLang true ;
+.
+
+:property-modified
+    sh:path dcterms:modified ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:dateTime ;
+.
+
+:property-language
+    sh:path dcterms:language ;
+    sh:minLength 2 ;
+    sh:maxLength 2 ;
+.

@@ -1,4 +1,5 @@
 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX schema: <http://schema.org/>
@@ -12,7 +13,11 @@ ex:cube
     dcterms:creator ex:JohnDoe ;
     schema:creator ex:JohnDoe ;
     schema:publisher ex:Org ;
-    dcterms:publisher ex:Org ;
+    dcterms:publisher
+        [
+            a foaf:Organization ;
+            foaf:name "Acme Corp." ;
+        ] ;
     dcat:contactPoint
         [
             a vcard:Organization ;
@@ -47,10 +52,4 @@ ex:cube
             dcterms:description "This is an example cube"@en ;
         ] ;
     dcterms:language "de" ;
-    dcat:temporal
-        [
-            a dcat:PeriodOfTime ;
-            schema:startDate "1905-03-01"^^xsd:date ;
-            schema:endDate "2013-01-05"^^xsd:date
-        ] ;
 .
