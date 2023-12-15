@@ -35,6 +35,8 @@ jobs:
         profile:
           - basic-cube-constraint
           - standalone-constraint-constraint
+          - profile-opendataswiss
+          - profile-opendataswiss-lindas
     steps:
       - name: Checkout
         uses: actions/checkout@v4

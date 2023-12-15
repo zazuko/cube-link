@@ -1,0 +1,15 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX cube: <https://cube.link/>
+PREFIX ex: <http://example.org/>
+
+ex:Cube
+    a cube:Cube, dcat:Dataset ;
+    dcterms:identifier "cube-1234" ;
+    schema:workExample <https://ld.admin.ch/application/opendataswiss> ;
+    schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
+    dcterms:creator ex:John-Doe ;
+    schema:expires "2020-12-31T23:59:59Z"^^xsd:dateTime ;
+.

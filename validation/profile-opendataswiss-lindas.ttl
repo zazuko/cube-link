@@ -1,14 +1,9 @@
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX schema: <http://schema.org/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX schema: <http://schema.org/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 prefix code: <https://cube.link/code#>
-prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
 prefix cube: <https://cube.link/>
-prefix frequency: <http://publications.europa.eu/resource/authority/frequency/>
 prefix : <https://cube.link/>
 
 [
@@ -18,28 +13,16 @@ prefix : <https://cube.link/>
 <CubeShape>
     a sh:NodeShape ;
     sh:targetClass cube:Cube ;
+    sh:class dcat:Dataset ;
     sh:property
-        [
-            sh:path rdf:type ;
-            sh:hasValue dcat:Dataset ;
-        ],
-        [
-            sh:path dcterms:creator ;
-            sh:equals schema:creator ;
-        ],
-        [
-            sh:path dcterms:publisher ;
-            sh:equals schema:publisher ;
-        ],
-        [
-            sh:path dcat:contactPoint ;
-            sh:equals schema:contactPoint ;
-        ],
         [
             sh:path dcterms:identifier ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
-            sh:datatype xsd:string ;
+        ],
+        [
+            sh:path dcterms:creator ;
+            sh:minCount 1 ;
         ],
         [
             sh:path schema:workExample ;
@@ -50,129 +33,7 @@ prefix : <https://cube.link/>
             sh:hasValue <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
         ],
         [
-            sh:path dcterms:title ;
-            sh:minCount 1 ;
-            sh:languageIn ( "de" "fr" "it" "en" ) ;
-            sh:uniqueLang true ;
-        ],
-        [
-            sh:path dcterms:description ;
-            sh:minCount 1 ;
-            sh:languageIn ( "de" "fr" "it" "en" ) ;
-            sh:uniqueLang true ;
-        ],
-        [
-            sh:path dcat:contactPoint ;
-            sh:minCount 1 ;
-        # TODO: validate vcard structure
-        ],
-        [
-            sh:path dcat:distribution ;
-        # TODO: validate structure
-        ],
-        [
-            sh:path dcat:issued ;
-            sh:maxCount 1 ;
-            sh:datatype xsd:dateTime ;
-        ],
-        [
-            sh:path dcat:modified ;
-            sh:maxCount 1 ;
-            sh:datatype xsd:dateTime ;
-        ],
-        [
-            sh:path dcat:theme ;
-            sh:in
-                (
-                    dcat-theme:work
-                    dcat-theme:construction
-                    dcat-theme:population
-                    dcat-theme:education
-                    dcat-theme:energy
-                    dcat-theme:finances
-                    dcat-theme:geography
-                    dcat-theme:legislation
-                    dcat-theme:health
-                    dcat-theme:trade
-                    dcat-theme:industry
-                    dcat-theme:crime
-                    dcat-theme:culture
-                    dcat-theme:agriculture
-                    dcat-theme:mobility
-                    dcat-theme:politics
-                    dcat-theme:prices
-                    dcat-theme:territory
-                    dcat-theme:social-security
-                    dcat-theme:statistical-basis
-                    dcat-theme:tourism
-                    dcat-theme:administration
-                    dcat-theme:national-economy
-                ) ;
-        ],
-        [
-            sh:path dcat:landingPage ;
-            #sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-        ],
-        [
-            sh:path dcterms:relation ;
-            sh:nodeKind sh:IRI ;
-        ],
-        [
-            sh:path rdfs:seeAlso ;
-            sh:nodeKind sh:IRI ;
-        ],
-        [
-            sh:path dcterms:spatial ;
-        # TODO
-        ],
-        [
-            sh:path dcterms:coverage ;
-        # TODO
-        ],
-        [
-            sh:path dcterms:temporal ;
-        # TODO
-        ],
-        [
-            sh:path dcat:keyword ;
-            sh:languageIn ( "de" "fr" "it" "en" ) ;
-        ],
-        [
-            sh:path dcat:accrualPeriodicity ;
-            sh:maxCount 1 ;
-            sh:in
-                (
-                    frequency:ANNUAL_2
-                    frequency:ANNUAL_3
-                    frequency:BIENNIAL
-                    frequency:BIMONTHLY
-                    frequency:BIWEEKLY
-                    frequency:CONT
-                    frequency:DAILY
-                    frequency:DAILY_2
-                    frequency:IRREG
-                    frequency:MONTHLY
-                    frequency:MONTHLY_2
-                    frequency:MONTHLY_3
-                    frequency:NEVER
-                    frequency:OP_DATPRO
-                    frequency:QUARTERLY
-                    frequency:TRIENNIAL
-                    frequency:UNKNOWN
-                    frequency:UPDATE_CONT
-                    frequency:WEEKLY_2
-                    frequency:WEEKLY_3
-                    frequency:QUINQUENNIAL
-                    frequency:DECENNIAL
-                    frequency:HOURLY
-                    frequency:QUADRENNIAL
-                    frequency:BIHOURLY
-                    frequency:TRIHOURLY
-                    frequency:BIDECENNIAL
-                    frequency:TRIDECENNIAL
-                    frequency:OTHER
-                    frequency:WEEKLY
-                    frequency:ANNUAL
-                ) ;
-        ] .
+            sh:path [ sh:alternativePath ( schema:validThrough schema:expires ) ] ;
+            sh:maxCount 0 ;
+        ] ;
+.
