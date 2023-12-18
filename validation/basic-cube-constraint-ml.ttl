@@ -1,4 +1,4 @@
-@base <https://cube.link/shape/basic-cube-constraint-ml#> .
+@prefix : <https://cube.link/shape/basic-cube-constraint-ml#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -12,23 +12,23 @@
 # All cubes should pass this validation.
 #
 
-<CubeShape>
+:CubeShape
     a sh:NodeShape ;
     sh:targetClass cube:Cube ;
     sh:property [
         sh:path cube:observationSet ;
         sh:minCount 1 ;
-        sh:node <ObservationSetShape> ;
+        sh:node :ObservationSetShape ;
         sh:message "cube:Cube needs at least one cube:ObservationSet"
     ];
     sh:property [
         # optional, but recommended
         sh:path cube:observationConstraint ;
-        sh:node <ObservationConstraintShape> ;
+        sh:node :ObservationConstraintShape ;
         sh:message "cube:Cube must point to a valid cube:Constraint"
     ] .
 
-<ObservationSetShape>
+:ObservationSetShape
     a sh:NodeShape ;
     sh:targetClass cube:ObservationSet ;
     sh:property [
@@ -37,7 +37,7 @@
         sh:message "cube:ObservationSet needs at least one cube:observation"
     ] .
 
-<ObservationConstraintShape>
+:ObservationConstraintShape
     a sh:NodeShape ;
     sh:targetClass cube:Constraint ;
     sh:property [
@@ -51,11 +51,11 @@
         # we assume at least 3 dimensions, otherwise we would have an empty list of dimensions
         # one for cube:observedBy, one for rdf:type and at least one cube dimension
         sh:path sh:property ;
-        sh:node <SchemaNameML> ;
+        sh:node :SchemaNameML ;
         sh:message "When Schema:name is provided it should have all 3 languages"
     ] .
 
-<SchemaNameML> a sh:NodeShape  ;
+:SchemaNameML a sh:NodeShape  ;
     sh:property [
         sh:or(
             [

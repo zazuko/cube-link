@@ -1,4 +1,4 @@
-@base <https://cube.link/shape/standalone-constraint-constraint#> .
+@prefix : <https://cube.link/shape/standalone-constraint-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -14,7 +14,7 @@
 # All Cube Constraints should pass this validation.
 #
 
-<ObservationConstraintShape>
+:ObservationConstraintShape
     a sh:NodeShape ;
     sh:targetClass cube:Constraint ;
     sh:property [
@@ -26,7 +26,7 @@
     ] ;
     sh:property [
         sh:path sh:property ;
-        sh:node <ObservationConstraintProperty>;
+        sh:node :ObservationConstraintProperty ;
         sh:message "The constraints do not validate"
     ] ;
 	sh:property [
@@ -35,12 +35,12 @@
     ] ;
     sh:property [
         sh:path meta:inHierarchy;
-        sh:node <Hierarchy>;
+        sh:node :Hierarchy;
         sh:message "meta:inHierarchy does not validate"
     ] ;
     .
 
-<ObservationConstraintProperty> a sh:NodeShape;
+:ObservationConstraintProperty a sh:NodeShape;
 	sh:property [
         sh:path qudt:scaleType;
         sh:in ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
@@ -60,7 +60,7 @@
     ];
     sh:property [
         sh:path sh:in;
-        sh:node <listnode>;
+        sh:node :listnode;
         sh:message "sh:in needs to be a list"
     ];
     sh:property [
@@ -70,7 +70,7 @@
     ];
     sh:property [
         sh:path meta:dimensionRelation;
-        sh:node <DimensionRelation>;
+        sh:node :DimensionRelation;
         sh:message "meta:dimensionRelation does not validate"
     ];
 
@@ -103,7 +103,7 @@
             [
                 sh:path sh:or;
                 sh:minCount 1;
-                sh:node <listnode> ;
+                sh:node :listnode ;
                 sh:node [
                     sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
                     sh:property [ sh:path sh:datatype ; sh:minCount 1 ] ; # have at least one datatype
@@ -115,7 +115,7 @@
 .
 
 
-<DimensionRelation> a sh:NodeShape ;
+:DimensionRelation a sh:NodeShape ;
     sh:property [
         sh:path meta:relatesTo;
         sh:nodeKind sh:IRI ;
@@ -125,7 +125,7 @@
 
 
 # Testing proper rdf:list construction
-<listnode> a sh:NodeShape ;
+:listnode a sh:NodeShape ;
     sh:targetClass rdf:List ;
     sh:property [
         sh:path rdf:first;
@@ -138,18 +138,18 @@
         sh:maxCount 1;
         sh:or (
             [
-                sh:node <listnode>;
+                sh:node :listnode;
             ]
             [
                 sh:hasValue rdf:nil;
             ]
 	    ) ;
         sh:message "a rdf:List can only have one rdf:rest node, multiples nodes need to be linked"
-        #sh:node <restnode>;
+        #sh:node :restnode;
     ]
     .
 
-<inversepathnode> a sh:NodeShape ;
+:inversepathnode a sh:NodeShape ;
     sh:property [
         sh:path sh:inversePath;
         sh:nodeKind sh:IRI;
@@ -158,7 +158,7 @@
         sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
     ] .
 
-<NextInHierarchy> a sh:NodeShape ;
+:NextInHierarchy a sh:NodeShape ;
     sh:property [
         sh:path sh:path;
         sh:minCount 1;
@@ -177,7 +177,7 @@
     ],
     [
         sh:path meta:nextInHierarchy;
-        sh:node <NextInHierarchy> ;
+        sh:node :NextInHierarchy ;
         sh:severity sh:Info;
         sh:message "nextInHierarchy can have nested nodes"
     ] ;
@@ -190,13 +190,13 @@
         [
             sh:path sh:path;
             sh:nodeKind sh:BlankNode;
-            sh:node <inversepathnode>;
+            sh:node :inversepathnode;
             sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
         ]
     )
     .
 
-<Hierarchy> a sh:NodeShape ;
+:Hierarchy a sh:NodeShape ;
     sh:targetClass meta:Hierarchy ;
     sh:property [
         sh:path meta:hierarchyRoot;
@@ -211,7 +211,7 @@
     ],
     [
         sh:path meta:nextInHierarchy;
-	    sh:node <NextInHierarchy>;
+	    sh:node :NextInHierarchy;
         sh:minCount 1;
         sh:message "inHierarchy requires a conform nextInHierarchy"
     ] .

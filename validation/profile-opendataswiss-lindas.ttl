@@ -2,15 +2,16 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
 PREFIX schema: <http://schema.org/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
-prefix code: <https://cube.link/code#>
+prefix code: <https://code.described.at/>
 prefix cube: <https://cube.link/>
-prefix : <https://cube.link/>
+prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
 
 [
-    code:imports <./standalone-cube-constraint>
+    code:imports <./standalone-cube-constraint> ;
+    code:extension "ttl" ;
 ] .
 
-<CubeShape>
+:CubeShape
     a sh:NodeShape ;
     sh:targetClass cube:Cube ;
     sh:class dcat:Dataset ;

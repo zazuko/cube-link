@@ -8,14 +8,15 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <http://schema.org/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
-prefix code: <https://cube.link/code#>
+prefix code: <https://code.described.at/>
 prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
 prefix cube: <https://cube.link/>
 prefix frequency: <http://publications.europa.eu/resource/authority/frequency/>
 prefix : <https://cube.link/shape/profile-opendataswiss#>
 
 [
-    code:imports <./standalone-cube-constraint>
+    code:imports <./standalone-cube-constraint> ;
+    code:extension "ttl" ;
 ] .
 
 :CubeShape
