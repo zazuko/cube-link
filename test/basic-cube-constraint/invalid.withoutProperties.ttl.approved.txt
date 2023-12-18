@@ -11,7 +11,7 @@ _:report a sh:ValidationReport ;
 		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
 		sh:sourceShape [
 			sh:path cube:observationConstraint ;
-			sh:node <https://cube.link/shape/ObservationConstraintShape> ;
+			sh:node <https://cube.link/shape/basic-cube-constraint#ObservationConstraintShape> ;
 			sh:message "cube:Cube must point to a valid cube:Constraint" ;
 		] ;
 		sh:focusNode <https://example.org/cube> ;

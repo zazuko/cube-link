@@ -9,7 +9,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:ClassConstraintComponent ;
-		sh:sourceShape <CubeShape> ;
+		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#CubeShape> ;
 		sh:focusNode <http://example.org/Cube> ;
 		sh:value <http://example.org/Cube> ;
 	] ;
