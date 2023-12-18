@@ -17,6 +17,9 @@ For example, to get version 0.0.4 of `standalone-cube-constraint.ttl`, fetch htt
 
 Otherwise, to get the latest version, fetch https://cube.link/latest/shape/standalone-cube-constraint instead.
 
+Finally, it is possible to request shapes from a branch or specific commit by building the URI as `/ref/{REF}/shape/...`.
+For example, to get the `standalone-cube-constraint` shape from the `main` branch, fetch https://cube.link/ref/main/shape/standalone-cube-constraint and to get it from the commit `a1b2c3d4e5f6`, fetch https://cube.link/ref/a1b2c3d4e5f6/shape/standalone-cube-constraint .
+
 ## How to Contribute
 
 Please open [Issues](https://github.com/zazuko/cube-link/issues) on this repository or provide PRs for contributions.
