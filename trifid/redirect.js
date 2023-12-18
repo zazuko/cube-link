@@ -32,11 +32,11 @@ function factory () {
       return res.redirect('/relation/')
     }
 
-    // Redirect to a version of a shape (for routes: `/vX.Y.Z/shape/NAME` and `/latest/shape/NAME`)
+    // Redirect to a version of a shape (for routes: `/vX.Y.Z/shape/NAME`, `/ref/COMMIT_ID/shape/NAME` and `/latest/shape/NAME`)
     const shapePath = requestPath.split('/').slice(3).join('/')
-    const versionMatch = requestPath.match(/^\/(?<version>v[0-9]+\.[0-9]+\.[0-9]+)\/shape\//)
-    if (versionMatch || requestPath.startsWith('/latest/shape/')) {
-      let versionPath = versionMatch?.groups?.version
+    const versionMatch = requestPath.match(/^\/((?<version>v[0-9]+\.[0-9]+\.[0-9]+)|(ref\/(?<ref>.+))|latest)\/shape\//)
+    if (versionMatch) {
+      let { versionPath, ref } = versionMatch?.groups || {}
       if (!versionPath) {
         const tags = await cachedFetch('https://api.github.com/repos/zazuko/cube-link/tags').then(async (res) => {
           if (!res.ok) {
@@ -53,7 +53,10 @@ function factory () {
         } else {
           versionPath = tags[0].name
         }
+      } else if (ref) {
+        versionPath = ref
       }
+
       if (shapePath) {
         try {
           const rawGithub = await fetch(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
