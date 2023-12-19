@@ -32,12 +32,13 @@ function factory () {
       return res.redirect('/relation/')
     }
 
-    // Redirect to a version of a shape (for routes: `/vX.Y.Z/shape/NAME` and `/latest/shape/NAME`)
-    const shapePath = requestPath.split('/').slice(3).join('/')
-    const versionMatch = requestPath.match(/^\/(?<version>v[0-9]+\.[0-9]+\.[0-9]+)\/shape\//)
-    if (versionMatch || requestPath.startsWith('/latest/shape/')) {
-      let versionPath = versionMatch?.groups?.version
-      if (!versionPath) {
+    // Redirect to a version of a shape (for routes: `/vX.Y.Z/shape/NAME`, `/ref/COMMIT_ID/shape/NAME` and `/latest/shape/NAME`)
+    const versionMatch = requestPath.match(/^\/((?<version>v[0-9]+\.[0-9]+\.[0-9]+)|(ref\/(?<ref>.+))|latest)\/shape\/(?<shapePath>.+)/)
+    if (versionMatch) {
+      let versionPath
+
+      const { version, ref, shapePath } = versionMatch?.groups || {}
+      if (!version && !ref) {
         const tags = await cachedFetch('https://api.github.com/repos/zazuko/cube-link/tags').then(async (res) => {
           if (!res.ok) {
             await res.ejectFromCache()
@@ -53,28 +54,31 @@ function factory () {
         } else {
           versionPath = tags[0].name
         }
+      } else if (ref) {
+        versionPath = ref
+      } else if (version) {
+        versionPath = version
       }
-      if (shapePath) {
-        try {
-          const rawGithub = await fetch(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
-          if (rawGithub.ok) {
-            res.set('Content-Type', 'text/turtle')
-          } else {
-            res.status(500)
-          }
-          // if the shape does not exist, we return a 404
-          if (rawGithub.status === 404) {
-            return res.sendStatus(404)
-          }
-          /** @type {any | null} */
-          const body = rawGithub.body
-          if (!rawGithub.body) {
-            throw new Error('No body')
-          }
-          return Readable.fromWeb(body).pipe(res)
-        } catch (e) {
-          return res.status(502).send(`Error fetching shape: ${e.message}`)
+
+      try {
+        const rawGithub = await fetch(`https://raw.githubusercontent.com/zazuko/cube-link/${versionPath}/validation/${shapePath}.ttl`)
+        if (rawGithub.ok) {
+          res.set('Content-Type', 'text/turtle')
+        } else {
+          res.status(500)
         }
+        // if the shape does not exist, we return a 404
+        if (rawGithub.status === 404) {
+          return res.sendStatus(404)
+        }
+        /** @type {any | null} */
+        const body = rawGithub.body
+        if (!rawGithub.body) {
+          throw new Error('No body')
+        }
+        return Readable.fromWeb(body).pipe(res)
+      } catch (e) {
+        return res.status(502).send(`Error fetching shape: ${e.message}`)
       }
     }
 
