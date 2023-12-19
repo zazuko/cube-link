@@ -1,5 +1,12 @@
 # cube-link
 
+## 0.1.4
+
+### Patch Changes
+
+- 81b209f: `standalone-cube-constraint`: Allow `schema:contactPoint` to be a blank node
+- 9d28874: Support git refs when serving shapes from Trifid
+
 ## 0.1.3
 
 ### Patch Changes
