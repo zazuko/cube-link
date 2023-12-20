@@ -26,7 +26,7 @@ _:report a sh:ValidationReport ;
 		] ;
 		sh:focusNode <http://example.org/cube> ;
 		sh:resultPath <http://purl.org/dc/terms/publisher> ;
-		sh:value _:b1 ;
+		sh:value _:b2 ;
 		sh:resultMessage "Publisher must be a foaf:Organization DCAT-AP." ;
 	] ;
 	sh:conforms false .

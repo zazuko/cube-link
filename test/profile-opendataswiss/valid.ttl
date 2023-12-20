@@ -9,6 +9,19 @@ prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
 
 ex:cube
     a cube:Cube, dcat:Dataset ;
+    cube:observationSet <observationSet> ;
+    schema:name "Example cube" ;
+    schema:publisher ex:JohnDoe ;
+    schema:creator ex:JohnDoe ;
+    schema:contributor ex:JohnDoe ;
+    schema:dateCreated "2020-10-10"^^xsd:date ;
+    schema:dateModified "2020-10-10"^^xsd:date ;
+    schema:datePublished "2020-11-11"^^xsd:date ;
+    schema:contactPoint
+        [
+            schema:name "Max Muster, BAFU Datenspezialist" ;
+            schema:email "max-muster@bafu.admin.ch" ;
+        ] ;
     dcterms:creator ex:JohnDoe ;
     schema:creator ex:JohnDoe ;
     schema:publisher ex:Org ;
@@ -54,3 +67,9 @@ ex:cube
             schema:endDate "2013-01-05"^^xsd:date
         ] ;
 .
+
+<observationSet> cube:observation <observation> .
+
+<observation> a cube:Observation ;
+    cube:observedBy <observer> ;
+    <dimension1> 4.9 .

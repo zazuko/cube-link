@@ -5,7 +5,7 @@ name=$(basename "$file")
 
 message=$4
 if [ -z "$message" ]; then
-  message="compare reports"
+  message="check report"
 fi
 
 playground=$("$SCRIPT_PATH"/shorten-report.js "$2" "$3")

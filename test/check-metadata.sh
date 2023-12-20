@@ -35,21 +35,27 @@ if [ -z "$profile" ]; then
   exit 1
 fi
 
+loadFullShape() {
+  "$SCRIPT_PATH"/load-graph.mjs "$1" | "$SCRIPT_PATH"/pretty-print.mjs
+}
+
 # iterate over valid cases, run validation and monitor exit code
 for file in "$SCRIPT_PATH"/"$profile"/valid*.ttl; do
+  name=$(basename "$file")
+
   # check if filter is set and skip if not matching
   if [ -n "$filter" ] && ! echo "$file" | grep -q "$filter"; then
+    echo "ℹ️SKIP - $name"
     continue
   fi
 
-  name=$(basename "$file")
   {
     npx barnard59 cube check-metadata --profile "$profilePath" > "$file.log" 2>&1
     success=$?
   } < "$file"
 
   if [ $success -ne 0 ] ; then
-    "$SCRIPT_PATH"/report-failure.sh "$file" "$(cat "$profilePath")" "$(cat "$file")"
+    "$SCRIPT_PATH"/report-failure.sh "$file" "$(loadFullShape "$profilePath")" "$(cat "$file")"
     FAILED=1
   else
     echo "✅ PASS - $name"
@@ -58,16 +64,18 @@ done
 
 # iterate over invalid cases
 for file in "$SCRIPT_PATH"/"$profile"/invalid*.ttl; do
+  name=$(basename "$file")
+
   # check if pattern is set and skip if not matching
-  if [ -n "$pattern" ] && ! echo "$file" | grep -q "$pattern"; then
+  if [ -n "$filter" ] && ! echo "$file" | grep -q "$filter"; then
+    echo "ℹ️SKIP - $name"
     continue
   fi
 
-  name=$(basename "$file")
   report=$(npx barnard59 cube check-metadata --profile "$profilePath" < "$file" 2> "$file.log" | "$SCRIPT_PATH"/pretty-print.mjs)
 
   if ! echo "$report" | npx approvals "$name" --outdir "$SCRIPT_PATH"/"$profile" "$approvalsFlags" > /dev/null 2>&1 ; then
-    "$SCRIPT_PATH"/report-failure.sh "$file" "$(cat "$profilePath")" "$(cat "$file")" "check results"
+    "$SCRIPT_PATH"/report-failure.sh "$file" "$(loadFullShape "$profilePath")" "$(cat "$file")" "check results"
     FAILED=1
   else
     echo "✅ PASS - $name"

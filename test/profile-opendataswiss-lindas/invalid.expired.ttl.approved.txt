@@ -10,16 +10,16 @@ _:report a sh:ValidationReport ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
 		sh:sourceShape [
-			sh:path _:b365 ;
+			sh:path _:b387 ;
 			sh:maxCount 0 ;
 		] ;
 		sh:focusNode <http://example.org/Cube> ;
-		sh:resultPath _:b365 ;
+		sh:resultPath _:b387 ;
 		sh:resultMessage "More than 0 values" ;
 	] ;
 	sh:conforms false .
 
-_:b365 sh:alternativePath (
+_:b387 sh:alternativePath (
 		schema:validThrough
 		schema:expires
 	) .
