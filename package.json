@@ -58,6 +58,8 @@
     "@changesets/cli": "^2.26.2",
     "@rdfjs-elements/formats-pretty": "^0.6.4",
     "@zazuko/env-node": "^1.0.0",
+    "@zazuko/s": "^1.0.1",
+    "@zazuko/shacl-playground": "^1.0.0",
     "approvals": "^6.2.2",
     "barnard59": "^4.3.0",
     "barnard59-cube": "^1.2.0",
