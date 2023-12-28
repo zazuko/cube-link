@@ -11,7 +11,6 @@
 #
 # This is the bare minimal SHACL shape for validating a cube.
 # All cubes should pass this validation.
-# It does not validate the constraints
 #
 
 [
