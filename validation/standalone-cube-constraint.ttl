@@ -6,12 +6,18 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cube: <https://cube.link/> .
+@prefix code: <https://code.described.at/> .
 
 #
 # This is the bare minimal SHACL shape for validating a cube.
 # All cubes should pass this validation.
 # It does not validate the constraints
 #
+
+[
+    code:imports <./standalone-constraint-constraint> ;
+    code:extension "ttl" ;
+] .
 
 :CubeShape
     a sh:NodeShape ;
