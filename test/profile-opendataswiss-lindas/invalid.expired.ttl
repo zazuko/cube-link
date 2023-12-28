@@ -1,0 +1,34 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX cube: <https://cube.link/>
+PREFIX ex: <http://example.org/>
+
+ex:Cube
+    a cube:Cube, dcat:Dataset ;
+    cube:observationSet <observationSet> ;
+    schema:name "Example cube" ;
+    schema:publisher <publisher> ;
+    schema:creator <creator> ;
+    schema:contributor <contributor> ;
+    dcterms:identifier "cube-1234" ;
+    schema:workExample <https://ld.admin.ch/application/opendataswiss> ;
+    schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
+    dcterms:creator ex:John-Doe ;
+    schema:expires "2020-12-31T23:59:59Z"^^xsd:dateTime ;
+    schema:dateCreated "2020-10-10"^^xsd:date ;
+    schema:dateModified "2020-10-10"^^xsd:date ;
+    schema:datePublished "2020-11-11"^^xsd:date ;
+    schema:contactPoint
+        [
+            schema:name "John Doe" ;
+            schema:email "john@doe.tech" ;
+        ] ;
+.
+
+<observationSet> cube:observation <observation> .
+
+<observation> a cube:Observation ;
+    cube:observedBy <observer> ;
+    <dimension1> 4.9 .

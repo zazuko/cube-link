@@ -1,0 +1,54 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path sh:property ;
+			sh:node <https://cube.link/shape/standalone-constraint-constraint#ObservationConstraintProperty> ;
+			sh:message "The constraints do not validate" ;
+		] ;
+		sh:focusNode <https://example.org/shape> ;
+		sh:value _:b3 ;
+		sh:resultMessage "The constraints do not validate" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:OrConstraintComponent ;
+			sh:sourceShape [
+				sh:message "needs a schema:name" ;
+				sh:or (
+					[
+						sh:path schema:name ;
+						sh:or (
+							[
+								sh:datatype xsd:string ;
+							]
+							[
+								sh:datatype rdf:langString ;
+							]
+						) ;
+						sh:minCount 1 ;
+					]
+					[
+						sh:path sh:path ;
+						sh:in (
+							rdf:type
+							cube:observedBy
+						) ;
+					]
+				) ;
+			] ;
+			sh:focusNode _:b3 ;
+			sh:value _:b3 ;
+			sh:resultMessage "needs a schema:name" ;
+		] ;
+		sh:resultPath sh:property ;
+	] ;
+	sh:conforms false .
