@@ -10,16 +10,17 @@ _:report a sh:ValidationReport ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
 		sh:sourceShape [
-			sh:path _:b387 ;
+			sh:path _:b388 ;
 			sh:maxCount 0 ;
+			sh:message "Cube cannot be expired" ;
 		] ;
 		sh:focusNode <http://example.org/Cube> ;
-		sh:resultPath _:b387 ;
-		sh:resultMessage "More than 0 values" ;
+		sh:resultPath _:b388 ;
+		sh:resultMessage "Cube cannot be expired" ;
 	] ;
 	sh:conforms false .
 
-_:b387 sh:alternativePath (
+_:b388 sh:alternativePath (
 		schema:validThrough
 		schema:expires
 	) .

@@ -36,5 +36,6 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
         [
             sh:path [ sh:alternativePath ( schema:validThrough schema:expires ) ] ;
             sh:maxCount 0 ;
+            sh:message "Cube cannot be expired" ;
         ] ;
 .
