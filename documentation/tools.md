@@ -30,10 +30,10 @@ The validation process of the cube can be divided into three different aspects.
 
 The node package `barnard59-cube` includes [commands](https://github.com/zazuko/barnard59/tree/master/packages/cube#commands) to validate cubes and their constraints. Validation commands can be used with SHACL shapes defined [here](https://github.com/zazuko/cube-link/tree/main/validation).
 
-Once the package and its dependencies are installed in a node project (use `npm init -y` to create a new one): 
+To use, install `barnard59` CLI and the `barnard59-cube` package globally: 
 
 ```bash
-npm install barnard59 barnard59-cube barnard59-base barnard59-formats barnard59-http barnard59-rdf barnard59-sparql barnard59-shacl
+npm install -g barnard59 barnard59-cube
 ```
 
 Validation commands provide SHACL validation reports in case of violations:
