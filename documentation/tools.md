@@ -83,7 +83,7 @@ The validation tool takes care of making all the observations a target for the c
 When the cube and constraints are in the same file simply use the same filename twice
 
 ```bash
- cat completecube.ttl | npx barnard59 cube check-observations --constraint completecube.ttl
+ cat completecube.ttl | barnard59 cube check-observations --constraint completecube.ttl
 ```
 
 </aside>
