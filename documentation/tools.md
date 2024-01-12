@@ -42,7 +42,7 @@ Validation commands provide SHACL validation reports in case of violations:
  
 
 ```bash
- cat cube.ttl | npx barnard59 cube check-observations --constraint constraint.ttl
+ cat cube.ttl | barnard59 cube check-observations --constraint constraint.ttl
 ```
 
 </aside>
