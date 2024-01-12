@@ -55,7 +55,7 @@ Even though Cube Schema is a very lightweight vocabulary, there is a minimal set
  
 
 ```bash
-cat cube.ttl constraint.ttl | npx barnard59 cube check-metadata /
+cat cube.ttl constraint.ttl | barnard59 cube check-metadata /
     --profile https://cube.link/latest/shape/basic-cube-constraint /
     --profileFormat text/turtle
 ```
