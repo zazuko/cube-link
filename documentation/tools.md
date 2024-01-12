@@ -97,7 +97,7 @@ If constraints are used to provide guidance for interaction with the cube (e.g. 
 Here we use the command to validate the constraint, not the cube
 
 ```bash
-cat constraint.ttl | npx barnard59 cube check-metadata /
+cat constraint.ttl | barnard59 cube check-metadata /
     --profile https://cube.link/latest/shape/standalone-constraint-constraint /
     --profileFormat text/turtle
 ```
