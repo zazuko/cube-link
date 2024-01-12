@@ -74,7 +74,7 @@ The validation tool takes care of making all the observations a target for the c
  
 
 ```bash
- cat cube.ttl | npx barnard59 cube check-observations --constraint constraint.ttl
+ cat cube.ttl | barnard59 cube check-observations --constraint constraint.ttl
 ```
 
 </aside>
