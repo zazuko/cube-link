@@ -12,11 +12,9 @@ Cube Viewer [(Homepage)](https://github.com/zazuko/cube-viewer) is both an app a
 
 A demo of the app is deployed at [cube-viewer.zazuko.com](https://cube-viewer.zazuko.com).
 
-## Example Cube
+## Validating Cubes
 
 An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [constraint.ttl](constraint.ttl).
-
-### Validate the cube
 
 <pre class='ednote' title='Work in progress'>
 This section is a work in progress, the wording and terminology still need some thought.
