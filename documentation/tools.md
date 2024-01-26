@@ -34,13 +34,27 @@ To use, install `barnard59` CLI and the `barnard59-cube` package globally:
 npm install -g barnard59 barnard59-cube
 ```
 
-Validation commands provide SHACL validation reports in case of violations:
+Validation commands provide [SHACL validation reports](https://www.w3.org/TR/shacl/#validation-report) in case of violations:
 
 <aside class='example' title='Validate `cube.ttl` by using the constraint in `constraint.ttl`'>
  
 
 ```bash
- cat cube.ttl | barnard59 cube check-observations --constraint constraint.ttl
+ cat cube.ttl 
+ | barnard59 cube check-observations --constraint constraint.ttl
+```
+
+</aside>
+
+To get a human-readable summary of the report, chain another command, available with the `barnard59-shacl` package:
+
+<aside class='example' title='Validation with summary of report'>
+ 
+
+```bash
+ cat cube.ttl 
+ | barnard59 cube check-observations --constraint constraint.ttl
+ | barnard59 shacl report-summary 
 ```
 
 </aside>
@@ -85,6 +99,8 @@ When the cube and constraints are in the same file simply use the same filename 
 
 </aside>
 
+Notice that a single file is suitable only for small cubes: the `check-observations` command can process big cubes splitting the input into chunks but the constraint file is expected to fit in memory.
+
 Further options and details are described in the [documentation](https://github.com/zazuko/barnard59/tree/master/packages/cube#check-observations). 
 
 #### The integrity of the constraints
@@ -101,3 +117,5 @@ cat constraint.ttl | barnard59 cube check-metadata /
 </aside>
 
 The standalone constraint can be extended to meet the specific requirements for the intended interaction.
+
+Some profiles may involve more metadata besides the constraint, so it may be useful to split cube data differently to provide a suitable input (including the required information yet still fitting in memory) to `check-metadata`.
