@@ -115,5 +115,46 @@ To express that the dimension provides a specific _kind_ of data which is necess
 
 </aside>
 
+<section class="informative">
+
+##### Complex representation of time
+
+Representing temporal dimensions as literals typed as `xsd:date` or `xsd:dateTime` may be insufficient for complex scenarios. In such cases, data publishers may want to use the [Time Ontology in OWL](https://www.w3.org/TR/owl-time/) to represent temporal dimensions. This allows for the representation of complex temporal concepts, such as time periods, intervals, and repeating events, a well as joining cubes on the temporal dimension.
+
+When Time Ontology in a cube, the values of a temporal dimension are resources of type `time:TemporalEntity`. The dimension should be expressed as a `time:GeneralDateTimeDescription` and have `Ordinal` scale type.
+
+<aside class='example'>
+
+```turtle
+<observation> a cube:Observation ;
+  time:hasTime <month/2000-06> .
+
+<month/2000-06> a time:ProperInterval ;
+  time:hasBeginning <instant/2000-06-01> ;
+  time:hasEnd <instant/2000-06-30> ;
+  schema:position "2000-06" .
+
+<instant/2000-06-01> a time:Instant ;
+  time:inXSDDateTimeStamp "2000-06-01T00:00:00+02:00"^^xsd:dateTime .
+
+<instant/2000-06-30> a time:Instant ;
+  time:inXSDDateTimeStamp "2000-06-30T23:59:59+02:00"^^xsd:dateTime .
+
+<dimension/time> a sh:PropertyShape ;
+  sh:path time:hasTime ;
+  qudt:scaleType qudt:OrdinalScale ;
+  meta:dataKind
+   [
+      a time:GeneralDateTimeDescription ;
+      time:unitType time:unitMonth ;
+   ] .      
+```
+
+</aside>
+
+Please refer to the [Time Ontology in OWL](https://www.w3.org/TR/owl-time/) for more information on how to represent complex temporal concepts. You can also see [Lindas Core Entities](https://lindas.admin.ch/governance/core-entities/) for more examples.
+
+</section>
+
 #### sh:order
 The sh:order can be used to indicate the relative order of the dimension, for use in visualizations. It should be used according to [the specification](https://www.w3.org/TR/shacl/#order) by using ascending order, for example, so that properties with smaller order are placed above (or to the left) of properties with a larger order. 
