@@ -26,8 +26,8 @@
     ] ;
     sh:property [
         sh:path sh:property ;
-        sh:node <ObservationConstraintProperty>;
-        sh:message "The constraints do not validate"
+        sh:node <ObservationConstraintProperty>, <PropertyWithName>, <PropertyWithType> ;
+        sh:message "The constraints do not validate";
     ] ;
 	sh:property [
         sh:path sh:closed;
@@ -39,6 +39,43 @@
         sh:message "meta:inHierarchy does not validate"
     ] ;
     .
+
+<PropertyWithName> a sh:NodeShape ;
+    sh:message "needs a schema:name" ;
+    sh:or(
+        [
+            sh:path schema:name;
+            sh:minCount 1;
+        ]
+        [
+            sh:path sh:path;
+            sh:in (rdf:type cube:observedBy);
+        ]
+    );
+.
+
+<PropertyWithType> a sh:NodeShape ;
+    sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
+    sh:or(
+        [
+            sh:path sh:datatype;
+            sh:minCount 1;
+        ]
+        [
+            sh:path sh:nodeKind;
+            sh:minCount 1;
+        ]
+        [
+            sh:path sh:or;
+            sh:minCount 1;
+            sh:node <listnode> ;
+            sh:property [
+                sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
+                sh:property [ sh:path sh:datatype ; sh:minCount 1 ] ; # have at least one datatype
+            ]
+        ]
+    );
+.
 
 <ObservationConstraintProperty> a sh:NodeShape;
 	sh:property [
@@ -73,44 +110,11 @@
         sh:node <DimensionRelation>;
         sh:message "meta:dimensionRelation does not validate"
     ];
-
     sh:property [
-        sh:message "needs a schema:name" ;
-        sh:or(
-            [
-                sh:path schema:name;
-                sh:minCount 1;
-                sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-            ]
-            [
-                sh:path sh:path;
-                sh:in (rdf:type cube:observedBy);
-            ]
-        );
+        sh:path schema:name;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:message "schema:name needs to be a xsd:string or a rdf:langString"
     ];
-
-    sh:property [
-        sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
-        sh:or(
-            [
-                sh:path sh:datatype;
-                sh:minCount 1;
-            ]
-            [
-                sh:path sh:nodeKind;
-                sh:minCount 1;
-            ]
-            [
-                sh:path sh:or;
-                sh:minCount 1;
-                sh:node <listnode> ;
-                sh:node [
-                    sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
-                    sh:property [ sh:path sh:datatype ; sh:minCount 1 ] ; # have at least one datatype
-                ]
-            ]
-        );
-    ] ;
 
 .
 
