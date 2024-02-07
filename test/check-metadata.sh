@@ -4,6 +4,7 @@ SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 FAILED=0
 
 filter=''
+debug=false
 
 # get arguments --profile
 while [ $# -gt 0 ]; do
@@ -14,6 +15,9 @@ while [ $# -gt 0 ]; do
       ;;
     --approve)
       approvalsFlags='-f'
+      ;;
+    --debug)
+      debug=true
       ;;
     --filter=*)
       filter="${1#*=}"
@@ -50,6 +54,9 @@ for file in "$SCRIPT_PATH"/"$profile"/valid*.ttl; do
   fi
 
   {
+    if [ "$debug" = true ]; then
+      echo "🐞 npx barnard59 cube check-metadata --profile $profilePath < $file"
+    fi
     npx barnard59 cube check-metadata --profile "$profilePath" > "$file.log" 2>&1
     success=$?
   } < "$file"
@@ -72,6 +79,10 @@ for file in "$SCRIPT_PATH"/"$profile"/invalid*.ttl; do
     continue
   fi
 
+
+    if [ "$debug" = true ]; then
+      echo "🐞 npx barnard59 cube check-metadata --profile $profilePath < $file"
+    fi
   report=$(npx barnard59 cube check-metadata --profile "$profilePath" < "$file" 2> "$file.log" | "$SCRIPT_PATH"/pretty-print.mjs)
 
   if ! echo "$report" | npx approvals "$name" --outdir "$SCRIPT_PATH"/"$profile" "$approvalsFlags" > /dev/null 2>&1 ; then
