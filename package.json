@@ -14,6 +14,7 @@
     "test:basic-cube-constraint": "./test/check-metadata.sh --profile=basic-cube-constraint",
     "test:standalone-cube-constraint": "./test/check-metadata.sh --profile=standalone-cube-constraint",
     "test:standalone-constraint-constraint": "./test/check-metadata.sh --profile=standalone-constraint-constraint",
+    "test:profile-visualize": "./test/check-metadata.sh --profile=profile-visualize",
     "test:profile-opendataswiss": "./test/check-metadata.sh --profile=profile-opendataswiss",
     "test:profile-opendataswiss-lindas": "./test/check-metadata.sh --profile=profile-opendataswiss-lindas",
     "release": "changeset tag"
