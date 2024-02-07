@@ -35,6 +35,7 @@ jobs:
         profile:
           - basic-cube-constraint
           - standalone-constraint-constraint
+          - profile-visualize
           - profile-opendataswiss
           - profile-opendataswiss-lindas
     steps:
