@@ -31,14 +31,9 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
             sh:dataType xsd:langString ;
         ],
         [
-            sh:path dcterms:creator ;
-            sh:minCount 1 ;
-            sh:severity sh:Warning ;
-            sh:deactivated true ;
-        ],
-        [
             sh:path schema:workExample ;
             sh:hasValue <https://ld.admin.ch/application/visualize> ;
+            sh:severity sh:Warning ;
         ],
         [
             sh:path schema:creativeWorkStatus ;
