@@ -44,6 +44,7 @@ ex:Cube
             schema:name "Value" ;
             sh:path <dimension1> ;
             sh:datatype rdf:langString ;
+            sh:nodeKind sh:Literal ;
         ],
         [
             sh:path rdf:type ;

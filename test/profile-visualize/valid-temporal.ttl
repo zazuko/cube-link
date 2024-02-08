@@ -59,6 +59,7 @@ ex:Cube
             schema:name "Year-Month" ;
             sh:path <ym> ;
             sh:datatype xsd:gYearMonth ;
+            sh:nodeKind sh:Literal ;
             meta:dataKind
                 [
                     a time:GeneralDateTimeDescription ;
@@ -68,6 +69,7 @@ ex:Cube
             schema:name "Date" ;
             sh:path <d> ;
             sh:datatype xsd:date ;
+            sh:nodeKind sh:Literal ;
             meta:dataKind
                 [
                     a time:GeneralDateTimeDescription ;
@@ -77,6 +79,7 @@ ex:Cube
             schema:name "DateTime" ;
             sh:path <dt> ;
             sh:datatype xsd:dateTime ;
+            sh:nodeKind sh:Literal ;
             meta:dataKind
                 [
                     a time:GeneralDateTimeDescription ;

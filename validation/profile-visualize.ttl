@@ -1,3 +1,4 @@
+PREFIX qudt: <http://qudt.org/schema/qudt/>
 PREFIX meta: <https://cube.link/meta/>
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -67,7 +68,29 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
                         sh:node :ObservationConstraintCoreProperty ;
                     ]
                 ) ;
-            sh:message "Observation constraint must have exactly one datatype. It cannot be rdf:langString"
+            sh:message "Dimension constraint must have exactly one datatype. It cannot be rdf:langString"
+        ],
+        [
+            sh:path sh:property ;
+            sh:or
+                (
+                    [
+                        sh:node :ObservationConstraintNodeKindProperty ;
+                    ]
+                    [
+                        sh:node :ObservationConstraintCoreProperty ;
+                    ]
+                ) ;
+            sh:message "Dimension must have exactly one nodeKind: sh:IRI or sh:Literal" ;
+        ] ;
+.
+
+:ObservationConstraintNodeKindProperty
+    sh:property
+        [
+            sh:path sh:nodeKind ;
+            sh:in ( sh:IRI sh:Literal ) ;
+            sh:minCount 1 ;
         ] ;
 .
 
@@ -91,7 +114,8 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
 :TemporalDimensionConstraint
     a sh:NodeShape ;
     sh:targetClass time:GeneralDateTimeDescription ;
-    sh:message "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
+    sh:message
+        "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
     sh:or
         (
             [

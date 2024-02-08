@@ -1,3 +1,4 @@
+PREFIX qudt: <http://qudt.org/schema/qudt/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX meta: <https://cube.link/meta/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
@@ -34,7 +35,8 @@ ex:Cube
 
 <observation> a cube:Observation ;
     cube:observedBy <observer> ;
-    <dimension1> 4.9 .
+    <value> 4.9 ;
+    <dimension1> <shared-term> .
 
 <observationConstraint> a cube:Constraint ;
     sh:closed true ;
@@ -42,12 +44,13 @@ ex:Cube
         [
             schema:name "Dimenson 1" ;
             sh:path <dimension1> ;
-            sh:datatype xsd:decimal ;
+            sh:nodeKind sh:IRI ;
         ],
         [
             schema:name "Measure" ;
             sh:path <value> ;
             sh:datatype xsd:decimal ;
+            sh:nodeKind sh:Literal ;
         ],
         [
             sh:path rdf:type ;
