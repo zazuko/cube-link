@@ -117,5 +117,3 @@ cat constraint.ttl | barnard59 cube check-metadata /
 </aside>
 
 The standalone constraint can be extended to meet the specific requirements for the intended interaction.
-
-Some profiles may involve more metadata besides the constraint, so it may be useful to split cube data differently to provide a suitable input (including the required information yet still fitting in memory) to `check-metadata`.
