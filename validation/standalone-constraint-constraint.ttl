@@ -24,11 +24,45 @@
         sh:minCount 3 ;
         sh:message "cube:Constraint needs at least a certain amount of sh:properties"
     ] ;
-    sh:property [
-        sh:path sh:property ;
-        sh:node <ObservationConstraintProperty>;
-        sh:message "The constraints do not validate"
-    ] ;
+    sh:property
+        [
+            sh:path sh:property ;
+            sh:node <PropertyPath> ;
+            sh:message "a sh:path is needed on a property" ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node <PropertyWithName> ;
+            sh:message "needs a schema:name" ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node <PropertyNameType> ;
+            sh:message "schema:name needs to be a xsd:string or a rdf:langString" ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node <PropertyWithType> ;
+            sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node <PropertyScaleType> ;
+            sh:message "If qudt:scaleType is used it needs to be within ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale )" ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node <PropertyRange> ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node <PropertyInList> ;
+            sh:message "sh:in needs to be a list" ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node <DimensionRelation> ;
+        ] ;
 	sh:property [
         sh:path sh:closed;
         sh:hasValue true;
@@ -40,88 +74,95 @@
     ] ;
     .
 
-<ObservationConstraintProperty> a sh:NodeShape;
-	sh:property [
-        sh:path qudt:scaleType;
-        sh:in ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
-        sh:maxCount 1;
-	    sh:message "If qudt:scaleType is used it needs to be within ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale )"
-    ];
+<PropertyPath> a sh:NodeShape ;
 	sh:property [
         sh:path sh:path;
         sh:minCount 1;
         sh:maxCount 1;
-        sh:message "a sh:path is needed on a property"
     ];
+.
+
+<PropertyWithName> a sh:NodeShape ;
+    sh:or(
+        [
+            sh:path schema:name;
+            sh:minCount 1;
+        ]
+        [
+            sh:path sh:path;
+            sh:in (rdf:type cube:observedBy);
+        ]
+    );
+.
+
+<PropertyNameType> a sh:NodeShape ;
+    sh:property [
+        sh:path schema:name;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+    ];
+.
+
+<PropertyWithType> a sh:NodeShape ;
+    sh:or(
+        [
+            sh:path sh:datatype;
+            sh:minCount 1;
+        ]
+        [
+            sh:path sh:nodeKind;
+            sh:minCount 1;
+        ]
+        [
+            sh:path sh:or;
+            sh:minCount 1;
+            sh:node <listnode> ;
+            sh:property [
+                sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
+                sh:property [ sh:path sh:datatype ; sh:minCount 1 ] ; # have at least one datatype
+            ]
+        ]
+    );
+.
+
+<PropertyInList> a sh:NodeShape ;
+    sh:property [
+        sh:path sh:in;
+        sh:node <listnode>;
+    ];
+.
+
+<PropertyScaleType> a sh:NodeShape ;
+    sh:property [
+        sh:path qudt:scaleType;
+        sh:in (qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
+        sh:maxCount 1;
+    ];
+.
+
+<PropertyRange> a sh:NodeShape ;
     sh:property [
         sh:path sh:minInclusive;
         sh:nodeType sh:Literal;
         sh:message "sh:minInclusive needs to be a literal"
     ];
     sh:property [
-        sh:path sh:in;
-        sh:node <listnode>;
-        sh:message "sh:in needs to be a list"
-    ];
-    sh:property [
         sh:path sh:maxInclusive;
         sh:nodeType sh:Literal;
         sh:message "sh:maxInclusive needs to be a literal"
     ];
-    sh:property [
-        sh:path meta:dimensionRelation;
-        sh:node <DimensionRelation>;
-        sh:message "meta:dimensionRelation does not validate"
-    ];
-
-    sh:property [
-        sh:message "needs a schema:name" ;
-        sh:or(
-            [
-                sh:path schema:name;
-                sh:minCount 1;
-                sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-            ]
-            [
-                sh:path sh:path;
-                sh:in (rdf:type cube:observedBy);
-            ]
-        );
-    ];
-
-    sh:property [
-        sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
-        sh:or(
-            [
-                sh:path sh:datatype;
-                sh:minCount 1;
-            ]
-            [
-                sh:path sh:nodeKind;
-                sh:minCount 1;
-            ]
-            [
-                sh:path sh:or;
-                sh:minCount 1;
-                sh:node <listnode> ;
-                sh:node [
-                    sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
-                    sh:property [ sh:path sh:datatype ; sh:minCount 1 ] ; # have at least one datatype
-                ]
-            ]
-        );
-    ] ;
-
 .
-
 
 <DimensionRelation> a sh:NodeShape ;
     sh:property [
-        sh:path meta:relatesTo;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1;
-        sh:message "meta:dimensionRelation requires at least one meta:relatesTo";
-    ] .
+        sh:path meta:dimensionRelation;
+        sh:property [
+            sh:path meta:relatesTo;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1;
+            sh:message "meta:dimensionRelation requires at least one meta:relatesTo";
+        ]
+    ]
+.
 
 
 # Testing proper rdf:list construction

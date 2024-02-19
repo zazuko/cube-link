@@ -11,44 +11,20 @@ _:report a sh:ValidationReport ;
 		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
 		sh:sourceShape [
 			sh:path sh:property ;
-			sh:node <https://cube.link/shape/ObservationConstraintProperty> ;
-			sh:message "The constraints do not validate" ;
+			sh:node <https://cube.link/shape/PropertyWithName> ;
+			sh:message "needs a schema:name" ;
 		] ;
 		sh:focusNode <https://example.org/shape> ;
 		sh:value _:b3 ;
-		sh:resultMessage "The constraints do not validate" ;
 		sh:detail [
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
-			sh:sourceShape [
-				sh:message "needs a schema:name" ;
-				sh:or (
-					[
-						sh:path schema:name ;
-						sh:or (
-							[
-								sh:datatype xsd:string ;
-							]
-							[
-								sh:datatype rdf:langString ;
-							]
-						) ;
-						sh:minCount 1 ;
-					]
-					[
-						sh:path sh:path ;
-						sh:in (
-							rdf:type
-							cube:observedBy
-						) ;
-					]
-				) ;
-			] ;
+			sh:sourceShape <https://cube.link/shape/PropertyWithName> ;
 			sh:focusNode _:b3 ;
 			sh:value _:b3 ;
-			sh:resultMessage "needs a schema:name" ;
 		] ;
 		sh:resultPath sh:property ;
+		sh:resultMessage "needs a schema:name" ;
 	] ;
 	sh:conforms false .
