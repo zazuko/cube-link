@@ -1,0 +1,63 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path cube:observationConstraint ;
+			sh:maxCount 1 ;
+			sh:minCount 1 ;
+			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintShape> ;
+		] ;
+		sh:focusNode <http://example.org/Cube> ;
+		sh:value <observationConstraint> ;
+		sh:resultMessage "Value does not have shape <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintShape>" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+			sh:sourceShape [
+				sh:nodeKind sh:IRI ;
+			] ;
+			sh:focusNode _:b1 ;
+			sh:value _:b1 ;
+			sh:resultMessage "Value does not have node kind <http://www.w3.org/ns/shacl#IRI>" ;
+		], [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:OrConstraintComponent ;
+			sh:sourceShape _:b392 ;
+			sh:focusNode <observationConstraint> ;
+			sh:value _:b2 ;
+			sh:resultMessage "Dimension constraint must have exactly one datatype. It cannot be rdf:langString" ;
+			sh:resultPath sh:property ;
+		] ;
+		sh:resultPath cube:observationConstraint ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:OrConstraintComponent ;
+		sh:sourceShape _:b392 ;
+		sh:focusNode <observationConstraint> ;
+		sh:value _:b2 ;
+		sh:resultMessage "Dimension constraint must have exactly one datatype. It cannot be rdf:langString" ;
+		sh:resultPath sh:property ;
+	] ;
+	sh:conforms false .
+
+_:b392 sh:path sh:property ;
+	sh:or (
+		[
+			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintDatatypeProperty> ;
+		]
+		[
+			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintCoreProperty> ;
+		]
+	) ;
+	sh:message "Dimension constraint must have exactly one datatype. It cannot be rdf:langString" .
