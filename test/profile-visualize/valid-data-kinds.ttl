@@ -36,32 +36,29 @@ ex:Cube
 
 <observation> a cube:Observation ;
     cube:observedBy <observer> ;
-    <y> "2000"^^xsd:gYear ;
+    <geo-shape> "WKT" ;
+    <geo-coords> "WKT" ;
 .
 
 <observationConstraint> a cube:Constraint ;
     sh:closed true ;
     sh:property
         [
-            # no datatype, no time:unitType
-            schema:name "Year" ;
-            sh:path <y> ;
+            schema:name "GeoShape" ;
+            sh:path <geo-shape> ;
             sh:nodeKind sh:Literal ;
             meta:dataKind
                 [
-                    a time:GeneralDateTimeDescription ;
+                    a schema:GeoShape ;
                 ] ;
         ],
         [
-            # additional properties
-            schema:name "Year" ;
-            sh:path <y> ;
+            schema:name "GeoCoordinates" ;
+            sh:path <geo-coords> ;
             sh:nodeKind sh:Literal ;
             meta:dataKind
                 [
-                    a time:GeneralDateTimeDescription ;
-                    rdf:first "2000"^^xsd:gYear ;
-                    rdf:rest rdf:nil ;
+                    a schema:GeoCoordinates ;
                 ] ;
         ],
         [

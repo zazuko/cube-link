@@ -1,0 +1,50 @@
+PREFIX meta: <https://cube.link/meta/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX schema: <http://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix : <https://cube.link/shape/shared/data-kind#>
+
+:DataKind
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:dataKind ;
+    sh:xone ( :GeneralDateTimeDescription :GeoShape :GeoCoordinates ) ;
+    sh:severity sh:Warning ;
+    sh:message "Data kind should be one of the following: GeneralDateTimeDescription, GeoShape, GeoCoordinates" ;
+    sh:property
+        [
+            sh:path rdf:type ;
+            sh:minCount 1 ;
+        ]
+.
+
+:GeoShape
+    a sh:NodeShape ;
+    sh:targetClass schema:GeoShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+.
+
+:GeoCoordinates
+    a sh:NodeShape ;
+    sh:targetClass schema:GeoCoordinates ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+.
+
+:GeneralDateTimeDescription
+    a sh:NodeShape ;
+    sh:targetClass time:GeneralDateTimeDescription ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property
+        [
+            sh:path time:unitType ;
+            sh:maxCount 1 ;
+            sh:in
+                (
+                    time:unitYear time:unitMonth time:unitDay time:unitHour time:unitMinute time:unitSecond
+                    time:unitWeek
+                ) ;
+        ] ;
+.

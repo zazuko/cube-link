@@ -15,6 +15,10 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
     code:imports <./standalone-cube-constraint> ;
     code:extension "ttl" ;
 ] .
+[
+    code:imports <./shared/data-kind> ;
+    code:extension "ttl" ;
+] .
 
 :CubeShape
     a sh:NodeShape ;
