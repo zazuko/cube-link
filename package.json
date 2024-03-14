@@ -9,7 +9,7 @@
     "trifid": "trifid --verbose --config=trifid/config.json",
     "trifid:local": "trifid --verbose --config=trifid/config.local.json",
     "lint": "standard",
-    "test": "run-s -cns \"test:* {@}\" --",
+    "test": "run-p --aggregate-output -cns \"test:* {@}\" --",
     "test:observations": "./test/check-observations.sh",
     "test:basic-cube-constraint": "./test/check-metadata.sh --profile=basic-cube-constraint",
     "test:standalone-cube-constraint": "./test/check-metadata.sh --profile=standalone-cube-constraint",
