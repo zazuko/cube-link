@@ -54,6 +54,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             schema:name "GeoCoordinates" ;
@@ -66,6 +67,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             sh:path rdf:type ;

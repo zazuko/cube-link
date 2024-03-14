@@ -53,6 +53,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             # additional properties
@@ -67,6 +68,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             sh:path rdf:type ;

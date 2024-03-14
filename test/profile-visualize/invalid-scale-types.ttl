@@ -1,4 +1,3 @@
-PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX qudt: <http://qudt.org/schema/qudt/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX meta: <https://cube.link/meta/>
@@ -36,36 +35,30 @@ ex:Cube
 
 <observation> a cube:Observation ;
     cube:observedBy <observer> ;
-    <geo-shape> "WKT" ;
-    <geo-coords> "WKT" ;
-.
+    <value> 4.9 ;
+    <dimension1> <shared-term> .
 
 <observationConstraint> a cube:Constraint ;
     sh:closed true ;
     sh:property
         [
-            schema:name "GeoShape" ;
-            sh:path <geo-shape> ;
-            sh:nodeKind sh:Literal ;
-            meta:dataKind
-                [
-                    a schema:GeoShape ;
-                ] ;
+            schema:name "Dimenson 1" ;
+            sh:path <dimension1> ;
+            sh:nodeKind sh:IRI ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
-            qudt:scaleType qudt:NominalScale ;
+            # scale type missing
+            # qudt:scaleType qudt:NominalScale ;
         ],
         [
-            schema:name "GeoCoordinates" ;
-            sh:path <geo-coords> ;
+            schema:name "Measure" ;
+            sh:path <value> ;
+            sh:datatype xsd:decimal ;
             sh:nodeKind sh:Literal ;
-            meta:dataKind
-                [
-                    a schema:GeoCoordinates ;
-                ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
-            qudt:scaleType qudt:NominalScale ;
+            # scale type outside allowed values
+            qudt:scaleType qudt:EnumerationScale ;
         ],
         [
             sh:path rdf:type ;

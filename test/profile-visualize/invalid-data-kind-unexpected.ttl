@@ -51,6 +51,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             schema:name "Dimenson 2" ;
@@ -61,6 +62,7 @@ ex:Cube
             meta:dataKind
                 [
                 ] ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             schema:name "Measure" ;
@@ -69,6 +71,7 @@ ex:Cube
             sh:nodeKind sh:Literal ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             sh:path rdf:type ;

@@ -1,3 +1,4 @@
+PREFIX qudt: <http://qudt.org/schema/qudt/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX meta: <https://cube.link/meta/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
@@ -46,12 +47,14 @@ ex:Cube
             sh:nodeKind sh:Literal ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             sh:path rdf:type ;
             sh:nodeKind sh:IRI ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
+            qudt:scaleType qudt:NominalScale ;
         ],
         [
             sh:path cube:observedBy ;

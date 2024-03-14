@@ -73,6 +73,11 @@ done
 for file in "$SCRIPT_PATH"/"$profile"/{invalid,warning}*.ttl; do
   name=$(basename "$file")
 
+  # skip if file does not exist
+  if [ ! -f "$file" ]; then
+    continue
+  fi
+
   # check if pattern is set and skip if not matching
   if [ -n "$filter" ] && ! echo "$file" | grep -q "$filter"; then
     echo "ℹ️SKIP - $name"

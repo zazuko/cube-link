@@ -86,6 +86,19 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
                     ]
                 ) ;
             sh:message "Dimension must have exactly one nodeKind: sh:IRI or sh:Literal" ;
+        ],
+        [
+            sh:path sh:property ;
+            sh:or
+                (
+                    [
+                        sh:node :ObservationConstraintScaleTypeProperty ;
+                    ]
+                    [
+                        sh:node :ObservationConstraintCoreProperty ;
+                    ]
+                ) ;
+            sh:message "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
         ] ;
 .
 
@@ -95,6 +108,16 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
             sh:path sh:nodeKind ;
             sh:in ( sh:IRI sh:Literal ) ;
             sh:minCount 1 ;
+        ] ;
+.
+
+:ObservationConstraintScaleTypeProperty
+    sh:property
+        [
+            sh:path qudt:scaleType ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:in ( qudt:IntervalScale qudt:NominalScale qudt:RatioScale qudt:OrdinalScale ) ;
         ] ;
 .
 
