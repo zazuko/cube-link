@@ -53,6 +53,20 @@
         sh:maxCount 1;
         sh:message "a sh:path is needed on a property"
     ];
+	sh:property [
+        sh:path sh:minCount;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:hasValue 1 ;
+        sh:message "sh:minCount needs to be 1" ;
+    ];
+	sh:property [
+        sh:path sh:maxCount;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:hasValue 1 ;
+        sh:message "sh:maxCount needs to be 1" ;
+    ];
     sh:property [
         sh:path sh:minInclusive;
         sh:nodeType sh:Literal;

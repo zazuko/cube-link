@@ -49,11 +49,15 @@ ex:Cube
                 [
                     a schema:Thing ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             schema:name "Dimenson 2" ;
             sh:path <dimension2> ;
             sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
             meta:dataKind
                 [
                 ] ;
@@ -63,13 +67,19 @@ ex:Cube
             sh:path <value> ;
             sh:datatype xsd:decimal ;
             sh:nodeKind sh:Literal ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path rdf:type ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path cube:observedBy ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
 .

@@ -52,6 +52,8 @@ ex:Cube
                     a schema:GeoShape ;
                     ex:foo "bar" ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             schema:name "GeoCoordinates" ;
@@ -62,13 +64,19 @@ ex:Cube
                     a schema:GeoCoordinates ;
                     ex:foo "bar" ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path rdf:type ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path cube:observedBy ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
 .

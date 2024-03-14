@@ -46,13 +46,19 @@ ex:Cube
             sh:datatype xsd:decimal ;
             sh:datatype xsd:float ;
             sh:nodeKind sh:Literal ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path rdf:type ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path cube:observedBy ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
 .

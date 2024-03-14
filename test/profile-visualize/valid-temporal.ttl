@@ -54,6 +54,8 @@ ex:Cube
                     a time:GeneralDateTimeDescription ;
                     time:unitType time:unitYear ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             schema:name "Year-Month" ;
@@ -64,6 +66,8 @@ ex:Cube
                 [
                     a time:GeneralDateTimeDescription ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             schema:name "Date" ;
@@ -74,6 +78,8 @@ ex:Cube
                 [
                     a time:GeneralDateTimeDescription ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             schema:name "DateTime" ;
@@ -84,13 +90,19 @@ ex:Cube
                 [
                     a time:GeneralDateTimeDescription ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path rdf:type ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path cube:observedBy ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
 .

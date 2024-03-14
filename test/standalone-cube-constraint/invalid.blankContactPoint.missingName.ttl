@@ -34,17 +34,23 @@
     sh:property
         [
             sh:path rdf:type ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
     sh:property
         [
             sh:path cube:observedBy ; ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
     sh:property
         [
             sh:datatype xsd:decimal ;
             sh:path <dimension1> ;
-            schema:name "some Quantity"
+            schema:name "some Quantity" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
 .

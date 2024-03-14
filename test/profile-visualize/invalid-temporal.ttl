@@ -51,6 +51,8 @@ ex:Cube
                 [
                     a time:GeneralDateTimeDescription ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             # additional properties
@@ -63,13 +65,19 @@ ex:Cube
                     rdf:first "2000"^^xsd:gYear ;
                     rdf:rest rdf:nil ;
                 ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path rdf:type ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ],
         [
             sh:path cube:observedBy ;
-            sh:nodeKind sh:IRI
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
         ] ;
 .
