@@ -87,6 +87,12 @@
         sh:node :DimensionRelation;
         sh:message "meta:dimensionRelation does not validate"
     ];
+    sh:property [
+        sh:path qudt:unit ;
+        sh:severity sh:Warning ;
+        sh:equals qudt:hasUnit ;
+        sh:message "The use of qudt:unit is deprecated, please use qudt:hasUnit instead" ;
+    ] ;
 
     sh:property [
         sh:message "needs a schema:name" ;

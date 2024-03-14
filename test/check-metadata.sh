@@ -70,7 +70,7 @@ for file in "$SCRIPT_PATH"/"$profile"/valid*.ttl; do
 done
 
 # iterate over invalid cases
-for file in "$SCRIPT_PATH"/"$profile"/invalid*.ttl; do
+for file in "$SCRIPT_PATH"/"$profile"/{invalid,warning}*.ttl; do
   name=$(basename "$file")
 
   # check if pattern is set and skip if not matching
