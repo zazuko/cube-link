@@ -98,8 +98,47 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
                         sh:node :ObservationConstraintCoreProperty ;
                     ]
                 ) ;
-            sh:message "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
-        ] ;
+            sh:message
+                "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
+        ]
+.
+
+:KeyDimensionShInConstraint
+    a sh:NodeShape ;
+    sh:targetClass cube:KeyDimension ;
+    sh:severity sh:Info ;
+    sh:message "For performance reason, add list of occurring elements to nominal and ordinal Key Dimensions" ;
+    sh:xone
+        (
+            [
+                sh:node :ObservationConstraintCoreProperty ;
+            ]
+            [
+                sh:node
+                    [
+                        sh:property
+                            [
+                                sh:path qudt:scaleType ;
+                                sh:in ( qudt:NominalScale qudt:OrdinalScale ) ;
+                            ] ;
+                        sh:property
+                            [
+                                sh:path ( sh:in rdf:first ) ;
+                                sh:minCount 1 ;
+                            ] ;
+                    ]
+            ]
+            [
+                sh:node
+                    [
+                        sh:property
+                            [
+                                sh:path qudt:scaleType ;
+                                sh:in ( qudt:RatioScale qudt:IntervalScale ) ;
+                            ]
+                    ]
+            ]
+        ) ;
 .
 
 :ObservationConstraintNodeKindProperty
