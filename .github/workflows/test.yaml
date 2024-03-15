@@ -4,7 +4,13 @@ on: [push, pull_request]
 
 jobs:
   check-constraint:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,7 +24,13 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: sh ./test/check-observations.sh
+        shell: sh
+        run: ./test/check-observations.sh
+
+      - name: Show test results
+        if: ${{ always() }}
+        shell: sh
+        run: for file in test/observations/*.log ; do echo === $file === ; cat $file ; done
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
@@ -28,10 +40,13 @@ jobs:
           path: test
 
   check-cube:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
         profile:
           - basic-cube-constraint
           - standalone-constraint-constraint
@@ -51,7 +66,13 @@ jobs:
         run: npm ci
 
       - name: Run tests
+        shell: sh
         run: ./test/check-metadata.sh --profile=${{ matrix.profile }}
+
+      - name: Show test results
+        if: ${{ always() }}
+        shell: sh
+        run: for file in test/${{ matrix.profile }}/*.log ; do echo === $file === ; cat $file ; done
 
       - name: Upload test results
         uses: actions/upload-artifact@v3

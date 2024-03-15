@@ -32,7 +32,7 @@ _:report a sh:ValidationReport ;
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
-			sh:sourceShape _:b393 ;
+			sh:sourceShape _:b633 ;
 			sh:focusNode <observationConstraint> ;
 			sh:value _:b2 ;
 			sh:resultMessage "Dimension constraint must have exactly one datatype. It cannot be rdf:langString" ;
@@ -43,7 +43,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape _:b393 ;
+		sh:sourceShape _:b633 ;
 		sh:focusNode <observationConstraint> ;
 		sh:value _:b2 ;
 		sh:resultMessage "Dimension constraint must have exactly one datatype. It cannot be rdf:langString" ;
@@ -51,7 +51,7 @@ _:report a sh:ValidationReport ;
 	] ;
 	sh:conforms false .
 
-_:b393 sh:path sh:property ;
+_:b633 sh:path sh:property ;
 	sh:or (
 		[
 			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintDatatypeProperty> ;

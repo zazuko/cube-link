@@ -1,5 +1,11 @@
 # cube-link
 
+## 0.1.5
+
+### Patch Changes
+
+- dd52484: Documentation of new cube validation tools
+
 ## 0.1.4
 
 ### Patch Changes

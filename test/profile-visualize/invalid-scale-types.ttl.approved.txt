@@ -32,7 +32,7 @@ _:report a sh:ValidationReport ;
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
-			sh:sourceShape _:b403 ;
+			sh:sourceShape _:b643 ;
 			sh:focusNode <observationConstraint> ;
 			sh:value _:b2 ;
 			sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
@@ -41,7 +41,7 @@ _:report a sh:ValidationReport ;
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
-			sh:sourceShape _:b403 ;
+			sh:sourceShape _:b643 ;
 			sh:focusNode <observationConstraint> ;
 			sh:value _:b3 ;
 			sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
@@ -52,7 +52,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape _:b403 ;
+		sh:sourceShape _:b643 ;
 		sh:focusNode <observationConstraint> ;
 		sh:value _:b2 ;
 		sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
@@ -61,7 +61,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape _:b403 ;
+		sh:sourceShape _:b643 ;
 		sh:focusNode <observationConstraint> ;
 		sh:value _:b3 ;
 		sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
@@ -69,7 +69,7 @@ _:report a sh:ValidationReport ;
 	] ;
 	sh:conforms false .
 
-_:b403 sh:path sh:property ;
+_:b643 sh:path sh:property ;
 	sh:or (
 		[
 			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintScaleTypeProperty> ;
