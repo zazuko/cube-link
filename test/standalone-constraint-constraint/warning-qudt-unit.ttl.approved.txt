@@ -1,0 +1,36 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Warning ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path sh:property ;
+			sh:node _:b631 ;
+			sh:message "The use of qudt:unit is deprecated, please use qudt:hasUnit instead" ;
+			sh:severity sh:Warning ;
+		] ;
+		sh:focusNode <https://example.org/shape> ;
+		sh:resultPath sh:property ;
+		sh:value _:b3 ;
+		sh:resultMessage "The use of qudt:unit is deprecated, please use qudt:hasUnit instead" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:EqualsConstraintComponent ;
+			sh:sourceShape _:b631 ;
+			sh:focusNode _:b3 ;
+			sh:resultPath <http://qudt.org/schema/qudt/unit> ;
+			sh:value <http://qudt.org/vocab/unit/KiloGM> ;
+			sh:resultMessage "Must have same values as <http://qudt.org/schema/qudt/hasUnit>" ;
+		] ;
+	] ;
+	sh:conforms false .
+
+_:b631 sh:path <http://qudt.org/schema/qudt/unit> ;
+	sh:equals <http://qudt.org/schema/qudt/hasUnit> .

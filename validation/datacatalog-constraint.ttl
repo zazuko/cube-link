@@ -1,4 +1,4 @@
-@base <https://cube.link/shape/datacatalog-constraint#> .
+@prefix : <https://cube.link/shape/datacatalog-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -15,7 +15,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 # All datacatlogs should pass this validation.
 #
 
-<DataCatalogShape>
+:DataCatalogShape
     a sh:NodeShape ;
     sh:targetClass schema:DataCatalog ;
     #sh:targetClass ;
@@ -37,11 +37,11 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
         # optional, but recommended
         sh:path schema:dataset;
         sh:minCount 1;
-        sh:node <DataSetShape> ;
+        sh:node :DataSetShape ;
         sh:message "schema:DataCatalog needs at least one dataset"
     ] .
 
-<DataSetShape>
+:DataSetShape
     a sh:NodeShape ;
     sh:targetClass schema:Dataset;
     sh:or(
@@ -137,13 +137,13 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
         sh:path dcat:distribution ;
         sh:minCount 1 ;
         sh:nodeKind sh:IRI ;
-        sh:node <DCATDistributionShape>;
+        sh:node :DCATDistributionShape;
         sh:message "schema:Dataset needs a valid dcat:Distribution"
     ] ;
 
     .
 
-<DCATDistributionShape>
+:DCATDistributionShape
     a sh:NodeShape ;
     sh:targetClass dcat:Distribution;
     sh:property [

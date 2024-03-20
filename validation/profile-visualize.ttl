@@ -1,0 +1,208 @@
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX meta: <https://cube.link/meta/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX schema: <http://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix code: <https://code.described.at/>
+prefix cube: <https://cube.link/>
+prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
+
+[
+    code:imports <./standalone-cube-constraint> ;
+    code:extension "ttl" ;
+] .
+[
+    code:imports <./shared/data-kind> ;
+    code:extension "ttl" ;
+] .
+
+:CubeShape
+    a sh:NodeShape ;
+    sh:targetClass cube:Cube ;
+    sh:property
+        [
+            sh:path cube:observationConstraint ;
+            sh:node :ObservationConstraintShape ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ],
+        [
+            sh:path schema:name ;
+            sh:minCount 1 ;
+            sh:dataType xsd:langString ;
+        ],
+        [
+            sh:path schema:workExample ;
+            sh:hasValue <https://ld.admin.ch/application/visualize> ;
+            sh:severity sh:Warning ;
+        ],
+        [
+            sh:path schema:creativeWorkStatus ;
+            sh:minCount 1 ;
+            sh:in
+                (
+                    <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published>
+                    <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Draft>
+                ) ;
+        ],
+        [
+            sh:path [ sh:alternativePath ( schema:validThrough schema:expires ) ] ;
+            sh:maxCount 0 ;
+            sh:message "Cube cannot be expired" ;
+        ] ;
+.
+
+
+:ObservationConstraintShape
+    a sh:NodeShape ;
+    sh:targetClass cube:Constraint ;
+    sh:property
+        [
+            sh:path sh:property ;
+            sh:or
+                (
+                    [
+                        sh:node :ObservationConstraintDatatypeProperty ;
+                    ]
+                    [
+                        sh:node :ObservationConstraintCoreProperty ;
+                    ]
+                ) ;
+            sh:message "Dimension constraint must have exactly one datatype. It cannot be rdf:langString"
+        ],
+        [
+            sh:path sh:property ;
+            sh:or
+                (
+                    [
+                        sh:node :ObservationConstraintNodeKindProperty ;
+                    ]
+                    [
+                        sh:node :ObservationConstraintCoreProperty ;
+                    ]
+                ) ;
+            sh:message "Dimension must have exactly one nodeKind: sh:IRI or sh:Literal" ;
+        ],
+        [
+            sh:path sh:property ;
+            sh:or
+                (
+                    [
+                        sh:node :ObservationConstraintScaleTypeProperty ;
+                    ]
+                    [
+                        sh:node :ObservationConstraintCoreProperty ;
+                    ]
+                ) ;
+            sh:message
+                "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
+        ]
+.
+
+:KeyDimensionShInConstraint
+    a sh:NodeShape ;
+    sh:targetClass cube:KeyDimension ;
+    sh:severity sh:Info ;
+    sh:message "For performance reason, add list of occurring elements to nominal and ordinal Key Dimensions" ;
+    sh:xone
+        (
+            [
+                sh:node :ObservationConstraintCoreProperty ;
+            ]
+            [
+                sh:node
+                    [
+                        sh:property
+                            [
+                                sh:path qudt:scaleType ;
+                                sh:in ( qudt:NominalScale qudt:OrdinalScale ) ;
+                            ] ;
+                        sh:property
+                            [
+                                sh:path ( sh:in rdf:first ) ;
+                                sh:minCount 1 ;
+                            ] ;
+                    ]
+            ]
+            [
+                sh:node
+                    [
+                        sh:property
+                            [
+                                sh:path qudt:scaleType ;
+                                sh:in ( qudt:RatioScale qudt:IntervalScale ) ;
+                            ]
+                    ]
+            ]
+        ) ;
+.
+
+:ObservationConstraintNodeKindProperty
+    sh:property
+        [
+            sh:path sh:nodeKind ;
+            sh:in ( sh:IRI sh:Literal ) ;
+            sh:minCount 1 ;
+        ] ;
+.
+
+:ObservationConstraintScaleTypeProperty
+    sh:property
+        [
+            sh:path qudt:scaleType ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:in ( qudt:IntervalScale qudt:NominalScale qudt:RatioScale qudt:OrdinalScale ) ;
+        ] ;
+.
+
+:ObservationConstraintDatatypeProperty
+    sh:property
+        [
+            sh:path sh:datatype ;
+            sh:maxCount 1 ;
+            sh:not [ sh:hasValue rdf:langString ] ;
+        ] ;
+.
+
+:ObservationConstraintCoreProperty
+    sh:property
+        [
+            sh:path sh:path ;
+            sh:in ( rdf:type cube:observedBy )
+        ] ;
+.
+
+:TemporalDimensionConstraint
+    a sh:NodeShape ;
+    sh:targetClass time:GeneralDateTimeDescription ;
+    sh:message
+        "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
+    sh:or
+        (
+            [
+                sh:property
+                    [
+                        sh:path ( [ sh:inversePath meta:dataKind ] sh:datatype ) ;
+                        sh:minCount 1 ;
+                        sh:in ( xsd:gYear xsd:gYearMonth xsd:date xsd:dateTime ) ;
+                    ],
+                    [
+                        sh:path time:unitType ;
+                        sh:maxCount 0 ;
+                    ]
+            ]
+            [
+                sh:property
+                    [
+                        sh:path time:unitType ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ;
+            ]
+        )
+.

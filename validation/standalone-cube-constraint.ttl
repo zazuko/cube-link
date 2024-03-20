@@ -1,4 +1,4 @@
-@base <https://cube.link/shape/standalone-cube-constraint#> .
+@prefix : <https://cube.link/shape/standalone-cube-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -6,14 +6,19 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cube: <https://cube.link/> .
+@prefix code: <https://code.described.at/> .
 
 #
 # This is the bare minimal SHACL shape for validating a cube.
 # All cubes should pass this validation.
-# It does not validate the constraints
 #
 
-<CubeShape>
+[
+    code:imports <./standalone-constraint-constraint> ;
+    code:extension "ttl" ;
+] .
+
+:CubeShape
     a sh:NodeShape ;
     sh:targetClass cube:Cube ;
     sh:or
@@ -104,7 +109,7 @@
         [
             sh:path cube:observationSet ;
             sh:minCount 1 ;
-            sh:node <ObservationSetShape> ;
+            sh:node :ObservationSetShape ;
             sh:message "cube:Cube needs an observationSet"
         ] ;
     sh:property
@@ -115,19 +120,19 @@
         ]
 .
 
-<ObservationSetShape>
+:ObservationSetShape
     a sh:NodeShape ;
     sh:targetClass cube:ObservationSet ;
     sh:property
         [
             sh:path cube:observation ;
             sh:minCount 1 ;
-            sh:node <ObservationShape> ;
+            sh:node :ObservationShape ;
             sh:message "cube:Cube needs at least one observation"
         ] ;
 .
 
-<ObservationShape>
+:ObservationShape
     a sh:NodeShape ;
     sh:targetClass cube:Observation ;
     sh:property

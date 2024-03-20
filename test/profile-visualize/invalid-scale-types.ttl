@@ -1,0 +1,75 @@
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX meta: <https://cube.link/meta/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX cube: <https://cube.link/>
+PREFIX ex: <http://example.org/>
+
+ex:Cube
+    a cube:Cube, dcat:Dataset ;
+    cube:observationSet <observationSet> ;
+    cube:observationConstraint <observationConstraint> ;
+    schema:name "Example cube" ;
+    schema:publisher <publisher> ;
+    schema:creator <creator> ;
+    schema:contributor <contributor> ;
+    dcterms:identifier "cube-1234" ;
+    schema:workExample <https://ld.admin.ch/application/visualize> ;
+    schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
+    dcterms:creator ex:John-Doe ;
+    schema:dateCreated "2020-10-10"^^xsd:date ;
+    schema:dateModified "2020-10-10"^^xsd:date ;
+    schema:datePublished "2020-11-11"^^xsd:date ;
+    schema:contactPoint
+        [
+            schema:name "John Doe" ;
+            schema:email "john@doe.tech" ;
+        ] ;
+.
+
+<observationSet> cube:observation <observation> .
+
+<observation> a cube:Observation ;
+    cube:observedBy <observer> ;
+    <value> 4.9 ;
+    <dimension1> <shared-term> .
+
+<observationConstraint> a cube:Constraint ;
+    sh:closed true ;
+    sh:property
+        [
+            schema:name "Dimenson 1" ;
+            sh:path <dimension1> ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            # scale type missing
+            # qudt:scaleType qudt:NominalScale ;
+        ],
+        [
+            schema:name "Measure" ;
+            sh:path <value> ;
+            sh:datatype xsd:decimal ;
+            sh:nodeKind sh:Literal ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            # scale type outside allowed values
+            qudt:scaleType qudt:EnumerationScale ;
+        ],
+        [
+            sh:path rdf:type ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ],
+        [
+            sh:path cube:observedBy ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+.

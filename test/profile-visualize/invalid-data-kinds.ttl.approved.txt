@@ -1,0 +1,43 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:ClosedConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/shared/data-kind#GeoShape> ;
+		sh:focusNode _:b3 ;
+		sh:resultPath <http://example.org/foo> ;
+		sh:value "bar" ;
+		sh:resultMessage "Predicate is not allowed (closed shape)" ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:ClosedConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/shared/data-kind#GeoCoordinates> ;
+		sh:focusNode _:b5 ;
+		sh:resultPath <http://example.org/foo> ;
+		sh:value "bar" ;
+		sh:resultMessage "Predicate is not allowed (closed shape)" ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Warning ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/shared/data-kind#DataKind> ;
+		sh:focusNode _:b3 ;
+		sh:value _:b3 ;
+		sh:resultMessage "Data kind should be one of the following: GeneralDateTimeDescription, GeoShape, GeoCoordinates" ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Warning ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/shared/data-kind#DataKind> ;
+		sh:focusNode _:b5 ;
+		sh:value _:b5 ;
+		sh:resultMessage "Data kind should be one of the following: GeneralDateTimeDescription, GeoShape, GeoCoordinates" ;
+	] ;
+	sh:conforms false .

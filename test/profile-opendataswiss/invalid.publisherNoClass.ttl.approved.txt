@@ -1,0 +1,32 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape [
+			sh:path <http://purl.org/dc/terms/publisher> ;
+			sh:maxCount 1 ;
+			sh:minCount 1 ;
+			sh:xone (
+				[
+					sh:nodeKind sh:IRI ;
+				]
+				[
+					sh:nodeKind sh:BlankNode ;
+					sh:class <http://xmlns.com/foaf/0.1/Organization> ;
+				]
+			) ;
+			sh:message "Publisher must be a foaf:Organization DCAT-AP." ;
+		] ;
+		sh:focusNode <http://example.org/cube> ;
+		sh:resultPath <http://purl.org/dc/terms/publisher> ;
+		sh:value _:b2 ;
+		sh:resultMessage "Publisher must be a foaf:Organization DCAT-AP." ;
+	] ;
+	sh:conforms false .

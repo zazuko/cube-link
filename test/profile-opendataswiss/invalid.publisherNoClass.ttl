@@ -1,0 +1,72 @@
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX cube: <https://cube.link/>
+PREFIX ex: <http://example.org/>
+prefix dcat-theme: <http://dcat-ap.ch/vocabulary/themes/>
+
+ex:cube
+    a cube:Cube, dcat:Dataset ;
+    dcterms:creator ex:JohnDoe ;
+    schema:creator ex:JohnDoe ;
+    schema:publisher ex:Org ;
+    cube:observationSet <observationSet> ;
+    schema:name "Example cube" ;
+    schema:contributor ex:JohnDoe ;
+    schema:dateCreated "2020-10-10"^^xsd:date ;
+    schema:dateModified "2020-10-10"^^xsd:date ;
+    schema:datePublished "2020-11-11"^^xsd:date ;
+    schema:contactPoint
+        [
+            schema:name "Max Muster, BAFU Datenspezialist" ;
+            schema:email "max-muster@bafu.admin.ch" ;
+        ] ;
+    dcterms:publisher
+        [
+            # a foaf:Organization ;
+            foaf:name "Acme Corp." ;
+        ] ;
+    dcat:contactPoint
+        [
+            a vcard:Organization ;
+            vcard:fn "Abteilung Lärm BAFU" ;
+            vcard:hasEmail <mailto:noise@bafu.admin.ch>
+        ],
+        [
+            a vcard:Individual ;
+            vcard:fn "Max Muster, BAFU Datenspezialist" ;
+            vcard:hasEmail <mailto:max-muster@bafu.admin.ch>
+        ] ;
+    dcterms:identifier "1234@acme-corp" ;
+    schema:workExample <https://ld.admin.ch/application/opendataswiss> ;
+    schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
+    dcterms:title "Example Cube"@en ;
+    dcterms:description "This is an example cube"@en ;
+    dcat:issued "2019-01-01T00:00:00Z"^^xsd:dateTime ;
+    dcat:modified "2019-01-01T00:00:00Z"^^xsd:dateTime ;
+    dcat:theme
+        dcat-theme:work,
+        dcat-theme:construction,
+        dcat-theme:population ;
+    dcat:landingPage <http://example.com/cube> ;
+    dcat:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/BIWEEKLY> ;
+    dcat:distribution
+        [
+            dcterms:title "Example Cube"@en ;
+            dcat:accessURL <http://example.com/cube> ;
+            dcat:mediaType <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+            dcat:rights "NonCommercialAllowed-CommercialAllowed-ReferenceNotRequired" ;
+            dcat:issued "2019-01-01T00:00:00Z"^^xsd:dateTime ;
+            dcterms:description "This is an example cube"@en ;
+        ] ;
+    dcterms:language "de" ;
+.
+
+<observationSet> cube:observation <observation> .
+
+<observation> a cube:Observation ;
+    cube:observedBy <observer> ;
+    <dimension1> 4.9 .

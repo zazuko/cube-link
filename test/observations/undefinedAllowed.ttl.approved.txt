@@ -3,3 +3,6 @@
 @prefix schema: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:conforms true .

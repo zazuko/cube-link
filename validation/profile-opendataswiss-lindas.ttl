@@ -1,0 +1,41 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX schema: <http://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+prefix code: <https://code.described.at/>
+prefix cube: <https://cube.link/>
+prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
+
+[
+    code:imports <./standalone-cube-constraint> ;
+    code:extension "ttl" ;
+] .
+
+:CubeShape
+    a sh:NodeShape ;
+    sh:targetClass cube:Cube ;
+    sh:class dcat:Dataset ;
+    sh:property
+        [
+            sh:path dcterms:identifier ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ],
+        [
+            sh:path dcterms:creator ;
+            sh:minCount 1 ;
+        ],
+        [
+            sh:path schema:workExample ;
+            sh:hasValue <https://ld.admin.ch/application/opendataswiss> ;
+        ],
+        [
+            sh:path schema:creativeWorkStatus ;
+            sh:hasValue <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
+        ],
+        [
+            sh:path [ sh:alternativePath ( schema:validThrough schema:expires ) ] ;
+            sh:maxCount 0 ;
+            sh:message "Cube cannot be expired" ;
+        ] ;
+.

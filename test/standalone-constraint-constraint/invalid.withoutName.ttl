@@ -22,11 +22,13 @@
 <shape> a cube:Constraint ;
     sh:targetClass cube:Observation ;
     sh:closed true ;
-    sh:property [ sh:path rdf:type ; sh:nodeKind sh:IRI] ;
-    sh:property [ sh:path cube:observedBy ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path rdf:type ; sh:nodeKind sh:IRI ; sh:minCount 1; sh:maxCount 1 ] ;
+    sh:property [ sh:path cube:observedBy ; sh:nodeKind sh:IRI ; sh:minCount 1; sh:maxCount 1 ] ;
     sh:property [
         sh:path  <dimension1> ;
         sh:datatype xsd:decimal ;
         # schema:name "some Quantity" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
     ] ;
 .

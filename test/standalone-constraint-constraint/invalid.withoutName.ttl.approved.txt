@@ -11,7 +11,7 @@ _:report a sh:ValidationReport ;
 		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
 		sh:sourceShape [
 			sh:path sh:property ;
-			sh:node <https://cube.link/shape/PropertyWithName> ;
+			sh:node <https://cube.link/shape/standalone-constraint-constraint#PropertyWithName> ;
 			sh:message "needs a schema:name" ;
 		] ;
 		sh:focusNode <https://example.org/shape> ;
@@ -20,7 +20,7 @@ _:report a sh:ValidationReport ;
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
-			sh:sourceShape <https://cube.link/shape/PropertyWithName> ;
+			sh:sourceShape <https://cube.link/shape/standalone-constraint-constraint#PropertyWithName> ;
 			sh:focusNode _:b3 ;
 			sh:value _:b3 ;
 		] ;

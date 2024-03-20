@@ -1,4 +1,4 @@
-@base <https://cube.link/shape/standalone-constraint-constraint#> .
+@prefix : <https://cube.link/shape/standalone-constraint-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -14,7 +14,7 @@
 # All Cube Constraints should pass this validation.
 #
 
-<ObservationConstraintShape>
+:ObservationConstraintShape
     a sh:NodeShape ;
     sh:targetClass cube:Constraint ;
     sh:property [
@@ -27,41 +27,50 @@
     sh:property
         [
             sh:path sh:property ;
-            sh:node <PropertyPath> ;
+            sh:node :PropertyPath ;
             sh:message "a sh:path is needed on a property" ;
         ] ,
         [
             sh:path sh:property ;
-            sh:node <PropertyWithName> ;
+            sh:node :PropertyWithName ;
             sh:message "needs a schema:name" ;
         ] ,
         [
             sh:path sh:property ;
-            sh:node <PropertyNameType> ;
+            sh:node :PropertyNameType ;
             sh:message "schema:name needs to be a xsd:string or a rdf:langString" ;
         ] ,
         [
             sh:path sh:property ;
-            sh:node <PropertyWithType> ;
+            sh:node :PropertyWithType ;
             sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
         ] ,
         [
             sh:path sh:property ;
-            sh:node <PropertyScaleType> ;
+            sh:node :PropertyScaleType ;
             sh:message "If qudt:scaleType is used it needs to be within ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale )" ;
         ] ,
         [
             sh:path sh:property ;
-            sh:node <PropertyRange> ;
+            sh:node :PropertyRange ;
         ] ,
         [
             sh:path sh:property ;
-            sh:node <PropertyInList> ;
+            sh:node :PropertyInList ;
             sh:message "sh:in needs to be a list" ;
         ] ,
         [
             sh:path sh:property ;
-            sh:node <DimensionRelation> ;
+            sh:node :DimensionRelation ;
+        ] ,
+        [
+            sh:path sh:property ;
+            sh:node [
+                sh:path qudt:unit ;
+                sh:equals qudt:hasUnit ;
+            ] ;
+            sh:severity sh:Warning ;
+            sh:message "The use of qudt:unit is deprecated, please use qudt:hasUnit instead" ;
         ] ;
 	sh:property [
         sh:path sh:closed;
@@ -69,20 +78,20 @@
     ] ;
     sh:property [
         sh:path meta:inHierarchy;
-        sh:node <Hierarchy>;
+        sh:node :Hierarchy;
         sh:message "meta:inHierarchy does not validate"
     ] ;
     .
 
-<PropertyPath> a sh:NodeShape ;
-	sh:property [
+:PropertyPath a sh:NodeShape ;
+    sh:property [
         sh:path sh:path;
         sh:minCount 1;
         sh:maxCount 1;
-    ];
+    ] ;
 .
 
-<PropertyWithName> a sh:NodeShape ;
+:PropertyWithName a sh:NodeShape ;
     sh:or(
         [
             sh:path schema:name;
@@ -95,14 +104,14 @@
     );
 .
 
-<PropertyNameType> a sh:NodeShape ;
+:PropertyNameType a sh:NodeShape ;
     sh:property [
         sh:path schema:name;
         sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
     ];
 .
 
-<PropertyWithType> a sh:NodeShape ;
+:PropertyWithType a sh:NodeShape ;
     sh:or(
         [
             sh:path sh:datatype;
@@ -115,7 +124,7 @@
         [
             sh:path sh:or;
             sh:minCount 1;
-            sh:node <listnode> ;
+            sh:node :listnode ;
             sh:property [
                 sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
                 sh:property [ sh:path sh:datatype ; sh:minCount 1 ] ; # have at least one datatype
@@ -124,14 +133,14 @@
     );
 .
 
-<PropertyInList> a sh:NodeShape ;
+:PropertyInList a sh:NodeShape ;
     sh:property [
         sh:path sh:in;
-        sh:node <listnode>;
+        sh:node :listnode ;
     ];
 .
 
-<PropertyScaleType> a sh:NodeShape ;
+:PropertyScaleType a sh:NodeShape ;
     sh:property [
         sh:path qudt:scaleType;
         sh:in (qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
@@ -139,7 +148,7 @@
     ];
 .
 
-<PropertyRange> a sh:NodeShape ;
+:PropertyRange a sh:NodeShape ;
     sh:property [
         sh:path sh:minInclusive;
         sh:nodeType sh:Literal;
@@ -150,9 +159,22 @@
         sh:nodeType sh:Literal;
         sh:message "sh:maxInclusive needs to be a literal"
     ];
+    sh:property [
+        sh:path sh:minCount;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:hasValue 1 ;
+        sh:message "sh:minCount needs to be 1" ;
+    ] , [
+        sh:path sh:maxCount;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:hasValue 1 ;
+        sh:message "sh:maxCount needs to be 1" ;
+    ] ;
 .
 
-<DimensionRelation> a sh:NodeShape ;
+:DimensionRelation a sh:NodeShape ;
     sh:property [
         sh:path meta:dimensionRelation;
         sh:property [
@@ -160,13 +182,13 @@
             sh:nodeKind sh:IRI ;
             sh:minCount 1;
             sh:message "meta:dimensionRelation requires at least one meta:relatesTo";
-        ]
-    ]
+        ] ;
+    ] ;
 .
 
 
 # Testing proper rdf:list construction
-<listnode> a sh:NodeShape ;
+:listnode a sh:NodeShape ;
     sh:targetClass rdf:List ;
     sh:property [
         sh:path rdf:first;
@@ -179,18 +201,18 @@
         sh:maxCount 1;
         sh:or (
             [
-                sh:node <listnode>;
+                sh:node :listnode;
             ]
             [
                 sh:hasValue rdf:nil;
             ]
 	    ) ;
         sh:message "a rdf:List can only have one rdf:rest node, multiples nodes need to be linked"
-        #sh:node <restnode>;
+        #sh:node :restnode;
     ]
     .
 
-<inversepathnode> a sh:NodeShape ;
+:inversepathnode a sh:NodeShape ;
     sh:property [
         sh:path sh:inversePath;
         sh:nodeKind sh:IRI;
@@ -199,7 +221,7 @@
         sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
     ] .
 
-<NextInHierarchy> a sh:NodeShape ;
+:NextInHierarchy a sh:NodeShape ;
     sh:property [
         sh:path sh:path;
         sh:minCount 1;
@@ -218,7 +240,7 @@
     ],
     [
         sh:path meta:nextInHierarchy;
-        sh:node <NextInHierarchy> ;
+        sh:node :NextInHierarchy ;
         sh:severity sh:Info;
         sh:message "nextInHierarchy can have nested nodes"
     ] ;
@@ -231,13 +253,13 @@
         [
             sh:path sh:path;
             sh:nodeKind sh:BlankNode;
-            sh:node <inversepathnode>;
+            sh:node :inversepathnode;
             sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
         ]
     )
     .
 
-<Hierarchy> a sh:NodeShape ;
+:Hierarchy a sh:NodeShape ;
     sh:targetClass meta:Hierarchy ;
     sh:property [
         sh:path meta:hierarchyRoot;
@@ -252,7 +274,7 @@
     ],
     [
         sh:path meta:nextInHierarchy;
-	    sh:node <NextInHierarchy>;
+	    sh:node :NextInHierarchy;
         sh:minCount 1;
         sh:message "inHierarchy requires a conform nextInHierarchy"
     ] .
