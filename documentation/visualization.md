@@ -121,7 +121,7 @@ To express that the dimension provides a specific _kind_ of data which is necess
 
 Representing temporal dimensions as literals typed as `xsd:date` or `xsd:dateTime` may be insufficient for complex scenarios. In such cases, data publishers may want to use the [Time Ontology in OWL](https://www.w3.org/TR/owl-time/) to represent temporal dimensions. This allows for the representation of complex temporal concepts, such as time periods, intervals, and repeating events, a well as joining cubes on the temporal dimension.
 
-When using Time Ontology in a cube, the values of a temporal dimension are resources of type `time:TemporalEntity`. The dimension should be expressed as a `time:GeneralDateTimeDescription` and have `Ordinal` scale type.
+When using Time Ontology in a cube, the values of a temporal dimension are resources of type [`time:TemporalEntity`](https://prefix.zazuko.com/time:TemporalEntity) or one of its subtypes: [`time:Interval`](https://prefix.zazuko.com/time:Intetrval), [`time:Instant`](https://prefix.zazuko.com/time:Instant), or [`time:ProperInterval`.](https://prefix.zazuko.com/time:ProperInterval) The dimension should be expressed as a `time:GeneralDateTimeDescription` and have `Ordinal` scale type.
 
 <aside class='example'>
 
