@@ -1,5 +1,16 @@
 # cube-link
 
+## 0.2.0
+
+### Minor Changes
+
+- 1c2205e: Include `standalone-constraint-constraint` in `standalone-cube-constraint`
+
+### Patch Changes
+
+- 4645d09: Visualize validation profile (closes #114)
+- d7d3256: Added validation profile for opendata.swiss (closes #118)
+
 ## 0.1.5
 
 ### Patch Changes
