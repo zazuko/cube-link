@@ -1,0 +1,48 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix cube: <https://cube.link/> .
+@prefix observation: <https://environment.ld.admin.ch/foen/nfi/observation/max_min_undefined> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@base <https://example.org/> .
+
+<cube> a cube:Cube ;
+    cube:observationConstraint <shape> ;
+    cube:observationSet <observationSet> .
+
+<observationSet> cube:observation <observation> .
+
+<observation> a cube:Observation ;
+    cube:observedBy <observer> ;
+    <dimension1> "one" .
+
+
+<shape> a cube:Constraint ;
+    sh:targetClass cube:Observation ;
+    sh:closed true ;
+    sh:property
+        [
+            sh:path rdf:type ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:in [ a rdf:List ; rdf:first cube:Observation ; rdf:rest rdf:nil ] # well-formed list
+        ] ;
+    sh:property
+        [
+            sh:path cube:observedBy ; ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:in [ rdf:first <observer> ; rdf:rest rdf:wrong ] # malformed list
+        ] ;
+    sh:property
+        [
+            sh:datatype xsd:string ;
+            sh:path <dimension1> ;
+            schema:name "dimension 1" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:in [ rdf:first "one" ] # malformed list
+        ] ;
+.
