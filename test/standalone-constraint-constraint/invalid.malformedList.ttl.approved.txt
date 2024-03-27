@@ -16,14 +16,6 @@ _:report a sh:ValidationReport ;
 	], [
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
-		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape <https://cube.link/shape/standalone-constraint-constraint#restvalue> ;
-		sh:focusNode rdf:wrong ;
-		sh:resultMessage "rdf:rest value must be a list node or rdf:nil" ;
-		sh:value rdf:wrong ;
-	], [
-		rdf:type sh:ValidationResult ;
-		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
 		sh:sourceShape [
 			sh:path sh:property ;
@@ -33,7 +25,6 @@ _:report a sh:ValidationReport ;
 		sh:focusNode <https://example.org/shape> ;
 		sh:resultPath sh:property ;
 		sh:resultMessage "sh:in needs to be a list" ;
-		sh:value _:b5 ;
 		sh:detail [
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
@@ -45,7 +36,6 @@ _:report a sh:ValidationReport ;
 			sh:focusNode _:b5 ;
 			sh:resultPath sh:in ;
 			sh:resultMessage "Value does not have shape <https://cube.link/shape/standalone-constraint-constraint#listnode>" ;
-			sh:value _:b6 ;
 			sh:detail [
 				rdf:type sh:ValidationResult ;
 				sh:resultSeverity sh:Violation ;
@@ -87,7 +77,17 @@ _:report a sh:ValidationReport ;
 				sh:resultPath rdf:rest ;
 				sh:resultMessage "list node needs exactly one rdf:rest" ;
 			] ;
+			sh:value _:b6 ;
 		] ;
+		sh:value _:b5 ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/standalone-constraint-constraint#restvalue> ;
+		sh:focusNode rdf:wrong ;
+		sh:resultMessage "rdf:rest value must be a list node or rdf:nil" ;
+		sh:value rdf:wrong ;
 	] ;
 	sh:conforms false .
 

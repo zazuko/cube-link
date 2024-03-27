@@ -191,7 +191,7 @@
 
 :restvalue sh:targetObjectsOf rdf:rest ;
     sh:message "rdf:rest value must be a list node or rdf:nil";
-    sh:or ([ sh:node :listnode ] [ sh:hasValue rdf:nil ])
+    sh:xone ([ sh:node :listnode ] [ sh:hasValue rdf:nil ])
 .
 
 :listnode sh:targetSubjectsOf rdf:first, rdf:rest ;
