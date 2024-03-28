@@ -65,10 +65,16 @@
         ] ,
         [
             sh:path sh:property ;
-            sh:node [
-                sh:path qudt:unit ;
-                sh:equals qudt:hasUnit ;
-            ] ;
+            sh:or (
+                      [
+                          sh:path qudt:unit ;
+                          sh:equals qudt:hasUnit ;
+                      ]
+                      [
+                          sh:path qudt:unit ;
+                          sh:maxCount 0 ;
+                      ]
+                  ) ;
             sh:severity sh:Warning ;
             sh:message "The use of qudt:unit is deprecated, please use qudt:hasUnit instead" ;
         ] ;

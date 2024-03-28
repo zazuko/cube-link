@@ -52,4 +52,13 @@ PREFIX qudt: <http://qudt.org/schema/qudt/>
             sh:maxCount 1 ;
             qudt:unit unit:KiloGM ;
         ] ;
+    sh:property
+        [
+            sh:datatype xsd:decimal ;
+            sh:path <dimension2> ;
+            schema:name "some Quantity" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            qudt:hasUnit unit:KiloGM ;
+        ] ;
 .
