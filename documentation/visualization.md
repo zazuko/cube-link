@@ -61,8 +61,10 @@ A descriptive name of the Dimension, this description can be multilingual.
 #### schema:description
 A description of the Dimension, this description can be multilingual.
 
-#### qudt:unit
-To describe the unit of the values in a dimension the respective `qudt:Unit` instance can be attached to a [Dimension Constraint](#dimensionconstraints) with the `qudt:unit` property.
+#### qudt:unit / qudt:hasUnit (merge to qudt:hasUnit instead of qudt:unit tbd in 2024)
+To describe the unit of the values in a dimension the respective `qudt:Unit` instance can be attached to a [Dimension Constraint](#dimensionconstraints) with the `qudt:unit` / `qudt:hasUnit`   property.
+
+
 
 #### qudt:scaleType
 
