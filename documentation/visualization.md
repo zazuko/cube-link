@@ -116,4 +116,4 @@ To express that the dimension provides a specific _kind_ of data which is necess
 </aside>
 
 #### sh:order
-The sh:order can be used to indicate the relative order of the dimension, for use in visualizations. It should be used according to [the specification](https://www.w3.org/TR/shacl/#order) by using ascending order, for example, so that properties with smaller order are placed above (or to the left) of properties with a larger order. 
+The sh:order can be used to indicate the relative order of the dimension, for use in visualizations. It should be used according to [the specification](https://www.w3.org/TR/shacl/#order) by using ascending order, for example, so that properties with smaller order are placed above (or to the left) of properties with a larger order. For an example how to use it in  [Cube-Creator](https://int.cube-creator.lindas.admin.ch/app/cube-projects/cube-project!!28-finanzielle-situation-der-schweizer-online-medienangebote-kbwzndeywpl/csv-mapping).
