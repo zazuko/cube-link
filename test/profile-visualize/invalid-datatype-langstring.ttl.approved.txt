@@ -16,38 +16,28 @@ _:report a sh:ValidationReport ;
 			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintShape> ;
 		] ;
 		sh:focusNode <http://example.org/Cube> ;
+		sh:resultPath cube:observationConstraint ;
 		sh:value <observationConstraint> ;
 		sh:resultMessage "Value does not have shape <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintShape>" ;
 		sh:detail [
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
-			sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
-			sh:sourceShape [
-				sh:nodeKind sh:IRI ;
-			] ;
-			sh:focusNode _:b1 ;
-			sh:value _:b1 ;
-			sh:resultMessage "Value does not have node kind <http://www.w3.org/ns/shacl#IRI>" ;
-		], [
-			rdf:type sh:ValidationResult ;
-			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
 			sh:sourceShape _:b633 ;
 			sh:focusNode <observationConstraint> ;
+			sh:resultPath sh:property ;
 			sh:value _:b2 ;
 			sh:resultMessage "Dimension constraint must have exactly one datatype. It cannot be rdf:langString" ;
-			sh:resultPath sh:property ;
 		] ;
-		sh:resultPath cube:observationConstraint ;
 	], [
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:OrConstraintComponent ;
 		sh:sourceShape _:b633 ;
 		sh:focusNode <observationConstraint> ;
+		sh:resultPath sh:property ;
 		sh:value _:b2 ;
 		sh:resultMessage "Dimension constraint must have exactly one datatype. It cannot be rdf:langString" ;
-		sh:resultPath sh:property ;
 	] ;
 	sh:conforms false .
 
