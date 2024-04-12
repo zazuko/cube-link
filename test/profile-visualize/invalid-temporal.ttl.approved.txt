@@ -25,22 +25,6 @@ _:report a sh:ValidationReport ;
 		sh:resultMessage "Predicate is not allowed (closed shape)" ;
 	], [
 		rdf:type sh:ValidationResult ;
-		sh:resultSeverity sh:Violation ;
-		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#TemporalDimensionConstraint> ;
-		sh:focusNode _:b3 ;
-		sh:value _:b3 ;
-		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
-	], [
-		rdf:type sh:ValidationResult ;
-		sh:resultSeverity sh:Violation ;
-		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#TemporalDimensionConstraint> ;
-		sh:focusNode _:b5 ;
-		sh:value _:b5 ;
-		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
-	], [
-		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Warning ;
 		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
 		sh:sourceShape <https://cube.link/shape/shared/data-kind#DataKind> ;
@@ -55,5 +39,21 @@ _:report a sh:ValidationReport ;
 		sh:focusNode _:b5 ;
 		sh:value _:b5 ;
 		sh:resultMessage "Data kind should be one of the following: GeneralDateTimeDescription, GeoShape, GeoCoordinates" ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#TemporalDimensionConstraint> ;
+		sh:focusNode _:b3 ;
+		sh:value _:b3 ;
+		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#TemporalDimensionConstraint> ;
+		sh:focusNode _:b5 ;
+		sh:value _:b5 ;
+		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
 	] ;
 	sh:conforms false .

@@ -182,7 +182,7 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
     sh:targetClass time:GeneralDateTimeDescription ;
     sh:message
         "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
-    sh:or
+    sh:xone
         (
             [
                 sh:property

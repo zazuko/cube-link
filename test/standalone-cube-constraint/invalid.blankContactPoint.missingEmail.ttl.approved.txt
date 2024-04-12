@@ -8,11 +8,11 @@ _:report a sh:ValidationReport ;
 	sh:result [
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
-		sh:sourceConstraintComponent sh:OrConstraintComponent ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
 		sh:sourceShape [
 			sh:path schema:contactPoint ;
 			sh:minCount 1 ;
-			sh:or (
+			sh:xone (
 				[
 					sh:nodeKind sh:IRI ;
 				]
