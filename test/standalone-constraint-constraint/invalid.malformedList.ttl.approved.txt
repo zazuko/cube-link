@@ -1,0 +1,65 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+		sh:sourceShape _:b678 ;
+		sh:focusNode _:b6 ;
+		sh:resultPath rdf:rest ;
+		sh:resultMessage "list node needs exactly one rdf:rest" ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path sh:property ;
+			sh:message "sh:in needs to be a list" ;
+			sh:node <https://cube.link/shape/standalone-constraint-constraint#PropertyInList> ;
+		] ;
+		sh:focusNode <https://example.org/shape> ;
+		sh:resultPath sh:property ;
+		sh:resultMessage "sh:in needs to be a list" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+			sh:sourceShape [
+				sh:path sh:in ;
+				sh:node <https://cube.link/shape/standalone-constraint-constraint#listnode> ;
+			] ;
+			sh:focusNode _:b5 ;
+			sh:resultPath sh:in ;
+			sh:resultMessage "Value does not have shape <https://cube.link/shape/standalone-constraint-constraint#listnode>" ;
+			sh:detail [
+				rdf:type sh:ValidationResult ;
+				sh:resultSeverity sh:Violation ;
+				sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+				sh:sourceShape _:b678 ;
+				sh:focusNode _:b6 ;
+				sh:resultPath rdf:rest ;
+				sh:resultMessage "list node needs exactly one rdf:rest" ;
+			] ;
+			sh:value _:b6 ;
+		] ;
+		sh:value _:b5 ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/standalone-constraint-constraint#restvalue> ;
+		sh:focusNode rdf:wrong ;
+		sh:resultMessage "rdf:rest value must be a list node or rdf:nil" ;
+		sh:value rdf:wrong ;
+	] ;
+	sh:conforms false .
+
+_:b678 sh:path rdf:rest ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:message "list node needs exactly one rdf:rest" .
