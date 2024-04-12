@@ -113,7 +113,7 @@
 :PropertyNameType a sh:NodeShape ;
     sh:property [
         sh:path schema:name;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:xone ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
     ];
 .
 
@@ -241,7 +241,7 @@
         sh:severity sh:Info;
         sh:message "nextInHierarchy can have nested nodes"
     ] ;
-    sh:or (
+    sh:xone (
         [
             sh:path sh:path;
 	        sh:nodeKind sh:IRI;

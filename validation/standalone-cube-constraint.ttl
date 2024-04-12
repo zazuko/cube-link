@@ -54,7 +54,7 @@
         [
             sh:path schema:contactPoint ;
             sh:minCount 1 ;
-            sh:or
+            sh:xone
                 (
                     [ sh:nodeKind sh:IRI ]
                     [
