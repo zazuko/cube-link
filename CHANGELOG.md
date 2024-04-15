@@ -1,5 +1,18 @@
 # cube-link
 
+## 0.2.0
+
+### Minor Changes
+
+- 1c2205e: Include `standalone-constraint-constraint` in `standalone-cube-constraint`
+
+### Patch Changes
+
+- 3f40fd5: Validating RDF Lists should now work with long lists of any size
+- 4645d09: Visualize validation profile (closes #114)
+- 9faf4fb: Validation profiles: switch to `sh:xone` where appropriate
+- d7d3256: Added validation profile for opendata.swiss (closes #118)
+
 ## 0.1.5
 
 ### Patch Changes
