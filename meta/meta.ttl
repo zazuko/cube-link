@@ -5,7 +5,7 @@ PREFIX meta: <https://cube.link/meta/>
 PREFIX schema: <http://schema.org/>
 
 meta:dimensionRelation a rdfs:Property;
-    rdfs:subClassOf meta:relatesTo;
+    rdfs:subPropertyOf meta:relatesTo;
     rdfs:label "dimension relation";
     rdfs:comment "A meta:dimensionRelation property is used to express the relation of this dimension in related to other dimension, examples are Deviation and StandardError";
     .

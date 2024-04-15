@@ -65,10 +65,16 @@
         ] ,
         [
             sh:path sh:property ;
-            sh:node [
-                sh:path qudt:unit ;
-                sh:equals qudt:hasUnit ;
-            ] ;
+            sh:or (
+                      [
+                          sh:path qudt:unit ;
+                          sh:equals qudt:hasUnit ;
+                      ]
+                      [
+                          sh:path qudt:unit ;
+                          sh:maxCount 0 ;
+                      ]
+                  ) ;
             sh:severity sh:Warning ;
             sh:message "The use of qudt:unit is deprecated, please use qudt:hasUnit instead" ;
         ] ;
@@ -107,7 +113,7 @@
 :PropertyNameType a sh:NodeShape ;
     sh:property [
         sh:path schema:name;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:xone ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
     ];
 .
 
@@ -188,29 +194,20 @@
 
 
 # Testing proper rdf:list construction
-:listnode a sh:NodeShape ;
-    sh:targetClass rdf:List ;
-    sh:property [
-        sh:path rdf:first;
-        sh:minCount 1;
-        sh:maxCount 1;
-    ];
-    sh:property [
-        sh:path rdf:rest;
-        sh:minCount 1;
-        sh:maxCount 1;
-        sh:or (
-            [
-                sh:node :listnode;
-            ]
-            [
-                sh:hasValue rdf:nil;
-            ]
-	    ) ;
-        sh:message "a rdf:List can only have one rdf:rest node, multiples nodes need to be linked"
-        #sh:node :restnode;
-    ]
-    .
+
+:restvalue sh:targetObjectsOf rdf:rest ;
+    sh:message "rdf:rest value must be a list node or rdf:nil";
+    sh:xone ([ sh:node :listnode ] [ sh:hasValue rdf:nil ])
+.
+
+:listnode sh:targetSubjectsOf rdf:first, rdf:rest ;
+    sh:property [ sh:path rdf:first ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "list node needs exactly one rdf:first" ] ;
+    sh:property [ sh:path rdf:rest ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "list node needs exactly one rdf:rest" ] ;
+    sh:closed true ;
+    sh:ignoredProperties (rdf:type) .
+
 
 :inversepathnode a sh:NodeShape ;
     sh:property [
@@ -244,7 +241,7 @@
         sh:severity sh:Info;
         sh:message "nextInHierarchy can have nested nodes"
     ] ;
-    sh:or (
+    sh:xone (
         [
             sh:path sh:path;
 	        sh:nodeKind sh:IRI;
