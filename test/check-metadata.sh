@@ -40,7 +40,7 @@ if [ -z "$profile" ]; then
 fi
 
 loadFullShape() {
-  "$SCRIPT_PATH"/load-graph.mjs "$1" | "$SCRIPT_PATH"/pretty-print.mjs
+  "$SCRIPT_PATH"/load-graph.js "$1" | "$SCRIPT_PATH"/pretty-print.mjs
 }
 
 # iterate over valid cases, run validation and monitor exit code
@@ -88,7 +88,7 @@ for file in "$SCRIPT_PATH"/"$profile"/{invalid,warning}*.ttl; do
     if [ "$debug" = true ]; then
       echo "🐞 npx barnard59 cube check-metadata --profile $profilePath < $file"
     fi
-  report=$(npx barnard59 cube check-metadata --profile "$profilePath" < "$file" 2> "$file.log" | "$SCRIPT_PATH"/pretty-print.mjs)
+  report=$(npx barnard59 cube check-metadata --profile "$profilePath" < "$file" 2> "$file.log" | "$SCRIPT_PATH"/pretty-print.js)
 
   if ! echo "$report" | npx approvals "$name" --outdir "$SCRIPT_PATH"/"$profile" "$approvalsFlags" > /dev/null 2>&1 ; then
     "$SCRIPT_PATH"/report-failure.sh "$file" "$(loadFullShape "$profilePath")" "$(cat "$file")" "check results"
