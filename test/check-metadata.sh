@@ -40,7 +40,7 @@ if [ -z "$profile" ]; then
 fi
 
 loadFullShape() {
-  "$SCRIPT_PATH"/load-graph.js "$1" | "$SCRIPT_PATH"/pretty-print.mjs
+  "$SCRIPT_PATH"/load-graph.js "$1" | "$SCRIPT_PATH"/pretty-print.js
 }
 
 # iterate over valid cases, run validation and monitor exit code
