@@ -21,6 +21,7 @@ prefix : <https://cube.link/shape/shared/data-kind#>
 :GeoShape
     a sh:NodeShape ;
     sh:targetClass schema:GeoShape ;
+    sh:class schema:GeoShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
 .
@@ -28,6 +29,7 @@ prefix : <https://cube.link/shape/shared/data-kind#>
 :GeoCoordinates
     a sh:NodeShape ;
     sh:targetClass schema:GeoCoordinates ;
+    sh:class schema:GeoCoordinates ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
 .
@@ -35,6 +37,7 @@ prefix : <https://cube.link/shape/shared/data-kind#>
 :GeneralDateTimeDescription
     a sh:NodeShape ;
     sh:targetClass time:GeneralDateTimeDescription ;
+    sh:class time:GeneralDateTimeDescription ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property
