@@ -15,15 +15,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js (except for Windows)
+        if: ${{ runner.os != 'Windows' }}
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: npm
 
-      - name: Remove some dependencies for Windows
+      # https://github.com/approvals/Approvals.NodeJS/issues/176
+      - name: Set up Node.js (for Windows)
         if: ${{ runner.os == 'Windows' }}
-        run: chmod -R 777 . && npm rm pm2 chromium
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.12.1'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -62,10 +67,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js (except for Windows)
+        if: ${{ runner.os != 'Windows' }}
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
+
+      # https://github.com/approvals/Approvals.NodeJS/issues/176
+      - name: Set up Node.js (for Windows)
+        if: ${{ runner.os == 'Windows' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.12.1'
           cache: npm
 
       - name: Remove some dependencies for Windows
