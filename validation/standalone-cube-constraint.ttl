@@ -107,6 +107,7 @@
         ] ;
     sh:property
         [
+            sh:severity sh:Warning ;
             sh:path cube:observationSet ;
             sh:minCount 1 ;
             sh:node :ObservationSetShape ;
@@ -125,6 +126,7 @@
     sh:targetClass cube:ObservationSet ;
     sh:property
         [
+            sh:severity sh:Warning ;
             sh:path cube:observation ;
             sh:minCount 1 ;
             sh:node :ObservationShape ;
