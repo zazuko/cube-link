@@ -101,8 +101,11 @@
     sh:property
         [
             sh:path schema:dateModified ;
+            sh:or (
+                [ sh:datatype xsd:date ]
+                [ sh:datatype xsd:dateTime ]
+            ) ;
             sh:minCount 1 ;
-            sh:datatype xsd:date ;
             sh:message "cube:Cube needs a valid schema:dateModified"
         ] ;
     sh:property

@@ -14,7 +14,7 @@
     schema:creator <creator> ;
     schema:contributor <contributor> ;
     schema:dateCreated "2020-10-10"^^xsd:date ;
-    schema:dateModified "2020-10-10"^^xsd:date ;
+    schema:dateModified "2020-10-10T12:34:56"^^xsd:dateTime ;
     schema:datePublished "2020-11-11"^^xsd:date ;
     schema:contactPoint
         [
