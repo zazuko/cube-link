@@ -7,7 +7,7 @@ const { fetchBuilder, MemoryCache } = require('node-fetch-cache')
  *
  * @returns {import('express').RequestHandler}
  */
-function factory () {
+const factory = () => {
   const cachedFetch = fetchBuilder.withCache(new MemoryCache({
     ttl: 60 * 60 * 1000, // 1 hour
   }))

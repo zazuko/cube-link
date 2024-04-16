@@ -82,7 +82,7 @@
     "vocab-redirect": {
       "priority": 55,
       "module": "trifid-core:./plugins/middleware",
-      "middleware": "cwd:trifid/redirect"
+      "middleware": "cwd:trifid/redirect.cjs"
     }
   }
 }
