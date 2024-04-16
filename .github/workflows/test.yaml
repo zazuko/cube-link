@@ -20,6 +20,10 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Remove some dependencies for Windows
+        if: ${{ runner.os == 'windows-latest' }}
+        run: npm rm pm2 chromium
+
       - name: Install dependencies
         run: npm ci
 
@@ -61,6 +65,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Remove some dependencies for Windows
+        if: ${{ runner.os == 'windows-latest' }}
+        run: npm rm pm2 chromium
 
       - name: Install dependencies
         run: npm ci
