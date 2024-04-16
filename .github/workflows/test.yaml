@@ -21,7 +21,7 @@ jobs:
           node-version: '20'
 
       - name: Remove some dependencies for Windows
-        if: ${{ runner.os == 'windows-latest' }}
+        if: ${{ runner.os == 'Windows' }}
         run: npm rm pm2 chromium
 
       - name: Install dependencies
@@ -67,7 +67,7 @@ jobs:
           node-version: '20'
 
       - name: Remove some dependencies for Windows
-        if: ${{ runner.os == 'windows-latest' }}
+        if: ${{ runner.os == 'Windows' }}
         run: npm rm pm2 chromium
 
       - name: Install dependencies
