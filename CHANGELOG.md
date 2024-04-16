@@ -1,5 +1,11 @@
 # cube-link
 
+## 0.2.1
+
+### Patch Changes
+
+- 9b04f0f: Fix Trifid instance so that it can work with a CommonJS module
+
 ## 0.2.0
 
 ### Minor Changes
