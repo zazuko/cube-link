@@ -23,7 +23,7 @@ jobs:
 
       - name: Remove some dependencies for Windows
         if: ${{ runner.os == 'Windows' }}
-        run: npm rm pm2 chromium
+        run: chmod -R 777 . && npm rm pm2 chromium
 
       - name: Install dependencies
         run: npm ci
@@ -70,7 +70,7 @@ jobs:
 
       - name: Remove some dependencies for Windows
         if: ${{ runner.os == 'Windows' }}
-        run: npm rm pm2 chromium
+        run: chmod -R 777 . && npm rm pm2 chromium
 
       - name: Install dependencies
         run: npm ci
