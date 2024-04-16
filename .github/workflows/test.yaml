@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: '20'
 
-      - run: npm cache clean --force
-      - run: npm cache verify
+      - name: Verify cache
+        run: npm cache verify
 
       - name: Install dependencies
         run: npm ci
@@ -64,6 +64,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - name: Verify cache
+        run: npm cache verify
 
       - name: Install dependencies
         run: npm ci
