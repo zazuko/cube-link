@@ -101,12 +101,16 @@
     sh:property
         [
             sh:path schema:dateModified ;
+            sh:or (
+                [ sh:datatype xsd:date ]
+                [ sh:datatype xsd:dateTime ]
+            ) ;
             sh:minCount 1 ;
-            sh:datatype xsd:date ;
             sh:message "cube:Cube needs a valid schema:dateModified"
         ] ;
     sh:property
         [
+            sh:severity sh:Warning ;
             sh:path cube:observationSet ;
             sh:minCount 1 ;
             sh:node :ObservationSetShape ;
@@ -125,6 +129,7 @@
     sh:targetClass cube:ObservationSet ;
     sh:property
         [
+            sh:severity sh:Warning ;
             sh:path cube:observation ;
             sh:minCount 1 ;
             sh:node :ObservationShape ;
