@@ -38,7 +38,7 @@ _:report a sh:ValidationReport ;
 		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#TemporalDimensionConstraint> ;
 		sh:focusNode _:b3 ;
 		sh:value _:b3 ;
-		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
+		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType, or have an ordinal scaleType" ;
 	], [
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
@@ -46,6 +46,6 @@ _:report a sh:ValidationReport ;
 		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#TemporalDimensionConstraint> ;
 		sh:focusNode _:b5 ;
 		sh:value _:b5 ;
-		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
+		sh:resultMessage "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType, or have an ordinal scaleType" ;
 	] ;
 	sh:conforms false .

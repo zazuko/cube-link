@@ -181,7 +181,7 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
     a sh:NodeShape ;
     sh:targetClass time:GeneralDateTimeDescription ;
     sh:message
-        "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType" ;
+        "Temporal dimension must be one of XSD datatypes: gYear, gYearMonth, date, dateTime, or have time:unitType, or have an ordinal scaleType" ;
     sh:xone
         (
             [
@@ -203,6 +203,17 @@ prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
                         sh:minCount 1 ;
                         sh:maxCount 1 ;
                     ] ;
+            ]
+            [
+                sh:property
+                    [
+                        sh:path ( [ sh:inversePath meta:dataKind ] qudt:scaleType ) ;
+                        sh:hasValue qudt:OrdinalScale ;
+                    ],
+                    [
+                        sh:path time:unitType ;
+                        sh:maxCount 0 ;
+                    ]
             ]
         )
 .

@@ -98,6 +98,31 @@ ex:Cube
             qudt:scaleType qudt:NominalScale ;
         ],
         [
+            schema:name "Ordinal-Month" ;
+            sh:path <ordinalAny> ;
+            sh:nodeKind sh:IRI ;
+            meta:dataKind
+                [
+                    a time:GeneralDateTimeDescription ;
+                    time:unitType time:unitMonth ;
+                ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            qudt:scaleType qudt:OrdinalScale ;
+        ],
+        [
+            schema:name "Ordinal-AnyPeriod" ;
+            sh:path <ordinalAny> ;
+            sh:nodeKind sh:IRI ;
+            meta:dataKind
+                [
+                    a time:GeneralDateTimeDescription ;
+                ] ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            qudt:scaleType qudt:OrdinalScale ;
+        ],
+        [
             sh:path rdf:type ;
             sh:nodeKind sh:IRI ;
             sh:minCount 1 ;
