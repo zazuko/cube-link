@@ -1,33 +1,28 @@
 name: Test validation
 
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
 
 jobs:
   check-constraint:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.env.os }}
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
+        env:
+          - os: ubuntu-latest
+            node: 20
+          - os: windows-latest
+            node: 20.12.1 # Pinned, because of https://github.com/approvals/Approvals.NodeJS/issues/176
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js (except for Windows)
-        if: ${{ runner.os != 'Windows' }}
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: npm
-
-      # https://github.com/approvals/Approvals.NodeJS/issues/176
-      - name: Set up Node.js (for Windows)
-        if: ${{ runner.os == 'Windows' }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.12.1'
+          node-version: ${{ matrix.env.node }}
           cache: npm
 
       - name: Install dependencies
@@ -50,13 +45,15 @@ jobs:
           path: test
 
   check-cube:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.env.os }}
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
+        env:
+          - os: ubuntu-latest
+            node: 20
+          - os: windows-latest
+            node: 20.12.1 # Pinned, because of https://github.com/approvals/Approvals.NodeJS/issues/176
         profile:
           - basic-cube-constraint
           - standalone-constraint-constraint
@@ -67,19 +64,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js (except for Windows)
-        if: ${{ runner.os != 'Windows' }}
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: npm
-
-      # https://github.com/approvals/Approvals.NodeJS/issues/176
-      - name: Set up Node.js (for Windows)
-        if: ${{ runner.os == 'Windows' }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.12.1'
+          node-version: ${{ matrix.env.node }}
           cache: npm
 
       - name: Install dependencies
