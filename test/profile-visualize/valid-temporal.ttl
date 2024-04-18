@@ -56,7 +56,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
-            qudt:scaleType qudt:NominalScale ;
+            qudt:scaleType qudt:IntervalScale ;
         ],
         [
             schema:name "Year-Month" ;
@@ -69,7 +69,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
-            qudt:scaleType qudt:NominalScale ;
+            qudt:scaleType qudt:IntervalScale ;
         ],
         [
             schema:name "Date" ;
@@ -82,7 +82,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
-            qudt:scaleType qudt:NominalScale ;
+            qudt:scaleType qudt:IntervalScale ;
         ],
         [
             schema:name "DateTime" ;
@@ -95,7 +95,7 @@ ex:Cube
                 ] ;
             sh:minCount 1 ;
             sh:maxCount 1 ;
-            qudt:scaleType qudt:NominalScale ;
+            qudt:scaleType qudt:IntervalScale ;
         ],
         [
             schema:name "Ordinal-Month" ;
