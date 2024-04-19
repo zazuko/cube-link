@@ -9,7 +9,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Info ;
 		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
-		sh:sourceShape <https://cube.link/shape/profile-opendataswiss-lindas#KeyDimensionShInConstraint> ;
+		sh:sourceShape <https://cube.link/shape/profile-visualize#KeyDimensionShInConstraint> ;
 		sh:focusNode _:b2 ;
 		sh:value _:b2 ;
 		sh:resultMessage "For performance reason, add list of occurring elements to nominal and ordinal Key Dimensions" ;
