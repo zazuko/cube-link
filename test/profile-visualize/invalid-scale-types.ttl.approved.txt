@@ -13,12 +13,12 @@ _:report a sh:ValidationReport ;
 			sh:path cube:observationConstraint ;
 			sh:maxCount 1 ;
 			sh:minCount 1 ;
-			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintShape> ;
+			sh:node <https://cube.link/shape/profile-visualize#ObservationConstraintShape> ;
 		] ;
 		sh:focusNode <http://example.org/Cube> ;
 		sh:resultPath cube:observationConstraint ;
 		sh:value <observationConstraint> ;
-		sh:resultMessage "Value does not have shape <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintShape>" ;
+		sh:resultMessage "Value does not have shape <https://cube.link/shape/profile-visualize#ObservationConstraintShape>" ;
 		sh:detail [
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
@@ -62,10 +62,10 @@ _:report a sh:ValidationReport ;
 _:b643 sh:path sh:property ;
 	sh:or (
 		[
-			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintScaleTypeProperty> ;
+			sh:node <https://cube.link/shape/profile-visualize#ObservationConstraintScaleTypeProperty> ;
 		]
 		[
-			sh:node <https://cube.link/shape/profile-opendataswiss-lindas#ObservationConstraintCoreProperty> ;
+			sh:node <https://cube.link/shape/profile-visualize#ObservationConstraintCoreProperty> ;
 		]
 	) ;
 	sh:message "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" .
