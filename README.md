@@ -28,6 +28,7 @@ For example, to get the `standalone-cube-constraint` shape from the `main` branc
 | [standalone-constraint-constraint](validation/standalone-constraint-constraint.ttl) | Minimal dimensions metadata. Included in `standalone-cube-constraint`                                                                     |
 | [profile-opendataswiss](validation/profile-opendataswiss.ttl)                       | Cube metadata profile which follows the [Opendata.swiss Handbook](https://handbook.opendata.swiss/). Extends `standalone-cube-constraint` |
 | [profile-opendataswiss-lindas](validation/profile-opendataswiss-lindas.ttl)         | Cube metadata for cubes published to Opendata.swiss from Lindas                                                                           |
+| [profile-visualize](validation/profile-visualize.ttl)                               | Cube metadata for cubes published to [Visualize](https://visualize.admin.ch/)                                                             |
 | [basic-cube-constraint](validation/basic-cube-constraint.ttl)                       | Minimum cube. This typically isn't used directly                                                                                          |
 
 ## How to Contribute
