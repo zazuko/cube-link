@@ -43,7 +43,7 @@ ex:Cube
     sh:closed true ;
     sh:property
         [
-            # no datatype, no time:unitType
+            # no datatype, no time:unitType, not qudt:scaleType qudt:OrdinalScale
             schema:name "Year" ;
             sh:path <y> ;
             sh:nodeKind sh:Literal ;
