@@ -9,7 +9,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 prefix code: <https://code.described.at/>
 prefix cube: <https://cube.link/>
-prefix : <https://cube.link/shape/profile-opendataswiss-lindas#>
+prefix : <https://cube.link/shape/profile-visualize#>
 
 [
     code:imports <./standalone-cube-constraint> ;
