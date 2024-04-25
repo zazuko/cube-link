@@ -99,7 +99,7 @@ prefix : <https://cube.link/shape/profile-visualize#>
                     ]
                 ) ;
             sh:message
-                "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
+                "Dimension must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
         ]
 .
 

@@ -27,7 +27,7 @@ _:report a sh:ValidationReport ;
 			sh:focusNode <observationConstraint> ;
 			sh:resultPath sh:property ;
 			sh:value _:b2 ;
-			sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
+			sh:resultMessage "Dimension must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
 		], [
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
@@ -36,7 +36,7 @@ _:report a sh:ValidationReport ;
 			sh:focusNode <observationConstraint> ;
 			sh:resultPath sh:property ;
 			sh:value _:b3 ;
-			sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
+			sh:resultMessage "Dimension must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
 		] ;
 	], [
 		rdf:type sh:ValidationResult ;
@@ -46,7 +46,7 @@ _:report a sh:ValidationReport ;
 		sh:focusNode <observationConstraint> ;
 		sh:resultPath sh:property ;
 		sh:value _:b2 ;
-		sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
+		sh:resultMessage "Dimension must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
 	], [
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
@@ -55,7 +55,7 @@ _:report a sh:ValidationReport ;
 		sh:focusNode <observationConstraint> ;
 		sh:resultPath sh:property ;
 		sh:value _:b3 ;
-		sh:resultMessage "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
+		sh:resultMessage "Dimension must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" ;
 	] ;
 	sh:conforms false .
 
@@ -68,4 +68,4 @@ _:b643 sh:path sh:property ;
 			sh:node <https://cube.link/shape/profile-visualize#ObservationConstraintCoreProperty> ;
 		]
 	) ;
-	sh:message "Cube must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" .
+	sh:message "Dimension must have exactly one scaleType: qudt:IntervalScale, qudt:NominalScale, qudt:RatioScale, or qudt:OrdinalScale" .
