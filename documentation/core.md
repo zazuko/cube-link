@@ -21,7 +21,7 @@ We describe the model, an elaborate example, and scripts to validate observation
 | --- | --- | --- |
 | schema | [http://schema.org/](http://schema.org) | To describe basic properties. |
 | sh | [http://www.w3.org/ns/shacl#](https://www.w3.org/TR/shacl/) | Inherited from the Cube Schema for constratins. |
-| qudt | [http://qudt.org/vocab/](http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html) | Describe scale of mesures. |
+| qudt | [http://qudt.org/schema/qudt/](http://www.qudt.org/doc/DOC_SCHEMA-QUDT.html) | Describe scale of mesures. |
 | unit | [http://qudt.org/vocab/unit/](http://www.qudt.org/doc/DOC_VOCAB-UNITS.html) | Describes units on values. |
 | time | [http://www.w3.org/2006/time#](https://www.w3.org/TR/owl-time/) | A time description ontology. |
 | geo | [http://www.opengis.net/ont/geosparql#](http://www.opengis.net/ont/geosparql) | OGC GeoSPARQL 1.0. |
