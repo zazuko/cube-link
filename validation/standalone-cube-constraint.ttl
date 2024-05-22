@@ -14,6 +14,10 @@
 #
 
 [
+    code:imports <./basic-cube-constraint> ;
+    code:extension "ttl" ;
+] .
+[
     code:imports <./standalone-constraint-constraint> ;
     code:extension "ttl" ;
 ] .
