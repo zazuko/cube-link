@@ -3,8 +3,7 @@
 ## Generating Constraints
 
 It is possible to generate a minimal constraint given a `Cube` and a set of `Observation`s.
-
-SPARQL CONSTRUCT queries will be provided in this repository.
+More information is available in the `barnard59-cube` [commands](https://github.com/zazuko/barnard59/tree/master/packages/cube#commands) documentation.
 
 ## Cube Viewer
 
@@ -15,10 +14,6 @@ A demo of the app is deployed at [cube-viewer.zazuko.com](https://cube-viewer.za
 ## Validating Cubes
 
 An example Cube is specified in [cube.ttl](cube.ttl). The cube provides a constraint in [constraint.ttl](constraint.ttl).
-
-<pre class='ednote' title='Work in progress'>
-This section is a work in progress, the wording and terminology still need some thought.
-</pre>
 
 The validation process of the cube can be divided into three different aspects.
 
