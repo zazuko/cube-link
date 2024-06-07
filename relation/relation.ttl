@@ -39,3 +39,29 @@ relation:StandardDeviation a meta:DimensionRelation;
  rdfs:comment "Dispersion of the values of a random variable around its expected value.";
  schema:about <http://www.wikidata.org/entity/Q12483>;
  schema:sameAs <http://www.wikidata.org/entity/Q159375>.
+
+relation:MarginOfError a meta:DimensionRelation;
+ schema:name "Margin of Error";
+ rdfs:label "Margin of Error";
+ schema:description "The margin of error is a statistic expressing the amount of random sampling error in a survey's results.";
+ rdfs:comment "The margin of error is a statistic expressing the amount of random sampling error in a survey's results.";
+ schema:about <http://www.wikidata.org/entity/Q12483>;
+ schema:sameAs <http://www.wikidata.org/entity/Q1352827>.
+
+relation:MarginOfErrorUpperBound
+    a meta:DimensionRelation;
+    schema:name "Margin of Error (Upper Bound)";
+    rdfs:label "Margin of Error (Upper Bound)";
+    schema:description "The upper bound of the margin of error.";
+    rdfs:comment "The upper bound of the margin of error.";
+    schema:about <http://www.wikidata.org/entity/Q12483>;
+    schema:sameAs <http://www.wikidata.org/entity/Q1352827>.
+
+relation:MarginOfErrorLowerBound
+    a meta:DimensionRelation;
+    schema:name "Margin of Error (Lower Bound)";
+    rdfs:label "Margin of Error (Lower Bound)";
+    schema:description "The lower bound of the margin of error.";
+    rdfs:comment "The lower bound of the margin of error.";
+    schema:about <http://www.wikidata.org/entity/Q12483>;
+    schema:sameAs <http://www.wikidata.org/entity/Q1352827>.
