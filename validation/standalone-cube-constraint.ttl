@@ -38,6 +38,7 @@
         ) ;
     sh:property
         [
+            sh:severity sh:Warning ;
             sh:path schema:publisher ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -45,6 +46,7 @@
         ] ;
     sh:property
         [
+            sh:severity sh:Warning ;
             sh:path schema:creator ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -79,6 +81,7 @@
         ] ;
     sh:property
         [
+            sh:severity sh:Warning ;
             sh:path schema:contributor ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
