@@ -2,4 +2,4 @@
 "cube-link": patch
 ---
 
-Lower severity of `schema:publisher`, `schema:creator` and `schema:contributor` to warning
+`standalone-cube-constraint`: Lower severity of `schema:publisher`, `schema:creator` and `schema:contributor` to warning
