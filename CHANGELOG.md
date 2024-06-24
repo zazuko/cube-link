@@ -1,5 +1,17 @@
 # cube-link
 
+## 0.2.2
+
+### Patch Changes
+
+- d289758: `profile-visualize`: allowed temporal dimensions (`meta:dataKind a time:GeneralDateTimeDescription`) to have ordinal scale type
+- 615b1c2: Corrected the URLs in profile-visualize
+- 214b479: `standalone-cube-constraint`: `schema:dateModified` now allows both `xsd:dateTime` in addition to `xsd:date` (closes #166)
+- 214b479: `profile-visualize`: added `sh:class` to `meta:dataKind` shapes (closes #167)
+- 985383e: `standalone-cube-constraint`: Lower severity of `schema:publisher`, `schema:creator` and `schema:contributor` to warning
+- 818acbd: `profile-visualize`: Correct wording of scale type constraint
+- 5bad04f: `standalone-cube-constraint`: lowered the severity of missing observation to `sh:Warning` (re #168)
+
 ## 0.2.1
 
 ### Patch Changes
