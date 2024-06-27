@@ -1,5 +1,12 @@
 # cube-link
 
+## 0.2.3
+
+### Patch Changes
+
+- 71c3d52: Add an informative section about using [Time Ontology in OWL](https://www.w3.org/TR/owl-time/) for temporal dimensions
+- 46133ba: Only use `qudt:hasUnit` in documentation (instead of deprecated `qudt:unit`)
+
 ## 0.2.2
 
 ### Patch Changes
