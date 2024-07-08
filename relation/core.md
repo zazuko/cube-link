@@ -29,10 +29,10 @@ Use `Confidence` to specify the level of uncertainty in the estimate. It can be 
 in which case add `dcterms:type` to each dimension relation to specify the type of confidence 
 (Margin of Error, Confidence Interval, etc.).
  
-#### relation:ConfidenceUpperBound and relation:ConfidenceUpperBound {#ConfidenceBounds}
+#### relation:ConfidenceUpperBound and relation:ConfidenceLowerBound {#ConfidenceBounds}
 
 In case of asymmetric confidence intervals, use `relation:ConfidenceUpperBound` together with 
-`relation:ConfidenceUpperBound` to specify the upper and lower bounds of the confidence interval.
+`relation:ConfidenceLowerBound` to specify the upper and lower bounds of the confidence interval.
 
 ```turtle
 [
@@ -42,7 +42,7 @@ In case of asymmetric confidence intervals, use `relation:ConfidenceUpperBound` 
     meta:relatesTo ex:lowerConfidence ; 
   ],
   meta:dimensionRelation [ 
-    a relation:ConfidenceLowerBound ;
+    a relation:ConfidenceUpperBound ;
     dcterms:type "Confidence interval" ;
     meta:relatesTo ex:upperConfidence ; 
   ]
