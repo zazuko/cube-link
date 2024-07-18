@@ -25,7 +25,7 @@ The standard error is 3 standard deviation of the mean of the sample.
 
 ### relation:Confidence {#MarginOfError}
  
-Use `Confidence` to specify the level of uncertainty in the estimate. It can be used multiple times,
+Use `Confidence` to specify uncertainty in the estimate. It can be used multiple times,
 in which case add `dcterms:type` to each dimension relation to specify the type of confidence 
 (Margin of Error, Confidence Interval, etc.).
  
@@ -39,12 +39,12 @@ In case of asymmetric confidence intervals, use `relation:ConfidenceUpperBound` 
   meta:dimensionRelation [ 
     a relation:ConfidenceLowerBound ;
     dcterms:type "Confidence interval" ;
-    meta:relatesTo ex:lowerConfidence ; 
+    meta:relatesTo ex:measurement-dimension ; 
   ],
   meta:dimensionRelation [ 
     a relation:ConfidenceUpperBound ;
     dcterms:type "Confidence interval" ;
-    meta:relatesTo ex:upperConfidence ; 
+    meta:relatesTo ex:measurement-dimension ; 
   ]
 ] .
 ```
