@@ -39,3 +39,21 @@ relation:StandardDeviation a meta:DimensionRelation;
  rdfs:comment "Dispersion of the values of a random variable around its expected value.";
  schema:about <http://www.wikidata.org/entity/Q12483>;
  schema:sameAs <http://www.wikidata.org/entity/Q159375>.
+
+relation:Confidence a meta:DimensionRelation;
+    schema:name "Confidence" ;
+    rdfs:label "Confidence" ;
+    schema:about <http://www.wikidata.org/entity/Q12483> .
+
+relation:ConfidenceUpperBound
+    a meta:DimensionRelation ;
+    schema:name "Confidence (Upper Bound)" ;
+    rdfs:label "Confidence (Upper Bound)" ;
+    schema:about <http://www.wikidata.org/entity/Q12483>
+.
+
+relation:ConfidenceLowerBound
+    a meta:DimensionRelation ;
+    schema:name "Confidence (Lower Bound)" ;
+    rdfs:label "Confidence (Lower Bound)" ;
+    schema:about <http://www.wikidata.org/entity/Q12483> .
