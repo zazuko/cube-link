@@ -36,15 +36,24 @@ In case of asymmetric confidence intervals, use `relation:ConfidenceUpperBound` 
 
 ```turtle
 [
-  meta:dimensionRelation [ 
-    a relation:ConfidenceLowerBound ;
-    dcterms:type "Confidence interval" ;
-    meta:relatesTo ex:measurement-dimension ; 
-  ],
-  meta:dimensionRelation [ 
-    a relation:ConfidenceUpperBound ;
-    dcterms:type "Confidence interval" ;
-    meta:relatesTo ex:measurement-dimension ; 
-  ]
+  sh:property [ 
+    sh:path ex:measurement-dimension ;
+  ] ;
+  sh:property [
+    sh:path ex:lower-confidence-dimension ;  
+    meta:dimensionRelation [ 
+      a relation:ConfidenceLowerBound ;
+      dcterms:type "Confidence interval" ;
+      meta:relatesTo ex:measurement-dimension ; 
+    ] ;
+  ] ;
+  sh:property [
+    sh:path ex:lower-confidence-dimension ;  
+    meta:dimensionRelation [ 
+      a relation:ConfidenceUpperBound ;
+      dcterms:type "Confidence interval" ;
+      meta:relatesTo ex:measurement-dimension ; 
+    ] ;
+  ] ;
 ] .
 ```
