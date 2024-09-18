@@ -1,3 +1,4 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix : <https://cube.link/shape/standalone-constraint-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -8,6 +9,7 @@
 @prefix cube: <https://cube.link/> .
 @prefix meta: <https://cube.link/meta/> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix relation: <https://cube.link/relation/> .
 
 #
 # This is the bare minimal SHACL shape for validating a Cube Constraint.
@@ -190,6 +192,14 @@
     ] ;
 .
 
+:Confidende a sh:NodeShape ;
+    sh:targetClass relation:ConfidenceLowerBound, relation:ConfidenceUpperBound ;
+    sh:property
+        [
+            sh:path dcterms:type ;
+            sh:maxCount 1 ;
+        ] ;
+.
 
 # Testing proper rdf:list construction
 
