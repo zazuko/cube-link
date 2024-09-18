@@ -1,0 +1,46 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+		sh:sourceShape [
+			sh:path sh:property ;
+			sh:node <https://cube.link/shape/standalone-constraint-constraint#DimensionRelation> ;
+		] ;
+		sh:focusNode <https://example.org/shape> ;
+		sh:resultPath sh:property ;
+		sh:resultMessage "Value does not have shape <https://cube.link/shape/standalone-constraint-constraint#DimensionRelation>" ;
+		sh:detail [
+			rdf:type sh:ValidationResult ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+			sh:sourceShape [
+				sh:path _:b675 ;
+				sh:class cube:Constraint ;
+				sh:minCount 1 ;
+				sh:message "value of meta:relatesTo must be a cube dimension" ;
+			] ;
+			sh:focusNode _:b5 ;
+			sh:resultPath _:b675 ;
+			sh:resultMessage "value of meta:relatesTo must be a cube dimension" ;
+		] ;
+		sh:value _:b4 ;
+	] ;
+	sh:conforms false .
+
+_:b675 rdf:first <https://cube.link/meta/relatesTo> ;
+	rdf:rest (
+		[
+			sh:inversePath sh:path ;
+		]
+		[
+			sh:inversePath sh:property ;
+		]
+	) .

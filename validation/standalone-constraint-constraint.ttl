@@ -181,14 +181,27 @@
 .
 
 :DimensionRelation a sh:NodeShape ;
-    sh:property [
+    sh:property
+        [
         sh:path meta:dimensionRelation;
-        sh:property [
-            sh:path meta:relatesTo;
-            sh:nodeKind sh:IRI ;
-            sh:minCount 1;
-            sh:message "meta:dimensionRelation requires at least one meta:relatesTo";
-        ] ;
+            sh:property
+                [
+                    sh:path meta:relatesTo ;
+                    sh:nodeKind sh:IRI ;
+                    sh:minCount 1 ;
+                    sh:message "meta:dimensionRelation requires at least one meta:relatesTo" ;
+                ],
+                [
+                    sh:path
+                        (
+                            meta:relatesTo
+                            [ sh:inversePath sh:path ]
+                            [ sh:inversePath sh:property ]
+                        ) ;
+                    sh:minCount 1 ;
+                    sh:class cube:Constraint ;
+                    sh:message "value of meta:relatesTo must be a cube dimension" ;
+                ] ;
     ] ;
 .
 
