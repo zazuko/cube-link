@@ -1,4 +1,4 @@
-FROM docker.io/library/node:20 AS respec
+FROM docker.io/library/node:22 AS respec
 
 # Install some required dependencies to run Puppeteer (for ReSpec)
 RUN apt-get update && apt-get install -y \
@@ -43,7 +43,7 @@ COPY . .
 RUN npm run build
 
 # Final Docker image
-FROM docker.io/library/node:20-alpine
+FROM docker.io/library/node:22-alpine
 
 EXPOSE 8080
 
