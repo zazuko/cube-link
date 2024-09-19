@@ -75,7 +75,7 @@ jobs:
 
       - name: Run tests
         shell: sh
-        run: ./test/check-metadata.sh --profile=${{ matrix.profile }}
+        run: ./test/check-metadata.sh ${{ matrix.profile }}
 
       - name: Show test results
         if: ${{ always() }}

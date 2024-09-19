@@ -1,7 +1,8 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
 @prefix cube: <https://cube.link/> .
 
 _:report a sh:ValidationReport ;
@@ -23,7 +24,7 @@ _:report a sh:ValidationReport ;
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
-			sh:sourceShape _:b643 ;
+			sh:sourceShape _:b644 ;
 			sh:focusNode <observationConstraint> ;
 			sh:resultPath sh:property ;
 			sh:value _:b2 ;
@@ -32,7 +33,7 @@ _:report a sh:ValidationReport ;
 			rdf:type sh:ValidationResult ;
 			sh:resultSeverity sh:Violation ;
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
-			sh:sourceShape _:b643 ;
+			sh:sourceShape _:b644 ;
 			sh:focusNode <observationConstraint> ;
 			sh:resultPath sh:property ;
 			sh:value _:b3 ;
@@ -42,7 +43,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape _:b643 ;
+		sh:sourceShape _:b644 ;
 		sh:focusNode <observationConstraint> ;
 		sh:resultPath sh:property ;
 		sh:value _:b2 ;
@@ -51,7 +52,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:OrConstraintComponent ;
-		sh:sourceShape _:b643 ;
+		sh:sourceShape _:b644 ;
 		sh:focusNode <observationConstraint> ;
 		sh:resultPath sh:property ;
 		sh:value _:b3 ;
@@ -59,7 +60,7 @@ _:report a sh:ValidationReport ;
 	] ;
 	sh:conforms false .
 
-_:b643 sh:path sh:property ;
+_:b644 sh:path sh:property ;
 	sh:or (
 		[
 			sh:node <https://cube.link/shape/profile-visualize#ObservationConstraintScaleTypeProperty> ;

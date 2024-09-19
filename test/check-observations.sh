@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+SHACL_TEST_PATH="$(npm root)/@zazuko/shacl-test"
 FAILED=0
 
 filter=''
@@ -31,10 +32,10 @@ for file in "$SCRIPT_PATH"/observations/*.ttl; do
     fi
 
     name=$(basename "$file")
-    report=$(npx barnard59 cube check-observations --constraint "$file" < "$file" 2> "$file.log" | "$SCRIPT_PATH"/pretty-print.js)
+    report=$(npx barnard59 cube check-observations --constraint "$file" < "$file" 2> "$file.log" | "$SHACL_TEST_PATH"/pretty-print.js --prefixes schema cube=https://cube.link/)
 
     if ! echo "$report" | npx approvals "$name" --outdir "$SCRIPT_PATH"/observations "$approvalsFlags" > /dev/null 2>&1 ; then
-      "$SCRIPT_PATH"/report-failure.sh "$file" "$(cat "$file")" "$(cat "$file")" "check results"
+      "$SHACL_TEST_PATH"/report-failure.sh "$file" "$(cat "$file")" "$(cat "$file")" "check results"
       FAILED=1
     else
       echo "✅ PASS - $name"

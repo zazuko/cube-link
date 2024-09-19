@@ -1,7 +1,8 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
 @prefix cube: <https://cube.link/> .
 
 _:report a sh:ValidationReport ;
@@ -10,17 +11,17 @@ _:report a sh:ValidationReport ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
 		sh:sourceShape [
-			sh:path _:b627 ;
+			sh:path _:b628 ;
 			sh:maxCount 0 ;
 			sh:message "Cube cannot be expired" ;
 		] ;
 		sh:focusNode <http://example.org/Cube> ;
-		sh:resultPath _:b627 ;
+		sh:resultPath _:b628 ;
 		sh:resultMessage "Cube cannot be expired" ;
 	] ;
 	sh:conforms false .
 
-_:b627 sh:alternativePath (
+_:b628 sh:alternativePath (
 		schema:validThrough
 		schema:expires
 	) .
