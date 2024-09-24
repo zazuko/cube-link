@@ -205,7 +205,7 @@
     ] ;
 .
 
-:Confidende a sh:NodeShape ;
+:Confidence a sh:NodeShape ;
     sh:targetClass relation:ConfidenceLowerBound, relation:ConfidenceUpperBound ;
     sh:property
         [
