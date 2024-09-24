@@ -34,8 +34,6 @@ A type of [annotation](#annotation) which can be used to express a limit or targ
 <aside class='example' title='Dimension with a target'>
 
 ```turtle
-PREFIX sh: <http://www.w3.org/ns/shacl#>
-PREFIX sh: <http://www.w3.org/ns/shacl#>
 <cube/shape> sh:property [
   a cube:KeyDimension ;  
   sh:path ex:year ;
@@ -133,9 +131,6 @@ applies to, namely:
 <aside class='example' title='Dimension with a continuous limit on a temporal dimension'>
 
 ```turtle
-PREFIX sh: <http://www.w3.org/ns/shacl#>
-PREFIX sh: <http://www.w3.org/ns/shacl#>
-PREFIX sh: <http://www.w3.org/ns/shacl#>
 <cube/shape> sh:property [
   a cube:KeyDimension ;  
   sh:path ex:year ;
