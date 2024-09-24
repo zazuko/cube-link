@@ -67,6 +67,10 @@
         ] ,
         [
             sh:path sh:property ;
+            sh:node :Annotation ;
+        ],
+        [
+            sh:path sh:property ;
             sh:or (
                       [
                           sh:path qudt:unit ;
@@ -203,6 +207,47 @@
                     sh:message "value of meta:relatesTo must be a cube dimension" ;
                 ] ;
     ] ;
+.
+
+:Annotation
+    a sh:NodeShape ;
+    sh:property
+        [
+            sh:path rdf:type ;
+            sh:minCount 1 ;
+            sh:message "annotation needs an rdf:type" ;
+        ],
+        [
+            sh:path meta:annotationContext ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:message "at most one meta:annotationContext is allowed" ;
+        ],
+        [
+            sh:path
+                (
+                    [ sh:inversePath meta:annotation ]
+                ) ;
+            sh:class cube:MeasureDimension ;
+            sh:message "annotated dimension must be a cube:MeasureDimension" ;
+        ] ;
+.
+
+:AnnotationContext
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotationContext ;
+.
+
+:LimitAnnotation
+    a sh:NodeShape ;
+    sh:targetClass cube:Limit ;
+    sh:property
+        [
+            sh:path meta:limit ;
+            sh:minCount 1 ;
+            sh:or ( [ sh:datatype xsd:integer ] [ sh:datatype xsd:decimal ] ) ;
+            sh:message "at least on meta:limit is needed and it needs to be a number" ;
+        ] ;
 .
 
 :Confidence a sh:NodeShape ;

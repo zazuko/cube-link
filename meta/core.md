@@ -27,6 +27,34 @@ To be able to distinguish Dimensions that are defined inside a Cube from Dimensi
 
 </aside>
 
+### meta:Limit {#Limit}
+
+A type of [annotation](#annotation) which can be used to express a limit or target value for a dimension.
+
+<aside class='example' title='Dimension with a target'>
+
+```turtle
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+<cube/shape> sh:property [
+  a cube:KeyDimension ;  
+  sh:path ex:year ;
+] , [
+  a cube:MeasureDimension ;
+  meta:annotation [
+    a meta:Limit ;
+    meta:limit 95 ;
+    schema:name "Target 2020" ;
+    meta:annotationContext [
+      sh:path ex:year ;
+      sh:hasValue <https://schema.ld.admin.ch/year/2020> ;
+    ] ;
+  ] ;
+] .
+```
+
+</aside>
+
 ## Properties
 
 ### meta:dataKind (temporal / spatial) {#dataKind}
@@ -84,3 +112,60 @@ With `meta:nextInHierarchy` the next lower level is attached to the higher level
 
 This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
 See [this example](../#relexample).
+
+### meta:annotation {#annotation}
+
+This property is used to add additional information to a dimension.
+
+### meta:annotationContext {#annotationContext}
+
+Links to dimension values to which the annotation applies. The object of `meta:annotationContext` 
+MUST be well-formed Property Shapes. The value of its `sh:path` MUST be na IRI of a cube dimension.
+Only a subset of SHACL Constraints are supported which defined which observations that the annotation
+applies to, namely:
+
+1. `sh:hasValue` - to select specific value(s)
+2. `sh:minInclusive` - to select values greater or equal to a specific value
+3. `sh:maxInclusive` - to select values smaller or equal to a specific value
+4. `sh:minExclusive` - to select values greater than a specific value
+5. `sh:maxExclusive` - to select values smaller than a specific value
+
+<aside class='example' title='Dimension with a continuous limit on a temporal dimension'>
+
+```turtle
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+<cube/shape> sh:property [
+  a cube:KeyDimension ;  
+  sh:path ex:year ;
+] , [
+  a cube:MeasureDimension ;
+  meta:annotation [
+    a meta:Limit ;
+    meta:limit 95 ;
+    schema:name "Target 2020" ;
+    meta:annotationContext [
+      sh:property [
+        sh:path ex:year ;
+        sh:minInclusive "2020-01-01"^^xsd:date ;
+        sh:maxInclusive "2020-12-31"^^xsd:date ;
+      ] ;   
+    ] ;
+  ] ;
+] .
+```
+
+</aside>
+
+### meta:limit {#limit}
+
+The value of a [Limit annotation](#Limit).
+
+### meta:upperLimit {#upper-limit}
+
+The upper limit of a [Limit annotation](#Limit).
+
+### meta:lowerLimit {#lower-limit}
+
+The lower limit of a [Limit annotation](#Limit).
