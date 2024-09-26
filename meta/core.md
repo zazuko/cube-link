@@ -41,7 +41,7 @@ A type of [annotation](#annotation) which can be used to express a limit or targ
   a cube:MeasureDimension ;
   meta:annotation [
     a meta:Limit ;
-    meta:limit 95 ;
+    schema:value 95 ;
     schema:name "Target 2020" ;
     meta:annotationContext [
       sh:path ex:year ;
@@ -52,6 +52,8 @@ A type of [annotation](#annotation) which can be used to express a limit or targ
 ```
 
 </aside>
+
+`schema:minValue` and `schema:maxValue` can be used to express a range of limit values.
 
 ## Properties
 
@@ -117,16 +119,21 @@ This property is used to add additional information to a dimension.
 
 ### meta:annotationContext {#annotationContext}
 
-Links to dimension values to which the annotation applies. The object of `meta:annotationContext` 
-MUST be well-formed Property Shapes. The value of its `sh:path` MUST be na IRI of a cube dimension.
+Links to dimension values to which the annotation applies.
+The objects of `meta:annotationContext` MUST be well-formed [Property Shapes](https://www.w3.org/TR/shacl/#property-shapes).
+The value of their `sh:path` MUST be an IRI of a cube's key dimension.
 Only a subset of SHACL Constraints are supported which defined which observations that the annotation
 applies to, namely:
 
-1. `sh:hasValue` - to select specific value(s)
+1. `sh:hasValue` - to select specific observation value
+2. `sh:in` - to select multiple observation values
 2. `sh:minInclusive` - to select values greater or equal to a specific value
 3. `sh:maxInclusive` - to select values smaller or equal to a specific value
 4. `sh:minExclusive` - to select values greater than a specific value
 5. `sh:maxExclusive` - to select values smaller than a specific value
+
+In case of temporal dimensions, the constraint values are expected to be literals with one of types `xsd:date`,
+`xsd:dateTime` or `xsd:gYear`, or the IRIs of a [temporal entity](https://lindas.admin.ch/governance/core-entities/).
 
 <aside class='example' title='Dimension with a continuous limit on a temporal dimension'>
 
@@ -138,29 +145,15 @@ applies to, namely:
   a cube:MeasureDimension ;
   meta:annotation [
     a meta:Limit ;
-    meta:limit 95 ;
+    schema:value 95 ;
     schema:name "Target 2020" ;
     meta:annotationContext [
-      sh:property [
-        sh:path ex:year ;
-        sh:minInclusive "2020-01-01"^^xsd:date ;
-        sh:maxInclusive "2020-12-31"^^xsd:date ;
-      ] ;   
+      sh:path ex:year ;
+      sh:minInclusive "2020-01-01"^^xsd:date ;
+      sh:maxInclusive "2020-12-31"^^xsd:date ;
     ] ;
   ] ;
 ] .
 ```
 
 </aside>
-
-### meta:limit {#limit}
-
-The value of a [Limit annotation](#Limit).
-
-### meta:upperLimit {#upper-limit}
-
-The upper limit of a [Limit annotation](#Limit).
-
-### meta:lowerLimit {#lower-limit}
-
-The lower limit of a [Limit annotation](#Limit).
