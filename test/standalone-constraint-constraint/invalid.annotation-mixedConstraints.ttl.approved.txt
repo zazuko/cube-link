@@ -1,0 +1,18 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+		sh:sourceShape <https://cube.link/shape/standalone-constraint-constraint#AnnotationContext> ;
+		sh:focusNode _:b5 ;
+		sh:value _:b5 ;
+		sh:resultMessage "annotation context only allows constraints sh:hasValue, sh:in, sh:minInclusive, sh:maxInclusive, sh:minExclusive, sh:maxExclusive and they cannot be mixed" ;
+	] ;
+	sh:conforms false .

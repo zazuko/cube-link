@@ -1,3 +1,4 @@
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix : <https://cube.link/shape/standalone-constraint-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
@@ -19,175 +20,191 @@
 :ObservationConstraintShape
     a sh:NodeShape ;
     sh:targetClass cube:Constraint ;
-    sh:property [
+    sh:property
+        [
         # we assume at least 3 dimensions, otherwise we would have an empty list of dimensions
         # one for cube:observedBy, one for rdf:type and at least one cube dimension
-        sh:path sh:property ;
-        sh:minCount 3 ;
-        sh:message "cube:Constraint needs at least a certain amount of sh:properties"
-    ] ;
+            sh:path sh:property ;
+            sh:minCount 3 ;
+            sh:message "cube:Constraint needs at least a certain amount of sh:properties"
+        ] ;
     sh:property
         [
             sh:path sh:property ;
             sh:node :PropertyPath ;
             sh:message "a sh:path is needed on a property" ;
-        ] ,
+        ],
         [
             sh:path sh:property ;
             sh:node :PropertyWithName ;
             sh:message "needs a schema:name" ;
-        ] ,
+        ],
         [
             sh:path sh:property ;
             sh:node :PropertyNameType ;
             sh:message "schema:name needs to be a xsd:string or a rdf:langString" ;
-        ] ,
+        ],
         [
             sh:path sh:property ;
             sh:node :PropertyWithType ;
             sh:message "needs a sh:datatype, sh:nodeKind or sh:datatype within sh:or (...)" ;
-        ] ,
+        ],
         [
             sh:path sh:property ;
             sh:node :PropertyScaleType ;
-            sh:message "If qudt:scaleType is used it needs to be within ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale )" ;
-        ] ,
+            sh:message
+                "If qudt:scaleType is used it needs to be within ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale )" ;
+        ],
         [
             sh:path sh:property ;
             sh:node :PropertyRange ;
-        ] ,
+        ],
         [
             sh:path sh:property ;
             sh:node :PropertyInList ;
             sh:message "sh:in needs to be a list" ;
-        ] ,
-        [
-            sh:path sh:property ;
-            sh:node :DimensionRelation ;
-        ] ,
-        [
-            sh:path sh:property ;
-            sh:node :Annotation ;
         ],
         [
             sh:path sh:property ;
-            sh:or (
-                      [
-                          sh:path qudt:unit ;
-                          sh:equals qudt:hasUnit ;
-                      ]
-                      [
-                          sh:path qudt:unit ;
-                          sh:maxCount 0 ;
-                      ]
-                  ) ;
+            sh:node :DimensionRelation ;
+        ],
+        [
+            sh:path sh:property ;
+            sh:or
+                (
+                    [
+                        sh:path qudt:unit ;
+                        sh:equals qudt:hasUnit ;
+                    ]
+                    [
+                        sh:path qudt:unit ;
+                        sh:maxCount 0 ;
+                    ]
+                ) ;
             sh:severity sh:Warning ;
             sh:message "The use of qudt:unit is deprecated, please use qudt:hasUnit instead" ;
         ] ;
-	sh:property [
-        sh:path sh:closed;
-        sh:hasValue true;
-    ] ;
-    sh:property [
-        sh:path meta:inHierarchy;
-        sh:node :Hierarchy;
-        sh:message "meta:inHierarchy does not validate"
-    ] ;
-    .
+    sh:property
+        [
+            sh:path sh:closed ;
+            sh:hasValue true ;
+        ] ;
+    sh:property
+        [
+            sh:path meta:inHierarchy ;
+            sh:node :Hierarchy ;
+            sh:message "meta:inHierarchy does not validate"
+        ] ;
+.
 
 :PropertyPath a sh:NodeShape ;
-    sh:property [
-        sh:path sh:path;
-        sh:minCount 1;
-        sh:maxCount 1;
-    ] ;
+    sh:property
+        [
+            sh:path sh:path ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
 .
 
 :PropertyWithName a sh:NodeShape ;
-    sh:or(
-        [
-            sh:path schema:name;
-            sh:minCount 1;
-        ]
-        [
-            sh:path sh:path;
-            sh:in (rdf:type cube:observedBy);
-        ]
-    );
+    sh:or
+        (
+            [
+                sh:path schema:name ;
+                sh:minCount 1 ;
+            ]
+            [
+                sh:path sh:path ;
+                sh:in ( rdf:type cube:observedBy ) ;
+            ]
+        ) ;
 .
 
 :PropertyNameType a sh:NodeShape ;
-    sh:property [
-        sh:path schema:name;
-        sh:xone ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-    ];
+    sh:property
+        [
+            sh:path schema:name ;
+            sh:xone ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ] ;
 .
 
 :PropertyWithType a sh:NodeShape ;
-    sh:or(
-        [
-            sh:path sh:datatype;
-            sh:minCount 1;
-        ]
-        [
-            sh:path sh:nodeKind;
-            sh:minCount 1;
-        ]
-        [
-            sh:path sh:or;
-            sh:minCount 1;
-            sh:node :listnode ;
-            sh:property [
-                sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
-                sh:property [ sh:path sh:datatype ; sh:minCount 1 ] ; # have at least one datatype
+    sh:or
+        (
+            [
+                sh:path sh:datatype ;
+                sh:minCount 1 ;
             ]
-        ]
-    );
+            [
+                sh:path sh:nodeKind ;
+                sh:minCount 1 ;
+            ]
+            [
+                sh:path sh:or ;
+                sh:minCount 1 ;
+                sh:node :listnode ;
+                sh:property
+                    [
+                        sh:path ( [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ; # all list elements
+                        sh:property
+                            [
+                                sh:path sh:datatype ;
+                                sh:minCount 1
+                            ] ; # have at least one datatype
+                    ]
+            ]
+        ) ;
 .
 
 :PropertyInList a sh:NodeShape ;
-    sh:property [
-        sh:path sh:in;
-        sh:node :listnode ;
-    ];
+    sh:property
+        [
+            sh:path sh:in ;
+            sh:node :listnode ;
+        ] ;
 .
 
 :PropertyScaleType a sh:NodeShape ;
-    sh:property [
-        sh:path qudt:scaleType;
-        sh:in (qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale) ;
-        sh:maxCount 1;
-    ];
+    sh:property
+        [
+            sh:path qudt:scaleType ;
+            sh:in ( qudt:IntervalScale qudt:NominalScale qudt:EnumerationScale qudt:RatioScale qudt:OrdinalScale ) ;
+            sh:maxCount 1 ;
+        ] ;
 .
 
 :PropertyRange a sh:NodeShape ;
-    sh:property [
-        sh:path sh:minInclusive;
-        sh:nodeType sh:Literal;
-        sh:message "sh:minInclusive needs to be a literal"
-    ];
-    sh:property [
-        sh:path sh:maxInclusive;
-        sh:nodeType sh:Literal;
-        sh:message "sh:maxInclusive needs to be a literal"
-    ];
-    sh:property [
-        sh:path sh:minCount;
-        sh:hasValue 1 ;
-        sh:maxCount 1 ;
-        sh:message "sh:minCount needs to be 1" ;
-    ] , [
-        sh:path sh:maxCount;
-        sh:hasValue 1 ;
-        sh:maxCount 1 ;
-        sh:message "sh:maxCount needs to be 1" ;
-    ] ;
+    sh:property
+        [
+            sh:path sh:minInclusive ;
+            sh:nodeType sh:Literal ;
+            sh:message "sh:minInclusive needs to be a literal"
+        ] ;
+    sh:property
+        [
+            sh:path sh:maxInclusive ;
+            sh:nodeType sh:Literal ;
+            sh:message "sh:maxInclusive needs to be a literal"
+        ] ;
+    sh:property
+        [
+            sh:path sh:minCount ;
+            sh:hasValue 1 ;
+            sh:maxCount 1 ;
+            sh:message "sh:minCount needs to be 1" ;
+        ],
+        [
+            sh:path sh:maxCount ;
+            sh:hasValue 1 ;
+            sh:maxCount 1 ;
+            sh:message "sh:maxCount needs to be 1" ;
+        ] ;
 .
 
 :DimensionRelation a sh:NodeShape ;
     sh:property
         [
-        sh:path meta:dimensionRelation;
+            sh:path meta:dimensionRelation ;
             sh:property
                 [
                     sh:path meta:relatesTo ;
@@ -206,11 +223,12 @@
                     sh:class cube:Constraint ;
                     sh:message "value of meta:relatesTo must be a cube dimension" ;
                 ] ;
-    ] ;
+        ] ;
 .
 
 :Annotation
     a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotation ;
     sh:property
         [
             sh:path rdf:type ;
@@ -219,9 +237,7 @@
         ],
         [
             sh:path meta:annotationContext ;
-            sh:maxCount 1 ;
             sh:nodeKind sh:BlankNode ;
-            sh:message "at most one meta:annotationContext is allowed" ;
         ],
         [
             sh:path
@@ -233,9 +249,117 @@
         ] ;
 .
 
+:AnnotationValue
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotation ;
+    sh:message "annotation must have exactly one schema:value or a combination of schema:minValue and schema:maxValue" ;
+    sh:xone
+        (
+            [
+                sh:property
+                    [
+                        sh:path schema:value ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ;
+            ]
+            [
+                sh:property
+                    [
+                        sh:path [ sh:alternativePath ( schema:minValue schema:maxValue ) ] ;
+                        sh:minCount 1 ;
+                        sh:maxCount 2 ;
+                    ] ;
+            ]
+        ) ;
+.
+
+:AnnotationContextDimensionType
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotationContext ;
+    sh:message "annotation context must have exactly one sh:path which is cube's key dimension" ;
+    sh:not
+        [
+            sh:property
+                [
+                    sh:path
+                        (
+                            [ sh:inversePath meta:annotationContext ]
+                            [ sh:inversePath meta:annotation ]
+                            [ sh:inversePath sh:property ]
+                            sh:property
+                            sh:path
+                        ) ;
+                    sh:disjoint sh:path ;
+                ] ;
+        ] ;
+    sh:property
+        [
+            sh:path sh:path ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+        ] ;
+    sh:property
+        [
+            sh:path ( sh:path [ sh:inversePath sh:path ] ) ;
+            sh:xone
+                (
+                    [ sh:class meta:KeyDimension ]
+                    [
+                        sh:property
+                            [
+                                sh:path [ sh:inversePath meta:annotationContext ] ;
+                                sh:minCount 1
+                            ]
+                    ]
+                )
+        ] ;
+.
+
 :AnnotationContext
     a sh:NodeShape ;
     sh:targetObjectsOf meta:annotationContext ;
+    sh:message
+        "annotation context only allows constraints sh:hasValue, sh:in, sh:minInclusive, sh:maxInclusive, sh:minExclusive, sh:maxExclusive and they cannot be mixed" ;
+    sh:xone
+        (
+            [
+                sh:property
+                    [
+                        sh:path sh:hasValue ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                        sh:nodeKind sh:IRIOrLiteral ;
+                    ] ;
+            ]
+            [
+                sh:property
+                    [
+                        sh:path sh:in ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                        sh:node :listnode ;
+                        sh:nodeKind sh:BlankNode ;
+                    ] ;
+            ]
+            [
+                sh:property
+                    [
+                        sh:path [ sh:alternativePath ( sh:maxInclusive sh:maxExclusive sh:minInclusive sh:minExclusive ) ] ;
+                        sh:minCount 1 ;
+                        sh:maxCount 2 ;
+                    ],
+                    [
+                        sh:path [ sh:alternativePath ( sh:maxInclusive sh:maxExclusive ) ] ;
+                        sh:maxCount 1 ;
+                    ],
+                    [
+                        sh:path [ sh:alternativePath ( sh:minInclusive sh:minExclusive ) ] ;
+                        sh:maxCount 1 ;
+                    ] ;
+            ]
+        )
 .
 
 :LimitAnnotation
@@ -262,82 +386,96 @@
 # Testing proper rdf:list construction
 
 :restvalue sh:targetObjectsOf rdf:rest ;
-    sh:message "rdf:rest value must be a list node or rdf:nil";
-    sh:xone ([ sh:node :listnode ] [ sh:hasValue rdf:nil ])
+    sh:message "rdf:rest value must be a list node or rdf:nil" ;
+    sh:xone ( [ sh:node :listnode ] [ sh:hasValue rdf:nil ] )
 .
 
 :listnode sh:targetSubjectsOf rdf:first, rdf:rest ;
-    sh:property [ sh:path rdf:first ; sh:minCount 1 ; sh:maxCount 1 ;
-        sh:message "list node needs exactly one rdf:first" ] ;
-    sh:property [ sh:path rdf:rest ; sh:minCount 1 ; sh:maxCount 1 ;
-        sh:message "list node needs exactly one rdf:rest" ] ;
+    sh:property
+        [
+            sh:path rdf:first ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:message "list node needs exactly one rdf:first"
+        ] ;
+    sh:property
+        [
+            sh:path rdf:rest ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:message "list node needs exactly one rdf:rest"
+        ] ;
     sh:closed true ;
-    sh:ignoredProperties (rdf:type) .
+    sh:ignoredProperties ( rdf:type ) .
 
 
 :inversepathnode a sh:NodeShape ;
-    sh:property [
-        sh:path sh:inversePath;
-        sh:nodeKind sh:IRI;
-        sh:minCount 1;
-        sh:maxCount 1;
-        sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
-    ] .
+    sh:property
+        [
+            sh:path sh:inversePath ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+        ] .
 
 :NextInHierarchy a sh:NodeShape ;
-    sh:property [
-        sh:path sh:path;
-        sh:minCount 1;
-        sh:maxCount 1;
-        sh:message "nextInHierarchy requires exactly one sh:path"
-    ],
-    [
-        sh:path schema:name;
-        sh:minCount 1;
-        sh:message "nextInHierarchy requires schema:name"
-    ],
-    [
-        sh:path sh:targetClass;
-        sh:nodeKind sh:IRI;
-        sh:message "meta:nextInHierarchy/sh:targetClass must be an IRI"
-    ],
-    [
-        sh:path meta:nextInHierarchy;
-        sh:node :NextInHierarchy ;
-        sh:severity sh:Info;
-        sh:message "nextInHierarchy can have nested nodes"
-    ] ;
-    sh:xone (
+    sh:property
         [
-            sh:path sh:path;
-	        sh:nodeKind sh:IRI;
-            sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
-        ]
+            sh:path sh:path ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:message "nextInHierarchy requires exactly one sh:path"
+        ],
         [
-            sh:path sh:path;
-            sh:nodeKind sh:BlankNode;
-            sh:node :inversepathnode;
-            sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
-        ]
-    )
-    .
+            sh:path schema:name ;
+            sh:minCount 1 ;
+            sh:message "nextInHierarchy requires schema:name"
+        ],
+        [
+            sh:path sh:targetClass ;
+            sh:nodeKind sh:IRI ;
+            sh:message "meta:nextInHierarchy/sh:targetClass must be an IRI"
+        ],
+        [
+            sh:path meta:nextInHierarchy ;
+            sh:node :NextInHierarchy ;
+            sh:severity sh:Info ;
+            sh:message "nextInHierarchy can have nested nodes"
+        ] ;
+    sh:xone
+        (
+            [
+                sh:path sh:path ;
+                sh:nodeKind sh:IRI ;
+                sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+            ]
+            [
+                sh:path sh:path ;
+                sh:nodeKind sh:BlankNode ;
+                sh:node :inversepathnode ;
+                sh:message "nextInHierarchy requires sh:path to be IRI or [ sh:inversePath ... ]"
+            ]
+        )
+.
 
 :Hierarchy a sh:NodeShape ;
     sh:targetClass meta:Hierarchy ;
-    sh:property [
-        sh:path meta:hierarchyRoot;
-        sh:minCount 1;
-        sh:nodeKind sh:IRI;
-        sh:message "inHierarchy requires hierarchyRoot";
-    ],
-    [
-        sh:path schema:name;
-        sh:minCount 1;
-        sh:message "inHierarchy requires schema:name"
-    ],
-    [
-        sh:path meta:nextInHierarchy;
-	    sh:node :NextInHierarchy;
-        sh:minCount 1;
-        sh:message "inHierarchy requires a conform nextInHierarchy"
-    ] .
+    sh:property
+        [
+            sh:path meta:hierarchyRoot ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:message "inHierarchy requires hierarchyRoot" ;
+        ],
+        [
+            sh:path schema:name ;
+            sh:minCount 1 ;
+            sh:message "inHierarchy requires schema:name"
+        ],
+        [
+            sh:path meta:nextInHierarchy ;
+            sh:node :NextInHierarchy ;
+            sh:minCount 1 ;
+            sh:message "inHierarchy requires a conform nextInHierarchy"
+        ] .

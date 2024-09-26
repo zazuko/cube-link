@@ -132,8 +132,8 @@ applies to, namely:
 4. `sh:minExclusive` - to select values greater than a specific value
 5. `sh:maxExclusive` - to select values smaller than a specific value
 
-In case of temporal dimensions, the constraint values are expected to be literals with one of types `xsd:date`,
-`xsd:dateTime` or `xsd:gYear`, or the IRIs of a [temporal entity](https://lindas.admin.ch/governance/core-entities/).
+In case of temporal dimensions, the constraint values are expected to be literals with datatypes `xsd:date`,
+`xsd:dateTime` or `xsd:gYear`, or the IRIs of [temporal entities](https://lindas.admin.ch/governance/core-entities/).
 
 <aside class='example' title='Dimension with a continuous limit on a temporal dimension'>
 
