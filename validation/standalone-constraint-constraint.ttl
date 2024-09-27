@@ -342,18 +342,6 @@
         )
 .
 
-:LimitAnnotation
-    a sh:NodeShape ;
-    sh:targetClass cube:Limit ;
-    sh:property
-        [
-            sh:path meta:limit ;
-            sh:minCount 1 ;
-            sh:or ( [ sh:datatype xsd:integer ] [ sh:datatype xsd:decimal ] ) ;
-            sh:message "at least on meta:limit is needed and it needs to be a number" ;
-        ] ;
-.
-
 :Confidence a sh:NodeShape ;
     sh:targetClass relation:ConfidenceLowerBound, relation:ConfidenceUpperBound ;
     sh:property
