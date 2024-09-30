@@ -201,6 +201,15 @@
                     sh:minCount 1 ;
                     sh:class cube:Constraint ;
                     sh:message "value of meta:relatesTo must be a cube dimension" ;
+                ],
+                [
+                    sh:path
+                        (
+                            meta:relatesTo
+                            [ sh:inversePath sh:path ]
+                        ) ;
+                    sh:class cube:MeasureDimension ;
+                    sh:message "value of meta:relatesTo must point to measure dimension " ;
                 ] ;
     ] ;
 .

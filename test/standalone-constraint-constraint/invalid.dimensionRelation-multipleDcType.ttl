@@ -40,6 +40,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
         ] ;
     sh:property
         [
+            a cube:MeasureDimension ;
             sh:datatype xsd:decimal ;
             sh:path <dimension> ;
             schema:name "dimension" ;
