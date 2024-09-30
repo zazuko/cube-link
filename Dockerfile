@@ -1,6 +1,6 @@
-FROM docker.io/library/node:20 as respec
+FROM docker.io/library/node:22 AS respec
 
-# install some required dependencies to run Puppeteer (for ReSpec)
+# Install some required dependencies to run Puppeteer (for ReSpec)
 RUN apt-get update && apt-get install -y \
   chromium \
   fonts-liberation \
@@ -39,11 +39,11 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-# start a server locally, and generate the ReSpec HTML file
+# Start a server locally, and generate the ReSpec HTML file
 RUN npm run build
 
 # Final Docker image
-FROM docker.io/library/node:20-alpine
+FROM docker.io/library/node:22-alpine
 
 EXPOSE 8080
 
@@ -51,7 +51,7 @@ WORKDIR /app
 
 RUN apk add --no-cache tini
 
-# install Trifid
+# Install Trifid
 ENV NODE_ENV=production
 COPY package.json package-lock.json ./
 RUN npm install
