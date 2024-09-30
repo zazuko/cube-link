@@ -10,7 +10,7 @@ _:report a sh:ValidationReport ;
 		rdf:type sh:ValidationResult ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
-		sh:sourceShape _:b679 ;
+		sh:sourceShape _:b690 ;
 		sh:focusNode _:b6 ;
 		sh:resultPath rdf:rest ;
 		sh:resultMessage "list node needs exactly one rdf:rest" ;
@@ -41,7 +41,7 @@ _:report a sh:ValidationReport ;
 				rdf:type sh:ValidationResult ;
 				sh:resultSeverity sh:Violation ;
 				sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
-				sh:sourceShape _:b679 ;
+				sh:sourceShape _:b690 ;
 				sh:focusNode _:b6 ;
 				sh:resultPath rdf:rest ;
 				sh:resultMessage "list node needs exactly one rdf:rest" ;
@@ -60,7 +60,7 @@ _:report a sh:ValidationReport ;
 	] ;
 	sh:conforms false .
 
-_:b679 sh:path rdf:rest ;
+_:b690 sh:path rdf:rest ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:message "list node needs exactly one rdf:rest" .

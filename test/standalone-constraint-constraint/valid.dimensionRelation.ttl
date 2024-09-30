@@ -1,0 +1,77 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+@prefix relation: <https://cube.link/relation/> .
+@prefix meta: <https://cube.link/meta/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix cube: <https://cube.link/> .
+@prefix observation: <https://environment.ld.admin.ch/foen/nfi/observation/max_min_undefined> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@base <https://example.org/> .
+
+<cube> a cube:Cube ;
+    cube:observationConstraint <shape> ;
+    cube:observationSet <observationSet> .
+
+<observationSet> cube:observation <observationA>, <observationB>, <observationC> .
+
+<observationA> a cube:Observation ;
+    cube:observedBy <observer> ;
+    <dimension> 4.9 ;
+    <upperConfidence> 0.1 ;
+    <lowerConfidence> 0.15 ;
+.
+
+<shape> a cube:Constraint ;
+    sh:targetClass cube:Observation ;
+    sh:closed true ;
+    sh:property
+        [
+            sh:path rdf:type ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1
+        ] ;
+    sh:property
+        [
+            sh:path cube:observedBy ; ;
+            sh:nodeKind sh:IRI ;
+            sh:minCount 1 ;
+            sh:maxCount 1
+        ] ;
+    sh:property
+        [
+            a cube:MeasureDimension ;
+            sh:datatype xsd:decimal ;
+            sh:path <dimension> ;
+            schema:name "dimension" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ],
+        [
+            sh:datatype xsd:decimal ;
+            sh:path <upperConfidence> ;
+            schema:name "upper confidence" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            meta:dimensionRelation
+                [
+                    a relation:ConfidenceUpperBound ;
+                    dcterms:type "Confidence interval" ;
+                    meta:relatesTo <dimension> ;
+                ] ;
+        ],
+        [
+            sh:datatype xsd:decimal ;
+            sh:path <lowerConfidence> ;
+            schema:name "lower confidence" ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            meta:dimensionRelation
+                [
+                    a relation:ConfidenceLowerBound ;
+                    dcterms:type "Confidence interval" ;
+                    meta:relatesTo <dimension> ;
+                ] ;
+        ] ;
+.
