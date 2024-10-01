@@ -27,6 +27,34 @@ To be able to distinguish Dimensions that are defined inside a Cube from Dimensi
 
 </aside>
 
+### meta:Limit {#Limit}
+
+A type of [annotation](#annotation) which can be used to express a limit or target value for a dimension.
+
+<aside class='example' title='Dimension with a target'>
+
+```turtle
+<cube/shape> sh:property [
+  a cube:KeyDimension ;  
+  sh:path ex:year ;
+] , [
+  a cube:MeasureDimension ;
+  meta:annotation [
+    a meta:Limit ;
+    schema:value 95 ;
+    schema:name "Target 2020" ;
+    meta:annotationContext [
+      sh:path ex:year ;
+      sh:hasValue <https://schema.ld.admin.ch/year/2020> ;
+    ] ;
+  ] ;
+] .
+```
+
+</aside>
+
+`schema:minValue` and `schema:maxValue` can be used to express a range of limit values.
+
 ## Properties
 
 ### meta:dataKind (temporal / spatial) {#dataKind}
@@ -84,3 +112,48 @@ With `meta:nextInHierarchy` the next lower level is attached to the higher level
 
 This property is used on a Dimension Constraint to express a relation with other properties through a [meta:Relation](#Relation) instance, the nature of this relationship is determined by the properties used on the instance. 
 See [this example](../#relexample).
+
+### meta:annotation {#annotation}
+
+This property is used to add additional information to a dimension.
+
+### meta:annotationContext {#annotationContext}
+
+Links to dimension values to which the annotation applies.
+The objects of `meta:annotationContext` MUST be well-formed [Property Shapes](https://www.w3.org/TR/shacl/#property-shapes).
+The value of their `sh:path` MUST be an IRI of a cube's key dimension.
+Only a subset of SHACL Constraints are supported which defined which observations that the annotation
+applies to, namely:
+
+1. `sh:hasValue` - to select specific observation value
+2. `sh:in` - to select multiple observation values
+2. `sh:minInclusive` - to select values greater or equal to a specific value
+3. `sh:maxInclusive` - to select values smaller or equal to a specific value
+4. `sh:minExclusive` - to select values greater than a specific value
+5. `sh:maxExclusive` - to select values smaller than a specific value
+
+In case of temporal dimensions, the constraint values are expected to be literals with datatypes `xsd:date`,
+`xsd:dateTime` or `xsd:gYear`, or the IRIs of [temporal entities](https://lindas.admin.ch/governance/core-entities/).
+
+<aside class='example' title='Dimension with a continuous limit on a temporal dimension'>
+
+```turtle
+<cube/shape> sh:property [
+  a cube:KeyDimension ;  
+  sh:path ex:year ;
+] , [
+  a cube:MeasureDimension ;
+  meta:annotation [
+    a meta:Limit ;
+    schema:value 95 ;
+    schema:name "Target 2020" ;
+    meta:annotationContext [
+      sh:path ex:year ;
+      sh:minInclusive "2020-01-01"^^xsd:date ;
+      sh:maxInclusive "2020-12-31"^^xsd:date ;
+    ] ;
+  ] ;
+] .
+```
+
+</aside>

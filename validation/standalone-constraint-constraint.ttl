@@ -1,3 +1,4 @@
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix : <https://cube.link/shape/standalone-constraint-constraint#> .
 @prefix dash: <http://datashapes.org/dash#> .
@@ -212,6 +213,142 @@
                     sh:message "value of meta:relatesTo must point to measure dimension " ;
                 ] ;
     ] ;
+.
+
+:Annotation
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotation ;
+    sh:property
+        [
+            sh:path rdf:type ;
+            sh:minCount 1 ;
+            sh:message "annotation needs an rdf:type" ;
+        ],
+        [
+            sh:path meta:annotationContext ;
+            sh:nodeKind sh:BlankNode ;
+        ],
+        [
+            sh:path
+                (
+                    [ sh:inversePath meta:annotation ]
+                ) ;
+            sh:class cube:MeasureDimension ;
+            sh:message "annotated dimension must be a cube:MeasureDimension" ;
+        ] ;
+.
+
+:AnnotationValue
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotation ;
+    sh:message "annotation must have exactly one schema:value or a combination of schema:minValue and schema:maxValue" ;
+    sh:xone
+        (
+            [
+                sh:property
+                    [
+                        sh:path schema:value ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ;
+            ]
+            [
+                sh:property
+                    [
+                        sh:path [ sh:alternativePath ( schema:minValue schema:maxValue ) ] ;
+                        sh:minCount 1 ;
+                        sh:maxCount 2 ;
+                    ] ;
+            ]
+        ) ;
+.
+
+:AnnotationContextDimensionType
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotationContext ;
+    sh:message "annotation context must have exactly one sh:path which is cube's key dimension" ;
+    sh:not
+        [
+            sh:property
+                [
+                    sh:path
+                        (
+                            [ sh:inversePath meta:annotationContext ]
+                            [ sh:inversePath meta:annotation ]
+                            [ sh:inversePath sh:property ]
+                            sh:property
+                            sh:path
+                        ) ;
+                    sh:disjoint sh:path ;
+                ] ;
+        ] ;
+    sh:property
+        [
+            sh:path sh:path ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+        ] ;
+    sh:property
+        [
+            sh:path ( sh:path [ sh:inversePath sh:path ] ) ;
+            sh:xone
+                (
+                    [ sh:class meta:KeyDimension ]
+                    [
+                        sh:property
+                            [
+                                sh:path [ sh:inversePath meta:annotationContext ] ;
+                                sh:minCount 1
+                            ]
+                    ]
+                )
+        ] ;
+.
+
+:AnnotationContext
+    a sh:NodeShape ;
+    sh:targetObjectsOf meta:annotationContext ;
+    sh:message
+        "annotation context only allows constraints sh:hasValue, sh:in, sh:minInclusive, sh:maxInclusive, sh:minExclusive, sh:maxExclusive and they cannot be mixed" ;
+    sh:xone
+        (
+            [
+                sh:property
+                    [
+                        sh:path sh:hasValue ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                        sh:nodeKind sh:IRIOrLiteral ;
+                    ] ;
+            ]
+            [
+                sh:property
+                    [
+                        sh:path sh:in ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                        sh:node :listnode ;
+                        sh:nodeKind sh:BlankNode ;
+                    ] ;
+            ]
+            [
+                sh:property
+                    [
+                        sh:path [ sh:alternativePath ( sh:maxInclusive sh:maxExclusive sh:minInclusive sh:minExclusive ) ] ;
+                        sh:minCount 1 ;
+                        sh:maxCount 2 ;
+                    ],
+                    [
+                        sh:path [ sh:alternativePath ( sh:maxInclusive sh:maxExclusive ) ] ;
+                        sh:maxCount 1 ;
+                    ],
+                    [
+                        sh:path [ sh:alternativePath ( sh:minInclusive sh:minExclusive ) ] ;
+                        sh:maxCount 1 ;
+                    ] ;
+            ]
+        )
 .
 
 :Confidence a sh:NodeShape ;
