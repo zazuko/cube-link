@@ -62,7 +62,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
         ] ;
     sh:property
         [
-            a meta:KeyDimension ;
+            a cube:KeyDimension ;
             sh:path <year> ;
             schema:name "year" ;
             sh:minCount 1 ;
@@ -71,7 +71,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
         ] ;
     sh:property
         [
-            a meta:KeyDimension ;
+            a cube:KeyDimension ;
             sh:path <station> ;
             schema:name "station" ;
             sh:minCount 1 ;

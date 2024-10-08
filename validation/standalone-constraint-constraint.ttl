@@ -294,7 +294,7 @@
             sh:path ( sh:path [ sh:inversePath sh:path ] ) ;
             sh:xone
                 (
-                    [ sh:class meta:KeyDimension ]
+                    [ sh:class cube:KeyDimension ]
                     [
                         sh:property
                             [
