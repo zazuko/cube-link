@@ -22,7 +22,7 @@ _:report a sh:ValidationReport ;
 			sh:path _:b710 ;
 			sh:xone (
 				[
-					sh:class <https://cube.link/meta/KeyDimension> ;
+					sh:class cube:KeyDimension ;
 				]
 				[
 					sh:property [
