@@ -48,7 +48,7 @@ In case of asymmetric confidence intervals, use `relation:ConfidenceUpperBound` 
     ] ;
   ] ;
   sh:property [
-    sh:path ex:lower-confidence-dimension ;  
+    sh:path ex:upper-confidence-dimension ;  
     meta:dimensionRelation [ 
       a relation:ConfidenceUpperBound ;
       dcterms:type "Confidence interval" ;
