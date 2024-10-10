@@ -1,5 +1,19 @@
 # cube-link
 
+## 0.2.3
+
+### Patch Changes
+
+- a41f716: Improve validation of `meta:dimensionRelation`:
+
+  1. Check that upper/lower bound has at most one `dcterms:type`
+  2. Check that `meta:relatesTo` is actually a dimension
+
+- 71c3d52: Add an informative section about using [Time Ontology in OWL](https://www.w3.org/TR/owl-time/) for temporal dimensions
+- 46133ba: Only use `qudt:hasUnit` in documentation (instead of deprecated `qudt:unit`)
+- 641d841: Adding dimension annotations (`meta:annotation`) re https://gitlab.ldbar.ch/bafu/visualize/-/issues/542
+- de24a37: Relation vocabulary: added relation types for asymmetrical margin of error
+
 ## 0.2.2
 
 ### Patch Changes
