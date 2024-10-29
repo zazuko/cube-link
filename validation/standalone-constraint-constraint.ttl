@@ -241,26 +241,20 @@
 :AnnotationValue
     a sh:NodeShape ;
     sh:targetObjectsOf meta:annotation ;
-    sh:message "annotation must have exactly one schema:value or a combination of schema:minValue and schema:maxValue" ;
-    sh:xone
-        (
-            [
-                sh:property
-                    [
-                        sh:path schema:value ;
-                        sh:minCount 1 ;
-                        sh:maxCount 1 ;
-                    ] ;
-            ]
-            [
-                sh:property
-                    [
-                        sh:path [ sh:alternativePath ( schema:minValue schema:maxValue ) ] ;
-                        sh:minCount 1 ;
-                        sh:maxCount 2 ;
-                    ] ;
-            ]
-        ) ;
+    sh:message "annotation must have at most one min value and one max value" ;
+    sh:property
+        [
+            sh:path [ sh:alternativePath ( schema:minValue schema:maxValue ) ] ;
+            sh:minCount 1 ;
+        ] ,
+        [
+            sh:path schema:minValue ;
+            sh:maxCount 1 ;
+        ] ,
+        [
+            sh:path schema:maxValue ;
+            sh:maxCount 1 ;
+        ] ;
 .
 
 :AnnotationContextDimensionType

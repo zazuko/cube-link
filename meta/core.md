@@ -41,7 +41,7 @@ A type of [annotation](#annotation) which can be used to express a limit or targ
   a cube:MeasureDimension ;
   meta:annotation [
     a meta:Limit ;
-    schema:value 95 ;
+    schema:maxValue 95 ;
     schema:name "Target 2020" ;
     meta:annotationContext [
       sh:path ex:year ;
@@ -53,7 +53,7 @@ A type of [annotation](#annotation) which can be used to express a limit or targ
 
 </aside>
 
-`schema:minValue` and `schema:maxValue` can be used to express a range of limit values.
+`schema:minValue` and `schema:maxValue` can be used together.
 
 ## Properties
 
@@ -65,7 +65,8 @@ To express that the dimension provides a specific _kind_ of data which is necess
 <aside class='example'>
 
   ```turtle
-  @prefix meta: <https://cube.link/meta/>
+  @prefix schema: <http://schema.org/> .
+  @prefix meta: <https://cube.link/meta/> .
   
   <dimension> meta:dataKind [ a schema:GeoCoordinates ].
   ```
