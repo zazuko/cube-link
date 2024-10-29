@@ -19,7 +19,7 @@ _:report a sh:ValidationReport ;
 		sh:resultSeverity sh:Violation ;
 		sh:sourceConstraintComponent sh:XoneConstraintComponent ;
 		sh:sourceShape [
-			sh:path _:b710 ;
+			sh:path _:b707 ;
 			sh:xone (
 				[
 					sh:class cube:KeyDimension ;
@@ -36,11 +36,11 @@ _:report a sh:ValidationReport ;
 		] ;
 		sh:focusNode _:b7 ;
 		sh:value _:b9 ;
-		sh:resultPath _:b710 ;
+		sh:resultPath _:b707 ;
 	] ;
 	sh:conforms false .
 
-_:b710 rdf:first sh:path ;
+_:b707 rdf:first sh:path ;
 	rdf:rest (
 		[
 			sh:inversePath sh:path ;
