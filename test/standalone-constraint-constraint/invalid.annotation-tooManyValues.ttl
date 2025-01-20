@@ -50,21 +50,25 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
             meta:annotation
                 [
                     a meta:Limit ;
-                    schema:minValue 95 ;
+                    schema:name "Target 2020+" ;
+                    schema:minValue 10 ;
+                    schema:minValue 20 ;
                     meta:annotationContext
                         [
-                            sh:path <non-dimension> ;
-                            sh:hasValue 10 ;
-                        ] ;
-                ] ,
+                            sh:path <year> ;
+                            sh:minInclusive <https://ld.admin.ch/time/year/2020> ;
+                        ]  ;
+                ],
                 [
                     a meta:Limit ;
-                    schema:maxValue 95 ;
+                    schema:name "Target 2025+" ;
+                    schema:maxValue 10 ;
+                    schema:maxValue 20 ;
                     meta:annotationContext
                         [
-                            sh:path <station> ;
-                            sh:hasValue ex:Station ;
-                        ] ;
+                            sh:path <year> ;
+                            sh:minInclusive <https://ld.admin.ch/time/year/2025> ;
+                        ]  ;
                 ] ;
         ] ;
     sh:property
@@ -78,6 +82,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
         ] ;
     sh:property
         [
+            a cube:KeyDimension ;
             sh:path <station> ;
             schema:name "station" ;
             sh:minCount 1 ;

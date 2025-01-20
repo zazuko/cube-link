@@ -50,7 +50,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
             meta:annotation
                 [
                     a meta:Limit ;
-                    schema:value 97 ;
+                    schema:maxValue 97 ;
                     schema:name "Target 2020+" ;
                     meta:annotationContext
                         [

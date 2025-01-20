@@ -1,0 +1,32 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix cube: <https://cube.link/> .
+
+_:report a sh:ValidationReport ;
+	sh:result [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+		sh:sourceShape [
+			sh:path schema:minValue ;
+			sh:maxCount 1 ;
+		] ;
+		sh:focusNode _:b4 ;
+		sh:resultPath schema:minValue ;
+		sh:resultMessage "More than 1 values" ;
+	], [
+		rdf:type sh:ValidationResult ;
+		sh:resultSeverity sh:Violation ;
+		sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+		sh:sourceShape [
+			sh:path schema:maxValue ;
+			sh:maxCount 1 ;
+		] ;
+		sh:focusNode _:b6 ;
+		sh:resultPath schema:maxValue ;
+		sh:resultMessage "More than 1 values" ;
+	] ;
+	sh:conforms false .
