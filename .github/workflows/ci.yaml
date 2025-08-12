@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Replace draft status
         run: sed -i 's/"ZZ-DRAFT"/"ZZ-BASIC"/g' config.js meta/config.js relation/config.js
