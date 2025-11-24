@@ -45,7 +45,7 @@
     "trifid": "^2.4.0"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.2",
+    "@changesets/cli": "^2.29.6",
     "@zazuko/shacl-test": "^0.1",
     "approvals": "^6.2.2",
     "barnard59": "^5.0.0",
@@ -54,12 +54,12 @@
     "barnard59-formats": "^2.1.0",
     "barnard59-http": "^2.0.0",
     "barnard59-sparql": "^2.3.0",
-    "chromium": "^3.0.3",
+    "chromium": "^3.2171.3008",
     "npm-run-all": "^4.1.5",
     "pm2": "^5.3.1",
     "respec": "^35.0.0",
     "serve": "^14.2.4",
-    "standard": "^14.3.4",
+    "standard": "^17.1.2",
     "ts-node": "^10.2.1"
   }
 }
