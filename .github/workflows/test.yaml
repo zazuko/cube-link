@@ -6,15 +6,13 @@ on:
 
 jobs:
   check-constraint:
-    runs-on: ${{ matrix.env.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        env:
-          - os: ubuntu-latest
-            node: 20
-          - os: windows-latest
-            node: 20.12.1 # Pinned, because of https://github.com/approvals/Approvals.NodeJS/issues/176
+        os:
+          - ubuntu-latest
+          - windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -22,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.env.node }}
+          node-version: "lts/*"
           cache: npm
 
       - name: Install dependencies
@@ -45,15 +43,13 @@ jobs:
           path: test
 
   check-cube:
-    runs-on: ${{ matrix.env.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        env:
-          - os: ubuntu-latest
-            node: 20
-          - os: windows-latest
-            node: 20.12.1 # Pinned, because of https://github.com/approvals/Approvals.NodeJS/issues/176
+        os:
+          - ubuntu-latest
+          - windows-latest
         profile:
           - basic-cube-constraint
           - standalone-constraint-constraint
@@ -67,7 +63,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.env.node }}
+          node-version: "lts/*"
           cache: npm
 
       - name: Install dependencies
