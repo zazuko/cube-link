@@ -36,7 +36,7 @@ jobs:
         run: for file in test/observations/*.log ; do echo === $file === ; cat $file ; done
 
       - name: Upload test results
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: ${{ failure() }}
         with:
           name: test-observations
@@ -79,7 +79,7 @@ jobs:
         run: for file in test/${{ matrix.profile }}/*.log ; do echo === $file === ; cat $file ; done
 
       - name: Upload test results
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: ${{ failure() }}
         with:
           name: test-${{ matrix.profile }}
