@@ -1,4 +1,4 @@
-FROM docker.io/library/node:22 AS respec
+FROM docker.io/library/node:24 AS respec
 
 # Install some required dependencies to run Puppeteer (for ReSpec)
 RUN apt-get update && apt-get install -y \
@@ -35,6 +35,12 @@ RUN apt-get update && apt-get install -y \
   libxtst6 \
   xdg-utils
 
+# ReSpec uses Puppeteer, which by default downloads its own (x86-64 only) Chromium.
+# That binary cannot run on arm64 / under Rosetta. Use the system Chromium installed
+# above (it matches the image architecture) and skip Puppeteer's download.
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
@@ -43,7 +49,7 @@ COPY . .
 RUN npm run build
 
 # Final Docker image
-FROM docker.io/library/node:22-alpine
+FROM docker.io/library/node:24-alpine
 
 EXPOSE 8080
 

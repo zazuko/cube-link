@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "./build.sh",
-    "trifid": "trifid --verbose --config=trifid/config.json",
-    "trifid:local": "trifid --verbose --config=trifid/config.local.json",
+    "trifid": "trifid -c trifid/config.yaml",
+    "trifid:local": "trifid -c trifid/config.local.yaml",
     "lint": "eslint --quiet",
     "test": "run-p --aggregate-output -cns \"test:* -- {@}\" --",
     "test:observations": "sh ./test/check-observations.sh",
@@ -41,13 +41,16 @@
   },
   "homepage": "https://github.com/zazuko/cube-link",
   "dependencies": {
+    "@rdfjs/formats-common": "^3.1.0",
     "node-fetch-cache": "^5.1.0",
-    "trifid": "^2.4.0"
+    "trifid": "^6.0.1",
+    "trifid-core": "^6.0.1"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
     "@eslint/js": "^9.39.4",
     "@tpluscode/eslint-config": "^1.0.3",
+    "@types/rdfjs__formats-common": "^3.1.5",
     "@zazuko/shacl-test": "^0.1",
     "approvals": "^7.3.0",
     "barnard59": "^5.0.5",
@@ -56,11 +59,10 @@
     "barnard59-formats": "^2.1.2",
     "barnard59-http": "^2.1.0",
     "barnard59-sparql": "^2.3.0",
-    "chromium": "^3.0.3",
     "eslint": "^9.39.4",
     "npm-run-all": "^4.1.5",
-    "pm2": "^5.3.1",
-    "respec": "^35.0.0",
+    "pm2": "^7.0.1",
+    "respec": "^37.1.0",
     "serve": "^14.2.5",
     "ts-node": "^10.2.1"
   },

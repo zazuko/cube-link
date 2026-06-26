@@ -84,3 +84,95 @@ jobs:
         with:
           name: test-${{ matrix.profile }}
           path: test
+
+  docker-image:
+    name: Build Docker image and smoke-test endpoints
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Build Docker image (no push)
+        run: docker build -t cube-link:ci .
+
+      - name: Start container
+        run: docker run -d --name cube-link -p 8080:8080 cube-link:ci
+
+      - name: Query endpoints and check the responses
+        shell: bash
+        run: |
+          set -uo pipefail
+          BASE="http://localhost:8080"
+
+          fail() { echo "::error::$1"; exit 1; }
+
+          # Wait for the server to be ready.
+          ready=
+          for _ in $(seq 1 30); do
+            if curl -fsS "$BASE/health" >/dev/null 2>&1; then ready=1; break; fi
+            sleep 2
+          done
+          [ -n "$ready" ] || fail "server did not become ready"
+
+          # Assert: status code, content-type (substring) and optional body substring.
+          assert() {
+            local desc="$1" url="$2" accept="$3" want_status="$4" want_ctype="$5" want_body="${6:-}"
+            local out status ctype
+            out=$(curl -s -H "Accept: $accept" -o body.txt -w "%{http_code}|%{content_type}" "$url")
+            status="${out%%|*}"; ctype="${out#*|}"
+            echo "→ $desc: $status ${ctype:-<none>}"
+            [ "$status" = "$want_status" ] || fail "$desc: expected status $want_status, got $status"
+            case "$ctype" in *"$want_ctype"*) ;; *) fail "$desc: expected content-type ~ '$want_ctype', got '$ctype'";; esac
+            if [ -n "$want_body" ]; then
+              grep -q "$want_body" body.txt || fail "$desc: body did not contain '$want_body'"
+            fi
+          }
+
+          # Assert: 302 redirect to a location ending with the expected path.
+          assert_redirect() {
+            local desc="$1" url="$2" want_location="$3" status location
+            status=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+            location=$(curl -s -o /dev/null -w "%{redirect_url}" "$url")
+            echo "→ $desc: $status -> $location"
+            [ "$status" = "302" ] || fail "$desc: expected 302, got $status"
+            case "$location" in *"$want_location") ;; *) fail "$desc: expected redirect ending with '$want_location', got '$location'";; esac
+          }
+
+          # Health
+          assert "health"            "$BASE/health"     "*/*"                 200 "text/plain" "OK"
+
+          # Vocabulary documents: HTML documentation
+          assert "root HTML"         "$BASE/"           "text/html"           200 "text/html"  "Cube Schema"
+          assert "meta HTML"         "$BASE/meta/"      "text/html"           200 "text/html"  "Meta vocabulary"
+          assert "relation HTML"     "$BASE/relation/"  "text/html"           200 "text/html"  "Relation vocabulary"
+
+          # Vocabulary documents: content-negotiated RDF
+          assert "root Turtle"       "$BASE/"           "text/turtle"         200 "text/turtle"        "cube.link"
+          assert "root JSON-LD"      "$BASE/"           "application/ld+json"  200 "application/ld+json" "cube.link"
+          assert "relation Turtle"   "$BASE/relation/"  "text/turtle"         200 "text/turtle"        "relation"
+          # RDF via the ?format= query parameter
+          assert "root ?format=nt"   "$BASE/?format=nt" "*/*"                 200 "application/n-triples" "cube.link"
+
+          # Term IRIs redirect to their ontology document
+          assert_redirect "term redirect"      "$BASE/Cube"            "/"
+          assert_redirect "meta term redirect" "$BASE/meta/Hierarchy"  "/meta/"
+
+          # Static assets
+          assert "diagram image"     "$BASE/img/cube-link-basic.svg" "*/*"    200 "image/svg"
+
+          # Versioned shapes (served from GitHub; uses raw.githubusercontent.com)
+          assert "shape (ref/main)"  "$BASE/ref/main/shape/standalone-constraint-constraint" "*/*" 200 "text/turtle" "cube.link"
+          status=$(curl -s -o /dev/null -w "%{http_code}" "$BASE/ref/main/shape/does-not-exist")
+          echo "→ missing shape: $status"
+          [ "$status" = "404" ] || fail "missing shape: expected 404, got $status"
+
+          echo "✅ all endpoint checks passed"
+
+      - name: Show container logs
+        if: ${{ always() }}
+        run: docker logs cube-link || true
+
+      - name: Stop and remove container
+        if: ${{ always() }}
+        run: docker rm -f cube-link || true
