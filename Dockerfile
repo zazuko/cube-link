@@ -35,6 +35,12 @@ RUN apt-get update && apt-get install -y \
   libxtst6 \
   xdg-utils
 
+# ReSpec uses Puppeteer, which by default downloads its own (x86-64 only) Chromium.
+# That binary cannot run on arm64 / under Rosetta. Use the system Chromium installed
+# above (it matches the image architecture) and skip Puppeteer's download.
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
