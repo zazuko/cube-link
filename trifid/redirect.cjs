@@ -76,6 +76,7 @@ const factory = () => {
         if (!rawGithub.body) {
           throw new Error('No body')
         }
+        // eslint-disable-next-line n/no-unsupported-features/node-builtins
         return Readable.fromWeb(body).pipe(res)
       } catch (e) {
         return res.status(502).send(`Error fetching shape: ${e.message}`)
