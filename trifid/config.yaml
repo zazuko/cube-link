@@ -1,0 +1,53 @@
+# Trifid v6 configuration for cube.link
+#
+# The server exposes the Cube Schema vocabularies as dereferenceable Linked Data:
+#   - `/`          -> Cube Schema           (vocab.ttl)
+#   - `/meta/`     -> Meta vocabulary       (meta/meta.ttl)
+#   - `/relation/` -> Relation vocabulary   (relation/relation.ttl)
+#
+# Each of those URLs is content-negotiated: browsers get the ReSpec HTML
+# documentation (the pre-rendered `dist/*.html` files), while RDF clients get the
+# vocabulary serialized in the requested format.
+#
+# Every single-segment term below a vocabulary (e.g. `/Cube`, `/meta/Hierarchy`)
+# is redirected to its ontology document, which contains the term definition.
+
+server:
+  listener:
+    port: 8080
+
+globals:
+  datasetBaseUrl: https://cube.link/
+  # No SPARQL endpoint is used: the data is served directly from the Turtle files.
+  endpoints: {}
+
+plugins:
+  # Custom redirects:
+  #   - term IRIs -> their ontology document
+  #   - versioned shape IRIs -> the matching file on GitHub
+  redirects:
+    module: ./trifid/plugins/redirect.js
+    order: 50
+
+  # Serve the vocabulary diagrams referenced by the documentation.
+  images:
+    module: trifid-core/plugins/static.js
+    order: 60
+    paths: /img
+    config:
+      directory: cwd:img
+
+  # Health check endpoint (used by the cluster).
+  health:
+    module: trifid-core/plugins/health.js
+    order: 65
+    paths: /health
+
+  # Serve the vocabulary documents (HTML documentation + content-negotiated RDF).
+  docs:
+    module: ./trifid/plugins/docs.js
+    order: 70
+    paths:
+      - /
+      - /meta/
+      - /relation/

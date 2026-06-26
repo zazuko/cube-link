@@ -1,0 +1,10 @@
+# Local / deployment configuration.
+#
+# It inherits everything from `config.yaml` and only sets the canonical base URL
+# of the dataset. This is the configuration used by the Docker image
+# (`npm run trifid:local`).
+extends:
+  - config.yaml
+
+globals:
+  datasetBaseUrl: https://cube.link/
