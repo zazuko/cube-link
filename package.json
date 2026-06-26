@@ -50,6 +50,7 @@
     "@changesets/cli": "^2.29.7",
     "@eslint/js": "^9.39.4",
     "@tpluscode/eslint-config": "^1.0.3",
+    "@types/rdfjs__formats-common": "^3.1.5",
     "@zazuko/shacl-test": "^0.1",
     "approvals": "^7.3.0",
     "barnard59": "^5.0.5",
