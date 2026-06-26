@@ -1,5 +1,19 @@
 # cube-link
 
+## 0.3.0
+
+### Minor Changes
+
+- 74e22df: Set minimum node version to 22.17 to match the native APIs used
+
+### Patch Changes
+
+- 4eb271f: build(deps): updated node-fetch-cache to v5
+- afbf75d: Bump `respec` to v37
+- 7f70f33: Use Node.js 24 as base image for the container image
+- b713220: Updated barnard59 packages
+- 3e0a7bd: Upgrade Trifid to v6
+
 ## 0.2.3
 
 ### Patch Changes
