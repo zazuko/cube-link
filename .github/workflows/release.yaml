@@ -38,8 +38,6 @@ jobs:
       - name: Create Release Pull Request or Create a GitHub Release + tag
         uses: changesets/action@v2
         with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: yarn release
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Use the GitHub App token so that the release commits/tags pushed by the action can trigger other workflows
+          github-token: ${{ steps.generate_token.outputs.token }}
+          publish-script: npm run release
